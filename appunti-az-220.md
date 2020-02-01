@@ -1,6 +1,11 @@
 
 # Appunti AZ-220
 
+## Link utili
+* [Scheda corso](https://docs.microsoft.com/en-us/learn/certifications/courses/az-220t00)
+* [Scheda corso PDF](http://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4nBeC)
+* [Laboratori](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/)
+
 ## Sowtware utile
 
 * `iotedgehubdev` - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
@@ -8,7 +13,7 @@
 * `azure-iot-sdk-csharp/tools/DeviceExplorer` - Desktop app per interagire con IotHub. Deprecato il 30/10/2019
 * `Azure/azure-iot-explorer` - Nuova implementazione ufficiale del device explorer
 
-## AZ CLI
+## Comandi AZ CLI
 
 * `az login`
 * `az account set -s {GUID}`
@@ -80,13 +85,27 @@ Prezzo fisso: solo tier S1
   * `class DeviceClient` ▶ Per mandare messaggi al cloud
     * `CreateFromConnectionString(str conn, TransportType t)` ▶ crea comunicaz verso cloud
     * `SendEventAsync(Message msg)` ▶ Invia messaggio al cloud
+    * `SetMethodHandlerAsync(str methodName, MethodCallback callback, obj ctx)` ▶ Registra un metodo per un device, per rispondere a un comando da cloud (come fosse un'API)
+  * `class MethodRequest` ▶ Msg per invocare metodi del device come fosse un'API
+    * `byte[] Data` ▶ Contenuto richiesta
+    * `str Name` ▶ Nome richiesta
+  * `class MethodResponse` ▶ Risposta del device (come fosse un'API)
+    * `MethodRequest(byte[] req, int httpCode)` ▶ ctor x obj di risposta
 
 * `Microsoft.Azure.Devices.Provisioning.Client`
 
 * `Microsoft.Azure.Devices.Provisioning.Transport.Mqtt`
+* `Microsoft.Azure.EventHubs`
+  * `class EventData` ▶ Messaggio di EH
+  * `class EventHubClient` ▶ Client x leggere da EH o IoT
+    * `CreateFromConnectionString(string conn)` ▶ Crea istanza di client
+    * `CreateReceiver(string consGroup, string partId, EventPosition e)` ▶ Crea un Partition Receiver da cui leggere
+  * `class PartitionReceiver` ▶ Lettore di partiz
+    * `ReceiveAsync(int max)` ▶ Leggi {max} msg
 
-* AzureMapsRestToolkit
+* `AzureMapsRestServices/AzureMapsRestToolkit` ▶ NuGet per posizioni, geocoding, spatial route e cose così
 
+***
 
 ## IotCentral
 
