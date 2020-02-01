@@ -2,16 +2,29 @@
 # Appunti AZ-220
 
 ## Link utili
+
 * [Scheda corso](https://docs.microsoft.com/en-us/learn/certifications/courses/az-220t00)
 * [Scheda corso PDF](http://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4nBeC)
 * [Laboratori](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/)
 
-## Sowtware utile
+## Sowtware utili
 
-* `iotedgehubdev` - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
-* `azure-cli-iot-ext` - Estensione della azure shell per comandi su iot
-* `azure-iot-sdk-csharp/tools/DeviceExplorer` - Desktop app per interagire con IotHub. Deprecato il 30/10/2019
-* `Azure/azure-iot-explorer` - Nuova implementazione ufficiale del device explorer
+* [`Azure/azure-cli-iot-ext`](https://github.com/Azure/azure-iot-cli-extension) - Estensione della azure shell per comandi su iot
+* [`Azure/azure-iot-sdk-csharp/tools/DeviceExplorer`](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer) - Desktop app per interagire con IotHub. Deprecato il 30/10/2019
+* [`Azure/azure-iot-explorer`](https://github.com/Azure/azure-iot-explorer) - Nuova implementazione ufficiale del device explorer
+* [`Azure/iotedge`](https://github.com/azure/iotedge) - Progetto OSS di IotEdge
+* [`Azure/iotedgehubdev`](https://github.com/Azure/iotedgehubdev) - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
+
+## Esempi codice
+
+* [Codice Laboratori](https://github.com/MicrosoftLearning/AZ-220-Microsoft-Azure-IoT-Developer)
+* [Azure Samples IotHub](https://github.com/Azure-Samples/azure-iot-samples-csharp)
+* [IotEdge E2E Example](https://github.com/Azure-Samples/iotedge-end2end-messageflow)
+* [Architettura IoT (Edge Hub TSI SA EG DA DL)](https://github.com/Azure-Samples/azureiotlabs)
+* [IoTEdge module](https://github.com/Azure-Samples/iot-edge-sample-dotnet)
+* [Event Grid - IotEdge](https://github.com/Azure-Samples/azure-iot-edge-event-grid-sample)
+
+***
 
 ## Comandi AZ CLI
 
