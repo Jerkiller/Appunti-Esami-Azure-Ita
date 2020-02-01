@@ -1,0 +1,101 @@
+
+# Appunti AZ-220
+
+## Sowtware utile
+
+* `iotedgehubdev` - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
+* `azure-cli-iot-ext` - Estensione della azure shell per comandi su iot
+* `azure-iot-sdk-csharp/tools/DeviceExplorer` - Desktop app per interagire con IotHub. Deprecato il 30/10/2019
+* `Azure/azure-iot-explorer` - Nuova implementazione ufficiale del device explorer
+
+## AZ CLI
+
+* `az login`
+* `az account set -s {GUID}`
+* `az group list`
+* `az iot`
+  * `hub`
+    * `create -n {Name}`
+    * `list -g {RgName}`
+    * `show -g {RgName} -n {Name}`
+    * `show-connection-string -g {RgName} -n {Name}`
+    * `device-identity` # (IOT-CLI)
+      * `create -d {Device} -n {Name} --edge-enabled`
+      * `show-connection-string -d {Device} -g {RgName} -n {Name}`
+    * `monitor-events -n {Name}` # (IOT-CLI)
+  * `dps`
+
+***
+
+## Prezzi e limiti
+
+### IotHub
+
+Tiers:
+Free / Basic / Standard
+
+Per tutte max 1M device
+
+La free non ha:
+
+* Dimensione messaggio 4KB ma solo 0.5KB
+* Solo 8K msg/u
+* No upgrade ad altre tier
+* Solo 1 IotHub / sottoscriz
+
+Basic non ha:
+
+* Device Streams
+* Comandi Cloud-to-device
+* Device Management
+* Device Twin, Module Twin
+* IoT Edge
+
+| Resource | S1 | S2 | S3 | F1 |
+| --- | --- | --- | --- | --- |
+| Messages/day |400K |6M |300M |8K |
+| Maximum units |200 |200 |10 |1 |
+| Throughput/day | 1.5 GB/unit | 22.8 GB/unit | 1.14 TB/unit
+
+### DPS
+
+Prezzo fisso: solo tier S1
+
+***
+
+## Pacchetti DotNet
+
+* `Microsoft.Azure.Devices`
+  * `class CloudToDeviceMethod` ▶ Metodo eseguibile su device
+    * `CloudToDeviceMethod(str name)`
+  * `class ServiceClient` ▶ Per mandare messaggi ai device
+    * `CreateFromConnectionString(str conn)` ▶ crea un service client
+    * `InvokeDeviceMethodAsync(str deviceId, CloudToDevice method)` ▶ invoca un metodo su un device
+
+* `Microsoft.Azure.Devices.Client`
+  * `Enum TransportType` ▶ Protocollo Amqp|Mqtt|Http...
+  * `class Message` ▶ Msg di comunicaz tra cloud e device, con prop
+    * `Message(byte[] msg)` ▶ ctor x creare msg con body
+    * `Dictionary<str,str> Properties` ▶ dizionario di proprietà tipo *metadati*
+  * `class DeviceClient` ▶ Per mandare messaggi al cloud
+    * `CreateFromConnectionString(str conn, TransportType t)` ▶ crea comunicaz verso cloud
+    * `SendEventAsync(Message msg)` ▶ Invia messaggio al cloud
+
+* `Microsoft.Azure.Devices.Provisioning.Client`
+
+* `Microsoft.Azure.Devices.Provisioning.Transport.Mqtt`
+
+* AzureMapsRestToolkit
+
+
+## IotCentral
+
+* Device Templates - Gestione ontologia del device
+  * Interfaces
+    * Capability (Command|Telemetry|Property)
+  * Views (dashboard personalizzate)
+* Devices - Gestione asset. Lista device per interfaccia
+  * New Device - Possibile creare nuovo device anche simulato
+  * Vista device - Cliccando sul singolo device si vedono le custom views e si possono inviare comandi
+* Jobs - Processi batch es. settare una property per gruppi di device. es. Optimal Temperature
+* Analytics - grafici valori sui device
