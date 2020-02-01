@@ -106,8 +106,14 @@ Prezzo fisso: solo tier S1
     * `MethodRequest(byte[] req, int httpCode)` ▶ ctor x obj di risposta
 
 * `Microsoft.Azure.Devices.Provisioning.Client`
+  * `class ProvisioningDeviceClient` ▶ Client per i device che usano DPS
+    * `Create(str endpoint, str scope, SecurityProvider sp, ...)` ▶ Crea il client
+    * `RegisterAsync()` ▶ Registra tramite DPS un device
+  * `class DeviceRegistrationResult` ▶ Il risultato della registrazione del device
+    * `str DeviceId` ▶ id device
+    * `str AssignedHub` ▶ hub associato al device
+    * `Status` ▶ Assigned|NotAssigned
 
-* `Microsoft.Azure.Devices.Provisioning.Transport.Mqtt`
 * `Microsoft.Azure.EventHubs`
   * `class EventData` ▶ Messaggio di EH
   * `class EventHubClient` ▶ Client x leggere da EH o IoT
@@ -115,6 +121,12 @@ Prezzo fisso: solo tier S1
     * `CreateReceiver(string consGroup, string partId, EventPosition e)` ▶ Crea un Partition Receiver da cui leggere
   * `class PartitionReceiver` ▶ Lettore di partiz
     * `ReceiveAsync(int max)` ▶ Leggi {max} msg
+
+* `Microsoft.Azure.Devices.Shared`
+  * `class SecurityProviderSymmetricKey`
+    * `SecurityProviderSymmetricKey(str registrationId, str pk, str sk)`
+  * `class SecurityProvider`
+    * `GetRegistrationID()`
 
 * `AzureMapsRestServices/AzureMapsRestToolkit` ▶ NuGet per posizioni, geocoding, spatial route e cose così
 
