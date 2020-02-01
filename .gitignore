@@ -5,6 +5,3 @@
 !.gitignore
 !appunti-az-220.md
 # etc...
-
-# ...even if they are in subdirectories
-!*/

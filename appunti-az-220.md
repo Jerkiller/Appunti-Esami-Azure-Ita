@@ -7,7 +7,7 @@
 * [Scheda corso PDF](http://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4nBeC)
 * [Laboratori](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/)
 
-## Sowtware utili
+## Software utili
 
 * [`Azure/azure-cli-iot-ext`](https://github.com/Azure/azure-iot-cli-extension) - Estensione della azure shell per comandi su iot
 * [`Azure/azure-iot-sdk-csharp/tools/DeviceExplorer`](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer) - Desktop app per interagire con IotHub. Deprecato il 30/10/2019
