@@ -132,6 +132,23 @@ Prezzo fisso: solo tier S1
 
 ***
 
+## Moduli Edge
+
+### Struttura modulo
+
+* `.env` contiene credenziali per ACR
+* `deployment.template.json` Template per deploy
+  * Sez. `systemModules` con dentro edgeHub e edgeAgent (runtime iot edge)
+  * Sez. `modules` immagini custom da deployare
+  * Sez. `$edgeHub.routes` qui si impostano le route tra moduli. Di default tempSimulator -> modulo -> iotHub
+* `modules` Qui troviamo il codice dei moduli custom
+  * `XYZ` Nome del modulo creato
+    * `Program.cs` Entry point del modulo
+      * `Init()` Inizializza modulo: crea client, apre conn e registra PipeMessage come handler dei msg
+      * `PipeMessage(Message msg, object ctx)` Logica gestione msg
+
+***
+
 ## IotCentral
 
 * Device Templates - Gestione ontologia del device
