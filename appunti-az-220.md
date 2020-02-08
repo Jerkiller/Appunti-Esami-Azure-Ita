@@ -14,6 +14,9 @@
 * [`Azure/azure-iot-explorer`](https://github.com/Azure/azure-iot-explorer) - Nuova implementazione ufficiale del device explorer
 * [`Azure/iotedge`](https://github.com/azure/iotedge) - Progetto OSS di IotEdge
 * [`Azure/iotedgehubdev`](https://github.com/Azure/iotedgehubdev) - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
+* [`Microsoft/vscode-azure-iot-toolkit`](https://github.com/Microsoft/vscode-azure-iot-toolkit) - Estensione VS Code x iot
+* [`Microsoft/vscode-iot-workbench`](https://github.com/Microsoft/vscode-iot-workbench) - Estensione VS Code x iot
+* [`Microsoft/vscode-azure-iot-edge`](https://github.com/Microsoft/vscode-azure-iot-edge/) - Estensione VS Code x edge
 
 ## Esempi codice
 
@@ -25,6 +28,12 @@
 * [Event Grid - IotEdge](https://github.com/Azure-Samples/azure-iot-edge-event-grid-sample)
 
 ***
+
+## Sistemi Operativi IOT
+
+* Windows IotCore
+* Ubuntu Core
+* Riot, QNX, Android Automotive
 
 ## Comandi AZ CLI
 
@@ -49,10 +58,11 @@
 
 ### IotHub
 
-Tiers:
-Free / Basic / Standard
-
-Per tutte max 1M device
+* 5 Protocolli: AMQP AMQP-WS MQTT MQTT-WS HTTPS
+* 3 Tiers: Free / Basic / Standard
+* Per tutte max 1M device
+* SLA 99.9%
+* 50 IotHub / sottoscriz
 
 La free non ha:
 
