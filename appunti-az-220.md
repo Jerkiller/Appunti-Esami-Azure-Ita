@@ -40,6 +40,7 @@
 * `az login`
 * `az account set -s {GUID}`
 * `az group list`
+* `az configure -d group={RgName}`
 * `az iot`
   * `hub`
     * `create -n {Name}`
@@ -51,6 +52,7 @@
       * `show-connection-string -d {Device} -g {RgName} -n {Name}`
     * `monitor-events -n {Name}` # (IOT-CLI)
   * `dps`
+    * `linked-hub list`
 
 ***
 
@@ -87,7 +89,17 @@ Basic non ha:
 
 ### DPS
 
-Prezzo fisso: solo tier S1
+* Prezzo fisso: solo tier S1
+* URL XXXXXXXXX.azure-devices-provisioning.net/
+* Provisioning dei singoli device o a gruppi (enrollment group)
+* Reprovisioning, Deprovisioning
+
+Vantaggi di un DPS
+
+* Scalabilità verso più IoTHub
+* Possibilità di fare provisioning di 1 device all'hub con meno latenza (geo-sharding)
+* Non serve inchiodare la connessione a IotHub in catena di produzione
+* Possibilità di gestire multi-tenancy con 1 hub / cliente
 
 ***
 
@@ -170,3 +182,6 @@ Prezzo fisso: solo tier S1
   * Vista device - Cliccando sul singolo device si vedono le custom views e si possono inviare comandi
 * Jobs - Processi batch es. settare una property per gruppi di device. es. Optimal Temperature
 * Analytics - grafici valori sui device
+
+
+### Pag 60
