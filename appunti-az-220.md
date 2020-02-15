@@ -114,7 +114,7 @@ C2D:
 * Prezzo fisso: solo tier S1
 * URL XXXXXXXXX.azure-devices-provisioning.net/
 * Provisioning dei singoli device o a gruppi (enrollment group)
-* Reprovisioning, Deprovisioning
+* Reprovisioning, Deprovisioning, blacklisting temporaneo (anche a livello di gruppi)
 
 Vantaggi di un DPS
 
@@ -130,6 +130,23 @@ Tipologie di provisioning:
 * Static Config - In base a un Enrollment (es. single tenant)
   * Enrollment singolo - con attestazione TPM o x509
   * Enrollment group - con x509 o SymmKeys - per molti device similmente configurati o dello stesso tenant
+
+### Certificati
+
+* x.509 standard x certificati a chiave pubblica (asimmetrica)
+* emessi da CA per ambiente produzione
+* emessi con openSSL o autofirmati per test
+* file .pem o .cer è la parte pubblica
+* è possibile creare catene di certificati.
+  * certificati root
+  * certificati intermedi/intermediate
+  * certificati foglia/leaf
+* Azure verifica il possesso dei certificati
+  * viene caricato il pem/cer
+  * azure genera un codice di verifica
+  * viene firmato il codice con chiave privata
+  * viene caricato il codice di verifica criptato come "proof of validity"
+* Possibilità di gestire 2 certificati (primario/secondario) per evitare downtime 
 
 ***
 
