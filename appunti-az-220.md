@@ -123,6 +123,14 @@ Vantaggi di un DPS
 * Non serve inchiodare la connessione a IotHub in catena di produzione
 * Possibilità di gestire multi-tenancy con 1 hub / cliente
 
+Tipologie di provisioning:
+
+* Evenly Weighted - Round robin
+* Low Latency - Minore latenza Device-IotHub
+* Static Config - In base a un Enrollment (es. single tenant)
+  * Enrollment singolo - con attestazione TPM o x509
+  * Enrollment group - con x509 o SymmKeys - per molti device similmente configurati o dello stesso tenant
+
 ***
 
 ## Pacchetti DotNet
