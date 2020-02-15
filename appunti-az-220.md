@@ -14,6 +14,7 @@
 * [`Azure/azure-iot-explorer`](https://github.com/Azure/azure-iot-explorer) - Nuova implementazione ufficiale del device explorer
 * [`Azure/iotedge`](https://github.com/azure/iotedge) - Progetto OSS di IotEdge
 * [`Azure/iotedgehubdev`](https://github.com/Azure/iotedgehubdev) - Pacchetto py per sviluppo, creazione, test, esecuzione con simulatore di moduli per iot edge.
+* [`Azure/IoT Security Agent C#`](https://github.com/Azure/Azure-IoT-Security-Agent-CS) - Software che fa audit sulla sicurezza a livello OS del device e invia a Azure i risultati
 * [`Microsoft/vscode-azure-iot-toolkit`](https://github.com/Microsoft/vscode-azure-iot-toolkit) - Estensione VS Code x iot
 * [`Microsoft/vscode-iot-workbench`](https://github.com/Microsoft/vscode-iot-workbench) - Estensione VS Code x iot
 * [`Microsoft/vscode-azure-iot-edge`](https://github.com/Microsoft/vscode-azure-iot-edge/) - Estensione VS Code x edge
@@ -51,6 +52,7 @@
       * `create -d {Device} -n {Name} --edge-enabled`
       * `show-connection-string -d {Device} -g {RgName} -n {Name}`
     * `monitor-events -n {Name}` # (IOT-CLI)
+    * `query -n {Name} -q "{Query}"`
   * `dps`
     * `linked-hub list`
 
@@ -86,6 +88,19 @@ Basic non ha:
 | Messages/day |400K |6M |300M |8K |
 | Maximum units |200 |200 |10 |1 |
 | Throughput/day | 1.5 GB/unit | 22.8 GB/unit | 1.14 TB/unit
+
+D2C:
+
+* Telemetria
+* Reported State del Twin
+* File Upload
+
+C2D:
+
+* Comandi (monodirezionali)
+* Metodi invocati (acknowledgement)
+* Desired State del Twin
+
 
 #### Device Twin
 
