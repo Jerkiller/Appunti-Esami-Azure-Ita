@@ -222,4 +222,4 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 60
+### Pag 80
