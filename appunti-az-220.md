@@ -87,6 +87,13 @@ Basic non ha:
 | Maximum units |200 |200 |10 |1 |
 | Throughput/day | 1.5 GB/unit | 22.8 GB/unit | 1.14 TB/unit
 
+#### Device Twin
+
+* Tags: non visibili dal device
+* Desired properties: stato desiderato specificato dal backend
+* Reported properties: stato del device
+* Device identity properties: info sul device. Read-only
+
 ### DPS
 
 * Prezzo fisso: solo tier S1
@@ -111,6 +118,11 @@ Vantaggi di un DPS
   * `class ServiceClient` ▶ Per mandare messaggi ai device
     * `CreateFromConnectionString(str conn)` ▶ crea un service client
     * `InvokeDeviceMethodAsync(str deviceId, CloudToDevice method)` ▶ invoca un metodo su un device
+  * `class RegistryManager` ▶ Per gestire device e twins
+    * `CreateFromConnectionString(str conn)` ▶ Crea un registry Manager
+    * `GetTwinAsync(str deviceId)` ▶ Mi da il json di un twin
+    * `UpdateTwinAsync(str deviceId, patch, twin.ETag)` ▶ Aggiorna tale twin
+    * `CreateQuery(str sqlQuery, 100)` ▶ Esegue una query sulla registry dispositivi
 
 * `Microsoft.Azure.Devices.Client`
   * `Enum TransportType` ▶ Protocollo Amqp|Mqtt|Http...
@@ -121,6 +133,9 @@ Vantaggi di un DPS
     * `CreateFromConnectionString(str conn, TransportType t)` ▶ crea comunicaz verso cloud
     * `SendEventAsync(Message msg)` ▶ Invia messaggio al cloud
     * `SetMethodHandlerAsync(str methodName, MethodCallback callback, obj ctx)` ▶ Registra un metodo per un device, per rispondere a un comando da cloud (come fosse un'API)
+    * `UpdateReportedPropertiesAsync(TwinCollection tc)` ▶ Invia lo stato che riporta il device al twin
+    * `GetTwinAsync()` ▶ Mi restituisce i dati del twin
+    * `SetDesiredPropertyUpdateCallbackAsync(callback, ...)` ▶ Setta un metodo al cambio del twin desiderato
   * `class MethodRequest` ▶ Msg per invocare metodi del device come fosse un'API
     * `byte[] Data` ▶ Contenuto richiesta
     * `str Name` ▶ Nome richiesta
