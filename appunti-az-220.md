@@ -101,6 +101,26 @@ C2D:
 * Metodi invocati (acknowledgement)
 * Desired State del Twin
 
+#### Routing
+
+Default Endpoint: Event Hub da cui leggere
+Custom Endpoint:
+
+* Event Hub
+* Service Bus Topic (no session o duplicati)
+* Service Bus Queue (no session o duplicati)
+* Storage Container (ADLS o Blob)
+
+Il routing aumenta latenza. È bene usare endpoint nella stessa area geografica.
+Il routing verso custom endpoint può essere condizionale.
+
+Così posso ottenere:
+
+* Filtraggio messaggi con logiche di business
+* Instradamento dello stesso messaggio su più catene
+
+Route di fallback: se non soddisfa alcuna condizione,
+instrada verso un endpoint "discarica".
 
 #### Device Twin
 
@@ -239,4 +259,4 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 80
+### Pag 91
