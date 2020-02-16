@@ -118,6 +118,7 @@ Così posso ottenere:
 
 * *Filtraggio* messaggi con logiche di business
 * Instradamento/*duplicazione* dello stesso messaggio su più catene
+* *Arricchimento* del msg con proprietà statiche o tag del twin
 
 **Route di fallback**: se non soddisfa alcuna condizione,
 instrada verso un endpoint "discarica".
@@ -239,6 +240,17 @@ Tipologie di provisioning:
 
 ***
 
+## Architetture
+
+* Lambda - Cold/warm/cool/hot path
+* EH = messaging broker con + throughput
+* ASA = message stream ad alta frequenza
+  * Stream Input: Blob, EH, IotHub
+  * Reference Input: Blob, SQL (metadati, es. x fare join)
+  * Functions: Windowing, SQL Query, UDF.js, ML, Anomaly Detections, Spatial, Routing
+  * Output: EH, SQL, Blob, ADLS, Table, SBT, SBQ, CDb, PBi, AF
+***
+
 ## Moduli Edge
 
 ### Struttura modulo
@@ -269,4 +281,4 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 108
+### Pag 175
