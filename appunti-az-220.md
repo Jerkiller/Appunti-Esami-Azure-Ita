@@ -123,7 +123,14 @@ Così posso ottenere:
 instrada verso un endpoint "discarica".
 
 Posso gestire anche messaggi sul ciclo di vita del device.
-Se non mi bastano gli endpoint custom posso usare **Event Grid**.
+
+Posso usare il routing anche con **Event Grid** attaccato a iotHub.
+Si noti però che:
+
+* Costa di più di iothub routing (msg = $)
+* Peggiore per le telemetrie
+* È integrato con tutti gli endpoint possibili
+* Non garantisce ordinamento
 
 #### Device Twin
 
@@ -262,4 +269,4 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 91
+### Pag 108
