@@ -103,8 +103,8 @@ C2D:
 
 #### Routing
 
-Default Endpoint: Event Hub da cui leggere
-Custom Endpoint:
+**Default Endpoint**: Event Hub da cui leggere
+**Custom Endpoint**:
 
 * Event Hub
 * Service Bus Topic (no session o duplicati)
@@ -116,11 +116,14 @@ Il routing verso custom endpoint può essere condizionale.
 
 Così posso ottenere:
 
-* Filtraggio messaggi con logiche di business
-* Instradamento dello stesso messaggio su più catene
+* *Filtraggio* messaggi con logiche di business
+* Instradamento/*duplicazione* dello stesso messaggio su più catene
 
-Route di fallback: se non soddisfa alcuna condizione,
+**Route di fallback**: se non soddisfa alcuna condizione,
 instrada verso un endpoint "discarica".
+
+Posso gestire anche messaggi sul ciclo di vita del device.
+Se non mi bastano gli endpoint custom posso usare **Event Grid**.
 
 #### Device Twin
 
@@ -138,16 +141,16 @@ instrada verso un endpoint "discarica".
 
 Vantaggi di un DPS
 
-* Scalabilità verso più IoTHub
-* Possibilità di fare provisioning di 1 device all'hub con meno latenza (geo-sharding)
-* Non serve inchiodare la connessione a IotHub in catena di produzione
-* Possibilità di gestire multi-tenancy con 1 hub / cliente
+* **Scalabilità** verso più IoTHub
+* Possibilità di fare provisioning di 1 device all'hub con **meno latenza** (geo-sharding)
+* Non serve **inchiodare la connessione a IotHub** in catena di produzione
+* Possibilità di gestire **multi-tenancy** con 1 hub / cliente
 
 Tipologie di provisioning:
 
-* Evenly Weighted - Round robin
-* Low Latency - Minore latenza Device-IotHub
-* Static Config - In base a un Enrollment (es. single tenant)
+* *Evenly Weighted* - Round robin
+* *Low Latency* - Minore latenza Device-IotHub
+* *Static Config* - In base a un Enrollment (es. single tenant)
   * Enrollment singolo - con attestazione TPM o x509
   * Enrollment group - con x509 o SymmKeys - per molti device similmente configurati o dello stesso tenant
 
