@@ -249,6 +249,13 @@ Tipologie di provisioning:
   * Reference Input: Blob, SQL (metadati, es. x fare join)
   * Functions: Windowing, SQL Query, UDF.js, ML, Anomaly Detections, Spatial, Routing
   * Output: EH, SQL, Blob, ADLS, Table, SBT, SBQ, CDb, PBi, AF
+* EG = IotHub pubblica le seguenti famiglie di eventi:
+  * Device Created/Deleted
+  * Device Connected/Disconnected
+  * Telemetry
+* PBi
+  * Connectors: SQL, ADX, Blob, Table, Cosmos, ADLS, HDFS, Spark
+  * Visuals
 ***
 
 ## Moduli Edge
@@ -281,4 +288,4 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 175
+### Pag 209
