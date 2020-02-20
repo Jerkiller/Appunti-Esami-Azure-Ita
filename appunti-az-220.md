@@ -288,6 +288,19 @@ Implementa AMQP e MQTT e fa da proxy locale x iot Hub.
 * Demultiplexa le connessioni di + device in 1 connessione a iotHub in modo trasparente
 * È una cache e consente di raggruppare i messaggi x risparmiare banda
 * Funge da Bus nella comunicazione tra edge modules
+* Ha regole di Routing tra moduli e iotHub
+
+### Routing
+
+Route: `FROM <source> WHERE <condition> INTO <target>`
+
+Source:
+* `/*`
+* `/messages/modules/<id>/outputs/<out>`
+
+Targets:
+* `$upstream`
+* `BrokeredEndpoint("/modules/<moduleId>/inputs/<input>")`
 
 ## Edge Agent
 
@@ -307,6 +320,11 @@ Implementa AMQP e MQTT e fa da proxy locale x iot Hub.
     * `Program.cs` Entry point del modulo
       * `Init()` Inizializza modulo: crea client, apre conn e registra PipeMessage come handler dei msg
       * `PipeMessage(Message msg, object ctx)` Logica gestione msg
+
+## Edge Gateway
+* transparent
+* protocol translation
+* identity translation
 
 ***
 
