@@ -248,6 +248,7 @@ Tipologie di provisioning:
   * Stream Input: Blob, EH, IotHub
   * Reference Input: Blob, SQL (metadati, es. x fare join)
   * Functions: Windowing, SQL Query, UDF.js, ML, Anomaly Detections, Spatial, Routing
+    * 4 Windowing nel GROUP BY: Tumbling, Hopping, Sliding, Session
   * Output: EH, SQL, Blob, ADLS, Table, SBT, SBQ, CDb, PBi, AF
 * EG = IotHub pubblica le seguenti famiglie di eventi:
   * Device Created/Deleted
@@ -255,10 +256,44 @@ Tipologie di provisioning:
   * Telemetry
 * PBi
   * Connectors: SQL, ADX, Blob, Table, Cosmos, ADLS, HDFS, Spark
-  * Visuals
+  * 3 livelli di view:
+    * Data View - Tabelle coi dati e fonti
+    * Model View - Relazioni fra tabelle e aggregate
+    * Design View - Interfaccia e presentazione dato tramite le Visualizations (grafici)
+
 ***
 
 ## Moduli Edge
+
+### Concetti Comuni
+
+* Module Image: Container con il sw del modulo
+  * Custom Image - Proprio codice (es. modulo di ML)
+  * Other Images - Codice di altri (es. Azure Stream Analytics)
+* Module Instance: Image che gira in un device
+* Module Identity: Informazioni identificative di un modulo
+* Module Twin: Json con info sul modulo. Dati e metadati
+
+### Stato di un modulo
+
+* Downloading
+* Running
+* Unhealthy
+* Failed
+* Stopped
+
+## Edge Hub
+
+Implementa AMQP e MQTT e fa da proxy locale x iot Hub.
+* Demultiplexa le connessioni di + device in 1 connessione a iotHub in modo trasparente
+* È una cache e consente di raggruppare i messaggi x risparmiare banda
+* Funge da Bus nella comunicazione tra edge modules
+
+## Edge Agent
+
+* Gestisce ciclo di vita dei moduli
+* Invia l'health dei moduli a IotHub
+* Viene creato da Edge Security allo startup
 
 ### Struttura modulo
 
@@ -288,4 +323,5 @@ Tipologie di provisioning:
 * Analytics - grafici valori sui device
 
 
-### Pag 209
+
+> P 221
