@@ -48,6 +48,8 @@
     * `list -g {RgName}`
     * `show -g {RgName} -n {Name}`
     * `show-connection-string -g {RgName} -n {Name}`
+    * `invoke-device-method -d --method-name {M} --method-payload {P}`
+    * `device-twin update -n -d... --set properties.desired.interval = 3000`
     * `device-identity` # (IOT-CLI)
       * `create -d {Device} -n {Name} --edge-enabled`
       * `show-connection-string -d {Device} -g {RgName} -n {Name}`
@@ -325,6 +327,11 @@ Targets:
 * transparent
 * protocol translation
 * identity translation
+
+* se perde connettività fa da buffer e funziona ancora con devices
+* Edge Blob Storage
+  * deviceToCloudUpload
+  * deviceAutoDelete
 
 ***
 
