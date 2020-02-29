@@ -3,5 +3,6 @@
 
 # But not these files...
 !.gitignore
+!appunti-az-204.md
 !appunti-az-220.md
 # etc...
