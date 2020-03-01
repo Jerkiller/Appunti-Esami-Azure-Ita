@@ -29,10 +29,41 @@ Gestione con PS, AzCLI, Portal, Batch Explorer, Batch Shipyard, Az Storage Explo
 * Batch Account - qui dentro vengono svolti tutti i workload. Può ess collegato a uno storage
   * Name - URL - Key
 * Pool - cluster di "Compute Node". Gestisce lo scheduling e le risorse
-* Job - viene assegnato a un pool, è una seq di Task (comando,script o app eseguito su un nodo).
+* Job - viene assegnato a un pool, può ess schedulato è una seq di Task (comando,script o app eseguito su un nodo).
+
+## Container
+
+Dove posso deployare un docker container?
+
+* EDGE - IoTEdge
+* SF - Service Fabric
+* BA - Azure Batch Job
+* WA - Azure Web Apps for Container
+* ACR - Azure Container Registry (No esecuzione)
+  * Auth AD Login
+  * Auth Admin account (evita in prod)
+  * Auth AD Service Principals
+* ACI - Azure Container Instance
+* ACS - Azure container service - Cluster Kube o Docker Swarm o DC/OS
+* AKS - Cluster K8S gestito
+  * Cluster Master Nodes (core orchestration su una serie di nodi nello stesso tenant - trasparente e gratuito. Gestito da Az)
+    * API server - utilizzate da kubectl e dashboard per interagire col cluster
+    * Scheduler - assegna workload ai nodi, avvia il workload
+    * ETCD - KV store x gestire stato e config del cluster
+    * Controller manager - gestisce i controller dei vari nodi x verificare e aggiornare ciclicamente lo stato
+  * Nodes - VM dove sono eseguiti i container
+    * kubelet (K8s agent) - riceve gli ordini e li esegue su un nodo
+    * kube-proxy - Getsisce la Vnet del nodo, gli IP dei servizi e dei pod e fa da router
+    * container runtime - consente ai container di girare e accedere alle risorse
+
+### Kubernetes
+* Pod - singola unit dove gira 1 container (di solito)
+* Deployment - Direttiva che deploya un applicativo su N pod e alloca risorse
+* Yaml Manifest - dove è specificato uno o + deployment
+* StatefulSet - Deployment persistente che muore salvando lo stato
+* DaemonSet - Deployment garantito in ogni nodo (es. logging del nodo)
 
 
-P.23
 
 ## Workflow
 
