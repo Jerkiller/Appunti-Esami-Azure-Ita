@@ -114,6 +114,12 @@ Pattern tipici
 Come crearle
 Kudu > CMD > cd D:\home\site\wwwroot > npm install durable-functions
 
+### Functions Core Tools
+CLI per gestire functions
+* `func`
+  * `init` - Inizializza un progetto di function nella dir corrente
+  * `new` - Crea una function dentro al progetto
+
 ## Events vs Messages
 
 Messaggi usati tra due componenti (entrambe devono essere vive).
