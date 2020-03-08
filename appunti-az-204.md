@@ -95,6 +95,25 @@ Trigger di un Workflow
   * Pushing (implementato con webhook)
   * Blob (polling)
 
+### Durable Function
+
+Estensione di Az Fun per C# e Node.Js.
+
+* Client - Avvia un flusso
+* Orchestrator - Avvia le attività con logica. Parallelismo, Ordine, Async, Modalità varie.
+* Activity
+
+Pattern tipici
+
+* Function chaining - Output di una funz è input di un'altra
+* Fan-out/fan-in - Appena tutte le attività sono concluse, sputo un output
+* Async API - la funz http-triggered ritorna l'endpoint da pollare, intanto viene avviata un'attività async e viene aggiornato lo stato nell'endpoint
+* Monitoraggio - Esegui un'attività appena una condizione si verifica
+* Interazione umana - Azione viene eseguita solo dopo intervento umano. Logiche di timeout
+
+Come crearle
+Kudu > CMD > cd D:\home\site\wwwroot > npm install durable-functions
+
 ## Events vs Messages
 
 Messaggi usati tra due componenti (entrambe devono essere vive).
@@ -130,3 +149,43 @@ EH - broker ad alta velocità x bigdata (milioni/sec a bassa latenza)
 * archivio immediato (capture)
 * autenticato - può fungere da gateway x l'esterno
 * da EH si può attaccare SA e fare analisi e aggregazione
+
+
+
+### Dati in Azure
+
+* Strutturati - Id, entità, relazioni, tutto molto bello
+* Semi strutturati - Serializzazioni i oggetti disomogenei. Es. Yaml, XML, Json
+* Non struttrati - Binari, es. video, pdf, ecc.
+
+Analisi dei dati:
+* Con che velocità voglio i dati? es. BI lenta, caricamento lento, lettura veloce
+* Che dati voglio?
+* Come li voglio i dati?
+* Come e quanto spesso li inserisco e elimino
+* Quali campi identificano i dati?
+
+Operazioni in transazione
+ACID: Atomicità, Coerenza, Isolamento e Durabilità
+OLTP: online TRANSACTIONAL processing - db transazionale
+OLAP: online ANALYTICAL processing - db + lunghi e da analisi
+
+CosmosDB
+* dati semistrutturati
+* bassa latenza
+* molte letture e scritture
+* query complesse
+* georeplica
+* ACIDo
+
+SQL
+* dati strutturati
+* bassa latenza
+* molte letture e scritture
+* query complesse e possibilità di avere un modello semantico con SSAS
+
+BLOB
+* dati NON strutturati
+* bassa latenza (se usato con CDN bassissima)
+* molte letture e scritture
+* poco costo
