@@ -119,9 +119,11 @@ CLI per gestire functions
 * `func`
   * `init` - Inizializza un progetto di function nella dir corrente
   * `new` - Crea una function dentro al progetto
+  * `azure functionapp publish "FUNCTIONAPP"` - Publica func su Azure
 
-AZ CLI
-`az functionapp create`
+### Functions AZ CLI
+`az functionapp create --name {name} --runtime node`
+`az functionapp deployment source config-zip --src <zip-file>`
 
 ## Events vs Messages
 
