@@ -78,10 +78,22 @@ In az, due approcci:
 
 Trigger di un Workflow
 * Ora
+  * CronEx
+    * Base: `{second} {minute} {hour} {day} {month} {day of the week}`
+    * `*` - Ogni valore di un campo
+    * `-` - Intervallo
+    * `,` - Separatore AND
+    * `/` - Incremento. Ogni x ore/minuti
 * Evento (http, msg...)
+  * HTTP
+    * Auth di 3 tipologie
+      * Admin - serve chiave host
+      * Function - Chiave host o chiave func
+      * Anonymous - No chiave
 * Dati
   * Polling (frequenza * intervallo check)
   * Pushing (implementato con webhook)
+  * Blob (polling)
 
 ## Events vs Messages
 
