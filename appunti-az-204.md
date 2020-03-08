@@ -120,6 +120,9 @@ CLI per gestire functions
   * `init` - Inizializza un progetto di function nella dir corrente
   * `new` - Crea una function dentro al progetto
 
+AZ CLI
+`az functionapp create`
+
 ## Events vs Messages
 
 Messaggi usati tra due componenti (entrambe devono essere vive).
