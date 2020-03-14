@@ -13,9 +13,10 @@
 * Rest API
 * SDK Azure Management
 
-## RG
+## Resource Group e organizzazione delle risorse
 
 Resource group gruppo logico risorse.
+No gruppi annidati. I gruppi di sottoscrizioni (management group) possono esserlo.
 
 Nomenclatura suggerita: `msftlearn-core-infrastructure-rg`.
 
@@ -27,11 +28,20 @@ Organizzabili per:
 * Tipo risorsa es. VM-RG tutte le VM
 * Fatturaz./centrodicosto es. proj-manhattan-rg
 
+### Spostamenti
+
+
+* È possibile spostare gruppi e risorse in altri sottoscrizioni o gruppi
+* In fase di spostamento viene lockato l'RG!
+* Gli spostamenti sono logici e non di datacenter
+* Non tutte le risorse possono essere spostate
+
 ### Tag
 
 * Altre categorizzazioni si possono ottenere con i TAG.
 * Sono elementi chiave-valore
-* Si possono applicare su risorse o gruppi.
+* Si possono applicare su quasi tutte le risorse
+* Si possono applicare ai gruppi ma le risorse non li ereditano
 
 ### Policies/Criteri
 
@@ -39,6 +49,16 @@ Permettono di applicare criteri su risorse.
 Es. impedire la creazione di risorse senza un certo tag.
 Es. creazione solo in certe aree geografiche 
 Es. no certe risorse o no certe tier
+
+### RBAC
+
+Gestione di ruoli a gruppi e per gruppi di risorse.
+Buone prassi:
+
+* Dare permessi minimi e non lassisti
+* Usare i lock sulle risorse che non devono essere eliminate
+  * Lock: per gruppo, sottoscriz o risorsa
+  * Lock di delete o di RO. Il secondo è + stringente -> risultati imprevisti
 
 ## VM
 
@@ -357,4 +377,7 @@ az vm restart -g MyResourceGroup -n MyVm
   * `list --output table`
   * `deployment source config --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
 * `az resource tag --tags Department=Finance`
-
+* `az rest --method post --uri <enter the correct REST operation URI here>`
+* `az resource`
+  * `show -g <group-name> -n <res-name> --query id --output tsv`
+  * `move --destination-group <destination-group-name> --ids $yourResource`
