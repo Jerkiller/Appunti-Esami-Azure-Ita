@@ -297,6 +297,14 @@ BLOB
 
 
 ### AZ CLI
+variable="value" in ps $variable="value"
+az --version
+az find "az xyz abc"
+az login
+* `az group`
+  * `create --name <name> --location <location>`
+  * `list --output table`
+  * `list --query "[?name == '$RESOURCE_GROUP']"` -> [Jmes path](https://jmespath.org/)
 * `az functionapp`
   * `create --name {name} --runtime node`
   * `deployment source config-zip --src <zip-file>`
@@ -313,3 +321,11 @@ BLOB
   * `eventhub
     * `create`
     * `show`
+az vm restart -g MyResourceGroup -n MyVm
+* `az appservice plan` 
+  * `create --name $AZURE_APP_PLAN --resource-group $RESOURCE_GROUP --location $AZURE_REGION --sku FREE`
+  * `list --output table`
+* `az webapp`
+  * `create --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --plan $AZURE_APP_PLAN`
+  * `list --output table`
+  * `deployment source config --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
