@@ -228,13 +228,32 @@ pro:
 * semplice ma potente (filtri avanzati)
 * ha, scale
 
+#### Event Hub (EH)
+
 EH - broker ad alta velocità x bigdata (milioni/sec a bassa latenza)
+
+Ad esso si attaccano M autori/pubblicatori in scrittura e N consumatori/sottoscrittori in lettura.
+
 * partizionato
 * archivio immediato (capture)
 * autenticato - può fungere da gateway x l'esterno
+* autoscale
+* dati ridondati
 * da EH si può attaccare SA e fare analisi e aggregazione
+* Compatibilità vrs Kafka
 
+* Possibilità di elaborare lo stesso messaggio in parallelo con i Consumer Group
 
+Tiers:
+
+* Basic
+* Standard (20CG, 1000 connessioni)
+* Dedicato
+
+##### Codice
+
+* `EventHubReceiver`
+* `EventProcessorHost`
 
 ### Dati in Azure
 
@@ -276,10 +295,10 @@ BLOB
 
 
 ### AZ CLI
-`az functionapp create --name {name} --runtime node`
-`az functionapp deployment source config-zip --src <zip-file>`
-`az storage account create`
-`az storage account show-connection-string`
-`az storage message peek`
-`az storage queue exists/create/delete`
-
+* `az functionapp create --name {name} --runtime node`
+* `az functionapp deployment source config-zip --src <zip-file>`
+* `az storage account create`
+* `az storage account show-connection-string`
+* `az storage message peek`
+* `az storage queue exists/create/delete`
+* `az eventhubs namespace create`
