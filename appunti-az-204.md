@@ -353,6 +353,8 @@ BLOB
   * es. `Install-Module -Name Az -AllowClobber`
 * Modulo per Azure è **-Az**. Precedentemente **-AzureRM**
 * Se la Get-ExecutionPolicy è restricted, non possono essere eseguiti moduli dalla PSGallery. Occorre lanciare `Set-ExecutionPolicy RemoteSigned`
+* Per eseguire scriptoni conviene usare *Powershell ISE*. File in formato `.ps1` eseguibili da PS con `\.deploy.ps1  -size 5 -location "East US"`
+* Cicli e varibili come coding
 
 ```powershell
 $ResourceGroupName = "prod-ciccio-rg"
