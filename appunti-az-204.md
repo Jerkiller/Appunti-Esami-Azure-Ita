@@ -5,7 +5,6 @@
 
 * [Scheda corso](https://docs.microsoft.com/en-us/learn/certifications/exams/az-204)
 * [Scheda corso PDF](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4oZ7B)
-* [Laboratori](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/)
 
 ## Deploy
 * Azure
@@ -121,10 +120,6 @@ CLI per gestire functions
   * `new` - Crea una function dentro al progetto
   * `azure functionapp publish "FUNCTIONAPP"` - Publica func su Azure
 
-### Functions AZ CLI
-`az functionapp create --name {name} --runtime node`
-`az functionapp deployment source config-zip --src <zip-file>`
-
 ## Events vs Messages
 
 Messaggi usati tra due componenti: mittente M e destinatario D.
@@ -141,7 +136,9 @@ Eventi usati tra 0 o molte componenti (broadcast).
 
 #### Service Bus Namespace (SBN)
 
-Serve per l'invio di messaggi. Contiene:
+Serve per l'invio di messaggi.
+Garantisce accoppiamento debole e quindi serve a gestire picchi di domanda.
+Contiene:
 
 * code
 * topic/argomenti
@@ -192,6 +189,33 @@ A differenza della Storage Queue, la SBQ ha feature come:
 * Serve per connessione tra componenti/app e non per messaggi.
 * È un canale di comunicazione bidirezionale.
 * Serve a bypassare limiti di rete come firewall.
+
+
+#### Storage Queue (SQ)
+
+* Dentro a uno storage account
+* Fino a 500TB
+* Dati replicati
+* Standard = HD Premium = SSD
+
+Come accedere?
+* AAD ruoli per client
+* Primary Key - accesso a tutto l'account
+* SAS Token - revocabile e temporale
+
+##### Codice
+* `WindowsAzure.Storage`
+  * `CloudStorageAccount` rappresenta l'account di archiviazione di Azure.
+    * `Parse(str connStr)`
+    * `CreateCloudQueueClient()`
+  * `CloudQueueClient` rappresenta Archiviazione code di Azure.
+    * `GetQueueReference(str queueName)`
+  * `CloudQueue` rappresenta una delle istanze della coda.
+    * `CreateIfNotExistsAsync()`
+    * `AddMessageAsync(CQM msg)`
+    * `GetMessageAsync()`
+    * `DeleteMessageAsync(CQM msg)`
+  * `CloudQueueMessage(str message)` rappresenta un messaggio.
 
 #### Event Grid (EG)
 
@@ -249,3 +273,13 @@ BLOB
 * bassa latenza (se usato con CDN bassissima)
 * molte letture e scritture
 * poco costo
+
+
+### AZ CLI
+`az functionapp create --name {name} --runtime node`
+`az functionapp deployment source config-zip --src <zip-file>`
+`az storage account create`
+`az storage account show-connection-string`
+`az storage message peek`
+`az storage queue exists/create/delete`
+
