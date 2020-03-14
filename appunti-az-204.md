@@ -153,6 +153,8 @@ Ha 3 tiers:
 * Standard (S)
 * Premium (P)
 
+Pacchetto per scrivere codice: `Microsoft.Azure.ServiceBus`
+
 #### Service Bus Queue (SBQ)
 
 A differenza della Storage Queue, la SBQ ha feature come:
@@ -164,6 +166,20 @@ A differenza della Storage Queue, la SBQ ha feature come:
 * Ruoli di sicurezza (RBAC)
 * Il destinatario viene pushato
 * milioni di msg... ma fino a 80GB <> SQ no limiti!!! e con log di tutti i msg (audit trail)
+
+##### Codice
+
+* `QueueClient(str connStr, str queueName)`
+  * `SendAsync(Msg msg)`
+  * `CloseAsync()`
+  * `RegisterMessageHandler(MessageHandler, opts)`
+  * `CompleteAsync(msg.SystemProperties.LockToken)`
+  
+* `TopicClient(str connStr, str topicName)`
+  * `SendAsync(Msg msg)`
+* `SubscriptionClient(str connStr, str topicName, str subscription)`
+  * `RegisterMessageHandler(MessageHandler, opts)`
+  * `CompleteAsync(msg.SystemProperties.LockToken)`
 
 #### Service Bus Topic (SBT)
 
