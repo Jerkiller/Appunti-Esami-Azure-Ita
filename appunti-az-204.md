@@ -13,6 +13,33 @@
 * Rest API
 * SDK Azure Management
 
+## RG
+
+Resource group gruppo logico risorse.
+
+Nomenclatura suggerita: `msftlearn-core-infrastructure-rg`.
+
+Organizzabili per:
+
+* Gruppo aziendale/Business unit es. Marketing, RnD
+* Ambiente es. Test/Prod/Demo
+* Ciclo di vita es. TestPowerBi
+* Tipo risorsa es. VM-RG tutte le VM
+* Fatturaz./centrodicosto es. proj-manhattan-rg
+
+### Tag
+
+* Altre categorizzazioni si possono ottenere con i TAG.
+* Sono elementi chiave-valore
+* Si possono applicare su risorse o gruppi.
+
+### Policies/Criteri
+
+Permettono di applicare criteri su risorse.
+Es. impedire la creazione di risorse senza un certo tag.
+Es. creazione solo in certe aree geografiche 
+Es. no certe risorse o no certe tier
+
 ## VM
 
 Risorse collegate: RG - PageBlob (VHD) - VNet - NIC (Network Interface)
@@ -329,3 +356,5 @@ az vm restart -g MyResourceGroup -n MyVm
   * `create --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --plan $AZURE_APP_PLAN`
   * `list --output table`
   * `deployment source config --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
+* `az resource tag --tags Department=Finance`
+
