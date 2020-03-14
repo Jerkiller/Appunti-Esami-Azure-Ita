@@ -342,8 +342,35 @@ BLOB
 * molte letture e scritture
 * poco costo
 
+## Powershell
 
-### AZ CLI
+* Installabile su tutte le piattaforme
+* Estendibile con moduli (dll) che contengono i cmdlet. `Get-Module` per vedere i moduli attivi ora.
+* Si basa sui *cmdlet*: commandlet con sintassi Verbo-Sostantivo
+  * Es. `Get-Help Get-ChildItem -detailed`
+* Moduli installabili dalla `PowerShell Gallery`
+  * `Install-Module`
+  * es. `Install-Module -Name Az -AllowClobber`
+* Modulo per Azure è **-Az**. Precedentemente **-AzureRM**
+* Se la Get-ExecutionPolicy è restricted, non possono essere eseguiti moduli dalla PSGallery. Occorre lanciare `Set-ExecutionPolicy RemoteSigned`
+
+```powershell
+
+Import-Module Az
+Connect-AzAccount
+Select-AzSubscription -Subscription "Visual Studio Enterprise"
+# Format-Table può essere abbreviato in `ft`
+Get-AzResourceGroup | Format-Table
+New-AzResourceGroup -Name <name> -Location <location>
+New-AzVm 
+       -ResourceGroupName <resource group name> 
+       -Name <machine name> 
+       -Credential <credentials object> 
+       -Location <location> 
+       -Image <image name>
+```
+
+## AZ CLI
 variable="value" in ps $variable="value"
 az --version
 az find "az xyz abc"
@@ -368,7 +395,9 @@ az login
   * `eventhub
     * `create`
     * `show`
-az vm restart -g MyResourceGroup -n MyVm
+* `az vm`
+  * `restart -g <groupName> -n <name>`
+  * `create -g <groupName> -n <name> --image UbuntuLTS`
 * `az appservice plan` 
   * `create --name $AZURE_APP_PLAN --resource-group $RESOURCE_GROUP --location $AZURE_REGION --sku FREE`
   * `list --output table`
