@@ -60,6 +60,33 @@ Buone prassi:
   * Lock: per gruppo, sottoscriz o risorsa
   * Lock di delete o di RO. Il secondo è + stringente -> risultati imprevisti
 
+### Cost Management
+
+I costi variano in base a:
+
+* Tipologia risorsa
+* Taglio risorsa (tier), scaling ecc.
+* Posizione risorsa (datacenter)
+* Tipologia cliente (es. Enterprise)
+* Risorsa del Marketplace? Tipologia fatturaz. diversa
+
+* Lo strumento fondamentale è il [pricing calculator](https://azure.microsoft.com/it-it/pricing/calculator/)
+* Per migrare verso il cloud c'è il tool [TCO calculator](https://azure.microsoft.com/pricing/tco/)
+* A valle della crez. risorse, si usano Advisor, Cost analyis e Budget
+* Licenze VS dann credito AZ:
+  * 45 eur/mese VS Professional
+  * 130 eur/mese Enterprise
+
+Modi di "sparagnare":
+* VM: Deallocazione se non usate (solo disco), ridimensionamento, Reserved Instance, spegnimento notturno, uso licenze on-prem su VM on-cloud
+* Località a basso costo
+* Limiti di spesa che bloccano spese
+* Go PAAS!
+* Offerte x sviluppo e test
+* SQL: uso licenze on-prem su cloud (BYOL), istanze vincolate (es. DB che non supererà mai i 100GB)
+
+---
+
 ## VM
 
 Risorse collegate: RG - PageBlob (VHD) - VNet - NIC (Network Interface)
