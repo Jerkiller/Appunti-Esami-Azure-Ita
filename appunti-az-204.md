@@ -355,26 +355,29 @@ BLOB
 * Se la Get-ExecutionPolicy è restricted, non possono essere eseguiti moduli dalla PSGallery. Occorre lanciare `Set-ExecutionPolicy RemoteSigned`
 
 ```powershell
+$ResourceGroupName = "prod-ciccio-rg"
 
 Import-Module Az
 Connect-AzAccount
 Select-AzSubscription -Subscription "Visual Studio Enterprise"
 # Format-Table può essere abbreviato in `ft`
 Get-AzResourceGroup | Format-Table
-New-AzResourceGroup -Name <name> -Location <location>
+New-AzResourceGroup -Name $ResourceGroupName -Location "<location>"
 New-AzVm 
-       -ResourceGroupName <resource group name> 
-       -Name <machine name> 
-       -Credential <credentials object> 
-       -Location <location> 
-       -Image <image name>
+       -ResourceGroupName $ResourceGroupName
+       -Name "<machine name>"
+       -Credential "<credentials object>"
+       -Location "<location>"
+       -Image "<image name>"
 ```
 
 ## AZ CLI
+
 variable="value" in ps $variable="value"
-az --version
-az find "az xyz abc"
-az login
+
+* `az --version`
+* `az find "az xyz abc"
+* `az login`
 * `az group`
   * `create --name <name> --location <location>`
   * `list --output table`
@@ -382,7 +385,7 @@ az login
 * `az functionapp`
   * `create --name {name} --runtime node`
   * `deployment source config-zip --src <zip-file>`
-* `az storage
+* `az storage`
   * `queue`
     * `exists/create/delete`
   * `message peek`
@@ -390,23 +393,23 @@ az login
   * `account`
     * `create`
     * `show-connection-string`
-* `az eventhubs
+* `az eventhubs`
   * `namespace create`
-  * `eventhub
+  * `eventhub`
     * `create`
     * `show`
 * `az vm`
   * `restart -g <groupName> -n <name>`
-  * `create -g <groupName> -n <name> --image UbuntuLTS`
+  * `create -n ... -g ... --image UbuntuLTS`
 * `az appservice plan` 
-  * `create --name $AZURE_APP_PLAN --resource-group $RESOURCE_GROUP --location $AZURE_REGION --sku FREE`
+  * `create -n ... -g ...P --location $AZURE_REGION --sku FREE`
   * `list --output table`
 * `az webapp`
-  * `create --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --plan $AZURE_APP_PLAN`
+  * `create -n ... -g ... --plan $AZURE_APP_PLAN`
   * `list --output table`
-  * `deployment source config --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
+  * `deployment source config -n ... -g ... --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
 * `az resource tag --tags Department=Finance`
-* `az rest --method post --uri <enter the correct REST operation URI here>`
+* `az rest --method post --uri "<enter the correct REST operation URI here>"`
 * `az resource`
   * `show -g <group-name> -n <res-name> --query id --output tsv`
   * `move --destination-group <destination-group-name> --ids $yourResource`
