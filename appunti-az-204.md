@@ -232,13 +232,15 @@ pro:
 
 EH - broker ad alta velocità x bigdata (milioni/sec a bassa latenza)
 
+Invio in AMQP per alta freq invii, HTTPS per invio poco frequente e con bassa latenza iniziale.
+
 Ad esso si attaccano M autori/pubblicatori in scrittura e N consumatori/sottoscrittori in lettura.
 
 * partizionato
 * archivio immediato (capture)
 * autenticato - può fungere da gateway x l'esterno
 * autoscale
-* dati ridondati
+* dati ridondati su + server fino a 7 gg di retention + capture su blob/ADLS
 * da EH si può attaccare SA e fare analisi e aggregazione
 * Compatibilità vrs Kafka
 
@@ -295,10 +297,19 @@ BLOB
 
 
 ### AZ CLI
-* `az functionapp create --name {name} --runtime node`
-* `az functionapp deployment source config-zip --src <zip-file>`
-* `az storage account create`
-* `az storage account show-connection-string`
-* `az storage message peek`
-* `az storage queue exists/create/delete`
-* `az eventhubs namespace create`
+* `az functionapp`
+  * `create --name {name} --runtime node`
+  * `deployment source config-zip --src <zip-file>`
+* `az storage
+  * `queue`
+    * `exists/create/delete`
+  * `message peek`
+  * `container create --connection-string ...`
+  * `account`
+    * `create`
+    * `show-connection-string`
+* `az eventhubs
+  * `namespace create`
+  * `eventhub
+    * `create`
+    * `show`
