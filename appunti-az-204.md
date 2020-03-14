@@ -127,24 +127,57 @@ CLI per gestire functions
 
 ## Events vs Messages
 
-Messaggi usati tra due componenti (entrambe devono essere vive).
-Servono a garantire comunicazione e ricezione. Un messaggio ha un contenuto esaustivo.
+Messaggi usati tra due componenti: mittente M e destinatario D.
+* Servono a garantire comunicazione e ricezione.
+* Un messaggio ha un contenuto **esaustivo**. D non deve fare altro per sapere l'info.
+* M e D devono essere vivi
+* M e D hanno un contratto di dati
 
 Eventi usati tra 0 o molte componenti (broadcast).
-Spesso Publish-subscribe. Un evento spesso è leggero e ha solo riferimento a un contenuto.
+* Spesso Publish-subscribe.
+* Un evento spesso è + leggero e ha solo riferimento a un contenuto
 
 ### Oggetti Azure
 
-Azure fornisce code e topic. Storage Queue VS SBT.
-Coda ha feature come:
- * at least once
- * at most once (rilecvamento duplicati)
- * FIFO
-E poi...
+#### Service Bus Namespace (SBN)
+
+Serve per l'invio di messaggi. Contiene:
+
+* code
+* topic/argomenti
+* inoltri
+
+Ha 3 tiers:
+
+* Basic (B)
+* Standard (S)
+* Premium (P)
+
+#### Service Bus Queue (SBQ)
+
+A differenza della Storage Queue, la SBQ ha feature come:
+* Messaggi > 256K (S) o 1M (P) <> SQ 64K
+* Supportati sia *at least once* che *at most once* (rilevamento duplicati)
+* FIFO garantito
 * transazioni di msg
 * batch di msg
-* milioni di msg...
-SBT garantisce + sottoscrittori (sistema a code interno)
+* Ruoli di sicurezza (RBAC)
+* Il destinatario viene pushato
+* milioni di msg... ma fino a 80GB <> SQ no limiti!!! e con log di tutti i msg (audit trail)
+
+#### Service Bus Topic (SBT)
+
+* Garantisce più sottoscrittori
+* Ha un sistema a code interno
+* Non supportati in (B)
+
+#### Service Bus Relay (SBR)
+
+* Serve per connessione tra componenti/app e non per messaggi.
+* È un canale di comunicazione bidirezionale.
+* Serve a bypassare limiti di rete come firewall.
+
+#### Event Grid (EG)
 
 EG - broker di eventi altamente scalabile (SF).
 Posso sottoscrivere eventi custom ed eventi di sistema
