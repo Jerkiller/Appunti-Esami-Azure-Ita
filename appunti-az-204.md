@@ -390,9 +390,11 @@ SQL
 
 BLOB
 * dati NON strutturati
-* bassa latenza (se usato con CDN bassissima)
-* molte letture e scritture
+* bassa latenza (se usato con CDN bassissima). Tuttavia è meno bassa di 1 FileSystem
+* molte letture e scritture. Difficile querying. (Azure Search)
 * poco costo
+* simulaz struttura gerarchica con prefissi es. `a/b/c/d.jpeg`
+* lease e access condition x gestire concorrenze
 
 ### Storage count SA
 
