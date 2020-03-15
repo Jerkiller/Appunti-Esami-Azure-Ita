@@ -136,7 +136,15 @@ Dove posso deployare un docker container?
 * StatefulSet - Deployment persistente che muore salvando lo stato
 * DaemonSet - Deployment garantito in ogni nodo (es. logging del nodo)
 
+### Web App
 
+Tiers: Free, Shared, Basic, Standard, Premium, PremiumV2, Isolated
+
+Slot di distribuz:
+* Solo dalla Standard in su
+* Hot swap delle app
+* Possibilità di scambiare anche config (var d'ambiente) insieme agli slot
+* Pipelining: es. pubblico su develop, deploy in staging. Porto su master, swap con prod slot
 
 ## Workflow
 
@@ -436,6 +444,7 @@ variable="value" in ps $variable="value"
 * `az webapp`
   * `create -n ... -g ... --plan $AZURE_APP_PLAN`
   * `list --output table`
+  * `up` - Crea un pacchetto e lo pubblica su WA. Se non esiste la WA la crea
   * `deployment source config -n ... -g ... --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration`
 * `az resource tag --tags Department=Finance`
 * `az rest --method post --uri "<enter the correct REST operation URI here>"`
