@@ -146,6 +146,8 @@ Slot di distribuz:
 * Possibilità di scambiare anche config (var d'ambiente) insieme agli slot
 * Pipelining: es. pubblico su develop, deploy in staging. Porto su master, swap con prod slot
 
+Distribuzione continua tramite WebHook con Az Container Regitry
+
 ## Workflow
 
 Ogni workflow ha dei task (input, condiz, azioni, output).
@@ -451,3 +453,7 @@ variable="value" in ps $variable="value"
 * `az resource`
   * `show -g <group-name> -n <res-name> --query id --output tsv`
   * `move --destination-group <destination-group-name> --ids $yourResource`
+* `az acr`
+  * `create -n ... -g ... --sku standard --admin-enabled true`
+  * `build --file Dockerfile --registry myregistry --image myimage .` - Esegue un dockerfile creando un'immagine docker sul ACR
+  * `task create --registry <container_registry_name> --name buildwebapp --image webimage --context https://github.com/MicrosoftDocs/mslearn-deploy-run-container-app-service.git --branch master --file Dockerfile --git-access-token <access_token>` - Definisce un task "buildWebApp"
