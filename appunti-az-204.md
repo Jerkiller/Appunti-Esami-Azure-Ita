@@ -216,7 +216,22 @@ Eventi usati tra 0 o molte componenti (broadcast).
 * Spesso Publish-subscribe.
 * Un evento spesso è + leggero e ha solo riferimento a un contenuto
 
-### Oggetti Azure
+## Databricks
+
+RDD Resilient Distributed Datasets
+* Resilient - Se una parte di operaz fallisce, DataBricks ricrea i dati
+* Distributes - Su più nodi
+* Dataset - Dataframe colonnari come db relaz
+
+* Programmi sono i notebook (markdown + script) scritti in Python, R, Scala
+* Formati csv, json, xml, parquet
+* ADLS, Blob (ABFS), Hadoop (hdfs), joining di più fs ...
+* Integrato con KeyVault
+* Integrato con JDBC e tutti i SQL che lo supportano
+* Integrabile con Kafka, CosmosDB e tutti i pacchetti Maven o Py
+
+
+### Comunicazione
 
 #### Service Bus Namespace (SBN)
 
