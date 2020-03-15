@@ -394,6 +394,53 @@ BLOB
 * molte letture e scritture
 * poco costo
 
+### Storage count SA
+
+* 2 tier:  Standard (HD) e Premium (SSD) - solo page blob.
+* Tipologia storage: Blob (legacy), Generic V1 (legacy) e **Generic V2**
+* Vari tipi di ridondanza LRS, ZRS, GRS GRS-RA...
+* accesso freq o sporadico
+* Max 500 TB, max 200 account
+* Endpoint `xxxx.[table|blob|queue|file].core.windows.net`
+
+Può contenere:
+
+* Code - 64Kb x milioni di msg
+* Tabelle - NoSql
+* Blob (block, page, append)
+  * Block Blob - es. video
+  * Page Blob - es. dischi virtuali (VHD)
+  * Append Blob - come block ma con append testuale. Max 195 GB
+* Files - SMB, utile per + VM con file comuni es. log o config centralizzate
+
+#### Sicurezza
+
+* Blob criptati con AES 256 non disativabile
+* VHD criptabili con BitLocker (Win) o DM-Crypt (Linux) chiavi in KV
+* Crittografia in transito. Usare HTTPS. Può essere messo obbligatorio. Per files può essere messo SMB 3.0
+* RBAC in gestione account e gestione dati
+* CORS policies
+* IAM - controllo accessi
+* Doppia chiave rigenerabile, SAS Token a livello di account o risorsa
+* Controllo di rete - Firewall, Blacklist o Whitelist di IP
+* Advanced Threat Protection - in preview x Blob: notifica se ci sono sospetti
+* in ADLS RBAC sul filesystem con permessi POSIX in base al grafo AD
+
+#### Codice **WindowsAzure.Storage**
+
+* `CloudStorageAccount`
+  * `Parse(str connStr)`
+  * `CreateCloudBlobClient()`
+* `CloudBlobClient`
+  * `GetContainerReference(str containerName)`
+* `CloudBlobContainer`
+  * `CreateAsync()`
+  * `GetBlockBlobReference(str blobName)`
+* `CloudBlockBlob`
+  * `UploadFromFileAsync(str fileName)`
+* `CloudBlobDirectory`
+  * `ListBlobs(options)`
+
 ## Powershell
 
 * Installabile su tutte le piattaforme
