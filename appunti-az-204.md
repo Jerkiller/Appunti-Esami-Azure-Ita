@@ -91,7 +91,19 @@ Modi di "sparagnare":
 
 Risorse collegate: RG - PageBlob (VHD) - VNet - NIC (Network Interface)
 Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
-x encrypt vhd -> az disk encryption service - (kv)
+* x encrypt vhd -> az disk encryption service - (kv)
+* divise per famiglie in base allo scopo (es. GPU, RAM, CPU, ...)
+* Managed disk o su storage account
+* diversi SO, immagini, stack installabili
+* Availability set
+  * Fault domain - se va giù una macchina ce n'è un'altra
+  * Update domain - se una macchina aggiorna, non l'altra
+* Az. Site Recovery - gestire il failover verso una VM secondaria
+* Backup di Azure - sia x VM che macchine fisiche, PC
+  * Agente di Backup di Azure
+  * System Center Data Protection Manager
+  * Server di Backup di Azure
+  * Estensione macchina virtuale di Backup di Azure
 
 ## AZ Batch
 
@@ -503,7 +515,7 @@ variable="value" in ps $variable="value"
     * `show`
 * `az vm`
   * `restart -g <groupName> -n <name>`
-  * `create -n ... -g ... --image UbuntuLTS`
+  * `create -n ... -g ... --image UbuntuLTS --admin-username jonc --admin-password aReallyGoodPasswordHere`
 * `az appservice plan` 
   * `create -n ... -g ...P --location $AZURE_REGION --sku FREE`
   * `list --output table`
