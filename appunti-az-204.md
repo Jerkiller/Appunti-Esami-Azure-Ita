@@ -92,8 +92,8 @@ Modi di "sparagnare":
 Risorse collegate: RG - PageBlob (VHD) - VNet - NIC (Network Interface)
 Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
 * x encrypt vhd -> az disk encryption service - (kv)
-* divise per famiglie in base allo scopo (es. GPU, RAM, CPU, ...)
-* Managed disk o su storage account
+* divise per famiglie in base allo scopo (es. GPU, RAM, CPU, IO, ...)
+* Managed disk o su storage account. Disco esterno temporaneo. Altri dischi vnno montati. Dischi in GiB = 1074 MB.
 * diversi SO, immagini, stack installabili
 * Availability set
   * Fault domain - se va giù una macchina ce n'è un'altra
@@ -104,6 +104,24 @@ Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
   * System Center Data Protection Manager
   * Server di Backup di Azure
   * Estensione macchina virtuale di Backup di Azure
+* NSG tipo firewall. Priorità bassa: nega tutto 65.500 poi regole. Di default è vietato entrare e uscire.
+
+### Codice
+
+* `ssh-keygen -t rsa -b 4096` - genera coppia di chiavi
+* `ls -la /` - visualizza la radice del disco
+* `ps -l` - mostra tutti i processi in esecuzione
+* `dmesg` - elenca tutti i messaggi del kernel
+* `lsblk` - elenca tutti i dispositivi a blocchi: qui verranno visualizzate le unità
+* `(echo n; echo p; echo 1; echo ; echo ; echo w) | sudo fdisk /dev/sdc` crea una patiz primaria
+* `sudo mkfs -t ext4 /dev/sdc1` crea Fie System nella partiz primaria
+* `sudo mkdir /data & sudo mount /dev/sdc1 /data` Monta l'unità nel File System corrente
+* `sudo apt-get install apache2 -y` installa Apache
+* ``
+* ``
+* ``
+
+* ``
 
 ## AZ Batch
 
