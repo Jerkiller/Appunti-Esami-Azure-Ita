@@ -426,7 +426,7 @@ BLOB
 * simulaz struttura gerarchica con prefissi es. `a/b/c/d.jpeg`
 * lease e access condition x gestire concorrenze
 
-### Storage count SA
+### Storage Account SA
 
 * 2 tier:  Standard (HD) e Premium (SSD) - solo page blob.
 * Tipologia storage: Blob (legacy), Generic V1 (legacy) e **Generic V2**
@@ -472,6 +472,37 @@ Può contenere:
   * `UploadFromFileAsync(str fileName)`
 * `CloudBlobDirectory`
   * `ListBlobs(options)`
+
+### SQL
+Suffisso: xxxxxxxxxx.database.windows.net
+* On premise
+* On-Cloud
+  * VM con SQL
+  * SQL di Azure - una via di mezzo
+  * SQL Database - completamente gestito
+  
+Unità di costo
+* DTU - misura combinata di risorse di calcolo, archiviazione e I/O
+* vCore - misura di core virtuali. È possibile configurare che risorse prediligere
+
+Regole di confronto: `SQL_Latin1_General_CP1_CI_AS`
+
+* **Latin1_General** si riferisce alla famiglia di lingue dell'Europa occidentale
+* **CP1** tabella codici 1252, una codifica char latin
+* **CI** - Case Insensitive (HeLLo = hello)
+* **AS** - Accent Sensitive (Però != Pero)
+
+Alternative: Database di Azure per PostgreSQL
+  * xxxxxxxxxxxxxx.postgres.database.azure.com.
+  * Estensibile, con retention configurabile e backup, scalabile...
+  * Sicurezza:
+    * account e ruoli
+    * vNet
+    * firewall (per impostare accesso da Azure disabilitare SSL)
+    * Connessioni SSL (evitare mitm)
+    * Client CLI: `psql`. Per lanciare comandi speciali si usa `\`.
+      * Es. `\l` fa il listing.
+      * Es. `\?` mostra tutti i comandi.
 
 ## Powershell
 
@@ -552,3 +583,4 @@ variable="value" in ps $variable="value"
   * `create -n ... -g ... --sku standard --admin-enabled true`
   * `build --file Dockerfile --registry myregistry --image myimage .` - Esegue un dockerfile creando un'immagine docker sul ACR
   * `task create --registry <container_registry_name> --name buildwebapp --image webimage --context https://github.com/MicrosoftDocs/mslearn-deploy-run-container-app-service.git --branch master --file Dockerfile --git-access-token <access_token>` - Definisce un task "buildWebApp"
+* `az postgres server create -n ... -g ... --sku-name SKU_NAME --admin-user ADMINISTRATOR_LOGIN`
