@@ -534,6 +534,7 @@ variable="value" in ps $variable="value"
 * `az vm`
   * `restart -g <groupName> -n <name>`
   * `create -n ... -g ... --image UbuntuLTS --admin-username jonc --admin-password aReallyGoodPasswordHere`
+  * `open-port -n ... -g ... --port 80`
 * `az appservice plan` 
   * `create -n ... -g ...P --location $AZURE_REGION --sku FREE`
   * `list --output table`
