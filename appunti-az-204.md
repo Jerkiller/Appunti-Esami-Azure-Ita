@@ -504,6 +504,12 @@ Alternative: Database di Azure per PostgreSQL
       * Es. `\l` fa il listing.
       * Es. `\?` mostra tutti i comandi.
 
+* Provisioning risorse deve essere fatto per ecceso
+* Elastic pool: quando ho più db con utilizzo medio e picchi sporadici
+  * Aggiungere pool se ho somma delle capacità >= 1.5 volte la capacità dell'elastic pool
+  * Pool: fino a 100 o 500 db
+  * eDTU: Unità asegnabili al pool intero. Al db puoi assegnare min e max DTU
+
 ## Powershell
 
 * Installabile su tutte le piattaforme
@@ -584,3 +590,7 @@ variable="value" in ps $variable="value"
   * `build --file Dockerfile --registry myregistry --image myimage .` - Esegue un dockerfile creando un'immagine docker sul ACR
   * `task create --registry <container_registry_name> --name buildwebapp --image webimage --context https://github.com/MicrosoftDocs/mslearn-deploy-run-container-app-service.git --branch master --file Dockerfile --git-access-token <access_token>` - Definisce un task "buildWebApp"
 * `az postgres server create -n ... -g ... --sku-name SKU_NAME --admin-user ADMINISTRATOR_LOGIN`
+* `az sql`
+  * `server create --location westeurope --admin-user xxx --admin-password yyy`
+  * `db create [--elastic-pool-name xyz] --server serverNme`
+  * `elastic-pools create`
