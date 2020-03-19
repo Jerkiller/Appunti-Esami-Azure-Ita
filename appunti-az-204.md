@@ -550,9 +550,28 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
 ### Key Vault (KV)
 
 * X gestire chiavi, credenziali, segreti
-* insiemi di credenziali: strutturato a FileSystem e contentente chiavi
+* Una volta salvata la chiave, nessuno ci accede più. Le app chiedono a KV.
+* insiemi di credenziali: strutturato a FileSystem e contentente chiavi.
   * es. chiave RMS, chiave x SQL TDE, chiave x SQL data masking o chiavi x SQL backup critto
+* chiavi a singola istanza o primaria + n secondarie
+* chiavi hw (HSM. Rispetta normativa FIPS140-2 liv 2) o sw (per testing, + economiche)
+* supporto x RSA 2048
+* log di chi usa che chiave
+* Segreti (blob < 10kb) per pfx o stringhe di connessione, ecc
+* RBAC su chiavi in KV. Ogni utente può vedere cose diverse
+* possibilità di ripristino di dati cancellati (accidentalmente)
+* arm può salvare su KV le kiavi
+* possibilità di limitare rete a vNet o IP con firewall
 
+
+* piano gestione - gestione keys
+* piano dati * accesso keys
+* es: applicazione: get delle chiavi
+      * Dev: get e list delle chiavi
+      * Dev ++: CRUD chiavi
+
+Usi comuni:
+* Getione password, token, API key, certificati, chiavi
 
 
 ## Powershell
