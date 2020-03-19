@@ -501,6 +501,11 @@ Unità di costo
   * Si attiva su "Sicurezza dei dati avanzata"
   * SQL Injection?
   * GDPR compliant?
+* SQL Server Integration Services (SSIS)
+* Istruzione SQL BULK INSERT
+* Utilità bcp (Bulk Copy Program, programma per la copia bulk)
+  * `bcp <database>.dbo.mytable format nul -c -f mytable.fmt -t, -S <server>.database.windows.net -U <username> -P <password>`
+  * `bcp <database>.dbo.mytable in mydata.csv -f mytable.fmt -S <server>.database.windows.net -U <username> -P <password> -F 2`
 
 #### Regole di confronto
 
