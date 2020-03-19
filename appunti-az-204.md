@@ -511,6 +511,19 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
 * **CI** - Case Insensitive (HeLLo = hello)
 * **AS** - Accent Sensitive (Però != Pero)
 
+#### Codice
+
+* `System.Data.SqlClient`
+  * `SqlConnection(connectionString)`
+    * `Open()`
+    * `Close()`
+  * `SqlCommand(str query, conn)`
+    * `ExecuteNonQuery()`
+    * `ExecuteReader()`
+  * `SqlDataReader`
+    * `Read()`
+  * `SqlException`
+
 ### Alternativa: Database di Azure per PostgreSQL
   * xxxxxxxxxxxxxx.postgres.database.azure.com.
   * Estensibile, con retention configurabile e backup, scalabile...
