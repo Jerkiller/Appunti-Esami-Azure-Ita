@@ -485,14 +485,33 @@ Unità di costo
 * DTU - misura combinata di risorse di calcolo, archiviazione e I/O
 * vCore - misura di core virtuali. È possibile configurare che risorse prediligere
 
-Regole di confronto: `SQL_Latin1_General_CP1_CI_AS`
+#### Sicurezza SQL
+
+* Autenticazione SQL o AD per n account o gruppi
+* Ruoli
+* Autorizzazione per vNet
+* Regole firewall (per impostare accesso da Azure disabilitare SSL) Ip, porte
+* Filtro IP per database (no porte). Non presente in SQL Warehouse
+  * `EXECUTE sp_set_database_firewall_rule N'VM linux', 'ip', 'ip'`
+* Connessioni SSL (evitare mitm)
+* Transparent Data Encryption (TDE) attiva by design.
+  * File di database, file di log e file di backup
+* Dynamic Data Masking - certi utenti non vedono una colonna ma solo xxxx-xxxxxxx. Es. carte credito, mail...
+* Advanced Data Security (ADS) - Analisi dati, vulenrabilità, minacce, ecc.
+  * Si attiva su "Sicurezza dei dati avanzata"
+  * SQL Injection?
+  * GDPR compliant?
+
+#### Regole di confronto
+
+Es. `SQL_Latin1_General_CP1_CI_AS`
 
 * **Latin1_General** si riferisce alla famiglia di lingue dell'Europa occidentale
 * **CP1** tabella codici 1252, una codifica char latin
 * **CI** - Case Insensitive (HeLLo = hello)
 * **AS** - Accent Sensitive (Però != Pero)
 
-Alternative: Database di Azure per PostgreSQL
+### Alternativa: Database di Azure per PostgreSQL
   * xxxxxxxxxxxxxx.postgres.database.azure.com.
   * Estensibile, con retention configurabile e backup, scalabile...
   * Sicurezza:
@@ -500,7 +519,7 @@ Alternative: Database di Azure per PostgreSQL
     * vNet
     * firewall (per impostare accesso da Azure disabilitare SSL)
     * Connessioni SSL (evitare mitm)
-    * Client CLI: `psql`. Per lanciare comandi speciali si usa `\`.
+  * Client CLI: `psql`. Per lanciare comandi speciali si usa `\`.
       * Es. `\l` fa il listing.
       * Es. `\?` mostra tutti i comandi.
 
@@ -592,5 +611,7 @@ variable="value" in ps $variable="value"
 * `az postgres server create -n ... -g ... --sku-name SKU_NAME --admin-user ADMINISTRATOR_LOGIN`
 * `az sql`
   * `server create --location westeurope --admin-user xxx --admin-password yyy`
-  * `db create [--elastic-pool-name xyz] --server serverNme`
+  * `db`
+    * `create [--elastic-pool-name xyz] --server serverNme [--sample-name AdventureWorksLT]`
+    * `show-connection-string --client sqlcmd -n ... --server $SERVERNAME | jq -r`
   * `elastic-pools create`
