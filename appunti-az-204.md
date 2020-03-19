@@ -547,6 +547,14 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
   * Pool: fino a 100 o 500 db
   * eDTU: Unità asegnabili al pool intero. Al db puoi assegnare min e max DTU
 
+### Key Vault (KV)
+
+* X gestire chiavi, credenziali, segreti
+* insiemi di credenziali: strutturato a FileSystem e contentente chiavi
+  * es. chiave RMS, chiave x SQL TDE, chiave x SQL data masking o chiavi x SQL backup critto
+
+
+
 ## Powershell
 
 * Installabile su tutte le piattaforme
@@ -633,3 +641,4 @@ variable="value" in ps $variable="value"
     * `create [--elastic-pool-name xyz] --server serverNme [--sample-name AdventureWorksLT]`
     * `show-connection-string --client sqlcmd -n ... --server $SERVERNAME | jq -r`
   * `elastic-pools create`
+* `az keyvault create -n ... -g ...`
