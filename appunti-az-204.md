@@ -138,12 +138,12 @@ Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
 * `ssh-keygen -t rsa -b 4096` - genera coppia di chiavi
 * `ls -la /` - visualizza la radice del disco
 * `ps -l` - mostra tutti i processi in esecuzione
-* `dmesg` - elenca tutti i messaggi del kernel
-* `lsblk` - elenca tutti i dispositivi a blocchi: qui verranno visualizzate le unità
-* `(echo n; echo p; echo 1; echo ; echo ; echo w) | sudo fdisk /dev/sdc` crea una patiz primaria
-* `sudo mkfs -t ext4 /dev/sdc1` crea Fie System nella partiz primaria
-* `sudo mkdir /data & sudo mount /dev/sdc1 /data` Monta l'unità nel File System corrente
-* `sudo apt-get install apache2 -y` installa Apache
+* `dmesg` - Diagnostic Message: elenca tutti i messaggi del kernel
+* `lsblk` - List Blocks: elenca tutti i dispositivi a blocchi: qui verranno visualizzate le unità
+* `(echo n; echo p; echo 1; echo ; echo ; echo w) | fdisk /dev/sdc` crea una patiz primaria
+* `mkfs -t ext4 /dev/sdc` crea File System nella partiz primaria
+* `mkdir /data & mount /dev/sdc1 /data` Monta l'unità nel File System corrente
+* `apt-get install apache2 -y` installa Apache
 
 ## AZ Batch
 
