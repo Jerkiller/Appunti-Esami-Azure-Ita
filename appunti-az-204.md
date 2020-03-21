@@ -7,6 +7,7 @@
 * [Scheda corso PDF](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4oZ7B)
 
 ## Deploy
+
 * Azure
 * ARM
 * Az CLI / Powershell
@@ -16,6 +17,7 @@
 ## Resource Group e organizzazione delle risorse
 
 Resource group gruppo logico risorse.
+
 No gruppi annidati. I gruppi di sottoscrizioni (management group) possono esserlo.
 
 Nomenclatura suggerita: `msftlearn-core-infrastructure-rg`.
@@ -45,13 +47,15 @@ Organizzabili per:
 ### Policies/Criteri
 
 Permettono di applicare criteri su risorse.
-Es. impedire la creazione di risorse senza un certo tag.
-Es. creazione solo in certe aree geografiche 
-Es. no certe risorse o no certe tier
+
+* Es. impedire la creazione di risorse senza un certo tag.
+* Es. creazione solo in certe aree geografiche 
+* Es. no certe risorse o no certe tier
 
 ### RBAC
 
 Gestione di ruoli a gruppi e per gruppi di risorse.
+
 Buone prassi:
 
 * Dare permessi minimi e non lassisti
@@ -77,6 +81,7 @@ I costi variano in base a:
   * 130 eur/mese Enterprise
 
 Modi di "sparagnare":
+
 * VM: Deallocazione se non usate (solo disco), ridimensionamento, Reserved Instance, spegnimento notturno, uso licenze on-prem su VM on-cloud
 * Località a basso costo
 * Limiti di spesa che bloccano spese
