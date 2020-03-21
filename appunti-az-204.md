@@ -508,7 +508,7 @@ Può contenere:
 
 ### SQL
 
-Suffisso: xxxxxxxxxx.database.windows.net
+Suffisso: `xxxxxxxxxx.database.windows.net`
 
 * On premise
 * On-Cloud
@@ -578,6 +578,8 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
     * Es. `\l` fa il listing.
     * Es. `\?` mostra tutti i comandi.
 
+### SQL Elastic Pool
+
 * Provisioning risorse deve essere fatto per ecceso
 * Elastic pool: quando ho più db con utilizzo medio e picchi sporadici
   * Aggiungere pool se ho somma delle capacità >= 1.5 volte la capacità dell'elastic pool
@@ -599,8 +601,6 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
 * possibilità di ripristino di dati cancellati (accidentalmente)
 * arm può salvare su KV le kiavi
 * possibilità di limitare rete a vNet o IP con firewall
-
-
 * piano gestione - gestione keys
 * piano dati * accesso keys
 * es: applicazione: get delle chiavi
