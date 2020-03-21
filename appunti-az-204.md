@@ -394,7 +394,6 @@ Ad esso si attaccano M autori/pubblicatori in scrittura e N consumatori/sottoscr
 * dati ridondati su + server fino a 7 gg di retention + capture su blob/ADLS
 * da EH si può attaccare SA e fare analisi e aggregazione
 * Compatibilità vrs Kafka
-
 * Possibilità di elaborare lo stesso messaggio in parallelo con i Consumer Group
 
 Tiers:
@@ -415,6 +414,7 @@ Tiers:
 * Non struttrati - Binari, es. video, pdf, ecc.
 
 Analisi dei dati:
+
 * Con che velocità voglio i dati? es. BI lenta, caricamento lento, lettura veloce
 * Che dati voglio?
 * Come li voglio i dati?
@@ -427,6 +427,7 @@ OLTP: online TRANSACTIONAL processing - db transazionale
 OLAP: online ANALYTICAL processing - db + lunghi e da analisi
 
 CosmosDB
+
 * dati semistrutturati
 * bassa latenza
 * molte letture e scritture
@@ -435,12 +436,14 @@ CosmosDB
 * ACIDo
 
 SQL
+
 * dati strutturati
 * bassa latenza
 * molte letture e scritture
 * query complesse e possibilità di avere un modello semantico con SSAS
 
 BLOB
+
 * dati NON strutturati
 * bassa latenza (se usato con CDN bassissima). Tuttavia è meno bassa di 1 FileSystem
 * molte letture e scritture. Difficile querying. (Azure Search)
@@ -501,7 +504,9 @@ Può contenere:
   * `ListBlobs(options)`
 
 ### SQL
+
 Suffisso: xxxxxxxxxx.database.windows.net
+
 * On premise
 * On-Cloud
   * VM con SQL
@@ -558,16 +563,17 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
   * `SqlException`
 
 ### Alternativa: Database di Azure per PostgreSQL
-  * xxxxxxxxxxxxxx.postgres.database.azure.com.
-  * Estensibile, con retention configurabile e backup, scalabile...
-  * Sicurezza:
-    * account e ruoli
-    * vNet
-    * firewall (per impostare accesso da Azure disabilitare SSL)
-    * Connessioni SSL (evitare mitm)
-  * Client CLI: `psql`. Per lanciare comandi speciali si usa `\`.
-      * Es. `\l` fa il listing.
-      * Es. `\?` mostra tutti i comandi.
+
+* xxxxxxxxxxxxxx.postgres.database.azure.com.
+* Estensibile, con retention configurabile e backup, scalabile...
+* Sicurezza:
+  * account e ruoli
+  * vNet
+  * firewall (per impostare accesso da Azure disabilitare SSL)
+  * Connessioni SSL (evitare mitm)
+* Client CLI: `psql`. Per lanciare comandi speciali si usa `\`.
+    * Es. `\l` fa il listing.
+    * Es. `\?` mostra tutti i comandi.
 
 * Provisioning risorse deve essere fatto per ecceso
 * Elastic pool: quando ho più db con utilizzo medio e picchi sporadici
