@@ -92,6 +92,20 @@ Modi di "sparagnare":
       * Area (es. West Europe)
         * Datacenter
 
+### AD
+
+* Tenant AD = di solito unico x rete aziendale
+* Sottoscrizione legata a un solo tenant AD
+* SSO per utenti
+* AD Connect per collegare server on-prem
+* RBAC
+  * Actions e NotActions: Dos and Donts dell'utente
+  * Assegnazione di ruoli tra 70 possibilità es. collaboratore di VM
+  * Ruoli
+    * Global Admin pericoloso: accesso a livello di management group
+    * Account Admin: a livello di subscription
+    * Contributor, Owner, Reader: a livello di sub, rg o res
+
 ---
 
 ## VM
