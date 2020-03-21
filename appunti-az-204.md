@@ -30,7 +30,6 @@ Organizzabili per:
 
 ### Spostamenti
 
-
 * È possibile spostare gruppi e risorse in altri sottoscrizioni o gruppi
 * In fase di spostamento viene lockato l'RG!
 * Gli spostamenti sono logici e non di datacenter
@@ -84,6 +83,14 @@ Modi di "sparagnare":
 * Go PAAS!
 * Offerte x sviluppo e test
 * SQL: uso licenze on-prem su cloud (BYOL), istanze vincolate (es. DB che non supererà mai i 100GB)
+
+### Geografia
+
+* Azure
+  * Azure provider (Azure
+    * Coppie di aree - X garantire BCDR (disaster recovery) > 480Km 300miles
+      * Area (es. West Europe)
+        * Datacenter
 
 ---
 
@@ -434,6 +441,10 @@ BLOB
 * accesso freq o sporadico
 * Max 500 TB, max 200 account
 * Endpoint `xxxx.[table|blob|queue|file].core.windows.net`
+* Gestione ciclo di vita dei blob o di path nel blob:
+  * Dopo x giorni sposta su accesso sporadico
+  * Dopo y giorni sposta su archiviazione
+  * Dopo z giorni elimina
 
 Può contenere:
 
@@ -457,6 +468,7 @@ Può contenere:
 * Controllo di rete - Firewall, Blacklist o Whitelist di IP
 * Advanced Threat Protection - in preview x Blob: notifica se ci sono sospetti
 * in ADLS RBAC sul filesystem con permessi POSIX in base al grafo AD
+* WORM - WriteOnce ReadMany. Dati scritti e non cancellabili. Es. x fini giudiziari
 
 #### Codice **WindowsAzure.Storage**
 
@@ -503,6 +515,7 @@ Unità di costo
   * GDPR compliant?
 * SQL Server Integration Services (SSIS)
 * Istruzione SQL BULK INSERT
+* Classificazione campi con Information Protection (IP) x GDPR e gradi di sicruezza
 * Utilità bcp (Bulk Copy Program, programma per la copia bulk)
   * `bcp <database>.dbo.mytable format nul -c -f mytable.fmt -t, -S <server>.database.windows.net -U <username> -P <password>`
   * `bcp <database>.dbo.mytable in mydata.csv -f mytable.fmt -S <server>.database.windows.net -U <username> -P <password> -F 2`
