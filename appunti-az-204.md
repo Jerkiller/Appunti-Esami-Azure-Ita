@@ -182,6 +182,7 @@ Dove posso deployare un docker container?
     * container runtime - consente ai container di girare e accedere alle risorse
 
 ### Kubernetes
+
 * Pod - singola unit dove gira 1 container (di solito)
 * Deployment - Direttiva che deploya un applicativo su N pod e alloca risorse
 * Yaml Manifest - dove è specificato uno o + deployment
@@ -306,6 +307,7 @@ Pacchetto per scrivere codice: `Microsoft.Azure.ServiceBus`
 #### Service Bus Queue (SBQ)
 
 A differenza della Storage Queue, la SBQ ha feature come:
+
 * Messaggi > 256K (S) o 1M (P) <> SQ 64K
 * Supportati sia *at least once* che *at most once* (rilevamento duplicati)
 * FIFO garantito
@@ -314,7 +316,7 @@ A differenza della Storage Queue, la SBQ ha feature come:
 * Ruoli di sicurezza (RBAC)
 * Il destinatario viene pushato
 * milioni di msg... ma fino a 80GB <> SQ no limiti!!! e con log di tutti i msg (audit trail)
-
+
 ##### Codice
 
 * `QueueClient(str connStr, str queueName)`
@@ -422,9 +424,10 @@ Analisi dei dati:
 * Quali campi identificano i dati?
 
 Operazioni in transazione
-ACID: Atomicità, Coerenza, Isolamento e Durabilità
-OLTP: online TRANSACTIONAL processing - db transazionale
-OLAP: online ANALYTICAL processing - db + lunghi e da analisi
+
+* ACID: Atomicità, Coerenza, Isolamento e Durabilità
+* OLTP: online TRANSACTIONAL processing - db transazionale
+* OLAP: online ANALYTICAL processing - db + lunghi e da analisi
 
 CosmosDB
 
@@ -605,6 +608,7 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
       * Dev ++: CRUD chiavi
 
 Usi comuni:
+
 * Getione password, token, API key, certificati, chiavi
 
 
