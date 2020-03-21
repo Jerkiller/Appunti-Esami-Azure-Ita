@@ -603,9 +603,9 @@ Es. `SQL_Latin1_General_CP1_CI_AS`
 * possibilità di limitare rete a vNet o IP con firewall
 * piano gestione - gestione keys
 * piano dati * accesso keys
-* es: applicazione: get delle chiavi
-      * Dev: get e list delle chiavi
-      * Dev ++: CRUD chiavi
+  * es: applicazione: get delle chiavi
+    * Dev: get e list delle chiavi
+    * Dev ++: CRUD chiavi
 
 Usi comuni:
 
