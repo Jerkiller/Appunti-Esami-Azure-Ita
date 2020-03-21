@@ -72,7 +72,6 @@ I costi variano in base a:
 * Posizione risorsa (datacenter)
 * Tipologia cliente (es. Enterprise)
 * Risorsa del Marketplace? Tipologia fatturaz. diversa
-
 * Lo strumento fondamentale è il [pricing calculator](https://azure.microsoft.com/it-it/pricing/calculator/)
 * Per migrare verso il cloud c'è il tool [TCO calculator](https://azure.microsoft.com/pricing/tco/)
 * A valle della crez. risorse, si usano Advisor, Cost analyis e Budget
@@ -116,7 +115,9 @@ Modi di "sparagnare":
 ## VM
 
 Risorse collegate: RG - PageBlob (VHD) - VNet - NIC (Network Interface)
+
 Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
+
 * x encrypt vhd -> az disk encryption service - (kv)
 * divise per famiglie in base allo scopo (es. GPU, RAM, CPU, IO, ...)
 * Managed disk o su storage account. Disco esterno temporaneo. Altri dischi vnno montati. Dischi in GiB = 1074 MB.
@@ -143,11 +144,6 @@ Azure storage service encryption SSE -> encrypt/decrypt trasparente x rest
 * `sudo mkfs -t ext4 /dev/sdc1` crea Fie System nella partiz primaria
 * `sudo mkdir /data & sudo mount /dev/sdc1 /data` Monta l'unità nel File System corrente
 * `sudo apt-get install apache2 -y` installa Apache
-* ``
-* ``
-* ``
-
-* ``
 
 ## AZ Batch
 
