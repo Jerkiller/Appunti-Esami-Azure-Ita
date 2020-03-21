@@ -645,10 +645,12 @@ New-AzVm
 
 ## AZ CLI
 
-variable="value" in ps $variable="value"
+AzCli: `variable="value"`
+
+PS: `$variable="value"`
 
 * `az --version`
-* `az find "az xyz abc"
+* `az find "az xyz abc"`
 * `az login`
 * `az group`
   * `create --name <name> --location <location>`
