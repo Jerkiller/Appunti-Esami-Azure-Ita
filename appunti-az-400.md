@@ -251,3 +251,42 @@ Suite di tool diversi
 * Boards - lavagne kanban e scrum, backlog e dashboard per i team
 * Repos - VCS, integrato con GitHub ma aziendalmente privato
 * Pipelines * strumenti di CI/CD
+
+## GitHub
+ 
+GitHub (GH) è una suite per VCS e CI/CD.
+
+Le GH **Actions** sono come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
+ 
+> **Ocio**! I minuti delle actions sono un credito.
+> Usando 1 minuto di Actions su Linux consumo 1 minuto di credito.
+> Usando 1 minuto di Actions su Windows consumo 2 minuti di credito.
+> Usando 1 minuto di Actions su Mac consumo 10 minuti di credito.
+
+Il sistema di archiviazione ha una fatturazione a sé sempre su base mensile.
+
+In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesanti.
+ 
+* Versioni: Free/Pro/Team/Enterprise
+* Account: Personale/Organizz/Aziendale
+
+* **Free** - dev singoli poveri, gruppi e organizzioni
+  * 2K minuti di GitHub actions
+  * 500 MB archiviazione
+* **Pro** - dev + pro
+  * wiki, branch protetti, github pages, PR, owner, grafici, riferimenti atomatici
+  * 3K minuti di Actions
+  * 2 GB archiviazione
+* **Team** - come pro ma x team (per PR)
+* **Enterprise** - GHE
+  * può stare on-premise
+  * supporto tecnico
+  * autenticazione integrata con azienda (SSO SAML)
+  * ti fanno pure il caffè
+* **GHE Cloud**
+  * ACL per GH pages
+  * SLA 99.9%
+  * fatturaz centralizzata
+  * 50K minuti Actions
+  * 50 GB archiviazione
+ 
