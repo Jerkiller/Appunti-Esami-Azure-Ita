@@ -45,14 +45,69 @@
   * Vanno definiti a priori
   * Utili per impostare regole di monitoraggio
 * **APM - Application Performance Management** sistema di tracciamento di una app per vedere lo stato di salute e il monitoraggio di requisiti non-funzionali. Di solito manda notifiche quando ci sono degradaz performance.
+* **microservizi** sw isolato a componenti che viene scalato, rilasciato indipendentemente. I microservizi possono essere scritti in linguaggi diversi da team diversi. Spesso si interfacciano via rest.
+* **Infrastructure as code (IaC)** gestione delle infrastrutture tramite un modello descrittivo, versionabile, come fosse codice. È paradigma del DevOps. Risolve il problema del Environment Drift.
+  * imperative approach - via CLI. Problema di mantenibilità, difficile scalabilità
+  * declarative approach - Azure Resource Manager (ARM) template: parameters, variables, resources, e outputs
+  * misto - spesso si crea un ambiente, ma poi le VM vanno popolate. Fare attenzione ai tempi di avvio, deploy e a come aggiornare le immagini.
+   * custom images. Occhio a tenerle aggiornate tramite un proc apposito.
+   * Post-deployment scripting - come per esempio scriptoni powershell o Azure Automation Desired State Configuration (DSC).
+  * operazioni schedulabili - Azure Automation. Es. cercare dischi orfani, spegnere/accendere VM, Patchare sistemi operativi
+  * Azure DevTest Labs per creare ambienti di sviluppo isolati, molto flessibli. Spegni accendi e paghi.
+* **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
+
+## Testing
+
+* manuale - Azure Testing Plans
+  * più costosi
+* automatico - Azure Pipelines
+  * unit tests - test veloci (~30") sul codice. Sintassi, correttezza, verifica con I/O. Sia su codice puro che su infrastrutturale
+  * smoke test - test su singola componente (~15'). Correttezza, verifica I/O.
+  * integration test - test multi-componente (~ore). Spesso schedulati di notte. Verifica interoperabilità tra componenti.
+
+### Acceptance testing
+
+Risponde alla domanda: una determinata versione del software è rilasciabile?
+
+* blue/green deployment - parte utenza reindirizzata a nuova versione. Se tutto va bene, indirizza tutti alla nuova versione e decommissiona la precedente (deployment slot di ASP)
+* canary release - gruppo di utenti selezionato x avere una nuova funzionalità (spesso tramite *feature flag*)
+* A/B testing - test x validare efficacia di una funzionalità. 50% utenti hanno la funz, 50% non ce l'hanno. Con delle metriche (es. tasso di conversione) valido esperimento. (User Behavior Analytic su Application Insights)
+
+### Altri test
+
+* stress test - importante testare l'infrastruttura per carichi improvvisi. Occorre verificare che dopo uno spike, torni al normale funzionamento.
+* fault injection - con la chaos engineering si prova a mettere in crisi il sistema. Si testa disaster recovery, ungraceful shutdown, rallentamenti di rete
+* security test - verifica vulnerabilità, sw automatici e analisi statica. Oppure tecnica del *red team* che prova a bucare il nostro SW.
 
 ## Monitoring
 
+Diviso in 3 grandi aree:
+
+* Core Monitoring - activity log (attività su Portal Azure), health services (stato servizi azure), metrics and diagnostics, raccomandazioni e best practice (sicurezza o costo)
+* Deep App Monitoring - App Insights - permette di vedere log applicativi, comportamento utente e performance applicative. Es. carico del webserver, #404, tempo medio risposta...
+* Deep infrastructure monitoring - Log Analytics, metriche specifiche raccolte da IaaS o prodotti cm SQL server o Windows Server AD. Es. mail quando SQL è all'90% memoria
+
 ### Azure Monitor
 
-* Raccoglie dati da applicazioni, OS, Azure, altre fonti.
-* I dati raccolti sono log o metriche
+* Raccoglie dati da applicazioni, OS di VM, Azure (risorse, sottoscriz e tenant, AD), altre fonti.
+* I dati raccolti sono log (evento testuale, data e metadati) o metriche (data e info numerica, salvate su TSDB)
 * Li mette a disposizione x altri servizi Azure
+* Possono essere estesi:
+  * abilitazione diagnostica (es. opt-in su Azure SQL x avere più metriche)
+  * aggiunta di un Agente di Log Analytics su una VM
+  * invio dati custom invocando un API REST via SDK
+* Log e metriche interrogabili via Kusto, anche per visualizzazione su Dashboard
+
+#### Kusto
+
+Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle con righe e colonne.
+* MS ha palesemente portato la sintassi di Splunk facendo qualche replace
+* Una query ha almeno una fonte dati (es. Metrics, Heartbeat)
+* Linguaggio case-sensitive. Generalmente in snake_case. Tabelle e Colonne in PascalCase.
+* Sequenze di istruzioni separate da `;`
+* Concatenazione di operazioni separate da `|`
+* `where`, `count`, extend`, `summarize`, `take 10`, `top 10 by Xyz`
+* Tipi base come `datetime(2018-11-01)`
 
 ### Log Analytics
 
@@ -60,7 +115,7 @@
 * Fonti sono Azure Monitor, App Insights, Az Security Center, API, Powershell
 * È un hub centrale di raccolta e permette varie azioni tra cui:
   * invocazione di funzioni: Logic App, Alert, Script o WebHook API
-  * visualizzazione: Azure Dahsboard, PowerBI, Analytics
+  * visualizzazione: Azure Dahsboard, PowerBI, Analytics, Workbooks (tipo dashboard ma con vari elementi grafici, testo)
 
 ### Application Insights
 
@@ -188,3 +243,11 @@ Metodi invio:
 * possono essere racoolti eventi custom per metriche specifiche. Es: tipo file uploadato, pagina in cui abbandonano
 * lo storico di una sessione aiuta a ricostruire un bug (pagine visitate, azioni intraprese)
 * Retention dati configurabile 28-90d. Estendibile con export continuo su blob.
+
+## DevOps
+
+Unione di persone, processi e prodotti per fornire valore continuo all'utente finale.
+Suite di tool diversi
+* Boards - lavagne kanban e scrum, backlog e dashboard per i team
+* Repos - VCS, integrato con GitHub ma aziendalmente privato
+* Pipelines * strumenti di CI/CD
