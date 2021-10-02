@@ -1,6 +1,7 @@
 # AZ400
 
-[Pdf del corso](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE3VP8d)
+* [Pdf del corso](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE3VP8d)
+* [Skillpipe](https://www.skillpipe.com/#/bookshelf/books)
 
 
 ## Core concepts
@@ -14,6 +15,57 @@
 * **Test Run** esecuzione di test di un binario su un device set
 * **Distribution Group** gruppo di utenti che ricevono un rilascio (pubblico o privato). Es. alpha-beta-prerelease-QA tester
 * **Analytics** analisi dati, atta a esaminare pattern. Es. app analytics = raccolta dati x utilizzo app da parte di utenti
+* **Resources Consumption** consumo computazionale da parte di un app. È misurabile.
+  * Unità fisiche come % CPU, RAM, banda
+  * Unità virtuali come RU (ComsosDB), DTU/VCore (SQL).
+* **Scaling** processo di ridimensionamento di risorse per soddisfare requisiti diversi (es. carico). Questo processo garantisce minima interruzione e nessuna perdita dati
+  * *Vertical scaling* quando si passa alla stessa risorsa con più o meno potenzialità computazionali. Si parla di *scaling up/down*.
+  * *Horizontal* quando si passa a più/meno istanze della stessa risorsa. Si parla di *scaling out/in*.
+  * *Autoscaling* automazione, permessa grazie al cloud, del processo di scaling. Può avvenire in base a schedulazione oraria oppure su metriche (es. 5.00-17.00 oppure CPU>80%). Molto usato nel pattern serverless.
+  * *Strategia di scaling* va misurata in base ai carichi, ai servizi offerti (stateless, stateful), alla rapidità di avvio/deallocaz servizi.
+* **Throttling** in un ottica di servizio, quando un servizio non riesce a soddisfare le richieste, ne ignora quelle in più (strozzamento). Usato con API.
+* **Container** sistema di virtualizzazione a livello di OS. Più leggero, e quindi ottimale per lo scaling. In azure possono essere usati su Web App, ACI, AKS... Si può collegare ACI in AKS tramite virtual Kubelet es. per carichi superiori a AKS
+* **Latency** Na brutta bestia. Tempo di comunicazione su una rete. Rountrip è tempo di comunicazione A/R.
+  * La latenza peggiora esperienza utente
+  * Data dalla somma delle latenze tra componenti architetturali es. utente-webserver-api-database.
+  * Strategie miglioramento latenza
+    * zona Azure unica e vicina all'utente finale
+    * Traffic manager che decide a che zona instradare traffico (tramite DNS resolution)
+    * DB distribuiti o replicati cm Cosmos o SQL o Sharding
+    * Cache come Redis o CDN
+    * ExpressRoute per collegare con VPN site-to-site da on-prem a Azure a bassa latenza
+* **Storage Performance** misure di accesso alla memoria
+  * si misura in IOPS I/O per second
+  * Strategie - dipendono dalle esigenze dell'applicazione
+    * Nelle VM (IaaS), utilizzo di Premium Storage SSD per produz. (Il local SSD storage è solo per dati temporanei). D2s_v3 dove s indica premium SSD. Si può abilitare il disk striping (I/O in parallelo, come nei db).
+    * Caching delle risorse (es. redis)
+    * Polyglot persistence (usare DB e fonti dati diverse per risorse diverse). A volte è dura sincronizzare dati diversi
+    * Eventual Consistency - permette di migliorare accesso a risorse in RW. Può fornire dati non sempre aggiornatissimi.
+* **Nonfunctional requirements** come l'applicazione deve rispondere. Es. soglia di secondi caricamento pagina.
+  * Vanno definiti a priori
+  * Utili per impostare regole di monitoraggio
+* **APM - Application Performance Management** sistema di tracciamento di una app per vedere lo stato di salute e il monitoraggio di requisiti non-funzionali. Di solito manda notifiche quando ci sono degradaz performance.
+
+## Monitoring
+
+### Azure Monitor
+
+* Raccoglie dati da applicazioni, OS, Azure, altre fonti.
+* I dati raccolti sono log o metriche
+* Li mette a disposizione x altri servizi Azure
+
+### Log Analytics
+
+* Permette di analizzare e fare query su dati raccolti da varie fonti
+* Fonti sono Azure Monitor, App Insights, Az Security Center, API, Powershell
+* È un hub centrale di raccolta e permette varie azioni tra cui:
+  * invocazione di funzioni: Logic App, Alert, Script o WebHook API
+  * visualizzazione: Azure Dahsboard, PowerBI, Analytics
+
+### Application Insights
+
+* Permette APM, monitoraggio delle metriche
+* Fa "health check" dei servizi web per valutare se sono vivi
 
 ## Logging
 
