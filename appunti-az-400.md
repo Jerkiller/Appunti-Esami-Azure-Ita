@@ -119,9 +119,30 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 
 ### Application Insights
 
-* Permette APM, monitoraggio delle metriche
+* Permette APM, monitoraggio delle metriche ed eventi (soprattutto in app web)
 * Fa "health check" dei servizi web per valutare se sono vivi
-
+* Può tracciare utenti tramite eventi di navigazione e profilarli
+* **Live metrics streams** metriche in tempo reale
+* **Metrics explorer** metriche storiche
+* **Alerts** configura regole di notifica e soglie
+* **Profiler** mostra come performano gruppi di richieste. es. pagine lente
+* **Application Map** crea grafico di topologia applicativa aggiornato dal live check e performance. Utile x *bottleneck analysis*
+* **Usage analysis** metriche utente, a mo' di Google Analytics
+* Due modalità di configurazione di AI (instrumentation):
+  * *runtime instrumentation*, config a caldo, no-code, per dati di base
+  * *Build-time instrumentation*, va settato SDK, NuGET, dati completi
+* Due versioni di AI:
+  * server-side, quella standard. Gli applicativi ASP.NET (+Core) sono totalmente integrati con un NuGET. A Java, NodeJS serve SDK e codice.
+    * SDK si installa così: `dotnet add package Microsoft.ApplicationInsights.AspNetCore`
+    * Si setta la `APPINSIGHTS_INSTRUMENTATIONKEY`
+    * Si invoca il metodo `.AddApplicationInisghtsTelemetry()` all'avvio
+  * client-side, un file JS che manda dati di tempi di caricamento, tracciamento utenti, e altro. In windows può essere no-code anche questa, con l'environment flag `APPINSIGHTS_JAVASCRIPT_ENABLED`. In linux va cambiato HTML x forza.
+* Visualizzazione dati:
+  * da portale, e dashboards. Kusto per interrogare o fare grafici custom
+  * su VS
+  * su PowerBI
+  * tramite le API su qualisasi applicativo custom
+* metriche sono pre-aggregate e multidimensionali (es. InterazioniUtente = # like nell'ultimo minuto, # dislikenel minuto)
 ## Logging
 
 ### App Logging
