@@ -143,6 +143,15 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
   * su PowerBI
   * tramite le API su qualisasi applicativo custom
 * metriche sono pre-aggregate e multidimensionali (es. InterazioniUtente = # like nell'ultimo minuto, # dislikenel minuto)
+
+### Event Grid
+
+* Hub per gestione eventi. Affidabile, veloce, semplice. Quindi, non economico.
+* Eventi da EventHub, Sottoscrizioni, RG, publisher di eventi personalizzati, blob...
+* Azioni di vario tipo (Function, Logic App, Runbook, WebHook, ServiceBus...)
+* Gestione a "Topic" per filtrare i messaggi ai subscriber
+
+
 ## Logging
 
 ### App Logging
