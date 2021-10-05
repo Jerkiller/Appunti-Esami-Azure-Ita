@@ -114,7 +114,7 @@ altre considerazioni:
 * complessità e osservabilità sono indipendenti. Sistemi semplici a volte sono complessi da monitorare
 * monitoraggio di un sistema ne garantisce la qualità (misurabile = migliorabile) es. supply chain altamente monitorata
 * workflow: unisce componenti fisici e virtuali in un IT dept
-* possono basarsi su un agente di monitoraggio opp no
+* possono basarsi su un agente di monitoraggio opp no (basandosi sullo stato corrente di un server, es. ping a un URL)
 
 Agente di monitoraggio
 
@@ -133,6 +133,12 @@ Agente di monitoraggio
 * applicaz cloud di APM
 * Insights, sistema di reportistica, avvisi e dashboard.
 * Elenco dei servizi - grafo dei componenti con agenti in una web app
+
+### Sumo Logic
+
+* tecnologia agent-less che però di fatto ha un agente di raccolta
+* si ispira a hadoop con map-reduce. Algoritmo chiamato LogReduce
+* query language proprietario per interrogare il db interno
 
 ### Azure Monitor
 
