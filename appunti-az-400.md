@@ -44,7 +44,13 @@
 * **Nonfunctional requirements** come l'applicazione deve rispondere. Es. soglia di secondi caricamento pagina.
   * Vanno definiti a priori
   * Utili per impostare regole di monitoraggio
-* **APM - Application Performance Management** sistema di tracciamento di una app per vedere lo stato di salute e il monitoraggio di requisiti non-funzionali. Di solito manda notifiche quando ci sono degradaz performance.
+* **APM - Application Performance Management** sistema di tracciamento di una app per vedere lo stato di salute e il monitoraggio di requisiti non-funzionali. Di solito manda notifiche quando ci sono degradaz performance. È un hub di messaggi di rete.
+  * il controller dell'APM verifica regole
+  * regole di avviso 1: valore supera o scende sotto quantità
+  * regole di avviso 2: media di valori supera o scende sotto soglia
+  * regole di avviso 3: uno o più valori sono fuori intervallo di tolleranza
+  * regole di avviso 4: applicazione arrestata in modo anomalo
+  * avvisi inviati tramite servizio spesso esterno, tipo mail o SMS
 * **microservizi** sw isolato a componenti che viene scalato, rilasciato indipendentemente. I microservizi possono essere scritti in linguaggi diversi da team diversi. Spesso si interfacciano via rest.
 * **Infrastructure as code (IaC)** gestione delle infrastrutture tramite un modello descrittivo, versionabile, come fosse codice. È paradigma del DevOps. Risolve il problema del Environment Drift.
   * imperative approach - via CLI. Problema di mantenibilità, difficile scalabilità
@@ -86,6 +92,47 @@ Diviso in 3 grandi aree:
 * Core Monitoring - activity log (attività su Portal Azure), health services (stato servizi azure), metrics and diagnostics, raccomandazioni e best practice (sicurezza o costo)
 * Deep App Monitoring - App Insights - permette di vedere log applicativi, comportamento utente e performance applicative. Es. carico del webserver, #404, tempo medio risposta...
 * Deep infrastructure monitoring - Log Analytics, metriche specifiche raccolte da IaaS o prodotti cm SQL server o Windows Server AD. Es. mail quando SQL è all'90% memoria
+
+I dati coinvlti del monitoraggio sono 3:
+* log - record di eventi
+  * permettono di ricostruire una cronologia di eventi
+  * in linux il servizio syslog raccoglie in `/var/log`
+  * una *Log Monitoring Platform* è un software apposito che legge cartelle, streaming, database di log e li raccoglie centralmente. Garantisce correlazione, normalizzazione e reportistica
+* metriche - valori quantitativi riferiti a un'unità temporale
+  * descrivono integrità, stabilità e disponibilità di un sistema
+  * orientate all'interno (logiche IT) e all'esterno (ai clienti e agli utenti)
+    * es- esterno: valutazione dell'utente, durata sessione
+    * es. interno: num errori, cpu, tempo risposta servizio web, volume coda richieste
+* tracce - percorsi per programmi e servizi, sequenze di istruzioni
+  * si usano codici di correlazione o probe (sonde) per capire collegamenti e dipendenze
+  * cloud dà vantaggi di fluidità delle risorse -> mappa dell'applicazione fluida -> necessità di tracciare flussi
+  * transazioni distribuite: quando un'operazione è suddivisa in vari passaggi tra servizi diversi
+  * utile visualizzare queste in un grafo delle dipendenze
+
+altre considerazioni:
+
+* complessità e osservabilità sono indipendenti. Sistemi semplici a volte sono complessi da monitorare
+* monitoraggio di un sistema ne garantisce la qualità (misurabile = migliorabile) es. supply chain altamente monitorata
+* workflow: unisce componenti fisici e virtuali in un IT dept
+* possono basarsi su un agente di monitoraggio opp no
+
+Agente di monitoraggio
+
+* componente remota che fa ping verso hub/controller centrale
+* oppure daemon che funge da proxy del controller
+* agente anche lato client, codice JS che comunica verso comp centrale, es. tempi di caricamento pagina
+
+### New Relic (One)
+
+* 4 tipi di agenti:
+  * agente APM da installare in sw compilati
+  * agente app mobile
+  * agente per browser. Si inserisce come tag HTML
+  * agente per infrwatruttura. Si installa in VM o PC remoto
+* agenti inviano dati ai server centrali di NR
+* applicaz cloud di APM
+* Insights, sistema di reportistica, avvisi e dashboard.
+* Elenco dei servizi - grafo dei componenti con agenti in una web app
 
 ### Azure Monitor
 
