@@ -61,6 +61,7 @@
   * operazioni schedulabili - Azure Automation. Es. cercare dischi orfani, spegnere/accendere VM, Patchare sistemi operativi
   * Azure DevTest Labs per creare ambienti di sviluppo isolati, molto flessibli. Spegni accendi e paghi.
 * **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
+* **QoS** - qualità del servizio. È possibile e auspicabile definire delle metriche di base che determinano il buon funzionamento di un servizio. Queste metriche vanno rappresentate in Dashboard
 
 ## Testing
 
@@ -116,11 +117,65 @@ altre considerazioni:
 * workflow: unisce componenti fisici e virtuali in un IT dept
 * possono basarsi su un agente di monitoraggio opp no (basandosi sullo stato corrente di un server, es. ping a un URL)
 
+Full stack monitoring - monitorare app a tutti i livelli
+
 Agente di monitoraggio
 
 * componente remota che fa ping verso hub/controller centrale
 * oppure daemon che funge da proxy del controller
 * agente anche lato client, codice JS che comunica verso comp centrale, es. tempi di caricamento pagina
+
+### Metriche comuni
+
+Di base:
+
+* richieste al minuto/sec
+* Tempi di risposta (spesso mediano), TTFB
+* Connessioni inattive
+* Disponibilità servizi 99.5% (confronta con SLA)
+* CPU %
+* Errori %
+* GC (utile sporattutto x interpretati - Java)
+
+Più complessi (indicatori su metriche):
+
+* punto di saturazione richieste
+  * non facile distinguere utilizzo da sovrasaturazione.
+  * Un server degrada le risposte rallentandole, a che punto si può dire che il server è sovraccarico?
+  * Una possibilità è quando il server è così lento che il client va in timeout
+* apdex
+  * le metriche oggettive a volte non rispecchiano la realtà (spesso troppo complessa)
+  * esistono metriche qualitative derivanti dal feeling di utilizzo dell'app
+  * apdex = range 0 e 100: "soddisfazione", "tolleranza" e "frustrazione"
+  * apdex calcolata sul tempo di caricamento pagina in una certa azione. es 0.5 soglia di tolleranza, 2 soglia di frustrazione.
+  * critiche: puoi impostare le soglie come vuoi, tempi di caricamento dipendono dalla connessione del cliente
+* USE - aggregazione di tre metriche usata in Oracle
+  * Utilizzo (% attività)
+  * Saturazione (caso in cui il server riceve migliaia di richieste al minuto. Il server ne risponde cento, senza problemi, rallentamenti o errori. Però la coda aumenta)
+  * Errori
+* RED - derivato di USE in Google, usato x Kube
+  * Rate - richieste/min
+  * Error - % richieste fallite
+  * Duration - Tempo medio di risposta
+
+### Correzione
+
+* reattiva - qualcosa non va, fixo
+* proattiva - qualcosa potrebbe non andare, provvedo
+
+* soluzioni di ticketing (priorità) per gestire correzione reattiva
+* tendenza attuale al focus su obbiettivi e non sui problemi (ticketing dà l'idea che problemi=ticket)
+* prestazioni dell'app = ricavi. Il sistema influenza l'utente.
+* monitoraggio KPI es. tempo medio compilazione modulo.
+  * i KPI sono allineati con obb aziendali
+  * servono a mandare un allarme ai responsabili
+
+Correzione continua/giornaliera (proattiva)
+* obbiettivi si evolvono nel tempo. Coinvolgimento dei dev nel processo
+* piccoli cambiamenti monitorati
+* conoscenza pratica del sistema per triage dei problemi
+* sicurezza e performance vanno di pari passo. Un carico eccessivo è una vulnerabilità
+
 
 ### New Relic (One)
 
@@ -136,9 +191,17 @@ Agente di monitoraggio
 
 ### Sumo Logic
 
-* tecnologia agent-less che però di fatto ha un agente di raccolta
+* tecnologia agent-less (basata sui log) che però di fatto ha un agente di raccolta
 * si ispira a hadoop con map-reduce. Algoritmo chiamato LogReduce
 * query language proprietario per interrogare il db interno
+
+### Prometeus
+
+* creato da SoundCloud. Nato per monitorare ambienti a micro-servizi (es. Kube)
+* Server centrale con TSDB e un agente per il recupero dei dati
+* Servizi generalmente installano delle librerie x esporre endpoint di metriche da cui server fa pull
+* server centrale invia metriche a alert manager
+* Visualizzazione con Grafana o Web. PromQL per query
 
 ### Azure Monitor
 
@@ -150,6 +213,11 @@ Agente di monitoraggio
   * aggiunta di un Agente di Log Analytics su una VM
   * invio dati custom invocando un API REST via SDK
 * Log e metriche interrogabili via Kusto, anche per visualizzazione su Dashboard
+
+### Amazon CloudWatch
+
+In AWS equivalente di APM su Azure
+* meglio soluz cloud (AWS o AZURE) integrata xk consente autoscalabilità, meglio rispetto a New Relic o Sumo Logic
 
 #### Kusto
 
