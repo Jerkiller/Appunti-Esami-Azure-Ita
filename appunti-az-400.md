@@ -117,7 +117,12 @@ altre considerazioni:
 * workflow: unisce componenti fisici e virtuali in un IT dept
 * possono basarsi su un agente di monitoraggio opp no (basandosi sullo stato corrente di un server, es. ping a un URL)
 
-Full stack monitoring - monitorare app a tutti i livelli. Monitorare a liv di sviluppo e in produzione. Monitor anche aspetti di sicurezza come IP sospetti o leakage di dati
+Full stack monitoring - monitorare app a tutti i livelli.
+* Monitorare a liv di sviluppo e in produzione.
+* Monitor anche aspetti di sicurezza come IP sospetti o leakage di dati
+* Come lo si ottiene in Azure?
+  * usando AppInsights e Azure Monitor x performance, liveness
+  * usando Azure Security Center e Sentinel x indagini e suggerimenti di sicurezza
 
 Agente di monitoraggio
 
@@ -213,7 +218,9 @@ Correzione continua/giornaliera (proattiva)
   * aggiunta di un Agente di Log Analytics su una VM
   * invio dati custom invocando un API REST via SDK
 * Log e metriche interrogabili via Kusto, anche per visualizzazione su Dashboard
-
+* monitoraggio di pod su Kube con *Azure Monitor container insights*
+* monitoraggio di VM con agente, con *Azure Monitor VM insights* dashboard che riunisce tutte le VM in un'unica schermata
+ 
 ### Amazon CloudWatch
 
 In AWS equivalente di APM su Azure
@@ -275,17 +282,22 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 
 ### Azure Security Center
 
-* monitoraggio centralizzato sicurezza della soluzione
-* raccomandazioni su misure da adottare contro vulnerabilità
+* monitoraggio centralizzato sicurezza della soluzione (sia on-cloud che on-premise)
+* raccomandazioni su misure da adottare contro vulnerabilità, interventi di mitigazione
 * raccoglie dati da Azure Monitor Logs
 * integrato in PaaS. in IaaS va installato agent
+* aiuta a classificare gli incidenti in: positivi, falsi positivi e i dubbi
+* permette di eseguire playbook, sequenze di mitigazioni a un evento
+* es. JIT access x VM (in Azure Defender), es. analisi processi con ML (adaptive application controls)
 
 ### Azure Sentinel
 
-* raccoglie da varie fonti anche esterne, multi-cloud, on-prem
+* raccoglie da varie fonti anche esterne, multi-cloud, on-prem (utile x unificare)
 * analizza con IA le minacce distinguendo veri e falsi positivi. Piattaforma **investigativa** e di **rilevazione**
-* consente di allertare con Logic App in caso di incidente
-* raccoglie dati da Azure Monitor Logs
+* consente di allertare con Logic App in caso di incidente (playbook)
+* aiuta a classificare gli incidenti in: positivi, falsi positivi e i dubbi
+* crea una mappa "investigation map" che collega gli elementi e aiuta con drill down
+* raccoglie dati da Azure Monitor Logs (prima crea il workspace!)
 * unico ambiente centrlaizzato dove correlare metriche di performance, sicurezza, e problemi
 
 ## Logging
