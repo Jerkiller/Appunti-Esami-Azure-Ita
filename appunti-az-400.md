@@ -117,7 +117,7 @@ altre considerazioni:
 * workflow: unisce componenti fisici e virtuali in un IT dept
 * possono basarsi su un agente di monitoraggio opp no (basandosi sullo stato corrente di un server, es. ping a un URL)
 
-Full stack monitoring - monitorare app a tutti i livelli
+Full stack monitoring - monitorare app a tutti i livelli. Monitorare a liv di sviluppo e in produzione. Monitor anche aspetti di sicurezza come IP sospetti o leakage di dati
 
 Agente di monitoraggio
 
@@ -237,6 +237,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * È un hub centrale di raccolta e permette varie azioni tra cui:
   * invocazione di funzioni: Logic App, Alert, Script o WebHook API
   * visualizzazione: Azure Dahsboard, PowerBI, Analytics, Workbooks (tipo dashboard ma con vari elementi grafici, testo)
+* dati divisi per Workspace. Raccomandazione: usane pochi. Gestisci accesso ai workspace tramite RBAC
 
 ### Application Insights
 
@@ -272,6 +273,20 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * Azioni di vario tipo (Function, Logic App, Runbook, WebHook, ServiceBus...)
 * Gestione a "Topic" per filtrare i messaggi ai subscriber
 
+### Azure Security Center
+
+* monitoraggio centralizzato sicurezza della soluzione
+* raccomandazioni su misure da adottare contro vulnerabilità
+* raccoglie dati da Azure Monitor Logs
+* integrato in PaaS. in IaaS va installato agent
+
+### Azure Sentinel
+
+* raccoglie da varie fonti anche esterne, multi-cloud, on-prem
+* analizza con IA le minacce distinguendo veri e falsi positivi. Piattaforma **investigativa** e di **rilevazione**
+* consente di allertare con Logic App in caso di incidente
+* raccoglie dati da Azure Monitor Logs
+* unico ambiente centrlaizzato dove correlare metriche di performance, sicurezza, e problemi
 
 ## Logging
 
