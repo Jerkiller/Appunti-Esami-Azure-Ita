@@ -63,6 +63,36 @@
 * **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
 * **QoS** - qualità del servizio. È possibile e auspicabile definire delle metriche di base che determinano il buon funzionamento di un servizio. Queste metriche vanno rappresentate in Dashboard
 
+## Processo di sviluppo
+
+modalità di orchestraz
+* waterfall
+  * ogni fase dà il via alla successiva
+  * globalmente + lento
+  * meno resiliente al cambiamento
+  * spesso il testing è lasciato x utlimo
+* agile
+
+Obbiettivo: massimizzare valore, minimizzare spreco
+
+Strumento: mappa di flusso del valore, o VSM
+* si tracciano le attività a catena, si stimano i giorni e si individuano quelle che danno valore diretto al cliente
+* serve a focalizzare il processo di sviluppo, individuare sprechi, accorgersi dell'efficienza globale
+
+
+Process Time: T di valore diretto x il cliente
+Total Lead Time: T di rilascio di una feature
+Activity Ratio: Rapporto Process/Lead - % di efficienza
+
+
+Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
+
+DevOps 
+Cos'è
+* unione di persone, processi e prodotto
+Cosa non è
+* una posizione lavorativa, un software o una metodologia
+
 ## Testing
 
 * manuale - Azure Testing Plans
