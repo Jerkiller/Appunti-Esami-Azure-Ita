@@ -71,7 +71,13 @@ modalità di orchestraz
   * globalmente + lento
   * meno resiliente al cambiamento
   * spesso il testing è lasciato x utlimo
-* agile
+* [agile - 2001](https://agilemanifesto.org/) (non è un processo ma una filosofia)
+  * recapito incrementale
+  * collaborazione tra team
+  * pianificazione continua
+  * apprendimento continuo
+  * sviluppo a iterazioni
+  * più resiliente ai cambiamenti
 
 Obbiettivo: massimizzare valore, minimizzare spreco
 
@@ -87,11 +93,33 @@ Activity Ratio: Rapporto Process/Lead - % di efficienza
 
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
 
-DevOps 
+## DevOps
 Cos'è
 * unione di persone, processi e prodotto
+* graduale, si possono adottare servizi e strumenti un po' alla volta
+* percorso da seguire per diventare un team con prestazioni alte (rilasci frequenti e di qualità)
 Cosa non è
 * una posizione lavorativa, un software o una metodologia
+
+### Boards
+
+> pianificazione, analisi e monitoraggio del lavoro e coordinamento tra team
+
+### Pipelines
+
+> compilare, testare e distribuire software in qualsiasi linguaggio e piattaforma. CI/CD
+
+### Test Plans
+
+> testing esplorativo e manuale
+
+### Repos
+
+> repo illimitati, privati e su cloud. Oppure git pubblici
+
+### Artifacts
+
+> Creare, ospitare e condividere pacchetti (NPM, Maven, Nuget)
 
 ## Testing
 
