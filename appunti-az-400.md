@@ -76,9 +76,16 @@ modalità di orchestraz
   * collaborazione tra team
   * pianificazione continua
   * apprendimento continuo
-  * sviluppo a iterazioni
+  * sviluppo a iterazioni (sprint 2-4w)
   * più resiliente ai cambiamenti
-
+  * sviluppo in team verticali e interfunzionali (più full-stack, più scalabili, più orientati al prodotto), non orizzontali (catena di montaggio)
+  * cambiamento culturale
+    * efficacia riunioni e comunicazione
+    * interruzioni da mail/call limitata e prioritizzata
+    * soft skill come gestione conflitti
+    * buona integrazione lavoro in presenza/da remoto
+    * utili sw quali Teams, Skype, Slack, Hangouts, Asana, Trello, GoToMeeting...
+> [Approfondisci](https://docs.microsoft.com/it-it/devops/plan/what-is-agile-development)
 Obbiettivo: massimizzare valore, minimizzare spreco
 
 Strumento: mappa di flusso del valore, o VSM
@@ -93,6 +100,7 @@ Activity Ratio: Rapporto Process/Lead - % di efficienza
 
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
 
+
 ## DevOps
 Cos'è
 * unione di persone, processi e prodotto
@@ -104,6 +112,28 @@ Cosa non è
 ### Boards
 
 > pianificazione, analisi e monitoraggio del lavoro e coordinamento tra team
+
+* entità centrale: work item (cosa da fare/problema da risolvere). Si declina in entità diverse (WIT work item type) a seconda del processo adottato
+* 4 modelli (process)
+  * CMMI
+    * per chi: complicato, x grandi aziende
+    * segue il modello formal change management activities
+    * Stati task: Original Estimate, Remaining Work, Completed Work
+    * WIT: Epic, feature, requirement task / bug task / CR review issue risk
+    * Ereditarietà dei backlog. Personalizzazioni aziendali con portfolio backlog
+  * Agile
+    * segue modello della Agile Alliance
+    * Per chi lavora con scrum
+    * WIT: epic feature US task / bug task / issue
+    * Stati task: Original Estimate, Remaining Work, and Completed Work.
+  * Scrum
+    * meno complicato segue modello della Scrum Organization. Per chi lavora con scrum
+    * WIT: epic feature PBI task / bug task / IMPEDIMENT
+    * Stati task: Remaining Work
+  * Basic
+    * Stati task: todo doing done
+    * modello per valutare devops, neofiti
+    * WIT: epic, issue, task
 
 ### Pipelines
 
