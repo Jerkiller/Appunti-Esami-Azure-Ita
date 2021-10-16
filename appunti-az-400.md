@@ -97,9 +97,18 @@ Process Time: T di valore diretto x il cliente
 Total Lead Time: T di rilascio di una feature
 Activity Ratio: Rapporto Process/Lead - % di efficienza
 
-
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
 
+## Delivery Plan
+
+* problema: comunicazione tra team diversi è difficile, la pianificazione deve considerare dipendenze
+* soluzione: i **Delivery Plan** sono uno strumento per allineare scadenze, rilasci, sprint e attività di tutti i team.
+* i DP devono essere visibili a tutti, in ottica di no-blame culture, di trasparenza
+* i DP aiutano a predirre rischio di interdipendenze ed evitare schedule chicken
+* utile l'estensione x AzDO che visualizza backlog in parallelo nel tempo con le sprint. Aggiunta marker x tracciare eventi (milestone) sulla base dei quali schedulare
+
+Approfondisci gestione di più progetti ([portfolio-management](https://docs.microsoft.com/en-us/azure/devops/boards/plans/?view=azure-devops#portfolio-management))
+> *Schedule Chicken* situazione che si verifica quando più team concorrono a un obbiettivo, ma nessuno dichiara ritardo perché spera lo faccia prima l'altro.
 
 ## DevOps
 Cos'è
@@ -108,6 +117,8 @@ Cos'è
 * percorso da seguire per diventare un team con prestazioni alte (rilasci frequenti e di qualità)
 Cosa non è
 * una posizione lavorativa, un software o una metodologia
+
+> https://www.azuredevopslabs.com/
 
 ### Boards
 
@@ -134,6 +145,8 @@ Cosa non è
     * Stati task: todo doing done
     * modello per valutare devops, neofiti
     * WIT: epic, issue, task
+
+> Molte estensioni utili, si scaricano da [visualstudio.marketplace.com](visualstudio.marketplace.com).
 
 ### Pipelines
 
