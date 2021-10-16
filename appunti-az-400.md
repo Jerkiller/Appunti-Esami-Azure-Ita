@@ -152,6 +152,30 @@ Cosa non è
 
 > compilare, testare e distribuire software in qualsiasi linguaggio e piattaforma. CI/CD
 
+Vantaggi:
+* compilazione su agente cloud elimina costi mantenimento server e tempo.
+
+#### Pipeline
+
+* si collega a un repo come: GitHub, SubVersion, BitBucket
+* parte manualmente o automaticamente
+* un *build agent* esegue serie di task
+* viene emesso un *build artifact* (libreria, docker img, pacchetto, app compressa, VM, installer .msi)
+
+#### Build Agent
+
+* può essere self-hosted o cloud-hosted
+* self-hosted - installa un agente su linux, macos, win o linux docker img. Puoi estenderlo aggiungendo tutto il sw che ti serve (es. estensioni, script, ecc.)
+* cloud-hosted - ogni volta una VM nuova di pallino
+* organizzati anche in **agent pool**, gruppi di agenti a livello di organizzazione
+* i job da eseguire sono organizzati in **agent build queues**
+* possibilità di sfruttare concorrenza con i **parallel jobs** (nn x agent cloud linux o mac)
+* pricing sulla base dei parallel jobs (free tier mensile di base)
+* come dimensionare i parallel jobs?
+  * regola empirica: ogni 4-5 xsn che usano le pipelines
+  * sulla base di: app multiple, branch multipli, team multipli
+
+
 ### Test Plans
 
 > testing esplorativo e manuale
