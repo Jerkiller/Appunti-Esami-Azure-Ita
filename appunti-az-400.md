@@ -161,6 +161,10 @@ Vantaggi:
 * parte manualmente o automaticamente
 * un *build agent* esegue serie di task
 * viene emesso un *build artifact* (libreria, docker img, pacchetto, app compressa, VM, installer .msi)
+* nella pipeline si possono usare **variabili**. $(myVar) che viene rimpiazzata a runtime. Ci sono var di default come $(Build.BuildId)
+* nella pipeline si possono ri-usare dei task come template ${{ myTasks }} parametrizzabili
+
+> parti dai comandi bash, poi mappa ogni comando con un task della pipeline
 
 #### Build Agent
 
