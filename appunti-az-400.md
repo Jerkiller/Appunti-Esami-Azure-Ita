@@ -234,6 +234,23 @@ aggiunge un upstream alla repo attuale
   * unit tests - test veloci (~30") sul codice. Sintassi, correttezza, verifica con I/O. Sia su codice puro che su infrastrutturale
   * smoke test - test su singola componente (~15'). Correttezza, verifica I/O.
   * integration test - test multi-componente (~ore). Spesso schedulati di notte. Verifica interoperabilità tra componenti.
+  * utili come documentazione, utili x validare la correttezza di un refactoring
+
+> piramide del testing: alla base ci sono i test di unità e sopra quelli di UI. Copro quasi tutto coprendo unit test.
+> spostare i test a sx: più vicini allo sviluppo
+
+* fare test sensati, mirati, non su tutto, ma solo su nostro codice. Test veloci
+* test con mock e stub x testare in modo isolato
+* lint test x validare scrittura codice
+
+Java: Checkstyle e JUnit
+C#: XUnit e NUnit
+UI: Selenium
+
+
+dotnet test Tailspin.SpaceGame.Web.Tests --configuration Release --no-build --logger trx
+esegue i test loggando il risultato in un xml in formato trx.
+
 
 ### Acceptance testing
 
@@ -248,6 +265,13 @@ Risponde alla domanda: una determinata versione del software è rilasciabile?
 * stress test - importante testare l'infrastruttura per carichi improvvisi. Occorre verificare che dopo uno spike, torni al normale funzionamento.
 * fault injection - con la chaos engineering si prova a mettere in crisi il sistema. Si testa disaster recovery, ungraceful shutdown, rallentamenti di rete
 * security test - verifica vulnerabilità, sw automatici e analisi statica. Oppure tecnica del *red team* che prova a bucare il nostro SW.
+
+### Code Coverage
+
+% di codice coperto da unit test.
+
+Coverlet x C#
+JaCoCo e Cobertura x Java (in DevOps)
 
 ## Monitoring
 
