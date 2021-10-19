@@ -62,6 +62,12 @@
   * Azure DevTest Labs per creare ambienti di sviluppo isolati, molto flessibli. Spegni accendi e paghi.
 * **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
 * **QoS** - qualità del servizio. È possibile e auspicabile definire delle metriche di base che determinano il buon funzionamento di un servizio. Queste metriche vanno rappresentate in Dashboard
+* **VCS** sistema di condivisione codice tra persone/team.
+  * centralizzato (TFVC) dove tutti lavorano sullo stesso codice (se uno fa un bad commit blocca tutti)
+  * distribuito (Git) dove tutti possono avere una copia del codice (clone), poi alla bisogna si sincronizza (magari con regole di review)
+  * privato o pubblico in base alla visibilità
+  * hosting è sui propri server o su web-based solution come GitHub o Bitbucket
+  * spesso si basa su meccanismi di branch. Il branch principale è main o trunk.
 
 ## Processo di sviluppo
 
@@ -166,6 +172,16 @@ Vantaggi:
 
 > parti dai comandi bash, poi mappa ogni comando con un task della pipeline
 
+Trigger funziona con black/white listing
+
+trigger:
+  branches:
+    include:
+    - '*'     # build all branches
+  paths:
+    exclude:
+    - docs/*  # exclude the docs folder
+
 #### Build Agent
 
 * può essere self-hosted o cloud-hosted
@@ -191,6 +207,24 @@ Vantaggi:
 ### Artifacts
 
 > Creare, ospitare e condividere pacchetti (NPM, Maven, Nuget)
+
+## Git
+
+git config --global user.name "Mona Lisa"
+git config --global user.email "email@example.com"
+caching della pwd -> gh auth login o GCM (git credential manager)
+
+`git remote -v` elenca i remote (repo) e i permessi (fetch e push)
+
+origin - repo su github
+
+upstream - nome convenzionale del fork di un origin
+
+git remote add upstream https://github.com/MicrosoftDocs/mslearn-tailspin-spacegame-web.git
+aggiunge un upstream alla repo attuale
+
+`git pull origin main` indica da che remote vogliamo fare pull di un branch
+`git push origin code-workflow` indica su che remote vogliamo fare push di un branch
 
 ## Testing
 
