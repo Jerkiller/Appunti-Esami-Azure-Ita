@@ -270,8 +270,27 @@ Risponde alla domanda: una determinata versione del software è rilasciabile?
 
 % di codice coperto da unit test.
 
-Coverlet x C#
-JaCoCo e Cobertura x Java (in DevOps)
+Tool x coverage:
+
+* Coverlet x C# (nuget coverlet.msbuild
+* JaCoCo e Cobertura formati x Java (in DevOps)
+* [Report Generator](https://github.com/danielpalme/ReportGenerator) converte i vari formati tra loro e in html. Azure Pipelines usa questo tool internamente
+
+Vengono installati come tool nuget (local vs globali). Cosa sono? Tipo utility npm.
+
+dotnet new tool-manifest # crea un file manifest dove installare tool locali
+dotnet tool install dotnet-reportgenerator-globaltool
+
+dotnet test --no-build \
+  --configuration Release \
+  /p:CollectCoverage=true \
+  /p:CoverletOutputFormat=cobertura \
+  /p:CoverletOutput=./TestResults/Coverage/
+  
+dotnet tool run reportgenerator \
+  -reports:./Tailspin.SpaceGame.Web.Tests/TestResults/Coverage/coverage.cobertura.xml \
+  -targetdir:./CodeCoverage \
+  -reporttypes:HtmlInline_AzurePipelines
 
 ## Monitoring
 
@@ -655,3 +674,39 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
   * 50K minuti Actions
   * 50 GB archiviazione
  
+## AAD
+ 
+Azure Active Directory - soluzione cloud-based per gestire identità interne ed esterne a un'ente/azienda
+ 
+Consente di:
+* accedere a risorse interne (es. app aziendali) ed esterne (es. MS 365, azure)
+* tenere sicure identità e informazioni
+* garantire accesso condizionale
+* fornire SSO aziendale (MFA attivabile)
+ 
+Gerarchia:
+* Tenant = organizzazione.
+* Gruppo = livello di accesso condiviso comune
+* Utente
+ 
+Il tenant ha uno score di sicurezza da 1 a 233 (come mai 233?!)
+
+## AD
+
+AD invece si basa su Kerberos e NTLM. È solo per reti locali, stampanti, NAS...
+Invce del Tenant, ci sono: Foreste, domini, unità organizzative
+ 
+### identità ibrida
+
+collega AD e AAD. Come sincronizzare le utenze ibride? Cioè, come dare SSO sia su cloud che risorse aziendali?
+ 
+1. sincronizzazione dell'HASH della password tra AD e AAD
+  * (-) hash salvati su cloud
+2. Auth pass-through - mi collego a AAD, questo mi fa da proxy verso AD
+3. Federated Auth - Active Directory Federation Services ADFS server
+  * (+) MFA
+  * (+) Smart Card
+
+Ocio che x GDPR tutti i dati stiano in europa.
+Alcuni dati di AAD B2B e B2C di confiugrazione o mail inviate agli utenti stanno in USA.
+MFA si basa su provider di SMS e chiamate USA
