@@ -200,8 +200,24 @@ trigger:
 #### Build Agent
 
 * può essere self-hosted o cloud-hosted
-* self-hosted - installa un agente su linux, macos, win o linux docker img. Puoi estenderlo aggiungendo tutto il sw che ti serve (es. estensioni, script, ecc.)
-* cloud-hosted - ogni volta una VM nuova di pallino
+  * self-hosted
+    * (++) installa un agente su linux, macos, win o linux docker img
+    * (++) Puoi estenderlo aggiungendo tutto il sw che ti serve (es. estensioni, script, ecc.)
+    * (++) Risorse le definisci te (quanta RAM vuoi)
+    * (++) durata compilazione illimitata
+    * (++) puoi accedere direttamente
+    * (++) puoi scegliere tra compilazione pulita o incrementale
+    * (--) devi pulirlo se "si sporca"
+    * (--) devi aggiornartelo a mano
+    * (--) può costare
+  * cloud-hosted 
+    * (++) ogni volta una VM nuova di pallino, pulita
+    * (++) aggiornato da altri
+    * (++) free tier
+    * (--) puoi estenderla in pipeline, ma modifiche impermanenti
+    * (--) pipeline usano DS2v2 (7GB ram e 2CPU)
+    * (--) compilazione ha tempo limitato
+    * (--) NON puoi accedere direttamente
 * organizzati anche in **agent pool**, gruppi di agenti a livello di organizzazione
 * i job da eseguire sono organizzati in **agent build queues**
 * possibilità di sfruttare concorrenza con i **parallel jobs** (nn x agent cloud linux o mac)
@@ -210,6 +226,28 @@ trigger:
   * regola empirica: ogni 4-5 xsn che usano le pipelines
   * sulla base di: app multiple, branch multipli, team multipli
 
+```yml
+# cloud-hosted
+pool:
+  vmImage: 'ubuntu-20.04'
+  demands:
+  - npm
+
+# private
+pool:
+  name: 'MyAgentPool'
+  demands:
+  - npm
+# same as:
+pool: 'MyAgentPool'
+```
+
+## Self-hosted agent
+
+Puoi installarlo 
+* manualmente (ottimo se te ne serve uno solo)
+* in automatico con Terraform o ARM template (utile per replicare e mantenere)
+* manualmente e poi *snapshottare* l'immagine per poterla replicare (utile per replicare, ma meno mantenibile xk update di sicurezza implicano ri-snapshottare. Utile Packer di Hashicorp x aggiornare immagini)
 
 ### Test Plans
 
