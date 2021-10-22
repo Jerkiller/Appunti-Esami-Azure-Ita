@@ -848,3 +848,32 @@ Alcuni dati di AAD B2B e B2C di confiugrazione o mail inviate agli utenti stanno
 MFA si basa su provider di SMS e chiamate USA
 
  az extension add --name azure-devops
+ 
+ ## Costi
+ 
+ total cost of ownership = vero costo di qualcosa (sommerso) es. elettricità + hardware + personale + licenze sw + datacenter...
+ 
+ [TCO calculator](https://azure.microsoft.com/pricing/tco/calculator) fornisce stima TCO su soluz Azure e home-made. Proiezione su N anni. Strumento da CFO che fa capire che Azure è figo.
+
+Sottoscrizioni Azure
+* free
+* pay as you go - collegata Carta Credito o Debito
+* member offers
+
+Contratti con Azure
+* Enterprise Agreement - azienda si impegna a spendere TOT in 3 anni. Microsoft fa scontoni e anche ilcaffè
+* Dal Web - come i comuni mortali
+* CSP - appoggiandosi a un intermediario
+
+Uno dei fattori sottovalutati del costo è la zona Azure. Una zona costa meno ma magari è distante. Più zone possono causare rallentamenti e spesa x banda.
+ 
+Cos'altro possiamo fare?
+* usare Azure Advisor
+* mettere limiti di spesa, alert sui budget
+* usare Azure Reservations x sconti su VM
+* usare Azure Cost Management + Billing
+* usare zone sfigate su Azure
+* usare tag x analizzare centri di costo / utilizzatori
+* fare pulizia di inutilizzato, ridimensionare, spegnere
+* go PaaS (spendi quanto usi)
+* gestione attenta alle licenze (Azure Hybrid)
