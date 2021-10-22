@@ -84,6 +84,17 @@
     * dove c'è indipendenza, qualcosa può essere isolato
     * dove ci viene segnalato dai tool di dipendenze e codice duplicato
   * NuGet, NPM, Maven, Docker
+* Approccio OKR - Objectives & Key Results. Obbiettivi e risultati concreti e verificabili. Di solito un ciclo è di 3 mesi. OKR in tutti i team in azienda
+  * ogni obbiettivo deve stare in una riga. Ogni azione dell'azienda deve essere allineata a un obbiettivo. Impegno, rilevamento.
+  * OKR spinge aziende oltre i propri limiti
+  * OKR è collegato a scrum. Mission/vision = OKR livello alto, viene declinata su N obbeittivi OKR. Ciascuno di questi hanno M risultati chiave (scenari o iniziative). Queste sono le epics.
+* Continuous Delivery è testing automatico, build (CI), integrazione ma ha un rilascio manuale (struca boton)
+* Continuous Deploy invece è tutto automatico. Dalla CI al test di accettazione. Più rilasci al giorno
+* Continuous Integration è la parte di testing e build automatico di artefatti. Prerequisito x CD. Senza di questa: debito, codice buggato, branch lunghi, conflitti, lacrime, urla, hackering, merda, molto tempo perso
+* Continuous Quality - modo totale di intendere la qualità. Test sempre, da tutti, su tutto. I bug possono essere prevenuti. Root causa analysis. I bug non li fanno solo i dev ma anche il Product Owner, lo story Writer, il cliente... Qualità prima di tutto vuol dire avere meno debito tech, meno bug, meno ticket.
+* Continuous Collaboration - paradigm shift di cooperazione tra team e persone (in base al manifesto agile). I team a silos, fanno soluzioni a silos. Team interfunzionali creano soluzioni + creative e aperte
+* Contiuous Improvement
+* MTTR = Mean time to restore//repair = MTTI+MTTK+MTTF+MTTV = Identify+Know+Fix+Verify
 
 ## Processo di sviluppo
 
@@ -93,11 +104,13 @@ modalità di orchestraz
   * globalmente + lento
   * meno resiliente al cambiamento
   * spesso il testing è lasciato x utlimo
+  * un progetto su 10 riesce
 * [agile - 2001](https://agilemanifesto.org/) (non è un processo ma una filosofia)
   * recapito incrementale
   * collaborazione tra team
   * pianificazione continua
   * apprendimento continuo
+  * 4 progetti su 10 riescono
   * sviluppo a iterazioni (sprint 2-4w)
   * più resiliente ai cambiamenti
   * sviluppo in team verticali e interfunzionali (più full-stack, più scalabili, più orientati al prodotto), non orizzontali (catena di montaggio)
@@ -120,6 +133,17 @@ Total Lead Time: T di rilascio di una feature
 Activity Ratio: Rapporto Process/Lead - % di efficienza
 
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
+
+## pianificazione continua
+
+in ottica agile, è importante avere piani resilienti, non resistenti ai cambiamenti.
+diverso da pianificazione statica (triangolo di ferro)
+* semplicità ha valore
+* agile manifesto
+* design thinking (viability, feasibility, and desirability) - MVP
+* sviluppo incrementale
+* lean management - miglioramento continuo, capire il flusso di valore, eliminare sprechi di valore
+* stime accurate - stima fatta dai tecnici è chiave. stima accurata e precisa sono concetti diversi. dalla stima dipendono obbiettivi e commitment
 
 ## Delivery Plan
 
