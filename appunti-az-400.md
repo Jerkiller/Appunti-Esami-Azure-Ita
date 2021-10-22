@@ -185,6 +185,7 @@ Vantaggi:
 * viene emesso un *build artifact* (libreria, docker img, pacchetto, app compressa, VM, installer .msi)
 * nella pipeline si possono usare **variabili**. $(myVar) che viene rimpiazzata a runtime. Ci sono var di default come $(Build.BuildId)
 * nella pipeline si possono ri-usare dei task come template ${{ myTasks }} parametrizzabili
+* utile settare variabili segrete usando il pipeline editor (ovviamente nn vanno in YAML)
 
 > parti dai comandi bash, poi mappa ogni comando con un task della pipeline
 
@@ -250,6 +251,8 @@ Puoi installarlo
 * in automatico con Terraform o ARM template (utile per replicare e mantenere)
 * manualmente e poi *snapshottare* l'immagine per poterla replicare (utile per replicare, ma meno mantenibile xk update di sicurezza implicano ri-snapshottare. Utile Packer di Hashicorp x aggiornare immagini)
 
+Installazione manuale su macos, linux o windows funziona tramite PAT generato da DevOps e configurato. Va aggiunto un agent pool personalizzato e il proprio agent su devops. Poi va lanciata l'installazione dell'agente e infine configurato l'agente a usare PAT, URL dell'organizzazione, nome agente, nome pool. Infine va settato come demone o servizio in background. Il gioco è fatto.
+
 ### Test Plans
 
 > testing esplorativo e manuale
@@ -258,13 +261,20 @@ Puoi installarlo
 
 > repo illimitati, privati e su cloud. Oppure git pubblici
 
+#### Migrazioni
+
+* Da TFS
+  * per preservare pacchetti e date commit, occorre avere TFS aggiornato alla release RTW
+* Da GIT
+  * basta selezionare importa codice da Git
+
 ### Artifacts
 
 > Creare, ospitare e condividere pacchetti (NPM, Maven, Nuget)
 
 * Package feed = Repository server. Es. NuGet, NPM, Maven, Docker
 * Artifacts ha come alternative
-  * Pubbliche: Nuget.ORG, NPMJS, DockerHub, Maven Central Repo
+  * Pubbliche: Nuget.ORG, NPMJS, DockerHub, Quay, Maven Central Repo
   * Private: MyGet, ACR, File Share
 * SemVer: `Major.Minor.Patch[-Suffix]`
 * Version pinning: richiedere una versione in base a una query
@@ -280,6 +290,26 @@ Puoi installarlo
 
 `Install-Package Newtonsoft.Json -Version 13.0.1`
 
+## Azure Container Registry
+
+* importante fare check dei pacchetti prima di fare push di un immagine
+* importante fare check dei pacchetti contiuno con uno scheduled task. Le vulnerabilità vengono scoperte continuamente
+
+## Docker
+
+Per ottimizzare un docker, unire comandi RUN x avere meno layer
+
+## Analizzatori statici
+
+### SonarQube
+
+* consente di tracciare il debito tecnico e spottare bug
+* integrabile in DevOps (Board e Pipelines)
+
+### Java
+
+* Checkstyle PMD o FindBugs
+* integrabili in DevOps
 
 ## Git
 
@@ -521,7 +551,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * Permette di analizzare e fare query su dati raccolti da varie fonti
 * Fonti sono Azure Monitor, App Insights, Az Security Center, API, Powershell
 * È un hub centrale di raccolta e permette varie azioni tra cui:
-  * invocazione di funzioni: Logic App, Alert, Script o WebHook API
+  * invocazione di funzioni: Logic App, Alert, Script o WebHook API, oppure connettori custom come ITSMC (integrazione con sistemi di incident da IT come ServiceNow, Provance, Cherwell, System Center Service Manager)
   * visualizzazione: Azure Dahsboard, PowerBI, Analytics, Workbooks (tipo dashboard ma con vari elementi grafici, testo)
 * dati divisi per Workspace. Raccomandazione: usane pochi. Gestisci accesso ai workspace tramite RBAC
 
@@ -746,6 +776,15 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
   * fatturaz centralizzata
   * 50K minuti Actions
   * 50 GB archiviazione
+
+## Jenkins
+
+* soluzione x CI/CD
+* può ess installato in VM. Serve la porta 8080 aperta
+
+## Bamboo
+ 
+* soluzione x CI/CD
  
 ## AAD
  
