@@ -94,7 +94,9 @@
 * Continuous Quality - modo totale di intendere la qualità. Test sempre, da tutti, su tutto. I bug possono essere prevenuti. Root causa analysis. I bug non li fanno solo i dev ma anche il Product Owner, lo story Writer, il cliente... Qualità prima di tutto vuol dire avere meno debito tech, meno bug, meno ticket.
 * Continuous Collaboration - paradigm shift di cooperazione tra team e persone (in base al manifesto agile). I team a silos, fanno soluzioni a silos. Team interfunzionali creano soluzioni + creative e aperte
 * Contiuous Improvement
+* Continuous Monitoring
 * MTTR = Mean time to restore//repair = MTTI+MTTK+MTTF+MTTV = Identify+Know+Fix+Verify
+* Osservabilità - capacità di rendere disponibli dati di un sistema
 
 ## Processo di sviluppo
 
@@ -561,7 +563,7 @@ Correzione continua/giornaliera (proattiva)
 
 ### Azure Monitor
 
-* Raccoglie dati da applicazioni, OS di VM, Azure (risorse, sottoscriz e tenant, AD), altre fonti.
+* Raccoglie dati da applicazioni cloud e on-prem, OS di VM, Azure (risorse, sottoscriz e tenant, AD), altre fonti.
 * I dati raccolti sono log (evento testuale, data e metadati) o metriche (data e info numerica, salvate su TSDB)
 * Li mette a disposizione x altri servizi Azure
 * Possono essere estesi:
@@ -569,6 +571,7 @@ Correzione continua/giornaliera (proattiva)
   * aggiunta di un Agente di Log Analytics su una VM
   * invio dati custom invocando un API REST via SDK
 * Log e metriche interrogabili via Kusto, anche per visualizzazione su Dashboard
+* monitoraggio di risorse Azure by design
 * monitoraggio di pod su Kube con *Azure Monitor container insights*
 * monitoraggio di VM con agente, con *Azure Monitor VM insights* dashboard che riunisce tutte le VM in un'unica schermata
  
@@ -609,6 +612,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * **Profiler** mostra come performano gruppi di richieste. es. pagine lente
 * **Application Map** crea grafico di topologia applicativa aggiornato dal live check e performance. Utile x *bottleneck analysis*
 * **Usage analysis** metriche utente, a mo' di Google Analytics
+* Altre figherie: Snapshot Debugger, Log Analytics, Search, Smart Detection
 * Due modalità di configurazione di AI (instrumentation):
   * *runtime instrumentation*, config a caldo, no-code, per dati di base
   * *Build-time instrumentation*, va settato SDK, NuGET, dati completi
@@ -623,6 +627,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
   * su VS
   * su PowerBI
   * tramite le API su qualisasi applicativo custom
+  * Continuous Export su storage
 * metriche sono pre-aggregate e multidimensionali (es. InterazioniUtente = # like nell'ultimo minuto, # dislikenel minuto)
 
 ### Event Grid
@@ -651,6 +656,46 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * crea una mappa "investigation map" che collega gli elementi e aiuta con drill down
 * raccoglie dati da Azure Monitor Logs (prima crea il workspace!)
 * unico ambiente centrlaizzato dove correlare metriche di performance, sicurezza, e problemi
+
+#### Dashboard
+
+* query multi-risorsa (app insights x production e x test) - max 100 risorse
+* maximum integration and flexibility
+* RBAC
+* autorefresh
+* full screen
+* (--) no max flexibility or customization, no drill down, no interactivity
+* (--) max 30days dati
+
+#### Azure Monitor Workbooks
+
+* integration with monitor and logs
+* interactivity, filtering and drill down
+* import/export
+* (--) no autorefresh, limiti query e richieste
+* (--) no risorse multiple
+* (--) no personalizzazioni per utente, ma solo a livello di workspace
+
+#### App Insights Workbooks
+
+* documenti interattivi e collaborativi x indagare aspetti di metriche e log (tipo post-mortem di un incidente)
+* (--) no autorefresh
+* (--) no dettaglio delle dashboard
+
+#### PowerBI
+
+* super interattivo, zoom, cross-filtri, drilldown
+* molte fonti dati
+* performance xk dati cachati in un cubo
+* (--) non supporta log e dati da Azure RM
+* (--) refresh dati max 8/d
+
+#### Grafana
+
+* Open Source tool
+* ottima interattività, zoom, filtro
+* grande ecosistema di fonti dati (tra cui Grafana Azure Monitor Plugin)
+* (--) non supporta log e dati da Azure RM
 
 ## Logging
 
