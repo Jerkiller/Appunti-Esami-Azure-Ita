@@ -68,6 +68,21 @@
   * privato o pubblico in base alla visibilità
   * hosting è sui propri server o su web-based solution come GitHub o Bitbucket
   * spesso si basa su meccanismi di branch. Il branch principale è main o trunk.
+* package - componente software, libreria con sw riutilizzabile tra più progetti.
+  * In ling compilati => codice compilato DLL, class
+  * In ling interpretati => codice sorgente puro (js py)
+  * Spesso zippati, con nome, descriz e versione
+  * Servono ad evitare la duplicazione => deriva (drift), a ridurre dimens proj
+  * Problema è che deve essere scritto e testato x funzionare bene dappertutto (è un altra codebase da mantenere)
+  * individuare componente sw?
+    * dove c'è duplicazione può esserci riuso
+    * dove c'è alta coesione tra parti di codice, alto accoppiamento, può essere una componente unica
+    * dove c'è basso accoppiamento, va separato il + possibile
+    * dove c'è un ciclo di vita individuale, in + parti di codice, splittare. Eventualmente potrebbero mantenerlo due team diversi?
+    * dove c'è stabilità e poco cambiamento, forse è ora di portare il pacchetto in libreria
+    * dove c'è indipendenza, qualcosa può essere isolato
+    * dove ci viene segnalato dai tool di dipendenze e codice duplicato
+  * NuGet, NPM, Maven, Docker
 
 ## Processo di sviluppo
 
@@ -207,6 +222,25 @@ trigger:
 ### Artifacts
 
 > Creare, ospitare e condividere pacchetti (NPM, Maven, Nuget)
+
+* Package feed = Repository server. Es. NuGet, NPM, Maven, Docker
+* Artifacts ha come alternative
+  * Pubbliche: Nuget.ORG, NPMJS, DockerHub, Maven Central Repo
+  * Private: MyGet, ACR, File Share
+* SemVer: `Major.Minor.Patch[-Suffix]`
+* Version pinning: richiedere una versione in base a una query
+  * NuGet
+    * usa parentesi quadre e tonde x indicare inclusione/esclusione
+    * quando c'è una virgola, mi aspetto un intervallo tra due versioni dove il primo numero è la vers minore installabile e il secondo la maggiore
+  * NPM
+    * lo stesso package può appartenere a molti package come dipendenza => conflitti e molta duplicazione => automerge
+    * `^` usato per fare merge sulla base della minor release
+    * `~` usato per fare merge sulla base della patch
+* 4 livelli di permessi: Owners, Contributors, Collaborators, Readers
+* Tool come whiteSource e BlackDuck per vedere Vulnerabilità su Artifacts con componenti 3part
+
+`Install-Package Newtonsoft.Json -Version 13.0.1`
+
 
 ## Git
 
@@ -710,3 +744,5 @@ collega AD e AAD. Come sincronizzare le utenze ibride? Cioè, come dare SSO sia 
 Ocio che x GDPR tutti i dati stiano in europa.
 Alcuni dati di AAD B2B e B2C di confiugrazione o mail inviate agli utenti stanno in USA.
 MFA si basa su provider di SMS e chiamate USA
+
+ az extension add --name azure-devops
