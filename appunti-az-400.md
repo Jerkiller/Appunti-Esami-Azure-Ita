@@ -93,10 +93,17 @@
 * Continuous Integration è la parte di testing e build automatico di artefatti. Prerequisito x CD. Senza di questa: debito, codice buggato, branch lunghi, conflitti, lacrime, urla, hackering, merda, molto tempo perso
 * Continuous Quality - modo totale di intendere la qualità. Test sempre, da tutti, su tutto. I bug possono essere prevenuti. Root causa analysis. I bug non li fanno solo i dev ma anche il Product Owner, lo story Writer, il cliente... Qualità prima di tutto vuol dire avere meno debito tech, meno bug, meno ticket.
 * Continuous Collaboration - paradigm shift di cooperazione tra team e persone (in base al manifesto agile). I team a silos, fanno soluzioni a silos. Team interfunzionali creano soluzioni + creative e aperte
-* Contiuous Improvement
+  * continuous feedback - MVP, release spesso, hypothesis-driven development, feedback al cliente
+* Contiuous Improvement - misurare x migliorare. Cosa misurare? Misurare l'impatto, non l'azione. es. lead time,freq deploy, MTTR, % regressioni su cambiamenti. Performance app... Cosa NON va misurato? velocity, num. bug, LoC, burndown, stime e consuntivi. Bisogna misurare sulla base del valore e migliorare su quello. Es. lead time
 * Continuous Monitoring
 * MTTR = Mean time to restore//repair = MTTI+MTTK+MTTF+MTTV = Identify+Know+Fix+Verify
 * Osservabilità - capacità di rendere disponibli dati di un sistema
+* 5 disfunzionalità di un team:
+  * Assenza di fiducia
+  * Paura del conflitto
+  * Mancanza di impegno
+  * Evitare le responsabilità
+  * Disattenzione nei confronti dei risultati
 
 ## Processo di sviluppo
 
@@ -129,19 +136,15 @@ Strumento: mappa di flusso del valore, o VSM
 * si tracciano le attività a catena, si stimano i giorni e si individuano quelle che danno valore diretto al cliente
 * serve a focalizzare il processo di sviluppo, individuare sprechi, accorgersi dell'efficienza globale
 
+### Data-driven DevOps
 
-Process Time: T di valore diretto x il cliente
-Total Lead Time: T di rilascio di una feature
-Activity Ratio: Rapporto Process/Lead - % di efficienza
-
-
-Lead time -
-Lead time measures the total time elapsed from the creation of work items to their completion.
-
-Cycle time -
-Cycle time measures the time it takes for your team to complete work items once they begin actively working on them.
-
-Burndown - lavoro rimanente
+* **Process Time**: T di valore diretto x il cliente
+* **Total Lead Time**: T di rilascio di una feature
+* **Activity Ratio**: Rapporto Process/Lead - % di efficienza
+* **Lead time** measures the total time elapsed from the creation of work items to their completion.
+* **Cycle time** measures the time it takes for your team to complete work items once they begin actively working on them.
+* **Idle Time** tempo morto in cui non viene prtato avanti un work item
+* **Burndown** lavoro rimanente
 
 
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
