@@ -3,6 +3,7 @@
 * [Pdf del corso](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE3VP8d)
 * [Skillpipe](https://www.skillpipe.com/#/bookshelf/books)
 * [examtopics - test gratuito](https://www.examtopics.com/exams/microsoft/az-400/)
+* [ravikirans - materiali vari](https://ravikirans.com/az-400-azure-exam-study-guide/)
 
 ## Core concepts
 
