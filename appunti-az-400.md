@@ -132,6 +132,16 @@ Process Time: T di valore diretto x il cliente
 Total Lead Time: T di rilascio di una feature
 Activity Ratio: Rapporto Process/Lead - % di efficienza
 
+
+Lead time -
+Lead time measures the total time elapsed from the creation of work items to their completion.
+
+Cycle time -
+Cycle time measures the time it takes for your team to complete work items once they begin actively working on them.
+
+Burndown - lavoro rimanente
+
+
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
 
 ## pianificazione continua
@@ -165,6 +175,14 @@ Cosa non è
 * una posizione lavorativa, un software o una metodologia
 
 > https://www.azuredevopslabs.com/
+
+Azure DevOps
+
+profili:
+
+* Stakeholder
+* Basic & Visual Studio Professional (VSE) - feature complete
+* Basic + Test Plans - estensione con i test plan
 
 ### Boards
 
@@ -569,6 +587,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * Concatenazione di operazioni separate da `|`
 * `where`, `count`, extend`, `summarize`, `take 10`, `top 10 by Xyz`
 * Tipi base come `datetime(2018-11-01)`
+* | where success == "False"
 
 ### Log Analytics
 
@@ -691,12 +710,13 @@ Si accedono via SSH alla Docker img.
 
 Via Kudu:
 
-Kudu è piattaforma di **Source Control Management (SCM)**. Si accede a https://<app name>.scm.azurewebsites.net con credenziali di deployment.
+Kudu è piattaforma di **Source Control Management (SCM)**.
+Si accede a `https://<app name>.scm.azurewebsites.net` con credenziali di deployment.
 Oppure si accede da Azure con *Development Tools* > *Advanced Tools*.
 Da Kudu, poi si può scaricare lo zip dei file da Windows, e da Linux lo zip dei log di docker
 
 Alternative x Blob Storage:
-  
+
 Si accede ai log su Blob e si aprono in excel. Come accedere? Da portal azure, da cli o da Azure Storage Explorer.
 
 ### Application Insights
@@ -708,7 +728,9 @@ Aggiungi codice per raccogliere in un logger centrale. AI funge anche da bidone 
 Prodotto che consente di compilare app per IoS, Android, ecc. Consente CI/CD, UI testing, raccolta metriche utilizzo app.
 Il portale PaaS è ubicato a https://appcenter.ms.
 È vantaggioso perché permette di integrare e migliorare i processi aziendali, efficienza e qualità.
- 
+
+Microsoft Test & Feedback extension - estensione x raccogliere feedback e crash sull'applicaz
+
 ### App Center Build
 
 * Infrastruttura cloud di build x il rilascio di App.
@@ -729,7 +751,7 @@ Alcuni vantaggi:
 * portale centrale, CLI o API per effettuare release
  
 #### Supporto
- 
+
 Piattaforme: iOS, Android, UWP, e tvOS
 Linguaggi: Swift, Kotlin, Xamarin, Java, Unity, o React Native
 VCS: GitHub, Bitbucket, Azure DevOps
@@ -764,11 +786,11 @@ Suite di tool diversi
 * Pipelines * strumenti di CI/CD
 
 ## GitHub
- 
+
 GitHub (GH) è una suite per VCS e CI/CD.
 
 Le GH **Actions** sono come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
- 
+
 > **Ocio**! I minuti delle actions sono un credito.
 > Usando 1 minuto di Actions su Linux consumo 1 minuto di credito.
 > Usando 1 minuto di Actions su Windows consumo 2 minuti di credito.
@@ -877,3 +899,10 @@ Cos'altro possiamo fare?
 * fare pulizia di inutilizzato, ridimensionare, spegnere
 * go PaaS (spendi quanto usi)
 * gestione attenta alle licenze (Azure Hybrid)
+
+## AKS
+
+Sonde:
+* livenessProbe - ping periodico per vedere se pod è vivo. Se non è configurato, do x scontato sia vivo. Se non risponde, mando un Restart
+* readinessProbe - viene fatto x capire se il pod può accettare richieste. Se non può setto Failure, altrimenti Success. Se Failure, escludo il pod dagli IP del service
+* startupProbe - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
