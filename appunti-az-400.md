@@ -840,11 +840,14 @@ GitHub (GH) è una suite per VCS e CI/CD. 50M utenti.
 Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (sito statico)
 
 File speciali:
-* ISSUE_TEMPLATE.md
-* README.md
-* CONTRIBUTING.md
-* LICENSE.md
-* SECURITY.md
+* README.md - mostrato nella folder corrente
+* ISSUE_TEMPLATE.md - mostrato quando uno crea una ISSUE
+* CONTRIBUTING.md - mostrato quando uno fa PR
+* LICENSE.md - licenza del prog
+* FUNDING.yml - mostra una lista di sponsor
+* SECURITY.md - pratiche di sicurezza
+* CODEOWNERS - utenti aggiunti automaticamente in PR
+* CITATION.cff - mostra come citare un software
 
 * Utenti organizzati in Team gerarchici a matrioska x riflettere struttura organizzazione (nested teams)
 * RBAC.
