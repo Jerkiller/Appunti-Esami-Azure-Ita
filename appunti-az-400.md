@@ -843,6 +843,8 @@ File speciali:
 * ISSUE_TEMPLATE.md
 * README.md
 * CONTRIBUTING.md
+* LICENSE.md
+* SECURITY.md
 
 * Utenti organizzati in Team gerarchici a matrioska x riflettere struttura organizzazione (nested teams)
 * RBAC.
@@ -868,6 +870,14 @@ Permessi:
   * può decidere delle default policy per le organization
     * per grandi organiz: read (di default solo lettura sulle repo)
     * per piccole organiz: write (read/pull/push)
+
+
+#### Migrazioni
+
+* Si vuole solo il codice o anche lo storico dei commit, le issue ecc?
+* Da SubVersion, Mercurial, TFVC: **GH Migrator**
+* Ocio ai file binari di grandi dimensioni => Git LFS
+* Aggiungi in gitignore file da escludere (file che cambiano sempre, file pesanti non importanti, file sensibili, file di config, override personali)
 
 Ruoli GH:
 
