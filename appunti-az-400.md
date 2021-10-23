@@ -835,7 +835,70 @@ Suite di tool diversi
 
 ## GitHub
 
-GitHub (GH) è una suite per VCS e CI/CD.
+GitHub (GH) è una suite per VCS e CI/CD. 50M utenti.
+
+Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (sito statico)
+
+File speciali:
+* ISSUE_TEMPLATE.md
+* README.md
+* CONTRIBUTING.md
+
+* Utenti organizzati in Team gerarchici a matrioska x riflettere struttura organizzazione (nested teams)
+* RBAC.
+* Possibilità di sync da profili AD dove i team sono gruppi
+* organization = meglio averne solo una, sempre
+
+Permessi:
+* Repository permissions
+  * Read - RO
+  * Triage - catalogatori di issue, cose così, ma non modifica codice
+  * Write - dev
+  * Maintain - PM - permessi alti ma non distruttivi. Si sa cosa possono fare i PM
+  * Admin - tutto
+* Team permissions
+  * Member - normali ruoli, eredita dai team superiori
+  * Mantainer - gestisce team
+* Organization permissions
+  * Owner - tutto, gestire membri
+  * Member - gestire repo e team
+  * Billing manager - gestire informazioni billing
+* Enterprise permissions
+  * stesse delle organization, ma l'owner può gestire organizations
+  * può decidere delle default policy per le organization
+    * per grandi organiz: read (di default solo lettura sulle repo)
+    * per piccole organiz: write (read/pull/push)
+
+Ruoli GH:
+
+* owner - gestisce organization (sicurezza, utenze, billing, script custom, grant dei permessi, auth, migrazioni)
+* admin - gestisce team
+* team mantainer - gestisce team
+
+Autenticazioni:
+
+* Username/Password
+* PAT (utile x software e cli)
+* Chiavi SSH (generazione chiavi ank protette, compliant con SAML SSO)
+* Deploy Key (chiavi SSH, ma solo x una repo)
+
+Opzioni Auth:
+* MFA/2FA
+* SAML SSO (vari IdP AD FS, AAD, Okta, OneLogin, PingOne...)
+* autenticazione di directory su FS con LDAP (integrato con AD, Oracle, OpenLDAP, OpenDirectory...)
+
+
+Rules for commit messages:
+  Don’t end your commit message with a period.
+  Keep your commit messages to 50 characters or less. Add extra detail in the extended description window if necessary. This is located just below the subject line.
+  Use active voice. For example, "add" instead of "added" and "merge" instead of "merged".
+  Think of your commit as expressing intent to introduce a change.
+
+* menzioni si fanno con `/cc @user` x aggiungere utente in carbon copy
+* commit che inizia con "close", "closes", "fixed", "fix"... `#issue_id` va a chiudere issue in automatico
+* pulse è una sezione che riepiloga cos'è successo su una issue
+
+Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
 
 Le GH **Actions** sono come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
 
@@ -870,7 +933,11 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
   * fatturaz centralizzata
   * 50K minuti Actions
   * 50 GB archiviazione
-
+ 
+ 
+ gh repo clone [url]
+ 
+ 
 ## Jenkins
 
 * soluzione x CI/CD
