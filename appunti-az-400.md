@@ -862,6 +862,8 @@ Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (s
 
 Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
 
+GH Codespaces - IDE as a Service (VS CODE a 0.18 $/h)
+
 GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
 
 * [x] First task
@@ -1225,6 +1227,16 @@ jobs:
   * 50K minuti Actions
   * 50 GB archiviazione
 
+### GH Packages
+
+* repo privata che supporta: Maven/Gradle, NPM, NuGet, RubyGems
+* totalmente integrato con GH Actions e codespaces
+* comodo x progetti multi tech xk basta dare permessi a una repo e si possono scaricare Packages da + registry
+* integra **GH Container Registry**, un Docker registry con RBAC si trova in [ghcr.io](https://ghcr.io)
+* auth con username + PAT + endpoint di packages
+* PAT può essere preso da interfaccia utente
+* Per installare un pacchetto o collegarsi a Packages, basta usare i tool di NPM/Maven/NuGet con endpoint packages
+
 ### GH CLI
 
 * `gh auth login`
@@ -1258,6 +1270,7 @@ Li farò in futuro:
 * [RBW](https://lab.github.com/githubtraining/create-a-release-based-workflow)
 * [GHCI](https://lab.github.com/githubtraining/github-actions:-continuous-integration)
 * [GHCD](https://lab.github.com/githubtraining/github-actions:-continuous-delivery-with-azure)
+* [GHCR](https://lab.github.com/githubtraining/github-actions:-publish-to-github-packages)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
 
 ## Jenkins
