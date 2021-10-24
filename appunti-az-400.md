@@ -63,6 +63,7 @@
   * Azure DevTest Labs per creare ambienti di sviluppo isolati, molto flessibli. Spegni accendi e paghi.
 * **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
 * **QoS** - qualità del servizio. È possibile e auspicabile definire delle metriche di base che determinano il buon funzionamento di un servizio. Queste metriche vanno rappresentate in Dashboard
+* ChatOps = automazione per mezzo di chat e bot di processi come CI/CD
 * **VCS** sistema di condivisione codice tra persone/team.
   * centralizzato (TFVC) dove tutti lavorano sullo stesso codice (se uno fa un bad commit blocca tutti)
   * distribuito (Git) dove tutti possono avere una copia del codice (clone), poi alla bisogna si sincronizza (magari con regole di review)
@@ -937,7 +938,7 @@ Opzioni Auth:
 
 * nel file SECURITY.md i white hat (hacker etici) fanno disclosure delle vulnerabilità
 * dependabot che fa scan continuo dipendenze
-* secret aalysis, ti avverte se committi credenziali o segreti
+* secret analysis, ti avverte se committi credenziali o segreti
 * tool di analisi statica continua
 * codeQL x estendere analisi statica con query sul codice
 
@@ -995,11 +996,30 @@ Permessi (singolo o team):
 
 ### GH Actions
 
-Le GH **Actions** sono soluz di CI come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
+Le GH **Actions** sono soluz di CI/CD come le Pipeline di DevOps. Integrano IaC e facilitano lo sviluppo. Si basano su un perverso sistema di credito a minuti mensili. Sono file Yaml eseguibili: Soliti sistemi con trigger e seq di azioni (Node.JS o Python). Parole chiave: on, job, step, runsOn, uses, matrix, artifact.
 
-Soliti sistemi con trigger e seq di azioni (Node.JS o Python). Parole chiave: on, job, step, runsOn, uses, matrix, artifact
+> Evento => Workflow => Job => Step => Action
 
-* NON possono essere usate x caricare GH secrets (vanno fatti manualmente da portale)
+* Evento - qualsiasi evento scatenante o eventi multipli o eventi condizionali (if x = y):
+  * una PR, o altri eventi di GH
+  * un evento esterno
+  * una schedulazione (POSIX CRON `*/15 * * * *`)
+  * workflow_dispatch = trigger manuale
+  * repository_dispatch = trigger API REST
+* Workflow - è la pipeline. Può essere di build, test, package, release, tutto insieme...
+  * può ess disabilitato o il run cancellato
+  * può ess templatizzato a livello di organization x riutilizzo
+* Job - unità di esecuzione su una macchina self-hosted o GH-hosted
+* Step - task individuale eseguito in un job costituito da almeno una action
+* Action - singola istruzione o funzione.
+  * può ess di 2 tipi:
+    * container action (+ linguaggi, sono solo su linux)
+    * JS action (solo JavaScript, ma multi-piattaforma)
+  * può venire da:
+    * action di base
+    * action dal marketplace
+    * scrittura action custom
+
 * matrix = matrice di compilazione: in una stessa pipeline posso fare azioni su + OS in + versioni. Viene fatto il prod cartesiano dei due insiemi. Posso usare var custom come `${{ matrix.node-version }}`. `os: [ubuntu-latest, windows-2016] node-version: [8.x, 10.x, 12.x]` => 6 run
 * artifact = docker o pacchetto semi-lavorato, che può ess download/upload-ato in varie fasi di actions
 * integrazione con i flussi di lavoro - si può aggiungere uno step tipo: "PR reviewed", "aggiunta etichetta alla issue".
@@ -1087,28 +1107,26 @@ jobs:
       - run: cat file.txt
 ```
 
-* Versioni: Free/Pro/Team/Enterprise
-* Account: Personale/Organizz/Aziendale
+```yml
+# Custom Action Definition
+name: "Hello Actions"
+description: "Greet someone"
+author: "octocat@github.com"
 
-* **Free** - dev singoli poveri, gruppi e organizzioni
-  * 2K minuti di GitHub actions
-  * 500 MB archiviazione
-* **Pro** - dev + pro
-  * wiki, branch protetti, github pages, PR, owner, grafici, riferimenti atomatici
-  * 3K minuti di Actions
-  * 2 GB archiviazione
-* **Team** - come pro ma x team (per PR)
-* **Enterprise** - GHE
-  * può stare on-premise
-  * supporto tecnico
-  * autenticazione integrata con azienda (SSO SAML)
-  * ti fanno pure il caffè
-* **GHE Cloud**
-  * ACL per GH pages
-  * SLA 99.9%
-  * fatturaz centralizzata
-  * 50K minuti Actions
-  * 50 GB archiviazione
+inputs:
+    MY_NAME:
+    description: "Who to greet"
+    required: true
+    default: "World"
+
+runs:
+    uses: "docker"
+    image: "Dockerfile"
+
+branding:
+    icon: "mic"
+    color: "purple"
+```
 
 ### App GH
 
@@ -1182,6 +1200,31 @@ jobs:
 * in questo form si possono trascinare asset tipo gli eseguibili, zip del sorgente, ecc.
 * verranno notificate le persone iscritte alla repo
 
+### Licenze GH
+
+* Versioni: Free/Pro/Team/Enterprise
+* Account: Personale/Organizz/Aziendale
+
+* **Free** - dev singoli poveri, gruppi e organizzioni
+  * 2K minuti di GitHub actions
+  * 500 MB archiviazione
+* **Pro** - dev + pro
+  * wiki, branch protetti, github pages, PR, owner, grafici, riferimenti atomatici
+  * 3K minuti di Actions
+  * 2 GB archiviazione
+* **Team** - come pro ma x team (per PR)
+* **Enterprise** - GHE
+  * può stare on-premise
+  * supporto tecnico
+  * autenticazione integrata con azienda (SSO SAML)
+  * ti fanno pure il caffè
+* **GHE Cloud**
+  * ACL per GH pages
+  * SLA 99.9%
+  * fatturaz centralizzata
+  * 50K minuti Actions
+  * 50 GB archiviazione
+
 ### GH CLI
 
 * `gh auth login`
@@ -1193,6 +1236,20 @@ jobs:
 
 > [Altri riferimenti](https://cli.github.com/manual/)
 
+### GH Secrets
+
+* un posto dove gestire i segreti manualmente
+* NON devono essere scritti direttamente in GH Actions
+* `creds: ${{ secrets.AZURE_CREDENTIALS }}`
+
+### GH Deploy & Release
+
+* verifica condizionale di label nelle PR per verificare se fare o no deploy
+* In fase di CD si fa spesso IaC, si creano/distruggono risorse cloud
+* artifacts hanno retention di 90 giorni ma è configurabile
+* si possono cancellare artifacts, ma non reversibilmente
+* nelle repo pubbliche spesso si impostano "required reviewers" e "wait timer"
+
 Li farò in futuro:
 
 * [GHA](https://lab.github.com/githubtraining/getting-started-with-github-apps)
@@ -1200,6 +1257,7 @@ Li farò in futuro:
 * [GHS](https://lab.github.com/githubtraining/github-actions:-using-github-script)
 * [RBW](https://lab.github.com/githubtraining/create-a-release-based-workflow)
 * [GHCI](https://lab.github.com/githubtraining/github-actions:-continuous-integration)
+* [GHCD](https://lab.github.com/githubtraining/github-actions:-continuous-delivery-with-azure)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
 
 ## Jenkins
