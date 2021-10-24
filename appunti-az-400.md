@@ -1298,7 +1298,16 @@ Gerarchia:
 * Tenant = organizzazione. Ha un dominio xyz.onmicrosoft.com che può ess personalizzato in xyz.com
 * Gruppo = livello di accesso condiviso comune
 * Identità = Utente/App/Servizio
-
+  * AAD role o RBAC
+    * admin - gestione licenze, utenti
+      * può usare `New-AzureADUser` o `az ad user create`
+      * può usare `Remove-AzureADUser` o `az ad user delete`
+      * può usare `New-AzureADMSInvitation` utile per essere automatizzato con bulk di mail
+        * delete logica x 30 gg poi fisica
+  * associaz app - user in 3 modi
+    * direct associat
+    * group associat
+    * rule associat (es. sulla base di una regola: tutti quelli che lavorano in sede a udine)
 Il tenant ha uno score di sicurezza da 1 a 233 (come mai 233?!)
 
 ### Licenze AAD
@@ -1307,7 +1316,7 @@ Il tenant ha uno score di sicurezza da 1 a 233 (come mai 233?!)
 * pay as you go - funzionalità specifiche come AAD B2C
 * Office365 app - free + landing page personalizzate (login/logout)
 * AAD Premium P1 - gruppi dinamici, forget pwd self-service, MS Identity Manager
-* AAD Premium P2 - cm sopra + AD Identity Protection + Privileged Identity Management = liv aggiuntivo di sicurezza sugli admin
+* AAD Premium P2 - cm sopra + AD Identity Protection + Privileged Identity Management (PIM) = liv aggiuntivo di sicurezza sugli admin
 
 Categorie Utenti:
 
@@ -1316,11 +1325,42 @@ Categorie Utenti:
 
 ### Servizi AAD
 
-* AAD B2B - utente guest riceve invito in tenant. Accede al tenant x una certa app cloud o locale (meglio attivare MFA) possiamo collaborare cn utenti esterni
+* AAD B2B - utente guest riceve invito in tenant. Accede al tenant x una certa app cloud o locale (meglio attivare MFA) possiamo collaborare cn utenti esterni. Meglio rispetto alla federation (più complessa e persistente partnership. Qui non serve che ci sia un reparto IT che gestisca gli account altrui)
 * AAD B2C - utente qualsiasi può registrarsi a un app e accedere. C'è un form di registraz, MFA. Monitoraggio aggiuntivo dei DDOS (può essere pay as you go)
 * AD DS - Domain Services - x estendere un dominio a VM senza domain controller
 * Gestione delle App - SSO su molte app, marketplace + app aziendali + app esterne. Gestione criteri di accesso (es. MFA) + controllo accessi. App locali in AAD con AAD Proxy
-* AD Identity Protection (Premium P2) - gestione criteri e rischi su identità. Possono esserci correzioni di rischi es. utente reimposta pwd
+* AAD Identity Protection (Premium P2) - gestione criteri e rischi su identità. Possono esserci correzioni di rischi es. utente reimposta pwd
+
+### Migrazione a AAD
+
+1. Creare basi sicure
+   * max 2 global admin
+   * assegnare degli admin
+   * PIM x monitorare admin (se P2)
+   * configurare reimpost password
+   * configurare password blacklist (password01, admin)
+   * configurare non riutilizzo pwd
+   * configurare pwd cloud senza richiesta di modifica x evitare incrementalità tipo patatina01 patatina02...
+   * MFA condizionale (P1)
+   * configurare AADIP (P2)
+2. utenti, divice e sync
+   * installa AAD connect (sync tra AD locale e AAD)
+   * installa AAD connect health - statistiche integrità e sync (P1)
+   * password hash sync
+   * ativa writeback password - se scrivi su Azure, si scrive anch locale (P1)
+   * configuraz gruppi e utenti
+   * pianificare gestione dispositivi (BYOD? cell aziendali o personali?)
+   * accesso con login social con AD B2B
+   * configurare metodi passwordless (authenticator) (P1)
+3. app
+   * identifica app usate
+   * imposta app SaaS da AD (veloce)
+   * imposta AAD proxy per app locali
+4. monitorare accessi, admin e cicli di vita
+   * PIM x monitorare admin (se P2)
+   * configura gruppi dinamici (P1)
+   * associa app a gruppi
+   * configura \[de\]provisioning automatico degli utenti
 
 ## AD
 
