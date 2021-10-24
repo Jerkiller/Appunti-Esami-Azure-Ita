@@ -57,8 +57,8 @@
   * imperative approach - via CLI. Problema di mantenibilità, difficile scalabilità
   * declarative approach - Azure Resource Manager (ARM) template: parameters, variables, resources, e outputs
   * misto - spesso si crea un ambiente, ma poi le VM vanno popolate. Fare attenzione ai tempi di avvio, deploy e a come aggiornare le immagini.
-   * custom images. Occhio a tenerle aggiornate tramite un proc apposito.
-   * Post-deployment scripting - come per esempio scriptoni powershell o Azure Automation Desired State Configuration (DSC).
+    * custom images. Occhio a tenerle aggiornate tramite un proc apposito.
+    * Post-deployment scripting - come per esempio scriptoni powershell o Azure Automation Desired State Configuration (DSC).
   * operazioni schedulabili - Azure Automation. Es. cercare dischi orfani, spegnere/accendere VM, Patchare sistemi operativi
   * Azure DevTest Labs per creare ambienti di sviluppo isolati, molto flessibli. Spegni accendi e paghi.
 * **Shift Left** paradigma che prevede che i test siano fatti più a sx nel tempo, verso lo sviluppo e non verso il rilascio. Gli errori costano meno.
@@ -109,6 +109,7 @@
 ## Processo di sviluppo
 
 modalità di orchestraz
+
 * waterfall
   * ogni fase dà il via alla successiva
   * globalmente + lento
@@ -130,10 +131,12 @@ modalità di orchestraz
     * soft skill come gestione conflitti
     * buona integrazione lavoro in presenza/da remoto
     * utili sw quali Teams, Skype, Slack, Hangouts, Asana, Trello, GoToMeeting...
+
 > [Approfondisci](https://docs.microsoft.com/it-it/devops/plan/what-is-agile-development)
 Obbiettivo: massimizzare valore, minimizzare spreco
 
 Strumento: mappa di flusso del valore, o VSM
+
 * si tracciano le attività a catena, si stimano i giorni e si individuano quelle che danno valore diretto al cliente
 * serve a focalizzare il processo di sviluppo, individuare sprechi, accorgersi dell'efficienza globale
 
@@ -147,13 +150,13 @@ Strumento: mappa di flusso del valore, o VSM
 * **Idle Time** tempo morto in cui non viene prtato avanti un work item
 * **Burndown** lavoro rimanente
 
-
 Strumento: Design Thinking. Capire il team e l'azienda, esigenze, obbiettivi e compiti di ciascuno
 
 ## pianificazione continua
 
 in ottica agile, è importante avere piani resilienti, non resistenti ai cambiamenti.
 diverso da pianificazione statica (triangolo di ferro)
+
 * semplicità ha valore
 * agile manifesto
 * design thinking (viability, feasibility, and desirability) - MVP
@@ -173,16 +176,24 @@ Approfondisci gestione di più progetti ([portfolio-management](https://docs.mic
 > *Schedule Chicken* situazione che si verifica quando più team concorrono a un obbiettivo, ma nessuno dichiara ritardo perché spera lo faccia prima l'altro.
 
 ## DevOps
-Cos'è
-* unione di persone, processi e prodotto
+
+Cos'è:
+
+* unione di persone, processi e prodotto per fornire valore continuo all'utente finale.
 * graduale, si possono adottare servizi e strumenti un po' alla volta
 * percorso da seguire per diventare un team con prestazioni alte (rilasci frequenti e di qualità)
-Cosa non è
+
+Cosa non è:
+
 * una posizione lavorativa, un software o una metodologia
 
-> https://www.azuredevopslabs.com/
+> [DevOps Labs](https://www.azuredevopslabs.com/)
 
-Azure DevOps
+**Azure DevOps** - Suite di tool diversi
+
+* Boards - lavagne kanban e scrum, backlog e dashboard per i team
+* Repos - VCS, integrato con GitHub ma aziendalmente privato
+* Pipelines * strumenti di CI/CD
 
 profili:
 
@@ -223,6 +234,7 @@ profili:
 > compilare, testare e distribuire software in qualsiasi linguaggio e piattaforma. CI/CD
 
 Vantaggi:
+
 * compilazione su agente cloud elimina costi mantenimento server e tempo.
 
 #### Pipeline
@@ -260,7 +272,7 @@ trigger:
     * (--) devi pulirlo se "si sporca"
     * (--) devi aggiornartelo a mano
     * (--) può costare
-  * cloud-hosted 
+  * cloud-hosted
     * (++) ogni volta una VM nuova di pallino, pulita
     * (++) aggiornato da altri
     * (++) free tier
@@ -294,7 +306,8 @@ pool: 'MyAgentPool'
 
 ## Self-hosted agent
 
-Puoi installarlo 
+Puoi installarlo:
+
 * manualmente (ottimo se te ne serve uno solo)
 * in automatico con Terraform o ARM template (utile per replicare e mantenere)
 * manualmente e poi *snapshottare* l'immagine per poterla replicare (utile per replicare, ma meno mantenibile xk update di sicurezza implicano ri-snapshottare. Utile Packer di Hashicorp x aggiornare immagini)
@@ -380,10 +393,8 @@ Java: Checkstyle e JUnit
 C#: XUnit e NUnit
 UI: Selenium
 
-
-dotnet test Tailspin.SpaceGame.Web.Tests --configuration Release --no-build --logger trx
+`dotnet test Tailspin.SpaceGame.Web.Tests --configuration Release --no-build --logger trx`
 esegue i test loggando il risultato in un xml in formato trx.
-
 
 ### Acceptance testing
 
@@ -434,6 +445,7 @@ Diviso in 3 grandi aree:
 * Deep infrastructure monitoring - Log Analytics, metriche specifiche raccolte da IaaS o prodotti cm SQL server o Windows Server AD. Es. mail quando SQL è all'90% memoria
 
 I dati coinvlti del monitoraggio sono 3:
+
 * log - record di eventi
   * permettono di ricostruire una cronologia di eventi
   * in linux il servizio syslog raccoglie in `/var/log`
@@ -457,6 +469,7 @@ altre considerazioni:
 * possono basarsi su un agente di monitoraggio opp no (basandosi sullo stato corrente di un server, es. ping a un URL)
 
 Full stack monitoring - monitorare app a tutti i livelli.
+
 * Monitorare a liv di sviluppo e in produzione.
 * Monitor anche aspetti di sicurezza come IP sospetti o leakage di dati
 * Come lo si ottiene in Azure?
@@ -515,11 +528,11 @@ Più complessi (indicatori su metriche):
   * servono a mandare un allarme ai responsabili
 
 Correzione continua/giornaliera (proattiva)
+
 * obbiettivi si evolvono nel tempo. Coinvolgimento dei dev nel processo
 * piccoli cambiamenti monitorati
 * conoscenza pratica del sistema per triage dei problemi
 * sicurezza e performance vanno di pari passo. Un carico eccessivo è una vulnerabilità
-
 
 ### New Relic (One)
 
@@ -560,21 +573,23 @@ Correzione continua/giornaliera (proattiva)
 * monitoraggio di risorse Azure by design
 * monitoraggio di pod su Kube con *Azure Monitor container insights*
 * monitoraggio di VM con agente, con *Azure Monitor VM insights* dashboard che riunisce tutte le VM in un'unica schermata
- 
+
 ### Amazon CloudWatch
 
 In AWS equivalente di APM su Azure
+
 * meglio soluz cloud (AWS o AZURE) integrata xk consente autoscalabilità, meglio rispetto a New Relic o Sumo Logic
 
 #### Kusto
 
 Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle con righe e colonne.
+
 * MS ha palesemente portato la sintassi di Splunk facendo qualche replace
 * Una query ha almeno una fonte dati (es. Metrics, Heartbeat)
 * Linguaggio case-sensitive. Generalmente in snake_case. Tabelle e Colonne in PascalCase.
 * Sequenze di istruzioni separate da `;`
 * Concatenazione di operazioni separate da `|`
-* `where`, `count`, extend`, `summarize`, `take 10`, `top 10 by Xyz`
+* `where`, `count`, `extend`, `summarize`, `take 10`, `top 10 by Xyz`
 * Tipi base come `datetime(2018-11-01)`
 * | where success == "False"
 
@@ -700,6 +715,7 @@ I log possono essere scritti su:
 * Blob Storage, impostando la retention x svecchiarli. (un tempo nn si potevano scrivere su blob con Linux, ora sì)
 
 I log possono essere consultati con Live Streaming quando:
+
 * sono pochi (fase iniziale o al deploy)
 * sono di una app sola (non multi istanza)
 
@@ -755,9 +771,9 @@ Si accede ai log su Blob e si aprono in excel. Come accedere? Da portal azure, d
 Aggiungi codice per raccogliere in un logger centrale. AI funge anche da bidone x le metriche.
 
 ## VS App Center
- 
+
 Prodotto che consente di compilare app per IoS, Android, ecc. Consente CI/CD, UI testing, raccolta metriche utilizzo app.
-Il portale PaaS è ubicato a https://appcenter.ms.
+Il portale PaaS è ubicato a [appcenter.ms](https://appcenter.ms).
 È vantaggioso perché permette di integrare e migliorare i processi aziendali, efficienza e qualità.
 
 Microsoft Test & Feedback extension - estensione x raccogliere feedback e crash sull'applicaz
@@ -780,7 +796,7 @@ Alcuni vantaggi:
 * Shared Distri Group (per + app)
 * semplificaz deploy IoS su Distri Group (non serve gestire UDID su IoS portale)
 * portale centrale, CLI o API per effettuare release
- 
+
 #### Supporto
 
 Piattaforme: iOS, Android, UWP, e tvOS
@@ -789,37 +805,29 @@ VCS: GitHub, Bitbucket, Azure DevOps
 Store: Apple App Store, Google Play Store, MS Intune
 
 ### App Center Diagnostics
- 
+
 * SDK per alimentare un HUB di diagnostica.
 * Ad ogni utente è associato un ID. Oltre ai dati evento e id utente possono essere mandati altri dati in KV pairs.
 * Il portale notifica, aggrega errori simili e li fa visualizzare.
 * Retention dati configurabile 28-90d. Estendibile con export continuo su blob.
- 
+
 Metodi invio:
 
 * Quando App Crasha, salva stato su memoria dispositivo. Alla successiva apertura manda i dati diagnostici + metadati evento
 * Programmaticamente, es. in un Try/catch usando `Crashes.TrackError`, solo in Xamarin, Unity, WPF, and WinForms SDKs
- 
+
 ### App Center Analytics
- 
+
 * raccolta dati utenti e analisi in un portale.
 * vanno individuate delle Key Metrics. Per esempio, qual è il SO degli utenti, il device, la localizzazione, la durata sessioni, gli utenti attivi
 * possono essere racoolti eventi custom per metriche specifiche. Es: tipo file uploadato, pagina in cui abbandonano
 * lo storico di una sessione aiuta a ricostruire un bug (pagine visitate, azioni intraprese)
 * Retention dati configurabile 28-90d. Estendibile con export continuo su blob.
 
-## DevOps
-
-Unione di persone, processi e prodotti per fornire valore continuo all'utente finale.
-Suite di tool diversi
-* Boards - lavagne kanban e scrum, backlog e dashboard per i team
-* Repos - VCS, integrato con GitHub ma aziendalmente privato
-* Pipelines * strumenti di CI/CD
-
 ## Git
 
-git config --global user.name "Mona Lisa"
-git config --global user.email "email@example.com"
+`git config --global user.name "Mona Lisa"`
+`git config --global user.email "email@example.com"`
 caching della pwd -> gh auth login o GCM (git credential manager)
 
 `git remote -v` elenca i remote (repo) e i permessi (fetch e push)
@@ -828,15 +836,14 @@ origin - repo su github
 
 upstream - nome convenzionale del fork di un origin
 
-git remote add upstream https://github.com/MicrosoftDocs/mslearn-tailspin-spacegame-web.git
-aggiunge un upstream alla repo attuale
+`git remote add upstream https://github.com/MicrosoftDocs/mslearn-tailspin-spacegame-web.git` aggiunge un upstream alla repo attuale
 
 `git pull origin main` indica da che remote vogliamo fare pull di un branch
 `git push origin code-workflow` indica su che remote vogliamo fare push di un branch
 
-git blame -> in alcuni ambti diventa git praise x evitare dispregiativo
+`git blame` -> in alcuni ambti diventa git praise x evitare dispregiativo
 
-git cherry-pick -> applicare commit su + branch anche indipendenti
+`git cherry-pick` -> applicare commit su + branch anche indipendenti
 
 ### Rules for commit messages
 
@@ -845,14 +852,25 @@ git cherry-pick -> applicare commit su + branch anche indipendenti
 * Use active voice. For example, "add" instead of "added" and "merge" instead of "merged".
 * Think of your commit as expressing intent to introduce a change.
 
-
 ## GitHub
 
 GitHub (GH) è una suite per VCS e CI/CD. 50M utenti.
 
 Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (sito statico)
+**pulse** è una sezione che riepiloga cos'è successo su una issue
 
-File speciali:
+Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
+
+GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
+
+* [x] First task
+* [x] Second task
+* [ ] Third task
+
+In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesanti.
+
+### File speciali su GH
+
 * README.md - mostrato nella folder corrente
 * .github/ISSUE_TEMPLATE.md - precompilazione in ISSUE
 * .github/PULL_REQUEST_TEMPLATE.md - precompilazione in PR
@@ -868,7 +886,8 @@ File speciali:
 * Possibilità di sync da profili AD dove i team sono gruppi
 * organization = meglio averne solo una, sempre
 
-Permessi:
+### Permessi su GH
+
 * Repository permissions
   * Read - RO
   * Triage - catalogatori di issue, cose così, ma non modifica codice
@@ -888,21 +907,20 @@ Permessi:
     * per grandi organiz: read (di default solo lettura sulle repo)
     * per piccole organiz: write (read/pull/push)
 
-
-#### Migrazioni
+### Migrazioni verso GH
 
 * Si vuole solo il codice o anche lo storico dei commit, le issue ecc?
 * Da SubVersion, Mercurial, TFVC: **GH Migrator**
 * Ocio ai file binari di grandi dimensioni => Git LFS
 * Aggiungi in gitignore file da escludere (file che cambiano sempre, file pesanti non importanti, file sensibili, file di config, override personali)
 
-#### Ruoli GH
+### Ruoli GH
 
 * owner - gestisce organization (sicurezza, utenze, billing, script custom, grant dei permessi, auth, migrazioni)
 * admin - gestisce team
 * team mantainer - gestisce team
 
-#### Autenticazioni
+### Autenticazioni
 
 * Username/Password
 * PAT (utile x software e cli)
@@ -921,7 +939,7 @@ Opzioni Auth:
 * dependabot che fa scan continuo dipendenze
 * secret aalysis, ti avverte se committi credenziali o segreti
 * tool di analisi statica continua
-* codeQL x estendere analisi statica con query sul codice 
+* codeQL x estendere analisi statica con query sul codice
 
 ### GH Search
 
@@ -946,8 +964,6 @@ Opzioni Auth:
 * a5c3785ed8d6a35868bc169f07e40e889087fd2e sha del commit -> prime 7 cifre a5c3785
 * ulteriori autolink configurabili
 
-**pulse** è una sezione che riepiloga cos'è successo su una issue
-
 ### Permessi repo
 
 Visibilità:
@@ -956,7 +972,7 @@ Visibilità:
 * internal - progetto innersource, visibile a un'organizzazione
 * public - visibile a tutti
 
-Permessi (singolo o team)
+Permessi (singolo o team):
 
 * Read - RO
 * Triage - catalogatori di issue, cose così, ma non modifica codice
@@ -964,28 +980,18 @@ Permessi (singolo o team)
 * Maintain - PM - permessi alti ma non distruttivi. Si sa cosa possono fare i PM
 * Admin - tutto
 
----
+### Cose da misurare secondo GH
 
-Cose da misurare secondo GH
-
-Measure process, not output
-Code review turnaround time
-Pull request size
-Work in progress
-Time to open
-Measure against targets and not absolutes
-Measure teams and not individuals
-Number of unique contributors to a project
-Number of projects reusing code
-Number of cross-team @mentions
-
-Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
-
-GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
-
-- [x] First task
-- [x] Second task
-- [ ] Third task
+* Measure process, not output
+  * Code review turnaround time
+  * Pull request size
+  * Work in progress
+  * Time to open
+* Measure against targets and not absolutes
+* Measure teams and not individuals
+  * Number of unique contributors to a project
+  * Number of projects reusing code
+  * Number of cross-team @mentions
 
 ### GH Actions
 
@@ -1000,7 +1006,7 @@ Soliti sistemi con trigger e seq di azioni (Node.JS o Python). Parole chiave: on
   * in questi casi, va sempre settata la env `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
 * variabili introdotte da `$`. Utili x non cablare
 * Negli step/job si possono usare clausole `if: condizione`
-* `run: cmd` esegue il comando 
+* `run: cmd` esegue il comando
 * debug attivabile:
   * ACTIONS_RUNNER_DEBUG = true -> debug di RUN
   * ACTIONS_STEP_DEBUG = true -> debug di STEP
@@ -1081,8 +1087,6 @@ jobs:
       - run: cat file.txt
 ```
 
-In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesanti.
- 
 * Versioni: Free/Pro/Team/Enterprise
 * Account: Personale/Organizz/Aziendale
 
@@ -1109,6 +1113,7 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
 ### App GH
 
 GH espone API solide su cui sono sviluppate molte app
+
 * autorizzate con OAuth (chiedono la tua autorizzaz e ti impersonano)
 * app gh (sono utenti a sé stanti che svolgono servizi - bot)
   * usano meccanismi di webhook x agire a certe azioni es. new PR
@@ -1179,90 +1184,96 @@ jobs:
 
 ### GH CLI
 
-gh auth login
+* `gh auth login`
 * `gh repo clone [url]`
-gh alias set / gh api - estendere la cli con cmd custom
-gh issue close
-gh pr comment
-gh run list - per vedere workflow delle GH actions
- 
+* `gh alias set / gh api` - estendere la cli con cmd custom
+* `gh issue close`
+* `gh pr comment`
+* `gh run list` - per vedere workflow delle GH actions
+
 > [Altri riferimenti](https://cli.github.com/manual/)
- 
+
 Li farò in futuro:
+
 * [GHA](https://lab.github.com/githubtraining/getting-started-with-github-apps)
 * [SSE](https://lab.github.com/githubtraining/security-strategy-essentials)
 * [GHS](https://lab.github.com/githubtraining/github-actions:-using-github-script)
 * [RBW](https://lab.github.com/githubtraining/create-a-release-based-workflow)
 * [GHCI](https://lab.github.com/githubtraining/github-actions:-continuous-integration)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
- 
+
 ## Jenkins
 
 * soluzione x CI/CD
 * può ess installato in VM. Serve la porta 8080 aperta
 
 ## Bamboo
- 
+
 * soluzione x CI/CD
- 
+
 ## AAD
- 
+
 Azure Active Directory - soluzione cloud-based per gestire identità interne ed esterne a un'ente/azienda
- 
+
 Consente di:
+
 * accedere a risorse interne (es. app aziendali) ed esterne (es. MS 365, azure)
 * tenere sicure identità e informazioni
 * garantire accesso condizionale
 * fornire SSO aziendale (MFA attivabile)
- 
+
 Gerarchia:
+
 * Tenant = organizzazione.
 * Gruppo = livello di accesso condiviso comune
 * Utente
- 
+
 Il tenant ha uno score di sicurezza da 1 a 233 (come mai 233?!)
 
 ## AD
 
 AD invece si basa su Kerberos e NTLM. È solo per reti locali, stampanti, NAS...
 Invce del Tenant, ci sono: Foreste, domini, unità organizzative
- 
+
 ### identità ibrida
 
 collega AD e AAD. Come sincronizzare le utenze ibride? Cioè, come dare SSO sia su cloud che risorse aziendali?
- 
+
 1. sincronizzazione dell'HASH della password tra AD e AAD
-  * (-) hash salvati su cloud
+   * (-) hash salvati su cloud
 2. Auth pass-through - mi collego a AAD, questo mi fa da proxy verso AD
 3. Federated Auth - Active Directory Federation Services ADFS server
-  * (+) MFA
-  * (+) Smart Card
+   * (+) MFA
+   * (+) Smart Card
 
 Ocio che x GDPR tutti i dati stiano in europa.
 Alcuni dati di AAD B2B e B2C di confiugrazione o mail inviate agli utenti stanno in USA.
 MFA si basa su provider di SMS e chiamate USA
 
  az extension add --name azure-devops
- 
- ## Costi
- 
- total cost of ownership = vero costo di qualcosa (sommerso) es. elettricità + hardware + personale + licenze sw + datacenter...
- 
- [TCO calculator](https://azure.microsoft.com/pricing/tco/calculator) fornisce stima TCO su soluz Azure e home-made. Proiezione su N anni. Strumento da CFO che fa capire che Azure è figo.
+
+## Costi
+
+total cost of ownership = vero costo di qualcosa (sommerso) es. elettricità + hardware + personale + licenze sw + datacenter...
+
+[TCO calculator](https://azure.microsoft.com/pricing/tco/calculator) fornisce stima TCO su soluz Azure e home-made. Proiezione su N anni. Strumento da CFO che fa capire che Azure è figo.
 
 Sottoscrizioni Azure
+
 * free
 * pay as you go - collegata Carta Credito o Debito
 * member offers
 
 Contratti con Azure
+
 * Enterprise Agreement - azienda si impegna a spendere TOT in 3 anni. Microsoft fa scontoni e anche ilcaffè
 * Dal Web - come i comuni mortali
 * CSP - appoggiandosi a un intermediario
 
 Uno dei fattori sottovalutati del costo è la zona Azure. Una zona costa meno ma magari è distante. Più zone possono causare rallentamenti e spesa x banda.
- 
+
 Cos'altro possiamo fare?
+
 * usare Azure Advisor
 * mettere limiti di spesa, alert sui budget
 * usare Azure Reservations x sconti su VM
@@ -1276,6 +1287,7 @@ Cos'altro possiamo fare?
 ## AKS
 
 Sonde:
-* livenessProbe - ping periodico per vedere se pod è vivo. Se non è configurato, do x scontato sia vivo. Se non risponde, mando un Restart
-* readinessProbe - viene fatto x capire se il pod può accettare richieste. Se non può setto Failure, altrimenti Success. Se Failure, escludo il pod dagli IP del service
-* startupProbe - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
+
+* **livenessProbe** - ping periodico per vedere se pod è vivo. Se non è configurato, do x scontato sia vivo. Se non risponde, mando un Restart
+* **readinessProbe** - viene fatto x capire se il pod può accettare richieste. Se non può setto Failure, altrimenti Success. Se Failure, escludo il pod dagli IP del service
+* **startupProbe** - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
