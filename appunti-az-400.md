@@ -987,14 +987,99 @@ GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-
 - [x] Second task
 - [ ] Third task
 
-Le GH **Actions** sono come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
+### GH Actions
+
+Le GH **Actions** sono soluz di CI come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
+
+Soliti sistemi con trigger e seq di azioni (Node.JS o Python). Parole chiave: on, job, step, runsOn, uses, matrix, artifact
+
+* NON possono essere usate x caricare GH secrets (vanno fatti manualmente da portale)
+* matrix = matrice di compilazione: in una stessa pipeline posso fare azioni su + OS in + versioni. Viene fatto il prod cartesiano dei due insiemi. Posso usare var custom come `${{ matrix.node-version }}`. `os: [ubuntu-latest, windows-2016] node-version: [8.x, 10.x, 12.x]` => 6 run
+* artifact = docker o pacchetto semi-lavorato, che può ess download/upload-ato in varie fasi di actions
+* integrazione con i flussi di lavoro - si può aggiungere uno step tipo: "PR reviewed", "aggiunta etichetta alla issue".
+  * in questi casi, va sempre settata la env `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
+* variabili introdotte da `$`. Utili x non cablare
+* Negli step/job si possono usare clausole `if: condizione`
+* `run: cmd` esegue il comando 
+* debug attivabile:
+  * ACTIONS_RUNNER_DEBUG = true -> debug di RUN
+  * ACTIONS_STEP_DEBUG = true -> debug di STEP
+* log visualizzabili
+  * da GH interfaccia web
+  * da API con permessi su repo: `GET /repos/{owner}/{repo}/actions/runs/{run_id}/logs`
 
 > **Ocio**! I minuti delle actions sono un credito.
-> Usando 1 minuto di Actions su Linux consumo 1 minuto di credito.
-> Usando 1 minuto di Actions su Windows consumo 2 minuti di credito.
-> Usando 1 minuto di Actions su Mac consumo 10 minuti di credito.
+>
+> * Usando 1 minuto di Actions su Linux consumo 1 minuto di credito.
+> * Usando 1 minuto di Actions su Windows consumo 2 minuti di credito.
+> * Usando 1 minuto di Actions su Mac consumo 10 minuti di credito.
 
 Il sistema di archiviazione ha una fatturazione a sé sempre su base mensile.
+
+```yml
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: Run build script
+      run: ./.github/scripts/build.sh
+      shell: bash
+    - name: Cache NPM dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-cache-
+          
+```
+
+```yml
+name: Share data between jobs
+on: push
+jobs:
+  job_1:
+    name: Upload File
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World" > file.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: file
+          path: file.txt
+
+  job_2:
+    name: Download File
+    runs-on: ubuntu-latest
+    needs: job_1
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: file
+      - run: cat file.txt
+```
 
 In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesanti.
  
@@ -1108,6 +1193,7 @@ Li farò in futuro:
 * [SSE](https://lab.github.com/githubtraining/security-strategy-essentials)
 * [GHS](https://lab.github.com/githubtraining/github-actions:-using-github-script)
 * [RBW](https://lab.github.com/githubtraining/create-a-release-based-workflow)
+* [GHCI](https://lab.github.com/githubtraining/github-actions:-continuous-integration)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
  
 ## Jenkins
