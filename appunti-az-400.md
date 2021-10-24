@@ -104,6 +104,7 @@
   * Mancanza di impegno
   * Evitare le responsabilità
   * Disattenzione nei confronti dei risultati
+* Inner Source - pratiche dell'open source portate a livello aziendale (tutti contribuiscono nelle 4 mura dell'azienda)
 
 ## Processo di sviluppo
 
@@ -357,24 +358,6 @@ Per ottimizzare un docker, unire comandi RUN x avere meno layer
 
 * Checkstyle PMD o FindBugs
 * integrabili in DevOps
-
-## Git
-
-git config --global user.name "Mona Lisa"
-git config --global user.email "email@example.com"
-caching della pwd -> gh auth login o GCM (git credential manager)
-
-`git remote -v` elenca i remote (repo) e i permessi (fetch e push)
-
-origin - repo su github
-
-upstream - nome convenzionale del fork di un origin
-
-git remote add upstream https://github.com/MicrosoftDocs/mslearn-tailspin-spacegame-web.git
-aggiunge un upstream alla repo attuale
-
-`git pull origin main` indica da che remote vogliamo fare pull di un branch
-`git push origin code-workflow` indica su che remote vogliamo fare push di un branch
 
 ## Testing
 
@@ -833,6 +816,34 @@ Suite di tool diversi
 * Repos - VCS, integrato con GitHub ma aziendalmente privato
 * Pipelines * strumenti di CI/CD
 
+## Git
+
+git config --global user.name "Mona Lisa"
+git config --global user.email "email@example.com"
+caching della pwd -> gh auth login o GCM (git credential manager)
+
+`git remote -v` elenca i remote (repo) e i permessi (fetch e push)
+
+origin - repo su github
+
+upstream - nome convenzionale del fork di un origin
+
+git remote add upstream https://github.com/MicrosoftDocs/mslearn-tailspin-spacegame-web.git
+aggiunge un upstream alla repo attuale
+
+`git pull origin main` indica da che remote vogliamo fare pull di un branch
+`git push origin code-workflow` indica su che remote vogliamo fare push di un branch
+
+git blame -> in alcuni ambti diventa git praise x evitare dispregiativo
+
+### Rules for commit messages
+
+* Don’t end your commit message with a period.
+* Keep your commit messages to 50 characters or less. Add extra detail in the extended description window if necessary. This is located just below the subject line.
+* Use active voice. For example, "add" instead of "added" and "merge" instead of "merged".
+* Think of your commit as expressing intent to introduce a change.
+
+
 ## GitHub
 
 GitHub (GH) è una suite per VCS e CI/CD. 50M utenti.
@@ -841,7 +852,8 @@ Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (s
 
 File speciali:
 * README.md - mostrato nella folder corrente
-* ISSUE_TEMPLATE.md - mostrato quando uno crea una ISSUE
+* .github/ISSUE_TEMPLATE.md - precompilazione in ISSUE
+* .github/PULL_REQUEST_TEMPLATE.md - precompilazione in PR
 * CONTRIBUTING.md - mostrato quando uno fa PR
 * LICENSE.md - licenza del prog
 * FUNDING.yml - mostra una lista di sponsor
@@ -882,13 +894,13 @@ Permessi:
 * Ocio ai file binari di grandi dimensioni => Git LFS
 * Aggiungi in gitignore file da escludere (file che cambiano sempre, file pesanti non importanti, file sensibili, file di config, override personali)
 
-Ruoli GH:
+#### Ruoli GH
 
 * owner - gestisce organization (sicurezza, utenze, billing, script custom, grant dei permessi, auth, migrazioni)
 * admin - gestisce team
 * team mantainer - gestisce team
 
-Autenticazioni:
+#### Autenticazioni
 
 * Username/Password
 * PAT (utile x software e cli)
@@ -896,22 +908,73 @@ Autenticazioni:
 * Deploy Key (chiavi SSH, ma solo x una repo)
 
 Opzioni Auth:
+
 * MFA/2FA
 * SAML SSO (vari IdP AD FS, AAD, Okta, OneLogin, PingOne...)
 * autenticazione di directory su FS con LDAP (integrato con AD, Oracle, OpenLDAP, OpenDirectory...)
 
+### GH Search
 
-Rules for commit messages:
-  Don’t end your commit message with a period.
-  Keep your commit messages to 50 characters or less. Add extra detail in the extended description window if necessary. This is located just below the subject line.
-  Use active voice. For example, "add" instead of "added" and "merge" instead of "merged".
-  Think of your commit as expressing intent to introduce a change.
+* ricerca globale
+* ricerca contestuale (in this repo)
+* tag di ricerca
+  * is:repo is:issue is:pr is:open is:closed
+  * stars:>1000 created:<=2016-04-29 topics:5..10
+  * `-` o NOT per escludere
+  * language:javascript author:nat assignee:@me org:github
+  * in:comments linked:pr
+  * sort:author-date
+
+### Sintassi globale x auto link
 
 * menzioni si fanno con `/cc @user` x aggiungere utente in carbon copy
-* commit che inizia con "close", "closes", "fixed", "fix"... `#issue_id` va a chiudere issue in automatico
-* pulse è una sezione che riepiloga cos'è successo su una issue
+* Duplicate of `#8` fa il link alla issue
+  * commit che inizia con "close", "closes", "fixed", "fix"... `#issue_id` va a chiudere issue in automatico
+* GH-26 -> link alla PR 26
+* jlord/sheetsee.js#26 github/linguist#4039 una specie di namespacing x repo
+* a5c3785ed8d6a35868bc169f07e40e889087fd2e sha del commit -> prime 7 cifre a5c3785
+* ulteriori autolink configurabili
+
+**pulse** è una sezione che riepiloga cos'è successo su una issue
+
+### Permessi repo
+
+Visibilità:
+
+* private - solo io o solo chi decido io (es. team web)
+* internal - progetto innersource, visibile a un'organizzazione
+* public - visibile a tutti
+
+Permessi (singolo o team)
+
+* Read - RO
+* Triage - catalogatori di issue, cose così, ma non modifica codice
+* Write - dev
+* Maintain - PM - permessi alti ma non distruttivi. Si sa cosa possono fare i PM
+* Admin - tutto
+
+---
+
+Cose da misurare secondo GH
+
+Measure process, not output
+Code review turnaround time
+Pull request size
+Work in progress
+Time to open
+Measure against targets and not absolutes
+Measure teams and not individuals
+Number of unique contributors to a project
+Number of projects reusing code
+Number of cross-team @mentions
 
 Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
+
+GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
+
+- [x] First task
+- [x] Second task
+- [ ] Third task
 
 Le GH **Actions** sono come le Pipeline di DevOps. Si basano su un perverso sistema di credito a minuti mensili.
 
@@ -947,9 +1010,19 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
   * 50K minuti Actions
   * 50 GB archiviazione
  
+### GH CLI
+
+gh auth login
+* `gh repo clone [url]`
+gh alias set / gh api - estendere la cli con cmd custom
+gh issue close
+gh pr comment
+gh run list - per vedere workflow delle GH actions
  
- gh repo clone [url]
+> [Altri riferimenti](https://cli.github.com/manual/)
  
+Li farò in futuro:
+* [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
  
 ## Jenkins
 
