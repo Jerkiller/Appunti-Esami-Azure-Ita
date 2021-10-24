@@ -767,7 +767,7 @@ Alternative x Blob Storage:
 
 Si accede ai log su Blob e si aprono in excel. Come accedere? Da portal azure, da cli o da Azure Storage Explorer.
 
-### Application Insights
+#### Logging su Application Insights
 
 Aggiungi codice per raccogliere in un logger centrale. AI funge anche da bidone x le metriche.
 
