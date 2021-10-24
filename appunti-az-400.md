@@ -913,6 +913,14 @@ Opzioni Auth:
 * SAML SSO (vari IdP AD FS, AAD, Okta, OneLogin, PingOne...)
 * autenticazione di directory su FS con LDAP (integrato con AD, Oracle, OpenLDAP, OpenDirectory...)
 
+### Sicurezza in GH
+
+* nel file SECURITY.md i white hat (hacker etici) fanno disclosure delle vulnerabilità
+* dependabot che fa scan continuo dipendenze
+* secret aalysis, ti avverte se committi credenziali o segreti
+* tool di analisi statica continua
+* codeQL x estendere analisi statica con query sul codice 
+
 ### GH Search
 
 * ricerca globale
@@ -1009,7 +1017,20 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
   * fatturaz centralizzata
   * 50K minuti Actions
   * 50 GB archiviazione
- 
+
+### App GH
+
+GH espone API solide su cui sono sviluppate molte app
+* autorizzate (chiedono la tua autorizzaz e ti impersonano)
+* app gh (sono utenti a sé stanti che svolgono servizi - bot)
+  * usano meccanismi di webhook x agire a certe azioni es. new PR
+  * possono essere azionate in polling ma è + sconveniente
+  * con firewall aziendale si possono usare servizi di tunneling come [Smee](https://smee.io/)
+  * Probot - framework che semplifica gestione di webhook. Su questo sono state sviluppate
+    * Pull - tiene un fork aggiornato
+    * Delete Merged Branch - elimina branch mergiati
+    * Release Drafter - genera change log sulle PR
+
 ### GH CLI
 
 gh auth login
@@ -1022,6 +1043,8 @@ gh run list - per vedere workflow delle GH actions
 > [Altri riferimenti](https://cli.github.com/manual/)
  
 Li farò in futuro:
+* [GHA](https://lab.github.com/githubtraining/getting-started-with-github-apps)
+* [SSE](https://lab.github.com/githubtraining/security-strategy-essentials)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
  
 ## Jenkins
