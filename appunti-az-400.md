@@ -1295,11 +1295,32 @@ Consente di:
 
 Gerarchia:
 
-* Tenant = organizzazione.
+* Tenant = organizzazione. Ha un dominio xyz.onmicrosoft.com che può ess personalizzato in xyz.com
 * Gruppo = livello di accesso condiviso comune
-* Utente
+* Identità = Utente/App/Servizio
 
 Il tenant ha uno score di sicurezza da 1 a 233 (come mai 233?!)
+
+### Licenze AAD
+
+* AAD Free - gestione accessi, forget pwd, SSO
+* pay as you go - funzionalità specifiche come AAD B2C
+* Office365 app - free + landing page personalizzate (login/logout)
+* AAD Premium P1 - gruppi dinamici, forget pwd self-service, MS Identity Manager
+* AAD Premium P2 - cm sopra + AD Identity Protection + Privileged Identity Management = liv aggiuntivo di sicurezza sugli admin
+
+Categorie Utenti:
+
+* membri - possono tutto in base ai permessi nel loro tenant
+* guest - possono visualizzare e gestire solo loro risorse, x utenti esterni e garantire la possibilità di lavorare ank senza accesso al tenant
+
+### Servizi AAD
+
+* AAD B2B - utente guest riceve invito in tenant. Accede al tenant x una certa app cloud o locale (meglio attivare MFA) possiamo collaborare cn utenti esterni
+* AAD B2C - utente qualsiasi può registrarsi a un app e accedere. C'è un form di registraz, MFA. Monitoraggio aggiuntivo dei DDOS (può essere pay as you go)
+* AD DS - Domain Services - x estendere un dominio a VM senza domain controller
+* Gestione delle App - SSO su molte app, marketplace + app aziendali + app esterne. Gestione criteri di accesso (es. MFA) + controllo accessi. App locali in AAD con AAD Proxy
+* AD Identity Protection (Premium P2) - gestione criteri e rischi su identità. Possono esserci correzioni di rischi es. utente reimposta pwd
 
 ## AD
 
