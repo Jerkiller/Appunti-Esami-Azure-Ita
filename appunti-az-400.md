@@ -202,6 +202,8 @@ profili:
 * Basic & Visual Studio Professional (VSE) - feature complete
 * Basic + Test Plans - estensione con i test plan
 
+Integrazione con teams: `@azure pipelines subscribe [project url]`
+
 ### Boards
 
 > pianificazione, analisi e monitoraggio del lavoro e coordinamento tra team
@@ -229,6 +231,8 @@ profili:
     * WIT: epic, issue, task
 
 > Molte estensioni utili, si scaricano da [visualstudio.marketplace.com](visualstudio.marketplace.com).
+>
+> Boards integrabile con GitHub come OAuth App su una repository
 
 ### Pipelines
 
