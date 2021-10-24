@@ -836,6 +836,8 @@ aggiunge un upstream alla repo attuale
 
 git blame -> in alcuni ambti diventa git praise x evitare dispregiativo
 
+git cherry-pick -> applicare commit su + branch anche indipendenti
+
 ### Rules for commit messages
 
 * Don’t end your commit message with a period.
@@ -925,6 +927,7 @@ Opzioni Auth:
 
 * ricerca globale
 * ricerca contestuale (in this repo)
+* Simpatico sistema di Label estensibili oltre a [quelle di default](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels#about-default-labels)
 * tag di ricerca
   * is:repo is:issue is:pr is:open is:closed
   * stars:>1000 created:<=2016-04-29 topics:5..10
@@ -1021,7 +1024,7 @@ In buona sostanza, conviene usare **Git LFS** (Large File Storage) per file pesa
 ### App GH
 
 GH espone API solide su cui sono sviluppate molte app
-* autorizzate (chiedono la tua autorizzaz e ti impersonano)
+* autorizzate con OAuth (chiedono la tua autorizzaz e ti impersonano)
 * app gh (sono utenti a sé stanti che svolgono servizi - bot)
   * usano meccanismi di webhook x agire a certe azioni es. new PR
   * possono essere azionate in polling ma è + sconveniente
@@ -1030,6 +1033,64 @@ GH espone API solide su cui sono sviluppate molte app
     * Pull - tiene un fork aggiornato
     * Delete Merged Branch - elimina branch mergiati
     * Release Drafter - genera change log sulle PR
+
+### GH Script
+
+In una GH Action, posso inserire un GH script che interagisce con GH API facendo azioni su issue, PR, repo ecc usando [octokit/rest.js](https://octokit.github.io/rest.js/v18).
+
+* Questo script è già preconfigurato e autenticato. Basta scrivere cosa si vuole fare in JS.
+* Basta scrivere `github.issues.createComment({...})`.
+* Ci sono altre variabili come context, io e core. Aggiungono funzionalità, es http, sessione utente, I/O e altro.
+* Esempio di Action GH con script
+
+```yml
+name: Learning GitHub Script
+
+# Questo è il trigger:
+on:
+  issues:
+    types: [opened]
+jobs:
+  # Nome job: comment
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      # Questo step commenta una issue
+      - uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "🎉 You've created this issue comment using GitHub Script!!!"
+            })
+      # Questo serve a eseguire uno script su un altra directory
+      - uses: actions/github-script@v2
+        with:
+          script: |
+            const path = require('path')
+            const scriptPath = path.resolve('./path/to/script.js')
+            console.log(require(scriptPath)({context}))
+```
+
+### GH Boards
+
+* un project in GH ha delle board e segue delle iterazioni (sprint) a cui sono associate delle release.
+* Board segue Kanban: todo inprog done
+* Milestone tracking x individuare raggiungimento obbiettivi di progetto
+
+### Branch policy
+
+* quando servono i long-lived branch? Quando va gestita retrocompatibilità, es. occorre tenere la release 1.0 x confronto. Allora, settala RO.
+* se serve apportare un fix su + branch scollegati da tempo, non si deve mergiare, ma fare cherry-pick.
+
+### Release in GH
+
+* quando si rilascia conviene scrivere change log (automatizzabili con GH app), semver in un comodo form di GH
+* in questo form si possono trascinare asset tipo gli eseguibili, zip del sorgente, ecc.
+* verranno notificate le persone iscritte alla repo
 
 ### GH CLI
 
@@ -1045,6 +1106,8 @@ gh run list - per vedere workflow delle GH actions
 Li farò in futuro:
 * [GHA](https://lab.github.com/githubtraining/getting-started-with-github-apps)
 * [SSE](https://lab.github.com/githubtraining/security-strategy-essentials)
+* [GHS](https://lab.github.com/githubtraining/github-actions:-using-github-script)
+* [RBW](https://lab.github.com/githubtraining/create-a-release-based-workflow)
 * [ISF](https://lab.github.com/githubtraining/innersource-fundamentals)
  
 ## Jenkins
