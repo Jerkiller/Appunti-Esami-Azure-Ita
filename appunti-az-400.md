@@ -202,7 +202,33 @@ profili:
 * Basic & Visual Studio Professional (VSE) - feature complete
 * Basic + Test Plans - estensione con i test plan
 
-Integrazione con teams: `@azure pipelines subscribe [project url]`
+### Integrazione ADO Teams
+
+* Connettori da Teams: consentono di essere notificati:
+  * CRUD su Release/PR/Code/WorkItem/build
+  * Filtri su Teams, AreaPath, WorkItem Type, Filtri testuali, Branch, Gruppo utente, Build Status, Definition
+* Aggiunta TAB su un Team riguardo Dashboard o Kanban Board
+* Aggiunta come Teams App di **Azure Pipelines**
+  * Viene aggiunto a mo di BOT, lo si richiama con il mention `@azure pipelines`
+  * Prima cosa da fare `@azure pipelines signin`
+  * Sottoscriversi a un prog `@azure pipelines subscribe [project url]`
+  * Gestire sottoscrizioni `@azure pipelines subscriptions`
+* Aggiunta come Teams App di **Azure DevOps**
+  * Con quest'app si possono cercare Work Item e formattare la preview del link in un'ottica collaborativa
+
+### Integrazione ADO tramite Service Hooks
+
+* Meccanismo Pub-sub: all'evento su ADO, scatena l'inferno sui vari subscriber
+* Funziona tramite API di terze parti autenticate spesso con Token
+* Servizi integrabili:
+  Pipelines|Collaborate|Customer support|Plan and track|Integrate
+  -|-|-|-|-
+  AppVeyor|Flowdock|UserVoice|Trello|Azure Service Bus
+  Bamboo|HipChat (No longer supported)|Zendesk||Azure Storage
+  Jenkins|Hubot|||Grafana
+  MyGet|Office 365|||Web Hooks
+  Slack|Slack||Slack|Zapier
+  Microsoft Teams|Microsoft Teams||Microsoft Teams|Datadog
 
 ### Boards
 
