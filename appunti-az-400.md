@@ -277,6 +277,7 @@ Vantaggi:
 * nella pipeline si possono usare **variabili**. $(myVar) che viene rimpiazzata a runtime. Ci sono var di default come $(Build.BuildId)
 * nella pipeline si possono ri-usare dei task come template ${{ myTasks }} parametrizzabili
 * utile settare variabili segrete usando il pipeline editor (ovviamente nn vanno in YAML)
+* right-click publish è + utile di CD se vuoi fare un progetto piccolo e fare 1 o 2 deploy.
 
 > parti dai comandi bash, poi mappa ogni comando con un task della pipeline
 
@@ -289,6 +290,53 @@ trigger:
   paths:
     exclude:
     - docs/*  # exclude the docs folder
+
+Altri trigger sono: PR, CI trigger, Scheduled trigger, build completion trigger
+
+
+Pipeline > Stage > Job > Task/Step
+
+Condition: un sistema per determinare se un job/stage ecc verrà eseguito o no.
+Utile per gestire il release management: es. se il branch è release fai release anche su prod.
+
+```yml
+condition: |
+  and
+  (
+    succeeded(),
+    eq(variables['Build.SourceBranchName'], 'release')
+  )
+```
+
+Altre condition sono le **release approval**: dei gate manuali che rendono la pipeline un proc semi-automatico.
+Utile per passare da uno stage/environment all'altro. Utile x verificare a k step la qualità degrada, dove si rompe la catena di solito?
+
+**Environment**: rappresentazione astratta dell'ambiente. Con una **service connection** può essere usato x rilasciare su quel resource group/risorsa/subscription ad esempio.
+
+* Dev - ambiente dove i dev si divertono e testano
+* Test/QA - ambiente x validare e fare acceptance test
+* Staging - altri stress test e demo interne al management
+* Demo - ambiente con cui i commericiali mostrano feature
+* Production/Release - ambiente cliente finale
+
+* [Service Connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?tabs=yaml&view=azure-devops) - auth di 2 tipi
+  * service principal auth - una specie di acount che agisce automaticamente per conto di qualcuno
+  * managed identities 4 azure resources - Feature di AAD, servizi hanno un'identità nel tenant e si collegano automaticamente
+
+* Strategy: Modalità di esecuz pipeline di deploy, es. RunOnce  BlueGreen o Canary
+
+* Library - serve a gestire variable group x non cablare valori
+
+* Pipelines Analytics - stats sulle pipelines
+  * feed OData disponibile x integrare con Slack, Teams, PowerBi
+  * KPI
+    * pass rate della pipeline
+    * pass rate dei test
+    * durata media
+
+* Integrazioni: CI fatta con CircleCI, GitLab, Jenkins e poi deploy fatto con Azure Pipelines
+
+* Documentazione - andrebbe automatizzata insieme alla pipeline. Es usando una [Azure Function con Web Hook triggerata alla release](https://docs.microsoft.com/en-us/samples/azure-samples/azure-devops-release-notes/azure-devops-release-notes-generator/).
 
 #### Build Agent
 
