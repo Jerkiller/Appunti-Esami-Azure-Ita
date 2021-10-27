@@ -293,8 +293,7 @@ trigger:
 
 Altri trigger sono: PR, CI trigger, Scheduled trigger, build completion trigger
 
-
-Pipeline > Stage > Job > Task/Step
+> Pipeline > Stage > Job > Task/Step
 
 Condition: un sistema per determinare se un job/stage ecc verrà eseguito o no.
 Utile per gestire il release management: es. se il branch è release fai release anche su prod.
@@ -442,7 +441,6 @@ az webapp deployment slot list \
     targetSlot: 'production'
     action: 'Swap Slots'
 ```
-
 
 ### Test Plans
 
@@ -1622,3 +1620,72 @@ Sonde:
 * **livenessProbe** - ping periodico per vedere se pod è vivo. Se non è configurato, do x scontato sia vivo. Se non risponde, mando un Restart
 * **readinessProbe** - viene fatto x capire se il pod può accettare richieste. Se non può setto Failure, altrimenti Success. Se Failure, escludo il pod dagli IP del service
 * **startupProbe** - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
+
+## DSC
+
+PowerShell DSC tool **dichiarativo** per powershell per la gestione delle installazioni nelle VM
+
+* Linguaggio dichiarativo serve a gestire deploy **idempotenti** (puoi eseguirli quante volte vuoi e non fare danni)
+* Linguaggio dichiarativo serve a gestire i fallimenti con politiche di retry
+* Script DSC viene compilato in un file .mof
+* Si basa sul fatto che in Win c'è un LCM (Local Config Manager) in WMF (windows management framework) che verifica desiderata e attuale e attua modifiche differenziali
+* Funziona in push o in pull ogni 15min (meglio soprattutto per ambienti con ridondanza e scalabilità)
+* Tutti i SO Windows, Linux ma non debian o ubuntu 18.04
+
+* per usare segreti usare PSCredential e non scriverli su script
+* si basa su 3 data block parametrici innestati:
+  * Configuration nome_config
+  * Node nodi a cui mandare (uno, molti, tutti *)
+  * Feature/Config/File da installare
+* poi si lancia il comando di compilazione in file mof
+
+Vari requirement di versioni su Win (dipende da WinRM e perciò no win server 2008 o win 7)
++
+
+* Port: Only TCP 443 is required for outbound internet access.
+* Global URL: *.azure-automation.net
+* Global URL of US Gov Virginia: *.azure-automation.us
+* Agent service: [https://.agentsvc.azure-automation.net](https://.agentsvc.azure-automation.net)
+
+In PS: @(elem1, elem2) = array
+In PS: @{ key1=value1 key2=value2 } = obj
+
+```ps1
+Configuration Create_Share
+{
+   Import-DscResource -Module xSmbShare
+   # A node describes the VM to be configured
+
+   Node $NodeName
+   {
+      # A node definition contains one or more resource blocks
+      # A resource block describes the resource to be configured on the node
+      xSmbShare MySMBShare
+      {
+          Ensure      = "Present"
+          Name        = "MyFileShare"
+          Path        = "C:\Shared"
+          ReadAccess  = "User1"
+          FullAccess  = "User2"
+          Description = "This is an updated description for this share"
+      }
+   }
+}
+
+Create_Share -OutputPath C:\temp\
+```
+
+### Comandi DSC
+
+* Installazione `Install-Module 'PSDscResources' -Verbose`
+* Importare modulo `Import-DscResource -ModuleName 'PSDscResources'`
+* Visualizzare tutte le feature personalizzabili `Get-DscResource | select Name,Module,Properties`
+* Esegue i file mof nella cartella D:\ in push mode: `Start-DscConfiguration -path D:\`
+* ottiene info da un nodo `Get-DscConfiguration e Get-DscConfigurationStatus`
+
+## Azure Automation State Configuration
+
+* Compila script DSC, li scrive, importa, li gestisce, li assegna a un nodo
+* si basa su DSC, centralizza artifacts DSC
+* pull server centrale da cui le VM prendono le config
+* integrazione con Azure Monitor x vedere la compliance dei nodi
