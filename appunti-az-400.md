@@ -323,7 +323,7 @@ Utile per passare da uno stage/environment all'altro. Utile x verificare a k ste
   * service principal auth - una specie di acount che agisce automaticamente per conto di qualcuno
   * managed identities 4 azure resources - Feature di AAD, servizi hanno un'identità nel tenant e si collegano automaticamente
 
-* Strategy: Modalità di esecuz pipeline di deploy, es. RunOnce  BlueGreen o Canary
+* Strategy: Modalità di esecuz pipeline di deploy, es. RunOnce  BlueGreen o Canary, vedi *"deployment pattern"*
 
 * Library - serve a gestire variable group x non cablare valori
 
@@ -383,7 +383,7 @@ pool:
 pool: 'MyAgentPool'
 ```
 
-## Self-hosted agent
+#### Self-hosted agent
 
 Puoi installarlo:
 
@@ -392,6 +392,57 @@ Puoi installarlo:
 * manualmente e poi *snapshottare* l'immagine per poterla replicare (utile per replicare, ma meno mantenibile xk update di sicurezza implicano ri-snapshottare. Utile Packer di Hashicorp x aggiornare immagini)
 
 Installazione manuale su macos, linux o windows funziona tramite PAT generato da DevOps e configurato. Va aggiunto un agent pool personalizzato e il proprio agent su devops. Poi va lanciata l'installazione dell'agente e infine configurato l'agente a usare PAT, URL dell'organizzazione, nome agente, nome pool. Infine va settato come demone o servizio in background. Il gioco è fatto.
+
+#### Deployment pattern
+
+* modalità di fare rollout/deploy minimizzando downtime, magari progressivamente per validare che tutto sia ok
+
+* Blue-green deployment - due ambienti live, un load-balancer o switch. Si reindirizza il traffico a seconda della versione
+* Canary releases - rilascio la feature a un piccolo gruppo di utenti, se vedo che è stabile, la rilascio a tutti
+* Feature toggles/flags - rilascio feature in un if. a runtime posso accenderla e spegnerla
+  * utile quando voglio poter tornare indietro facilmente
+  * può causare problemi se si abusa. Molti condizionali, molti casi da testare, molte configuraz possibili
+  * possono ess configurati per cliente es. feature flag a database
+* Dark launches - come la canary ma gli utenti-canarini sono inconsapevoli di fare da beta tester
+* A/B testing - rilascio feature "sperimentale" x metà utenti e valuto se tenerla o no (validazione esperimento)
+* Progressive-exposure deployment - estensione della canary. Amplio la feature a cerchi concentrici di utenti
+
+##### Blue Green con DEployment Slots
+
+```bash
+az webapp deployment slot create \
+  --name $staging --resource-group tailspin-space-game-rg \
+  --slot swap
+
+az webapp deployment slot list \
+    --name $staging --resource-group tailspin-space-game-rg \
+    --query [].hostNames --output tsv
+```
+
+```yml
+- task: AzureWebApp@1
+  displayName: 'Azure App Service Deploy: website'
+  inputs:
+    azureSubscription: 'Resource Manager - Tailspin - Space Game'
+    # New!
+    deployToSlotOrASE: 'true'
+    resourceGroupName: 'tailspin-space-game-rg'
+    # New!
+    slotName: 'swap'
+    appName: '$(WebAppNameStaging)'
+    package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+# New!
+- task: AzureAppServiceManage@0
+  displayName: 'Swap deployment slots'
+  inputs:
+    azureSubscription: 'Resource Manager - Tailspin - Space Game'
+    resourceGroupName: 'tailspin-space-game-rg'
+    webAppName: '$(WebAppNameStaging)'
+    sourceSlot: 'swap'
+    targetSlot: 'production'
+    action: 'Swap Slots'
+```
+
 
 ### Test Plans
 
@@ -483,11 +534,77 @@ Risponde alla domanda: una determinata versione del software è rilasciabile?
 * canary release - gruppo di utenti selezionato x avere una nuova funzionalità (spesso tramite *feature flag*)
 * A/B testing - test x validare efficacia di una funzionalità. 50% utenti hanno la funz, 50% non ce l'hanno. Con delle metriche (es. tasso di conversione) valido esperimento. (User Behavior Analytic su Application Insights)
 
-### Altri test
+### Altri test (non funzionali)
 
 * stress test - importante testare l'infrastruttura per carichi improvvisi. Occorre verificare che dopo uno spike, torni al normale funzionamento.
 * fault injection - con la chaos engineering si prova a mettere in crisi il sistema. Si testa disaster recovery, ungraceful shutdown, rallentamenti di rete
 * security test - verifica vulnerabilità, sw automatici e analisi statica. Oppure tecnica del *red team* che prova a bucare il nostro SW.
+
+### UI Testing
+
+* vanno eseguiti in ambiente simile a produz (right)
+* possono ess eseguiti nell'agente o nell'infra di test
+* test plan = quando fare i test, dove, con che strumenti e cosa dovrà accadere al OK/KO
+
+Strumenti
+
+* Windows Application Driver (WinAppDriver) - UI testing app windows in WinForms o UWP
+* Selenium - UI testing per web. Multi ling JS C# .NET con NUnit
+* SpecFlow - BDD integrabile con Selenium - Gherkin = parser di test in ling naturale
+* Cucumber - BDD integrabile con Selenium
+
+Selenium
+si basa sui locators (selettori)
+In macos si installa un driver in Edge: spctl --add Tailspin.SpaceGame.Web.UITests/bin/Release/net5.0/msedgedriver
+Si avvia con `dotnet test --configuration Release Tailspin.SpaceGame.Web.UITests`
+
+* id attribute
+* name attribute
+* XPath expression
+* Link text or partial link text
+* Tag name, such as body or h1
+* CSS class name
+* CSS selector
+
+* IWebDriver - implementata da ChromeDriver, FirefoxDriver, EdgeDriver, SafariDriver
+* IJavaScriptExecutor - implementata da ChromeDriver, FirefoxDriver, EdgeDriver, SafariDriver
+* IJavaScriptExecutor implementa `ExecuteScript`
+
+```csharp
+private IWebElement FindElement(By locator, IWebElement parent = null, int timeoutSeconds = 10)
+{
+  // WebDriverWait enables us to wait for the specified condition to be true
+  // within a given time period.
+  return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutSeconds))
+    .Until(c => {
+      IWebElement element = null;
+      // If a parent was provided, find its child element.
+      if (parent != null)
+      {
+        element = parent.FindElement(locator);
+      }
+      // Otherwise, locate the element from the root of the DOM.
+      else
+      {
+        element = driver.FindElement(locator);
+      }
+      // Return true after the element is displayed and is able to receive user input.
+      return (element != null && element.Displayed && element.Enabled) ? element : null;
+    });
+}
+```
+
+### Apache JMeter
+
+Test di carico vs stress test = test di carico simula condizioni realistiche x misurare performance, stress test misura condizioni straordinarie per vedere se il sistema rimane vivo e mediamente stabile (ovviamente è lento)
+
+Apache JMeter lancia thread paralleli di richieste e genera un report in xml:
+
+`apache-jmeter-5.4.1/bin/./jmeter -n -t LoadTest.jmx -o Results.xml`
+
+Formati supportati da ADO: CTest, JUnit (including PHPUnit), NUnit 2, NUnit 3, Visual Studio Test (TRX), and xUnit 2
+
+X JMeter si può trasformare JMtere in JUnit XML tramite una XSLT (trasforaz XML)
 
 ### Code Coverage
 
@@ -923,6 +1040,10 @@ upstream - nome convenzionale del fork di un origin
 `git blame` -> in alcuni ambti diventa git praise x evitare dispregiativo
 
 `git cherry-pick` -> applicare commit su + branch anche indipendenti
+
+`git --no-pager log` --oneline -> vedere log inline
+
+`git revert --no-edit HEAD` -> annullare ultimo commit committando l'opposto
 
 ### Rules for commit messages
 
