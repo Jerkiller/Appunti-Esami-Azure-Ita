@@ -106,6 +106,7 @@
   * Evitare le responsabilità
   * Disattenzione nei confronti dei risultati
 * Inner Source - pratiche dell'open source portate a livello aziendale (tutti contribuiscono nelle 4 mura dell'azienda)
+* Gerarchia dei livelli di reliability di Dickerson - piramide ispirata a quella di Maslow per descrivere i livelli di affidabilità di un sistema. [dickersons-hierarchy-of-service-reliability](https://www.zenoss.com/blog/dickersons-hierarchy-of-service-reliability).
 
 ## Processo di sviluppo
 
@@ -1689,3 +1690,56 @@ Create_Share -OutputPath C:\temp\
 * si basa su DSC, centralizza artifacts DSC
 * pull server centrale da cui le VM prendono le config
 * integrazione con Azure Monitor x vedere la compliance dei nodi
+
+## Azure Governance
+
+* Lock delle risorse critiche in DontDelete e ReadOnly (No eliminaz e modifica)
+* Cost management e gestione subscription/mgmt group, spesso con i tag
+* Policy, assignment x gestire regole di subscription e creare standard di conformità
+* Blueprint x avviare iniziative cross-subscription (alcune già pronte tipo ISO 27001)
+* [Azure Cloud Adoption Framework](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework) è una guida metodologica per migrare dolcemente al cloud Azure
+* RBAC utile per gestire granularità permessi
+
+## Incident reporting and reviewing
+
+* no-blame culture, non cercare colpevoli
+* in un sistema complesso ci sono interazioni => errori imprevedibili, a volte catastrofi a volte near-miss
+* importante fare retrospective-postmortem-postincident x opportunità di apprendere
+* va fatta entro 24-36h xk l'essere umano dimentica
+* concentrarsi su cosa sapevamo e cosa sappiamo ora, su cosa va storto nei processi
+* prima cosa da fare, raccogliere i dati, poi conversare e sentire le varie campane
+
+Errori frequenti
+
+* incolpare le persone (umani sono parte del sistema, spesso l'errrore umano è un sintomo di un problema) Vedi incidenti dei B17
+* ragionamento controfattuale (non aiuta ragionare su come sarebbe andata se solo...)
+* linguaggio normativo - le persone si sono comportate male inappropriatamente, le persone si sono comportate bene, hanno fatto il possibile - sono giudizi, non fanno bene alla discussione e fanno perdere di vista i fatti
+* raggionamento meccanicistico - il sistema avrebbe funzionato, stava funzionando se nessuno interveniva. No, un sistema ha bisogno di interventi
+
+Concretamente
+
+* utile querare su Microsoft Graph API per avere messaggi delle chat e dei canali di teams x ricostruire cronologia
+* utile DevOps board e wiki x raccogliere le info
+* utili le dashboard di Azure, possono ess esportate
+* utile fare query in Kusto su Log Analytics
+
+```kql
+AzureActivity
+| where CategoryValue == 'Administrative'
+| where OperationNameValue endswith "write" or OperationNameValue endswith "delete"
+| project TimeGenerated, Level, ResourceGroup, ResourceId, OperationName, OperationNameValue, ActivityStatus, Caller
+| order by TimeGenerated nulls first
+```
+
+Pratiche Comuni
+
+* avere un facilitatore neutrale che espone i fatti
+* meeting max 60-90min
+* pre-interviste utili x sondare se ci sono conflitti e avere già dati preventivi
+* non farle per incidenti piccoli
+* non chiedere perché ma come e cosa. Capiamo cosa è successo, come funzionano le cose ([Etsy debriefing guide](https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf))
+* concentrarsi anche su cos è andato bene, su come è stato rimediato
+
+---
+
+`command 'markdown.extension.onEnterKey' not found`
