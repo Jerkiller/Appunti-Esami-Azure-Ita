@@ -372,7 +372,11 @@ Utile per passare da uno stage/environment all'altro. Utile x verificare a k ste
     * (--) pipeline usano DS2v2 (7GB ram e 2CPU)
     * (--) compilazione ha tempo limitato
     * (--) NON puoi accedere direttamente
-* organizzati anche in **agent pool**, gruppi di agenti a livello di organizzazione
+* organizzati anche in **agent pool**, gruppi di agenti a livello di organizzazione. Permessi:
+  * Reader - vedere agent pool
+  * Service Account - aggiungere pool a un project pool
+  * User - aggiungere pool a una pipeline
+  * Admin - gestire i pool, eliminare agent, ecc
 * i job da eseguire sono organizzati in **agent build queues**
 * possibilità di sfruttare concorrenza con i **parallel jobs** (nn x agent cloud linux o mac)
 * pricing sulla base dei parallel jobs (free tier mensile di base)
@@ -1664,6 +1668,8 @@ Sonde:
 * **startupProbe** - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
 * nel caso di servizi di rete, API, applicativi che rispondono a porte WEB, di solito si configura la readiness. Perché se sta servendo altre richieste, viene escluso dal pool applicativo. Es. protezione un po' rudimentale da DDOS.
 
+* per collegarlo ad ACI usare uno yaml apposito e tiller con HELM
+* per collegarlo in AAD, occorre creare cluster, poi una System assigned managed-identity e poi un RBAC binding
 * **Azure Defender for Kubernetes** - monitor dei log del cluster e notifica in caso di vulnerabilità
 
 ## DSC
@@ -1739,7 +1745,7 @@ Create_Share -OutputPath C:\temp\
 
 * Lock delle risorse critiche in DontDelete e ReadOnly (No eliminaz e modifica)
 * Cost management e gestione subscription/mgmt group, spesso con i tag
-* Policy, assignment x gestire regole di subscription e creare standard di conformità
+* Policy, assignment x gestire regole di subscription e creare standard di conformità. Le policy NON sono retroattive. Le iniziative lo sono.
 * Blueprint x avviare iniziative cross-subscription (alcune già pronte tipo ISO 27001)
 * [Azure Cloud Adoption Framework](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework) è una guida metodologica per migrare dolcemente al cloud Azure
 * RBAC utile per gestire granularità permessi
@@ -1783,3 +1789,21 @@ Pratiche Comuni
 * non farle per incidenti piccoli
 * non chiedere perché ma come e cosa. Capiamo cosa è successo, come funzionano le cose ([Etsy debriefing guide](https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf))
 * concentrarsi anche su cos è andato bene, su come è stato rimediato
+
+## Identity
+
+* Service Principal
+  * app registration su AAD dove creo un'identità a un applicazione, come un identity proxy
+  * posso associare permessi con IAM (RBAC) per interagire con altri servizi
+  * serve sapere tenant_id client_id e autenticazione
+  * serve solo con app on-premise o servizi che non hanno ancora Managed Identity in Azure
+* Managed Identity
+  * prima si chiamava MSI
+  * serve a dare un'identità ai servizi Azure
+  * è free e inclusa in AAD
+  * sgrava l'utente dal fardello di autenticare, ruotare credenziali ecc.
+  * Azure Instance Metadata Service - REST API che usa MI per gestire identità
+  * intergabili con KV
+  * possono essere user-assigned o system-assigned
+  * `az vm identity assign`, `show` x associare una vm a una system-assigned MI o vedere
+  * `az identity create`, `delete` o `list` x gestire le user-assigned MI
