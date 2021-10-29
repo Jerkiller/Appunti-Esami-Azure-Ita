@@ -203,6 +203,16 @@ profili:
 * Basic & Visual Studio Professional (VSE) - feature complete
 * Basic + Test Plans - estensione con i test plan
 
+### Az CLI estensione
+
+* estensione x az cli si installa `az extension add --name azure-devops`
+* consente gestione amministrativa come:
+  * gestione Teams
+  * gestione Progetti
+  * gestione Wiki
+  * gestione Sicurezza
+  * getsione [Banner](https://docs.microsoft.com/it-it/azure/devops/organizations/settings/manage-banners?view=azure-devops)
+
 ### Integrazione ADO Teams
 
 * Connettori da Teams: consentono di essere notificati:
@@ -230,6 +240,7 @@ profili:
   MyGet|Office 365|||Web Hooks
   Slack|Slack||Slack|Zapier
   Microsoft Teams|Microsoft Teams||Microsoft Teams|Datadog
+* Se la repo è su GH, ADO pipelines può essere eseguita autenticandosi con **GH App**. In alternativa anche OAuth o PAT, ma non può partire in automatico la pipeline.
 
 ### Boards
 
@@ -351,10 +362,12 @@ Utile per passare da uno stage/environment all'altro. Utile x verificare a k ste
     * (--) devi pulirlo se "si sporca"
     * (--) devi aggiornartelo a mano
     * (--) può costare
+    * (--) difficile installarlo
   * cloud-hosted
     * (++) ogni volta una VM nuova di pallino, pulita
     * (++) aggiornato da altri
     * (++) free tier
+    * (++) set up veloce
     * (--) puoi estenderla in pipeline, ma modifiche impermanenti
     * (--) pipeline usano DS2v2 (7GB ram e 2CPU)
     * (--) compilazione ha tempo limitato
@@ -391,7 +404,7 @@ Puoi installarlo:
 * in automatico con Terraform o ARM template (utile per replicare e mantenere)
 * manualmente e poi *snapshottare* l'immagine per poterla replicare (utile per replicare, ma meno mantenibile xk update di sicurezza implicano ri-snapshottare. Utile Packer di Hashicorp x aggiornare immagini)
 
-Installazione manuale su macos, linux o windows funziona tramite PAT generato da DevOps e configurato. Va aggiunto un agent pool personalizzato e il proprio agent su devops. Poi va lanciata l'installazione dell'agente e infine configurato l'agente a usare PAT, URL dell'organizzazione, nome agente, nome pool. Infine va settato come demone o servizio in background. Il gioco è fatto.
+Installazione manuale su macos, linux o windows funziona tramite **PAT** generato da DevOps e configurato. Va aggiunto un agent pool personalizzato e il proprio agent su devops. Poi va lanciata l'installazione dell'agente e infine configurato l'agente a usare PAT, URL dell'organizzazione, nome agente, nome pool. Infine va settato come demone o servizio in background. Il gioco è fatto.
 
 #### Deployment pattern
 
@@ -484,6 +497,8 @@ az webapp deployment slot list \
 
 * importante fare check dei pacchetti prima di fare push di un immagine
 * importante fare check dei pacchetti contiuno con uno scheduled task. Le vulnerabilità vengono scoperte continuamente
+* Insomma, fare check sempre.
+* **Azure Defender for container registries** -> automazione di scan delle immagini e vulnerabilità. Ocio che funziona solo x Linux images, non Windows. Windows non ha difetti
 
 ## Docker
 
@@ -769,6 +784,15 @@ Correzione continua/giornaliera (proattiva)
 * monitoraggio di pod su Kube con *Azure Monitor container insights*
 * monitoraggio di VM con agente, con *Azure Monitor VM insights* dashboard che riunisce tutte le VM in un'unica schermata
 
+Oggi c'è un agente unico x Azure Monitor come prodotto unico log+metriche.
+
+Un tempo c'erano vari agenti (oggi considerati legacy) a seconda delle funzionalità:
+
+* WAD/LAD - agente di diagnostica, per le metriche
+* Telegraf - agente basato su InfluxDb per Linux sempre per metriche. Serve a Linux x gestire autoscale o alert
+* Dependency agent - Lin/Win agente per dipendenze e tracce applicative, richiede agente Log Analytics
+* Log Analytics Agent - Lin/Win agente di raccolta log
+
 ### Amazon CloudWatch
 
 In AWS equivalente di APM su Azure
@@ -843,6 +867,14 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * permette di eseguire playbook, sequenze di mitigazioni a un evento
 * es. JIT access x VM (in Azure Defender), es. analisi processi con ML (adaptive application controls)
 
+#### Azure Defender Plan
+
+* serivizio cross service try and buy, pay-as-u-go
+* ti mette in sicurezza VM, SQL, WebApp, DB, storage, AKS, ACR, KV, ARM, DNS
+* ti da uno score di sicurezza sulla compliance. Dashboard
+* fa assessment continuo
+* accesso JIT alle VM
+
 ### Azure Sentinel
 
 * raccoglie da varie fonti anche esterne, multi-cloud, on-prem (utile x unificare)
@@ -851,7 +883,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * aiuta a classificare gli incidenti in: positivi, falsi positivi e i dubbi
 * crea una mappa "investigation map" che collega gli elementi e aiuta con drill down
 * raccoglie dati da Azure Monitor Logs (prima crea il workspace!)
-* unico ambiente centrlaizzato dove correlare metriche di performance, sicurezza, e problemi
+* unico ambiente centralizzato dove correlare metriche di performance, sicurezza, e problemi
 
 #### Dashboard
 
@@ -884,7 +916,7 @@ Kusto Query Language (KQL) è usato per serie temporali organizzate in tabelle c
 * molte fonti dati
 * performance xk dati cachati in un cubo
 * (--) non supporta log e dati da Azure RM
-* (--) refresh dati max 8/d
+* (--) refresh dati max ogni 3h
 
 #### Grafana
 
@@ -1040,7 +1072,7 @@ upstream - nome convenzionale del fork di un origin
 
 `git cherry-pick` -> applicare commit su + branch anche indipendenti
 
-`git --no-pager log` --oneline -> vedere log inline
+`git --no-pager log --oneline` -> vedere log inline
 
 `git revert --no-edit HEAD` -> annullare ultimo commit committando l'opposto
 
@@ -1060,9 +1092,9 @@ Concetti chiave: Issues, notifiche, branch, commit, PR, label, actions, pages (s
 
 Cloning vs forking: clonare significa scaricare in locale una repo remota e committare su questa. Forkare significa copiare nel proprio gh la repo, poi la si clona e si lavora liberamente su questa copia. Se poi si vuole ricongiungere il fork alla repo originale, si può fare PR.
 
-GH Codespaces - IDE as a Service (VS CODE a 0.18 $/h)
+**GH Codespaces** - IDE as a Service (VS CODE a 0.18 $/h)
 
-GitHub-Flavored Markdown (GFM) - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
+**GitHub-Flavored Markdown (GFM)** - markdown esteso con figherie di Git come cross-ref link, a PR, issue, snippet di codice, commenti, ecc.
 
 * [x] First task
 * [x] Second task
@@ -1137,16 +1169,16 @@ Opzioni Auth:
 ### Sicurezza in GH
 
 * nel file SECURITY.md i white hat (hacker etici) fanno disclosure delle vulnerabilità
-* dependabot che fa scan continuo dipendenze
+* dependabot che fa scan continuo dipendenze e crea PR se trova pacchetti vulnerabili
 * secret analysis, ti avverte se committi credenziali o segreti
 * tool di analisi statica continua
-* codeQL x estendere analisi statica con query sul codice
+* codeQL x estendere analisi statica con query personali sul codice
 
 ### GH Search
 
 * ricerca globale
 * ricerca contestuale (in this repo)
-* Simpatico sistema di Label estensibili oltre a [quelle di default](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels#about-default-labels)
+* Simpatico sistema di Label colorate ed estensibili oltre a [quelle di default](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels#about-default-labels)
 * tag di ricerca
   * is:repo is:issue is:pr is:open is:closed
   * stars:>1000 created:<=2016-04-29 topics:5..10
@@ -1226,7 +1258,8 @@ Le GH **Actions** sono soluz di CI/CD come le Pipeline di DevOps. Integrano IaC 
   * in questi casi, va sempre settata la env `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
 * variabili introdotte da `$`. Utili x non cablare
 * Negli step/job si possono usare clausole `if: condizione`
-* `run: cmd` esegue il comando
+* `run: cmd` esegue il comando `cmd`
+* `with: ...` setta dei parametri per esempio in una action
 * debug attivabile:
   * ACTIONS_RUNNER_DEBUG = true -> debug di RUN
   * ACTIONS_STEP_DEBUG = true -> debug di STEP
@@ -1545,7 +1578,7 @@ Categorie Utenti:
    * installa AAD connect (sync tra AD locale e AAD)
    * installa AAD connect health - statistiche integrità e sync (P1)
    * password hash sync
-   * ativa writeback password - se scrivi su Azure, si scrive anch locale (P1)
+   * attiva writeback password - se scrivi su Azure, si scrive anche in locale (P1)
    * configuraz gruppi e utenti
    * pianificare gestione dispositivi (BYOD? cell aziendali o personali?)
    * accesso con login social con AD B2B
@@ -1580,8 +1613,6 @@ Ocio che x GDPR tutti i dati stiano in europa.
 Alcuni dati di AAD B2B e B2C di confiugrazione o mail inviate agli utenti stanno in USA.
 MFA si basa su provider di SMS e chiamate USA
 
- az extension add --name azure-devops
-
 ## Costi
 
 total cost of ownership = vero costo di qualcosa (sommerso) es. elettricità + hardware + personale + licenze sw + datacenter...
@@ -1594,9 +1625,9 @@ Sottoscrizioni Azure
 * pay as you go - collegata Carta Credito o Debito
 * member offers
 
-Contratti con Azure
+### Contratti con Azure
 
-* Enterprise Agreement - azienda si impegna a spendere TOT in 3 anni. Microsoft fa scontoni e anche ilcaffè
+* Enterprise Agreement - azienda si impegna a spendere TOT in 3 anni. Microsoft fa scontoni e fa anche il caffè
 * Dal Web - come i comuni mortali
 * CSP - appoggiandosi a un intermediario
 
@@ -1614,6 +1645,16 @@ Cos'altro possiamo fare?
 * go PaaS (spendi quanto usi)
 * gestione attenta alle licenze (Azure Hybrid)
 
+## App Configuration
+
+Servizio di gestione centralizzato che consente gestione segreti, feature flag, versionamento config ecc.
+
+## AZSK
+
+Azure DevOps Security Kit - tool non ufficiale che verrà rimpiazzato da Azure Tenant Security scanner (AzTS).
+
+Utile per garantire la **Continuous Assurance (CA)**: Runbook lanciato periodicamente per valutare eventuali drift di configurazioni DevOps.
+
 ## AKS
 
 Sonde:
@@ -1621,6 +1662,9 @@ Sonde:
 * **livenessProbe** - ping periodico per vedere se pod è vivo. Se non è configurato, do x scontato sia vivo. Se non risponde, mando un Restart
 * **readinessProbe** - viene fatto x capire se il pod può accettare richieste. Se non può setto Failure, altrimenti Success. Se Failure, escludo il pod dagli IP del service
 * **startupProbe** - viene chiesto se l'applicativo nel pod si è avviato. Se c'è questa sonda, le altre sono disabilitate
+* nel caso di servizi di rete, API, applicativi che rispondono a porte WEB, di solito si configura la readiness. Perché se sta servendo altre richieste, viene escluso dal pool applicativo. Es. protezione un po' rudimentale da DDOS.
+
+* **Azure Defender for Kubernetes** - monitor dei log del cluster e notifica in caso di vulnerabilità
 
 ## DSC
 
@@ -1648,8 +1692,8 @@ Vari requirement di versioni su Win (dipende da WinRM e perciò no win server 20
 * Global URL of US Gov Virginia: *.azure-automation.us
 * Agent service: [https://.agentsvc.azure-automation.net](https://.agentsvc.azure-automation.net)
 
-In PS: @(elem1, elem2) = array
-In PS: @{ key1=value1 key2=value2 } = obj
+* In PS: @(elem1, elem2) = array
+* In PS: @{ key1=value1 key2=value2 } = obj
 
 ```ps1
 Configuration Create_Share
@@ -1739,7 +1783,3 @@ Pratiche Comuni
 * non farle per incidenti piccoli
 * non chiedere perché ma come e cosa. Capiamo cosa è successo, come funzionano le cose ([Etsy debriefing guide](https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf))
 * concentrarsi anche su cos è andato bene, su come è stato rimediato
-
----
-
-`command 'markdown.extension.onEnterKey' not found`
