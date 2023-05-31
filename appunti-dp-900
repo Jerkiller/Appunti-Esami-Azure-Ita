@@ -2,3 +2,26 @@
 
 * lift-and-shift
 * ETL -> ELT
+* ADLS data lake compatibile con hadoop. Gen1 e Gen2. Si usa per BD, elaborati poi su HDinsight, hadoop e databricks
+  * crittografia by default
+  * ACL e RBAC
+* CosmosDB 99.999 (8min annui)
+  * API sql, mongo, cassandra, gremlin, table
+  * livelli di coerenza
+  * UDF, SP e trigger
+  * certificato HIPAA, FedRAMP, SOX e HITRUST
+* AzSQL (OLTP) soluz PaaS flessibile x costi e scala
+  * Advanced Threat Protection, AAD, MFA
+* Az Synapse Analytics, motore elaboraz per BD, per task di segmentazione, predittività, analisi, ecc sfruttando calcolo parallelo e semplicità di TSQL
+  * PolyBase
+* Stream Analytics, processing in stream
+  * input: IoTHub, EventHub, Storage
+  * output: blob, ADLS, SQL, Cosmos, PowerBI (in streaming), API
+  * windowing per batch
+* HDInisght, motore per BDC con framework spark
+  * Hadoop (HDFS, spark, Apache Hive), HBase, Kafka
+  * Lib anaconda precaricate PY, cm machine learning
+* Databricks (notebook serverless e cluster spark)
+* DataFactory (orchestraz flussi dati, pipeline, spostamento
+* DataCatalog?
+* Azure Purview - servizio olistico di governance che mappa i dati e li classifica
