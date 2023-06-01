@@ -1,6 +1,6 @@
 ## DP900
 
-* lift-and-shift
+* lift-and-shift (es. con SQL su VM)
 * ETL -> ELT
   * DL centrale, ETL verso DW con fatti e dimensioni, modello olap o cubo con misure, repportistica
   * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo
