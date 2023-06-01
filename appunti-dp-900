@@ -10,6 +10,13 @@
   * ORC - Horton Works, usato in Hive, colonnare
   * Parquet - Twitter, compresso codificato, per dati strutturati, a righe
 * soluzioni OLTP (transazionali) supportano semantica ACIDa (atomicity coherence isolation durability)
+
+## Ruoli
+* DBA - sicurezza, DR, backup/restore, performance, privilegi, controllo accessi
+* data engineer - spostamento dati, trasformazione, svecchiamento, privacy
+* data analyst - estrae valore dai dati, crea report, identifica trend, anomalie
+
+## Tecnologie
 * ADLS data lake compatibile con hadoop. Gen1 e Gen2. Si usa per BD, elaborati poi su HDinsight, hadoop e databricks
   * crittografia by default
   * ACL e RBAC
