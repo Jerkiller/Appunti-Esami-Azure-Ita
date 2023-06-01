@@ -2,6 +2,14 @@
 
 * lift-and-shift
 * ETL -> ELT
+  * DL centrale, ETL verso DW con fatti e dimensioni, modello olap o cubo con misure, repportistica
+  * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo
+  * DW è relazionale ottimizzato per lettura, DL invece un bidone non strutturato
+* formati
+  * AVRO - apache, compresso, strutturato a righe
+  * ORC - Horton Works, usato in Hive, colonnare
+  * Parquet - Twitter, compresso codificato, per dati strutturati, a righe
+* soluzioni OLTP (transazionali) supportano semantica ACIDa (atomicity coherence isolation durability)
 * ADLS data lake compatibile con hadoop. Gen1 e Gen2. Si usa per BD, elaborati poi su HDinsight, hadoop e databricks
   * crittografia by default
   * ACL e RBAC
