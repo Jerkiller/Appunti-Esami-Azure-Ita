@@ -2,9 +2,11 @@
 
 * lift-and-shift (es. con SQL su VM)
 * ETL -> ELT
-  * DL centrale, ETL verso DW con fatti e dimensioni, modello olap o cubo con misure, repportistica
+  * DW è relazionale ottimizzato per lettura. con fatti e dimensioni. DW con schema star o snowflake
+  * DL invece è un bidone non strutturato, ETL verso DW , modello olap o cubo con misure, repportistica
   * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo
-  * DW è relazionale ottimizzato per lettura, DL invece un bidone non strutturato
+* Polybase - consente di creare tabelle sopra un DL
+* approcci ibridi tra DW e DL, tipo con delta lake si crea un DL su cui si usa spark con estensione di tabelle e schema relazionale con API SQL
 * formati
   * AVRO - apache, compresso, strutturato a righe
   * ORC - Horton Works, usato in Hive, colonnare
@@ -31,13 +33,14 @@
   * certificato HIPAA, FedRAMP, SOX e HITRUST
 * AzSQL (OLTP) soluz PaaS flessibile x costi e scala
   * Advanced Threat Protection, AAD, MFA
-* Az Synapse Analytics, motore elaboraz per BD, per task di segmentazione, predittività, analisi, ecc sfruttando calcolo parallelo e semplicità di TSQL
-  * PolyBase
+* Az Synapse Analytics, motore elaboraz per BD, per task di segmentazione, predittività, analisi, ecc
+  * sfruttando calcolo parallelo e semplicità di TSQL
+  * usa Spark e può fare pipeline movim dati
 * Stream Analytics, processing in stream
   * input: IoTHub, EventHub, Storage
   * output: blob, ADLS, SQL, Cosmos, PowerBI (in streaming), API
   * windowing per batch
-* HDInisght, motore per BDC con framework spark
+* HDInisght, motore per BDC con framework spark, più complesso
   * Hadoop (HDFS, spark, Apache Hive), HBase, Kafka
   * Lib anaconda precaricate PY, cm machine learning
 * Databricks (notebook serverless e cluster spark)
