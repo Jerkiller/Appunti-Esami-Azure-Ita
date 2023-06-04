@@ -17,9 +17,13 @@
 * data analyst - estrae valore dai dati, crea report, identifica trend, anomalie
 
 ## Tecnologie
-* ADLS data lake compatibile con hadoop. Gen1 e Gen2. Si usa per BD, elaborati poi su HDinsight, hadoop e databricks
+* ADLS data lake compatibile con hadoop o Synapse. Gen1 e Gen2. Si usa per BD, elaborati poi su HDinsight, hadoop e databricks
   * crittografia by default
   * ACL e RBAC
+  * migrazione implica abilitare spazio nomi gerarchici
+* Az Table
+  * rowKey e partitionKey
+  * documentale, non relazionale, no chiavi o vincoli integrità
 * CosmosDB 99.999 (8min annui)
   * API sql, mongo, cassandra, gremlin, table
   * livelli di coerenza
