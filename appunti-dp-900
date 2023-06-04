@@ -6,7 +6,7 @@
   * DL invece è un bidone non strutturato, ETL verso DW , modello olap o cubo con misure, repportistica
   * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo
 * Polybase - consente di creare tabelle sopra un DL
-* approcci ibridi tra DW e DL, tipo con delta lake si crea un DL su cui si usa spark con estensione di tabelle e schema relazionale con API SQL
+* approcci ibridi tra DW e DL, tipo con **delta lake** si crea un DL su cui si usa spark con estensione di tabelle e schema relazionale con API SQL, e transazioni acide
 * formati
   * AVRO - apache, compresso, strutturato a righe
   * ORC - Horton Works, usato in Hive, colonnare
@@ -35,7 +35,7 @@
   * Advanced Threat Protection, AAD, MFA
 * Az Synapse Analytics, motore elaboraz per BD, per task di segmentazione, predittività, analisi, ecc
   * sfruttando calcolo parallelo e semplicità di TSQL
-  * usa Spark e può fare pipeline movim dati
+  * usa Spark e può fare pipeline movim dati, anche streaming e visualizzatore dati
 * Stream Analytics, processing in stream
   * input: IoTHub, EventHub, Storage
   * output: blob, ADLS, SQL, Cosmos, PowerBI (in streaming), API
