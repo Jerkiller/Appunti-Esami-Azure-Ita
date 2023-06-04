@@ -342,10 +342,12 @@ Targets:
     * Capability (Command|Telemetry|Property)
   * Views (dashboard personalizzate)
 * Devices - Gestione asset. Lista device per interfaccia
+  * Auth con SAS o cert x509
   * New Device - Possibile creare nuovo device anche simulato
   * Vista device - Cliccando sul singolo device si vedono le custom views e si possono inviare comandi
-* Jobs - Processi batch es. settare una property per gruppi di device. es. Optimal Temperature
+* Jobs - Processi batch es. settare una property per gruppi di device o tutti. es. Optimal Temperature
 * Analytics - grafici valori sui device
+* Device Bridge - utile per tradurre protocolli non supportati
 
 
 
