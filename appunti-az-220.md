@@ -353,6 +353,15 @@ Targets:
 * Analytics - grafici valori sui device
 * Device Bridge - utile per tradurre protocolli non supportati
 
+## Security
+
+* Come proteggere accessi a IoTHub? Filtri IP o endpoint privato
+* Microsoft Defender for IoT
+  * comp base: Analytics pipeline, security messages, IoTHub integration
+  * output to LogAnalytics workspace
+  * enabled by default with IoTHub
+* Defender for IoT micro agent - raccoglie log, accessi, errori e li manda al cloud
+* custom agent in C-C#
 
 
 > P 221
