@@ -352,3 +352,19 @@ Targets:
 
 
 > P 221
+
+## Scenari offline
+* Tutto su IoTEdge Hub
+  * dispositivo IoTEdge deve collegarsi almeno una volta ad IoT Hub
+  * serve relazione padre-figlio, con padre considerato attendibile (gateway)
+  * sincronizzare almeno una volta IoTEdge con IoTHub
+  * senza conn, EdgeHub continua a raccogliere (fare da buffer), e fare da bus tra i moduli. Inoltre fa auth provider.
+  * raccoglie finché spazio non è full o finché TTL (2h default) dei messaggi non scade (si può estendere tocchignando i desired di IoTEdge)
+  * alla riconnessione, viene sincronizzato IoTHub-IoTEdge e mandato tutto il buffer su su
+* Archiviazione su Edge SQL
+* Archiviazione su Edge Blob
+  * Modulo con praticamente stessa immagine cloud ma API lievemente + limitata (no page blob)
+  * Blocco di proprietà `deviceToCloudUpload` per settare se e come mandare dati verso cloud
+  * `deviceAutoDelete` per TTL dei file su blob
+  * Collegarsi a blob tramite endpoint `http://<module name>:11002/<account name>` oppure al posto di module name si può usare IP, FQDN o Edge host con local account name e key
+  * Ocio che bisogna montare lo storage binding su Edge Agent e su Edge Hub
