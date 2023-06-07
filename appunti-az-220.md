@@ -324,15 +324,19 @@ Targets:
       * `PipeMessage(Message msg, object ctx)` Logica gestione msg
 
 ## Edge Gateway
-* transparent
-* protocol translation
-* identity translation
-
-* se perde connettività fa da buffer e funziona ancora con devices
-* Edge Blob Storage
-  * deviceToCloudUpload
-  * deviceAutoDelete
-
+* Modalità:
+  * transparent
+    * dispos usano MQTT AMQP e HTTP
+    * i dispositivi pensano di comunicare col cloud
+    * Occorre dichiarare `hostname` nel config.yaml
+  * protocol translation
+    * dispos usano protocolli strani, vengono riconosciuti da gateway
+    * ha 1 identità e 1 twin su iothub, quindi i dispositivi devono *firmare* i msg con qualche prop identificativa
+  * identity translation
+    * come sopra per primo punto
+    * i device hanno identità propria su Iothub che viene rimappata da GW. Ogni device ha il suo twin e ricevere C2D e metodi diretti
+* Auth dei dispositivi: chiavi simmetriche o cert o firma x509
+* Dispositivo figlio avrà modulo che istanzia il DeviceClient usando una identity a cui viene passato come parametro il modo di auth prescelto (punto sopra)
 ***
 
 ## IotCentral
