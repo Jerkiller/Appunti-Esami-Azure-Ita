@@ -1,6 +1,6 @@
 ## DP900
 
-* lift-and-shift (es. con SQL su VM)
+* lift-and-shift = re-hosting su cloud di un app (es. con SQL su VM)
 * ETL -> ELT
   * DW è relazionale ottimizzato per lettura. con fatti e dimensioni. DW con schema star o snowflake
   * DL invece è un bidone non strutturato, ETL verso DW , modello olap o cubo con misure, repportistica
