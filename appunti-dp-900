@@ -4,7 +4,7 @@
 * ETL -> ELT
   * DW è relazionale ottimizzato per lettura. con fatti e dimensioni. DW con schema star o snowflake
   * DL invece è un bidone non strutturato, ETL verso DW , modello olap o cubo con misure, repportistica
-  * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo
+  * OLAP dati analitici preaggregati in base alle possibili dimensioni x velocità query dopo (cubi autogenerati)
 * Polybase - consente di creare tabelle sopra un DL
 * approcci ibridi tra DW e DL, tipo con **delta lake** si crea un DL su cui si usa spark con estensione di tabelle e schema relazionale con API SQL, e transazioni acide
 * formati
@@ -12,6 +12,8 @@
   * ORC - Horton Works, usato in Hive, colonnare
   * Parquet - Twitter, compresso codificato, per dati strutturati, a righe
 * soluzioni OLTP (transazionali) supportano semantica ACIDa (atomicity coherence isolation durability)
+  * dati normalizzati -> risparmio spazio e ottimizzazioni per insert update delete, read semplice ottimizzata ma non come OLAP
+  * utili per LOB application e live streaming
 
 ## Ruoli
 * DBA - sicurezza, DR, backup/restore, performance, privilegi, controllo accessi, indici e performance
@@ -27,7 +29,7 @@
   * rowKey e partitionKey
   * documentale, non relazionale, no chiavi o vincoli integrità
 * CosmosDB 99.999 (8min annui)
-  * API sql, mongo, cassandra, gremlin, table
+  * API sql, mongo, cassandra (colonnare basata su SQL), gremlin, table (odata e linq)
   * livelli di coerenza
   * UDF, SP e trigger
   * certificato HIPAA, FedRAMP, SOX e HITRUST
@@ -48,3 +50,4 @@
 * DataCatalog?
 * Azure Purview - servizio olistico di governance che mappa i dati e li classifica
 * Power BI Desktop - gerachia su attr x drill down up.
+* ADX x store e analisi di big data o log o iot
