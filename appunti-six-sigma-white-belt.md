@@ -108,3 +108,5 @@ Metric
   *  involve everyone
   *  IT group assist
   *  financial data - cost of Q analysis
+
+https://www.udemy.com/course/lean-six-sigma-white-belt-certification/learn/lecture/5477050#overview
