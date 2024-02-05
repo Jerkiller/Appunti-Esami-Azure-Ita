@@ -88,3 +88,23 @@ Metric
    * follow DMAIC, apply tools
    * review approach with GB and BB
    * provide input to GB and BB and PO during proj
+
+### 99% vs six-sigma
+
+> six-sigma = 99.9997% vs 99%
+
+* 110.000 babies dropped by doctors and nurses with 99% / <38 babies in six-sigma
+* 85h blackout per year / 9min blackout every 5y in six-sigma
+* 16 accident per day / 2 accidents per year in 6-sigma
+
+### DMAIC
+
+* similar to PDCA
+* define issues, collect data, study data, act on the data (experiments) and control change
+* continuous improvement - organisation grows but may regress as soon as stop spending on improvements
+* continual improvement - cycles of growth and stabilize the situation, steady growth path pattern
+* driving forces for six-sigma:
+  *  continual improvement
+  *  involve everyone
+  *  IT group assist
+  *  financial data - cost of Q analysis
