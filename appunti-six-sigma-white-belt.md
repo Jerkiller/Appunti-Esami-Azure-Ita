@@ -26,7 +26,24 @@ ASQ - totalit of features to satisfy needs
 * 1979 Japan -> Quality circles (focus groups to improve Q)
 * mid1980 - SPC SQC
 * 1987 - ISO 9000 standards
-* 1985-1988 - Six Sigma
+* 1985-1988 Motorola - Six Sigma
 * 2000 - Lean Manufacturing
 
-* 
+## Six Sigma
+
+> Struuctured disciplined process to deliver quality products and services, eliminating defects
+
+* Well-defined projects
+* Statistical thinking
+* DMAIC (Define measure analyse improve control)
+
+Philosophy
+* Output = f(Input) f is process
+* 7 basic tools of Q
+
+Methodology
+* DMAIC identify -> implement
+
+Metric
+* 3.4 defects / million opportunities
+
