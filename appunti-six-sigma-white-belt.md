@@ -47,3 +47,44 @@ Methodology
 Metric
 * 3.4 defects / million opportunities
 
+### Roles
+
+* Champion
+   * allocation of resources
+   * determine project selection
+   * interact with senior mgmt
+   * remove barriers
+   * approve completed proj
+   * implement change
+ * MBB - master black belt
+   * Six sigma methodologies
+   * Stats tools
+   * Basic financial tools
+   * Change mgmt
+   * Risk assessment
+   * PM
+   * Exec communication
+   * Teaching + Coaching + Mentoring Black/Green belts
+ * BB
+   * Six sigma methodologies
+   * Stats tools
+   * Basic financial tools
+   * Change mgmt
+   * Risk assessment
+   * PM
+   * Black belt proj
+   * Full-time
+ * GB Green belts
+   * Six sigma methodologies
+   * Stats tools
+   * Process-improvement tools
+   * Full-time or part of another job
+ * WB - White belts
+   * 7 basic tools of Q
+   * support & contribute proj
+   * partecipate in character and scope definition
+   * provide inputs in proj meeting and brainstorm ideas
+   * help collect data
+   * follow DMAIC, apply tools
+   * review approach with GB and BB
+   * provide input to GB and BB and PO during proj
