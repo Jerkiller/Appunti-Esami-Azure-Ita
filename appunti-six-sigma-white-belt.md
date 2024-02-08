@@ -109,4 +109,34 @@ Metric
   *  IT group assist
   *  financial data - cost of Q analysis
 
+### Seven quality tools
+
+1. Process Mapping
+   * Workflow of tasks and decisions, understanding and articulating how we deliver prod/serv to customer. Which process take more time? How toi improve? Standard operation procedure, traiuning
+   * SIPOC - Supplier Input Process Output Customer - process map template in one page
+   * Supplier who are internaòl and external
+   * Inputs - which are the materials, which metrics, knowledge data
+   * Process - 5-7 high level steps in the process
+   * Outputs - what're created
+   * Customers - who are internal/ext customers
+   * SIPOC - define boundaries of process - define consensus between stakeholders on process and struuctured discussion
+   * SIPOC - 1-page, effectiveness, understand customer requirements, scope, suppliers and customers
+   * SIPOC refers to exactly today.
+   * identify and verify everything in Sipoc
+2. Check Sheets
+   * Simple effective Way to collect data
+   * A check sheet refers to a single well-defined metric (e.g. phone calls)
+   * In check sheets the categories and times are well defined (e.g. day vs reason)
+   * Whenever it's useful to collect data repeatedly, defects, defect causes
+   * Design check sheets with the team, keep it clear, include definition, example, explain the reason and train everyone. Validate it and improve! 
+3. Histogram
+   * Barchart for numerical data of a process
+   * Height bar = size of a group <> bar graph
+   * Central tendency and variation, change according to bin size
+4. Pareto
+   *
+7. Fishbone
+8. 5W Analysis
+9. Cheat Sheets
+
 https://www.udemy.com/course/lean-six-sigma-white-belt-certification/learn/lecture/5477050#overview
