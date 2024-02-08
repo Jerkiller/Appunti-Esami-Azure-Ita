@@ -130,13 +130,19 @@ Metric
    * Whenever it's useful to collect data repeatedly, defects, defect causes
    * Design check sheets with the team, keep it clear, include definition, example, explain the reason and train everyone. Validate it and improve! 
 3. Histogram
-   * Barchart for numerical data of a process
+   * Barchart for numerical data of a process (useful in large dataset)
    * Height bar = size of a group <> bar graph
    * Central tendency and variation, change according to bin size
+   * analysis before/after process changes
 4. Pareto
+   * Simple powerful chart in descending order
+   * useful to identify causes
+   * 80/20 rule: 20% causes contribute to 80% issues
+5. Fishbone
+   * 
+6. 5W Analysis
    *
-7. Fishbone
-8. 5W Analysis
-9. Cheat Sheets
+7. Cheat Sheets
+   *
 
 https://www.udemy.com/course/lean-six-sigma-white-belt-certification/learn/lecture/5477050#overview
