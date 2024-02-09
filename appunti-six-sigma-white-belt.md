@@ -139,10 +139,30 @@ Metric
    * useful to identify causes
    * 80/20 rule: 20% causes contribute to 80% issues
 5. Fishbone
-   * 
+   * Brainstorming tool 4 RCA
+   * Cause and effect / Ishikawa diagram
+   * Team problem solving, useful with 5W analysis
+   * Brainstorming session with blackboard, ask why something happen
+   * 5M cathegories: Man Mehod Machine Material Mother-Nature
+   * Useful to visualize Causes and effect, identify the most vital ones and structure a brainstorming session
+   * Use it after data collected, use it to identify root couses and keep team united and focused
+   * Tips: Use large whiteboard, photograph it, use 5W, involve people and leverage on opinions, drill down causes, summarize the event
 6. 5W Analysis
-   *
-7. Cheat Sheets
-   *
+   * iterative probing technoque to get to the root causes
+   * Used with fishbone.
+   * Given a fact A, ask why A holds? because B, ask why B holds? because C... 5 times.
+   * Often 5 whys are sufficient to get to the root cause
+   * Simple (no statistics stuff), yet powerful
+   * Tips: Be specific, continue asking Why until everyone agrees or no answers.
+   * Tips/2: Don't move to fix-it mode too soon, avoid bias
+8. Run Charts
+   * Useful to see Process performance in time
+   * Trend chart / Time-series chart - a line chart in time
+   * Often the median is in red
+   * Useful to identify process variations, patterns, trends -> performance issues
+   * Useful to validate improvements
+   * Tips: validate data collection process and calculation, purpose of collection?
+   * Tips/2: select time interval, annotate chart with labels of changes
+   * Tips/3: Investigate outliers (distant from median), Investigate trends (grow, stable, decrease)
 
 https://www.udemy.com/course/lean-six-sigma-white-belt-certification/learn/lecture/5477050#overview
