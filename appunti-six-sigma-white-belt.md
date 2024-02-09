@@ -165,4 +165,14 @@ Metric
    * Tips/2: select time interval, annotate chart with labels of changes
    * Tips/3: Investigate outliers (distant from median), Investigate trends (grow, stable, decrease)
 
-https://www.udemy.com/course/lean-six-sigma-white-belt-certification/learn/lecture/5477050#overview
+## Lean
+
+* Tool based methodology focused on eliminating waste in a process from customer's perspective
+* Value-added activity: any activity that brings value to the customer
+* Non-Value-added activity: any activity that doesn't add market form, function or not necessary --> It should be ELIMINATED, SIMPLIFIED, REDUCED, INTEGRATED
+
+## Kaizen
+
+* Change for the better = kai + zen
+* Any small improvement by everybody in all areas
+* Reduce variations and defects
