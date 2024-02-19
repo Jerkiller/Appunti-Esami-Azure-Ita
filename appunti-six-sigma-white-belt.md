@@ -3,7 +3,7 @@
 ## Exam
 
 * AIGPE issues the certification
-* 30 multiple choice questions
+* 30 multiple choice questions -> [Link to the exam](https://www.sixsigmacouncil.org/shop/uncategorized/six-sigma-white-belt-standard-exam-single-certification/)
 * no time limit, available resources, 2 attempts, then 30$
 
 ## Quality
