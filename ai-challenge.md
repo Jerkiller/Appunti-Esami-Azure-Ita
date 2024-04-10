@@ -28,4 +28,41 @@
   * max length and stop sequence - indicate the length of a possible answer and how to finish it
   * pre-post text: add text before after the model answer to allow user to continue the conversation or to take time 4 the model to think
 * nel playground si possono scrivere esempi di conversazioni. si parla di modello few-shots (zero-shots è chatGPT puro)
-* 
+
+## 02. Integrate Open AI and apps
+
+* Deploy a specifc model in Open AI with some capabilities (e.g. Davinci 003)
+* Endpoint ChatCompletion - I specify roles and a sample conversation to provide a context. (only GPT3.5turbo)
+* Endpoint Embeddings - fFrom input to a vector
+* Endpoint Completion
+* pip install openai
+* `# Add OpenAI library
+from openai import AzureOpenAI
+
+deployment_name = '<YOUR_DEPLOYMENT_NAME>' 
+
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+        azure_endpoint = '<YOUR_ENDPOINT_NAME>', 
+        api_key='<YOUR_API_KEY>',  
+        api_version="20xx-xx-xx" #  Target version of the API, such as 2024-02-15-preview
+        )`
+
+## 03. Prompt engineering
+
+* play with top_p and temp, not both
+* be clear (no ambiguity)
+* add details, divide into sections '---'
+* in chat completion, the System role is used to tell the assistant what to do and how: you're a librarian of star trek saga, you're a italian-> spanish translator, don't answer to anything, just translate.
+* give a cronology to conversation or summarize periodically the conversation
+* few-shots learning: give some examples (e.g. of classification)
+* decompose the question in simpler shorter questions
+* step by step approach of thoughts. Ask the mpdel a step by step approach of thoughts, to know which are the basis of reason, the sources.
+
+## 04. Generate code
+
+* codex models for writing code, now only gpt35-turbo or higher. Github copilot
+* useful to generate code, optimize code (refactor), spot bugs and fix them, translate code dialect/language, or explain code
+* and also... write unit test, write documentation/comments
+
+## 05. Generate images
