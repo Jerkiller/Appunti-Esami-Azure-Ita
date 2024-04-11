@@ -66,3 +66,14 @@ client = AzureOpenAI(
 * and also... write unit test, write documentation/comments
 
 ## 05. Generate images
+
+* Dall-E parameters in plyground vivid/natural, resolution 256*256 ... 1024*1024 1024*1792 standard hd
+* API rest in post async con risposta di polling. param size, num imag e prompt
+
+## 06. RAG vs opt
+
+* RAG (Retrieval Augmented Generation) - sistema per fornire dati aggiuntivi
+* RAG via REST o playground, sfrutta AI search ad esempio e GPT35turbo mette insieme le risposte
+* md txt html pdf word ppt
+* indice da mettere
+* ocio ai token limitazioni
