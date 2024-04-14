@@ -77,3 +77,27 @@ client = AzureOpenAI(
 * md txt html pdf word ppt
 * indice da mettere
 * ocio ai token limitazioni
+
+## 07. Responsible AI
+
+* Approach in 4 steps mutuated by NIST AI Risk Framework: identify risks, measure them in the output, mitigate impact&presence, manage solution responsibly with a plan
+* Identify Risks: generate inexact content, hallucinate, harmful, offensive content, illicit illegal content, biased, discriminatory content...
+* Measure risks: measure possibility to happen and impact of risk. Can be subjective evaluation (e.g. make poison with cooking assistant).
+  More useful: categorize the possible outputs and count them (harmful/non-harmful/degrees of harmfulness)
+* Test and verify risk presence: try to spot identify risks using several prompts and try to extract what you want from the model (red teaming)
+  Tests can be manual or automated and are useful to re-validate in case of changes to the model
+* Mitigare risks: can be done at 4 levels:
+  * Model - change model, train model: Gpt4 very large and creative, sometimes it's too risky
+  * Security - filter prompts and response according to content filters (Azure Open AI already does), or avoid flooding/automated-bots
+    * content filters use 4 categories: hate, sex, violence, self-harm. Every response is marked with a score per each category (safe-low-med-high)
+  * Metaprompt and Grounding - work on the prompt to make it better. e.g. add specific context words, add RAG
+  * UX - limit inputs, validate inputs, document risks and tutorial to guide the user to a good use
+* Manage responsibly the solution
+  * Before releasing: check that conformity is satisfied (both in company and sector). Legal notes, privacy, security, accessibility.
+  * Consider a gradual release plan (more and more users)
+  * Consider a plan to front the imprevisti and rollback plan
+  * Implement features like: block harmful content, block malicious users/IPs, user feedback
+  * Keep track of user telemetry with privacy
+  * Document and share: what discovered must be documented and shared with stakeholders
+
+## 08. AI Search
