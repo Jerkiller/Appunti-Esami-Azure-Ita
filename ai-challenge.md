@@ -101,3 +101,32 @@ client = AzureOpenAI(
   * Document and share: what discovered must be documented and shared with stakeholders
 
 ## 08. AI Search
+* Capacity AI Search con tier NON MODIFICABILE: F,B,S,L free, basic (2GB-15ind), standard S2 e S3 per tagli diversi, L ottimizzato x archiviaz, query più lente, indici grandiii.
+* 1 RU = 1 partiz * 1 replica. repliche consentono di gestire + query simultanee. partiz ottimizzano indice e query
+* **data source**: cosmos, azsql, blob semistrutturati, indice json diretto
+* **set di competenze**: da 1 doc si poss estrarre varie info: lingua, sentiment, immg contenuto, pti chiave, luoghi menzionati, ecc. competenze custom
+* **indexer**: processo lanciato all'avvio o periodicamente o on-demand x ricostruire indice (es aggiungi nuova competenza, rilanci)
+* **indice** composto da key, searchable, sortable, facetable, filterable, retrievable /default yes
+* document index è un JSON gerarchico es. doc0>image0>text0...
+* i campi dell'indice possono essere usati cm input x competenze che come 1 pipeline vanno a generare altri campi in out
+* search: fatta con SDK o REST API. sintassi query Lucene. modalità simple o full. La full supporta regex, o filtri complessi. seachFiels e select x dire che campi dell0index cercare e quali restituire
+* query eseguita in vari passaggi: query analysis (create a subquery tree), lexical analysis (clean text, il/lo/la/e/...reimossi e parole derivate semplificate), document retrieval in inedx, assegnaz punteggio con TF/IDF
+* Lucene può ess esteso con OData come $filter $orderby
+* possibilità di querare AI search non solo per ricerca, ma anche x avere lista dei facet x GUI (es. lista autori su cui filtrare)
+* query anche x autocompletam e suggerimento DocumentsOperationsExtensions. Suggest e Autocomplete
+* possibilità di penalizzare o promuovere un certo aspetto in un punteggio di ricerca (TFIDF e' default), ma un es. è penalizzare file + datati
+* possibilità di definire e cercare per sinonimi
+
+## 09. Custom competence
+
+* competenza: Custom.WebApiSkill
+* custom comp. rispetta firma con array di documenti in input e array di doc in out. In out ci sono warnings e errors per ciascun documento. Inoltre ci sono dei chiave valore per ciascun doc input e output.
+*  in una nuova skill, occorre definire URI dell'api, header, contesto di esecuz, input e output
+*  utili le custom skill se voglio usare modulo Az ML per predire valori x integrare quello che manca o integrare con una Az Func.
+*  Quando non usarle? Quando esistono già skill predefinite come sentiment analysis
+
+## 10. Knowledge store with AI Search
+
+* utile usare ADF alimentato con i JSON dell'indice, o PowerBI su un relazionale creato a partire dai dati dell'incide
+* Microsoft.Skills.Util.ShaperSkill usata per creare un json con certi campi e certi valori basati su elementi dell'indice (proiezioni) mapping
+* viene così creato un knowledgeStore materializzando quello che serve in oggetti (json), file (png, jpeg) e tabelle definendo cosa si vuole e come in un json della
