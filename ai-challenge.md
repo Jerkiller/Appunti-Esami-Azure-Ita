@@ -130,3 +130,10 @@ client = AzureOpenAI(
 * utile usare ADF alimentato con i JSON dell'indice, o PowerBI su un relazionale creato a partire dai dati dell'incide
 * Microsoft.Skills.Util.ShaperSkill usata per creare un json con certi campi e certi valori basati su elementi dell'indice (proiezioni) mapping
 * viene così creato un knowledgeStore materializzando quello che serve in oggetti (json), file (png, jpeg) e tabelle definendo cosa si vuole e come in un json della
+
+## 11. Lingua con AI Search
+
+* competenza custom in cui estendo con AI Language features
+* traduzione, sentiment, QA, estraz info, summarize, classification
+* tutte le funz sia standard che personalizzabili se hanno l'icona ingranaggio verde e *
+* [Language studio](https://language.cognitive.azure.com/)
