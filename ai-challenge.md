@@ -131,9 +131,49 @@ client = AzureOpenAI(
 * Microsoft.Skills.Util.ShaperSkill usata per creare un json con certi campi e certi valori basati su elementi dell'indice (proiezioni) mapping
 * viene così creato un knowledgeStore materializzando quello che serve in oggetti (json), file (png, jpeg) e tabelle definendo cosa si vuole e come in un json della
 
-## 11. Lingua con AI Search
+## 11. arricchire dati di Lingua con AI Search
 
 * competenza custom in cui estendo con AI Language features
 * traduzione, sentiment, QA, estraz info, summarize, classification
 * tutte le funz sia standard che personalizzabili se hanno l'icona ingranaggio verde e *
 * [Language studio](https://language.cognitive.azure.com/)
+
+## 12.
+
+## 13.
+
+## 14.
+
+## 15.
+
+## 16.
+
+## 17.
+
+## 18.
+
+## 19.
+
+## 20.
+
+## 21.
+
+## 22.
+
+## 23. Copilot Studio
+
+* permette di creare chatbot
+* diversi ambienti in base a target o location (es. Cina Germania x privacy diversa)
+* definire fino a 1K nodi argomenti. Un arg: frasi trigger e poi domande/risposte/info
+* possibili variabili/parametri ed entità
+* pubblicaz bot x usarlo in teams, slack, facebook...
+* test del bot live o alla pubblicazione
+
+## 24.
+
+## 25.
+
+## 26.
+
+## 27.
+
