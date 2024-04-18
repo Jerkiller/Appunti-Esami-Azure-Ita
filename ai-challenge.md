@@ -162,14 +162,27 @@ client = AzureOpenAI(
 
 ## 23. Copilot Studio
 
-* permette di creare chatbot
+* permette di creare chatbot (aka power virtual agent)
 * diversi ambienti in base a target o location (es. Cina Germania x privacy diversa)
-* definire fino a 1K nodi argomenti. Un arg: frasi trigger e poi domande/risposte/info
+* definire fino a 1K nodi argomenti. Un arg: frasi trigger e poi nodi di conversazione (domande/risposte/info)
 * possibili variabili/parametri ed entità
 * pubblicaz bot x usarlo in teams, slack, facebook...
 * test del bot live o alla pubblicazione
 
-## 24.
+## 24. Argomenti Copilot
+
+* nodi argomenti: info/domadna/condiz/variab/goto_argom/scheda interatt/azione/avanzate
+* domanda chiusa (risposta multipla - campo identify x specificare su che dominio) e aperta (data ora/int/str) -> risposta salvata in variabile
+* varie opz domanda: ripetiz, opzionale, escalation, ecc
+* immagine o video in risposta (es. tutorial)
+* schede adattive indipend dalla piattaforma, carousel o elenco con piu schede
+* risposte rapide
+* invoca azione scatena flusso power automate (es manda mail)
+* flusso condizionale (if a è uguale a b, ... ramo) tutte le altre opzioni... ramo
+* aggiunta pagine web https x istruire il bot. il bot propone una serie di temi da includere nei nodi di un argomento
+* se non viene riconosciuto l'intento dell'utente, si può gestire un argom di sistema riassegna che passa la palla al bot oppure un argomento preimpostato di fallback, in cui per es. viene fatta escalation
+* stato degli argomenti (si possono abilitare/disab)
+* errori dei nodi / argomenti: es. cancello una variabile usata altrove, errori generici...
 
 ## 25.
 
