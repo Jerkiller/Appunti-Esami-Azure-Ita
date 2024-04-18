@@ -184,9 +184,19 @@ client = AzureOpenAI(
 * stato degli argomenti (si possono abilitare/disab)
 * errori dei nodi / argomenti: es. cancello una variabile usata altrove, errori generici...
 
-## 25.
+## 25. Entità e variabili
 
-## 26.
+* entità tipizzate, regex, tipo oggetti
+* variabili, visibilità in tutto il bot se iniziano con "bot."
+
+## 26. Migliorare i bot
+
+* flusso di MS power automate con parametri in input dal bot e output da flow (es. citta -> meteo -> info tempo)
+* escalation verso multichannel di Dynamics 365 o Salesforce, Genesys, ZenDesk, ServiceNow...
+* generative AI su siti web e sharepoint
+  * risp fallback con AI
+  * argomenti con AI per variare testo
+  * copilot x generaz nuovi argomenti
 
 ## 27.
 
