@@ -155,11 +155,52 @@ client = AzureOpenAI(
 * posso aggiungere nuove lingue usando set di competenze traduzioni dove uso descr_en come input e sparo fuori descr_jp come out.
 * funzioni geospaziali: geo.distance, geo.intersects (la prima x distanza tra 2 punti, la seconda per intersez punto-poligono utile per filtrare ordinare ricerca. poligoni in senso antiorario e chiusi (primo=ultimo pt). distance lt 5 = dist < 5km.
 
-## 13.
+## 13. AML Custom Skill
 
-## 14.
+* Microsoft.Skills.Custom.AmlSkill
+* Endpoint custom location.cloudapp.azure.com:443 in AKS (no ACI), nodi + potenti, migliori performance
+* con modelli cm regressioni o classificazione, utile arricchire un indice con competenza custom x calcolare un campo
 
-## 15.
+## 14. Push dati in indice
+
+* indexers fanno pull dati x creare o arricchire indice.
+* ADF può fare push di dati verso indice (sink). Approccio no-code con +100 data source
+* creare indice a mano, andare su ADF fare nuova pipeline di ingest, mapping campi ed è fatta. Limite: solo tipi semplici supportati
+* altro modo di fare push è con rest api. Push con api key su endpoint ***.search.windows.net
+  * POST con azioni di tipo upload, merge uploadOrMerge, Delete (insert update upsert delete)
+* usare SDK Azure.Search.Documents
+  * suggerimento: mandare un batch di 100N elementi e ottimizzare N per ricevere risposta valida in meno tempo/MB
+  * exponential backoff (codici 207 e 503) e threading
+
+## 15. Sicurezza e gestione AI Search
+
+* Sicurezza
+   * approccio on-prem: company on prem - Express-route - az gateway app service con deny internet traffic e attaccato az congnitive service
+   * traffico in transito in https (eventualm chiavi su vault)
+   * auth di ricerca con query key (max 50) o admin key (max 2)
+   * proteggere traffico in uscita (es. con app entra) vrs AzureCognitiveSearch (ip noti) o altre risorse
+   * protegg dati a liv di documento: utente-gruppo-gruppo di docum indicizzati-docum. metere in query di ricerca "search.in" e taggarlo come security_field
+* Performance
+   * date da grandezza e compless indice
+   * aggiungere log analytics al servizio di ricerca cognitive service in modo da misurare prestaz
+   * le richieste lunghe vengono limitate (207 e 503) da verificare in log analytics
+   * prova a fare 1 query con postman. sottrai tempo totale risposta 125ms da elapsed-time (negli response header) = 125-21 = 104ms totale tempo di roundtrip
+   * ridurre dimens e compless indice. tolgo alcuni campi, alcuni li rendo non sortable, altri solo facetable...
+   * scalare servizio di ricerca (grazie al...), fare + partizioni (max 12) x parallelizzare
+   * migliorare le richerche, più puntuali e meno generiche, meno complesse
+* Costi
+   * alti.
+   * saperli stimare col price calculator in base al num di dati, immg crackate, ecc.
+   * ridurre banda, tenere tutto in unica area, anche il frontend.
+   * usare budget e avvisi
+* Affidabilità
+   * 2/3+ repliche x SLA alti di query e di indicizzazione
+   * backup indice delegato all'utente
+* Monitoring
+   * usare metriche LogAnalytics come docum processati, grandezza indice, ricerche al sec, conteggio exec skill, richieste throtthlate...
+   * query custom KQL su AzureDiagnostics
+   * creazione avvisi in base a metriche e soglie
+   * 
 
 ## 16.
 
