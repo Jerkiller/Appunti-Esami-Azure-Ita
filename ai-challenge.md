@@ -202,19 +202,29 @@ client = AzureOpenAI(
    * creazione avvisi in base a metriche e soglie
    * 
 
-## 16.
+## 16. Classificaz semantica
 
-## 17.
+* 1K query di ricerca semantica gratuite (max 50 risultati)
+* ordinamento migliore x classificaz semantica (comprensione linguaggio)
+* riepilogo testuale - didascalie
 
-## 18.
+## 17. ricerca vettoriale
 
-## 19.
+* query vettoriali. I doc vengono indicizzati tramite vettori numerici non intelligibili
+* record simili avranno distanza vettoriale simile
 
-## 20.
+## 18.-19.-20.-21.-22. riconoscimento form
 
-## 21.
-
-## 22.
+* training su modello di questionario/documento es. dichiaraz di successione, biglietti da visita, W2
+* da dati scritti e stampati (pdf) a dati strutturati
+* modello composto se ci sono + template diversi ank con campi diversi. vengono puntati altri modelli. (ottimo x il caso misto)
+* modello generale se non c'è una struttura mai
+* modelli specifici o opzioni x la selezione se ci sono caselle da annerire
+* utile per import massivo
+* integrazione SDK Py Java JS C# REST avendo endpoint+apikey
+* azure ai document image studio
+* training personalizzato con json e immg, meglio se alta qualità. alemno 5-6 esempi
+* custom skillset - competenza personalizzata x sfruttare cose custom nell'analisi di un form (ACI,AKS,FUN) Microsoft.Skills.Custom.WebApiSkill URI+I/O
 
 ## 23. Copilot Studio
 
