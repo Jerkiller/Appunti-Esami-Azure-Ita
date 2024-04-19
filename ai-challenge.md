@@ -138,7 +138,22 @@ client = AzureOpenAI(
 * tutte le funz sia standard che personalizzabili se hanno l'icona ingranaggio verde e *
 * [Language studio](https://language.cognitive.azure.com/)
 
-## 12.
+## 12. Migliorare ricerca
+
+* Lucene estende funz di ricerca:
+  * fuzzy, di prossimità (3 parole a non + di 10 parole di distanza), regex, booleani, bool con raggruppamento, boosting di una parola^3, campo specifico e jolly
+* AI search usa algoritmo somiglianza BM25
+  * scoring dato da questo algoritmo in base ai termini
+  * scoring profile può ess definito x ponderare alcune categorie
+* tokenizzazione, lemmatizzazione fatta nel creare indice. 50 diversi language analyzer in MS. Pattern analyzer specializzato x cercare una specifica regex (cod postale)
+  * 3 step: filtri caratteri -> tokenizzatore -> filtri di token -> indicizzazione token
+  * filtri caratteri come html_strip, mapping come TX -> Texas
+  * tokenizer (13 diversi e svariati) di solito x lingua
+  * filtri token rimuove spazi, apostrofi, possessivi, punti degli acronomi, token + lunghi di 50 caratt...
+* possibile creare un custom analyzer definendo charFilters, tokenizers, tokenFilters. Viene invocato in REST e viene settato nella definiz dell0'indice
+* supporto multilingua. Si possono impostare + analyzer in varie lingue in contemporanea, in modo che in ricerca limito la query alla ricerca sul campo in tale lingua e ottengo score migliore
+* posso aggiungere nuove lingue usando set di competenze traduzioni dove uso descr_en come input e sparo fuori descr_jp come out.
+* funzioni geospaziali: geo.distance, geo.intersects (la prima x distanza tra 2 punti, la seconda per intersez punto-poligono utile per filtrare ordinare ricerca. poligoni in senso antiorario e chiusi (primo=ultimo pt). distance lt 5 = dist < 5km.
 
 ## 13.
 
@@ -198,5 +213,26 @@ client = AzureOpenAI(
   * argomenti con AI per variare testo
   * copilot x generaz nuovi argomenti
 
-## 27.
+## 27. Progettaz copiloti
 
+* uso interno aziendale dei copiloti x sostituire intranet faq
+* farsi domande tipo: dove migliorabile? dove cercano i clienti risposte? ...
+* definire possibili scenari e azioni (nelle varie fasi di processo prevendita, pagam, acquisto, spediz, postvendita...)
+* punti chiave di un copilota
+  * deve conoscere cliente e capire le esigenze
+  * dare contenuti efficaci e aggiornati
+  * assistenza puntuale non generica
+  * azioni intraprese o scalabilità verso umani
+  * frasi brevi, tono positivo e pro-attivo, colloquiale. evita assertività(imperativi) o formalità
+  * rispettare i pronomi io(bot)/noi (azienda)
+* qualità copilota: cooperativo, objecitve-oriented, veloce, a turni, sincero, educato
+* tipi argomenti
+  * informativi
+    * cos'e? perché? quand'è?
+  * attività
+    * vorrei... come posso...?
+  * risoluz probl
+    * quando ... ricevo mess di err. Qualcosa non funz.
+* creare albero nodi di conversazioni. tenerlo corto o accorciarlo xk all'utente non piace rispondere a 10 domande
+* dare obb a un argomento. es. arg. "reso" -> il cliente è autonomo x la restituzione
+* valutare efficacia nel tempo: KPI come abbandono, completamento, tempo attività, num escalation, argomenti abbandonati...
