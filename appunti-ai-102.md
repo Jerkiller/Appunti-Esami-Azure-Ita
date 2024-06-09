@@ -80,6 +80,13 @@ client = AzureOpenAI(
 
 ## 07. Responsible AI
 
+* Basic prinicples
+  * Fairness (No biases)
+  * Reliability+Safety (No harm)
+  * Privacy+Security
+  * Inclusiveness (Everyone, disability)
+  * Transparency
+  * Accountability (Governance, ethics, legal standards)
 * Approach in 4 steps mutuated by NIST AI Risk Framework: identify risks, measure them in the output, mitigate impact&presence, manage solution responsibly with a plan
 * Identify Risks: generate inexact content, hallucinate, harmful, offensive content, illicit illegal content, biased, discriminatory content...
 * Measure risks: measure possibility to happen and impact of risk. Can be subjective evaluation (e.g. make poison with cooking assistant).
