@@ -4,6 +4,13 @@
 
 ## 01. Intro
 
+* AI = SW that exhibit human-like capabilities
+  * Visual perception (is it a happy image)
+  * Language (understand)
+  * Speech (hear/speak/conversate)
+  * Decision making (spikes/thresholds)
+* AI built on top of ML (on data algorithms to train prediction models)
+* ML built on data science (math+statistics)
 * Deep learning - performant in unstructured data (lang, images), whereas alberi con boosting sfumato (XGBoost, LightGBM e CatBoost) for tabular data or GLM, decision trees...
 * [REgister OAI Azure](https://aka.ms/oai/access) [Access OAI](https://oai.azure.com/)
 * `az cognitiveservices account create -n MyOpenAIResource -g OAIResourceGroup -l eastus --kind OpenAI --sku s0 --subscription subscriptionID`
@@ -28,6 +35,51 @@
   * max length and stop sequence - indicate the length of a possible answer and how to finish it
   * pre-post text: add text before after the model answer to allow user to continue the conversation or to take time 4 the model to think
 * nel playground si possono scrivere esempi di conversazioni. si parla di modello few-shots (zero-shots è chatGPT puro)
+* AzML - data - train model and deploy and use it
+* Cognitive Services
+  * Visual Perception
+    * Image Analysis - get cathegories, tags
+    * Video Analysis
+    * Image Classification
+    * Obj Detection
+    * Face Analysis
+    * OCR
+    * Forms recognizer
+ * Language
+    * Lang Understanding
+      * Answerting question
+      * Text analysis
+    * Translation
+ * Speech
+   * Hearing (speech to text)
+   * Speaking (text to speak)
+   * Speech translation
+   * Speaker recognition
+* Decision making
+   * Anomaly detection
+   * Content moderation (is text suitable for 18+)
+   * Content personalisation (cart suggestion)
+* Other
+   * Metrics adviser
+   * Immersive reader (pics, insights)
+   * Bot services - conversational interaction (mail, web chat, teams, oth)
+   * Cognitive search - data, index enriched, search against index
+* How to use cogn services? add instance of service in my subscription and I get my cognitive services resource (region)
+  * res = multiservice (single endpoint, single access credentials, standard pricing, no free) / or / single service
+  * training may require different resource (a cost for train, a cost for use)
+  * endpoint URI of a resource
+    * firewall to restrict some IPs or service endpoint (subnet) / private endpoint
+    * REST (any lang, max personalisation, more complex) / SDK (create a client (endpoint, credentials) and use it, much sinpler)
+  * 2 keys for key rotation (regeneration command rest) -> store key in KV (RBAC for service principal)
+  * some services use tokens
+  * cost - pay as you go - pay for transactions, how much do I use it?
+  * metrics / logs (audit, response, trace) - diagnostics settings -> log anal workspace (az monitor), event hub, ext system, storage
+  * on premise scenario
+    * sometimes necessary (cars, factories) 
+    * provisioning of cognitive services as containers from mcr.microsoft.com docker registry
+    * 3 params required: Api key, billing URI, eula (must accept)
+    * some internet connectivities to report consumptions to billing endpoint
+  
 
 ## 02. Integrate Open AI and apps
 
@@ -294,3 +346,40 @@ client = AzureOpenAI(
 * creare albero nodi di conversazioni. tenerlo corto o accorciarlo xk all'utente non piace rispondere a 10 domande
 * dare obb a un argomento. es. arg. "reso" -> il cliente è autonomo x la restituzione
 * valutare efficacia nel tempo: KPI come abbandono, completamento, tempo attività, num escalation, argomenti abbandonati...
+
+## Image analysis
+
+* captioning srv
+* tags, add cathegory
+* obj: it's a car at (88,102,200,400) top-left and width height
+* adult content recognition
+* celebrity recognition
+
+## Video analysis
+
+* Face
+* OCR
+* speech (create transcription)
+* captioning/labels (key topics extract)
+* sentiment analysis
+* content moderation (adult/not)
+* scene segmentation
+* concepts, brands, project recognition
+
+## Image classification
+
+* train data with labels and images
+* class label based on global image
+* multi-label (1 immag ha + label) multi-class (+ label possibili, ma 1 immag ha 1 sola label)
+* facial analysis (no more age/sex)
+  * where it is, info about it, detection, verification
+  * detection = unique ID for every face (cached for 24h) useful to count people enter building and leave building
+  * recognition - person group with some pics of ppl
+* OCR read-api from images/pdf (small-large) books, magazines
+  * 2000 pag, 500MB (4MB in free), 50x50-10Kx10K
+* image analysis api can do ocr, but limited.
+
+## Lang understanding
+
+https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTraining
+1.11.40
