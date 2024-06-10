@@ -410,3 +410,41 @@ client = AzureOpenAI(
 
 https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTraining
 1.27.38
+
+
+## Answers
+
+* export model to gzip, set app version to v1.1, run container with model mounted # https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-container-howto
+* dispatch service useful to route user across many tasks/bots according to utterance
+* create a service for ocr+sentiment analysis with single endpoint? PUT + CognitiveService (update = PATCH)
+* on prem anomaly detection: (pull anomaly detection image implicit in build) - create custom dockerfile - build it + push to az cont registry - deploy a docker run script
+* cognitive services billing = contoso.cognitiveservices.azure.com , sent analysis image mcr.microsoft.com/azure-cognitive-services/textanalytics/sentimen
+* no free tier for computer vision. to add caption to images, custom vision prediction
+* regenerateKey => a new query key is generated for rotation
+* form recognizer limits for CUSTOM model training: 50MB, images and pdf
+* CMK encryption requires AzKV. increase index size and degrades query performance
+* app in vm+vnet must use cogn service without internet -> PRIVATE endpoint + az private link.
+* mp3 to text - GetCompressedFormat(MP3) + speechRecognizer
+* QnA - deploy QuognitiveService n Appservice to perform queries
+* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig
+* process 50K images OCR + text analytics -> cogserv s0
+* https://www.examtopics.com/exams/microsoft/ai-102/view/6/
+
+## Snippets
+
+
+```csharp
+// Add phraselist feature to programmatically add phrases to bots https://docs.microsoft.com/en-us/azure/cognitive-services/luis/client-libraries-rest-api
+var phraselistId = await client.Features.AddPhraseListAsync(appId, versionId, new PhraselistCreateObject
+{
+EnabledForAllModels = false,
+IsExchangeable = true,
+Name = "QuantityPhraselist",
+Phrases = "few,more,extra"
+});
+
+private static async Task AnalyzeReceipt(
+FormRecognizerClient recognizerClient, string receiptUri)
+{
+RecognizedFormCollection receipts = await recognizerClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
+```
