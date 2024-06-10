@@ -381,5 +381,32 @@ client = AzureOpenAI(
 
 ## Lang understanding
 
+* learned
+  * CLU utterence recognize pre-built entities or trained ones (train-test-deploy-review cycle)
+  * custom named entity / data+labels as json
+  * custom txt classification (single/multi label)
+* pre-built
+  * summary
+  * PII detection (IP; mail , name...)
+* KPIs
+  * recall - dataset con 6 documenti con la parola pizza. la ricerca mi da 3 giusti e 1 errato. recall = 3/6 = 0.5
+  * precision - come prima, ma è 3/4 = 0.75
+* question answering
+  * big knowledgebase - I want an endpoint to answer questions on it.
+  * a bot can call this endpoint in NL
+  * confidence of answer = %. gGimme 3 most confident answers
+* text analisys
+  * lang detection
+  * keyphrase extraction
+  * sentiment analysis (positive .9)
+  * named entity recognition
+  * entity linking
+* trnanslation
+  * lang detection
+  * one-to-many translation
+  * transliteration (alphabets)
+  
+
+
 https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTraining
-1.11.40
+1.27.38
