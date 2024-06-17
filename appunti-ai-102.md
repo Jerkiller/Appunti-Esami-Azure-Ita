@@ -1,6 +1,9 @@
 # AI Challenge
 
-> [Link to the challenge](https://learn.microsoft.com/it-it/collections/ddkzh7oe0jpk?WT.mc_id=cloudskillschallenge_da09d3ca-a2bb-47dc-ba42-bea77b386a3d)
+> * [Link to the challenge](https://learn.microsoft.com/it-it/collections/ddkzh7oe0jpk?WT.mc_id=cloudskillschallenge_da09d3ca-a2bb-47dc-ba42-bea77b386a3d)
+> * [Syllabus](https://learn.microsoft.com/it-it/credentials/certifications/resources/study-guides/ai-102#skills-measured-as-of-march-28-2024)
+> * [video indexer](https://www.videoindexer.ai/)
+
 
 ## 01. Intro
 
@@ -60,7 +63,7 @@
    * Content moderation (is text suitable for 18+)
    * Content personalisation (cart suggestion)
 * Other
-   * Metrics adviser
+   * Metrics advisor (RCA)
    * Immersive reader (pics, insights)
    * Bot services - conversational interaction (mail, web chat, teams, oth)
    * Cognitive search - data, index enriched, search against index
@@ -165,7 +168,7 @@ client = AzureOpenAI(
 * **data source**: cosmos, azsql, blob semistrutturati, indice json diretto
 * **set di competenze**: da 1 doc si poss estrarre varie info: lingua, sentiment, immg contenuto, pti chiave, luoghi menzionati, ecc. competenze custom
 * **indexer**: processo lanciato all'avvio o periodicamente o on-demand x ricostruire indice (es aggiungi nuova competenza, rilanci)
-* **indice** composto da key, searchable, sortable, facetable, filterable, retrievable /default yes
+* **indice** composto da key, searchable (by word), sortable, facetable (drill-down), filterable, retrievable /default yes
 * document index è un JSON gerarchico es. doc0>image0>text0...
 * i campi dell'indice possono essere usati cm input x competenze che come 1 pipeline vanno a generare altri campi in out
 * search: fatta con SDK o REST API. sintassi query Lucene. modalità simple o full. La full supporta regex, o filtri complessi. seachFiels e select x dire che campi dell0index cercare e quali restituire
@@ -372,7 +375,7 @@ client = AzureOpenAI(
 * class label based on global image
 * multi-label (1 immag ha + label) multi-class (+ label possibili, ma 1 immag ha 1 sola label)
 * facial analysis (no more age/sex)
-  * where it is, info about it, detection, verification
+  * where it is, info about it (masks?, glasses?), detection, verification
   * detection = unique ID for every face (cached for 24h) useful to count people enter building and leave building
   * recognition - person group with some pics of ppl
 * OCR read-api from images/pdf (small-large) books, magazines
@@ -422,13 +425,20 @@ https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTr
 * no free tier for computer vision. to add caption to images, custom vision prediction
 * regenerateKey => a new query key is generated for rotation
 * form recognizer limits for CUSTOM model training: 50MB, images and pdf
+* form recognizer -> power bi (table projection)
 * CMK encryption requires AzKV. increase index size and degrades query performance
-* app in vm+vnet must use cogn service without internet -> PRIVATE endpoint + az private link.
+* throttling di search: indice troppo grande? non aumentare indice, ma scala di tier ++ schei. evita CMK. puoi aumentare repliche x parallel.
+* app in vm+vnet must use cogn service without internet (on prem) -> PRIVATE endpoint + az private link.
+* x limitare auth ad app, usare az roles
 * mp3 to text - GetCompressedFormat(MP3) + speechRecognizer
+* inclusiveness = bot+direct line speech. app auth con speech in entra id ha bisogno di pvt endpoint e dominio custom
 * QnA - deploy QuognitiveService n Appservice to perform queries
-* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig
+* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general
 * process 50K images OCR + text analytics -> cogserv s0
-* https://www.examtopics.com/exams/microsoft/ai-102/view/6/
+* describeImageInStreamAsync x leggere x non vedenti
+* OAI via arm tpl: capacity = parametro che indica quanti k-tpm (1000 richieste al minuto servire). app-OAI: auth via api key e endpoint + deployment name in sdk
+* bot with emulator framework x local dev
+* [pag 14 da fare](https://www.examtopics.com/exams/microsoft/ai-102/view/14/)
 
 ## Snippets
 
