@@ -3,7 +3,7 @@
 > * [Link to the challenge](https://learn.microsoft.com/it-it/collections/ddkzh7oe0jpk?WT.mc_id=cloudskillschallenge_da09d3ca-a2bb-47dc-ba42-bea77b386a3d)
 > * [Syllabus](https://learn.microsoft.com/it-it/credentials/certifications/resources/study-guides/ai-102#skills-measured-as-of-march-28-2024)
 > * [video indexer](https://www.videoindexer.ai/)
-
+> * [exam topics prime 15 pag](https://www.examtopics.com/exams/microsoft/ai-102/view/)
 
 ## 01. Intro
 
@@ -428,17 +428,18 @@ https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTr
 * form recognizer -> power bi (table projection)
 * CMK encryption requires AzKV. increase index size and degrades query performance
 * throttling di search: indice troppo grande? non aumentare indice, ma scala di tier ++ schei. evita CMK. puoi aumentare repliche x parallel.
-* app in vm+vnet must use cogn service without internet (on prem) -> PRIVATE endpoint + az private link.
+* app in vm+vnet must use cogn service without internet (on prem) -> PRIVATE endpoint/service endpoint + az private link. cambiare settings su CS x accedere a vnet
 * x limitare auth ad app, usare az roles
 * mp3 to text - GetCompressedFormat(MP3) + speechRecognizer
 * inclusiveness = bot+direct line speech. app auth con speech in entra id ha bisogno di pvt endpoint e dominio custom
 * QnA - deploy QuognitiveService n Appservice to perform queries
-* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general
+* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general. useful when video stream with audio must be analyzed
 * process 50K images OCR + text analytics -> cogserv s0
 * describeImageInStreamAsync x leggere x non vedenti
 * OAI via arm tpl: capacity = parametro che indica quanti k-tpm (1000 richieste al minuto servire). app-OAI: auth via api key e endpoint + deployment name in sdk
 * bot with emulator framework x local dev
-* [pag 14 da fare](https://www.examtopics.com/exams/microsoft/ai-102/view/14/)
+* az video indexer (one drive file -> download link)
+
 
 ## Snippets
 
