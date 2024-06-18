@@ -432,13 +432,14 @@ https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTr
 * x limitare auth ad app, usare az roles
 * mp3 to text - GetCompressedFormat(MP3) + speechRecognizer
 * inclusiveness = bot+direct line speech. app auth con speech in entra id ha bisogno di pvt endpoint e dominio custom
-* QnA - deploy QuognitiveService n Appservice to perform queries
+* QnA - deploy QuognitiveService n Appservice to perform queries. QnA fornisce risp statiche su dati statici, sempre la stessa risp a una domanda
 * recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general. useful when video stream with audio must be analyzed
+* troubleshooting speech to text. errori di inserimento: aggiungi voci in background, err in eliminaz aggiungi voci sovrapposte. err di riconoscimento, train modello con + parole di nomi persone o prodotti.
 * process 50K images OCR + text analytics -> cogserv s0
 * describeImageInStreamAsync x leggere x non vedenti
 * OAI via arm tpl: capacity = parametro che indica quanti k-tpm (1000 richieste al minuto servire). app-OAI: auth via api key e endpoint + deployment name in sdk
 * bot with emulator framework x local dev
-* az video indexer (one drive file -> download link)
+* az video indexer (one drive file -> download link). to adapt transcript, correct it directly or upload an adaptation text (some key words, some phrases). avoid special chars
 
 
 ## Snippets
@@ -459,3 +460,13 @@ FormRecognizerClient recognizerClient, string receiptUri)
 {
 RecognizedFormCollection receipts = await recognizerClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
 ```
+
+
+https://learn.microsoft.com/it-it/azure/ai-services/
+
+https://learn.microsoft.com/it-it/azure/ai-services/luis/
+
+https://learn.microsoft.com/it-it/azure/ai-services/speech-service/
+https://learn.microsoft.com/it-it/azure/ai-services/translator/
+https://learn.microsoft.com/it-it/azure/ai-services/language-service/
+https://learn.microsoft.com/it-it/azure/ai-services/luis/
