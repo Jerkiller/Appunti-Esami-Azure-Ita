@@ -425,6 +425,7 @@ https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTr
 * no free tier for computer vision. to add caption to images, custom vision prediction
 * regenerateKey => a new query key is generated for rotation
 * form recognizer limits for CUSTOM model training: 50MB, images and pdf
+* form recognizer - S0 0.5GB and 2K pag. file con password falliscono
 * form recognizer -> power bi (table projection)
 * CMK encryption requires AzKV. increase index size and degrades query performance
 * throttling di search: indice troppo grande? non aumentare indice, ma scala di tier ++ schei. evita CMK. puoi aumentare repliche x parallel.
