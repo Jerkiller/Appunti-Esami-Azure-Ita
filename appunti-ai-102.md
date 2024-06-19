@@ -352,7 +352,7 @@ client = AzureOpenAI(
 
 ## Image analysis
 
-* captioning srv
+* captioning srv (description) read for text read
 * tags, add cathegory
 * obj: it's a car at (88,102,200,400) top-left and width height
 * adult content recognition
@@ -433,14 +433,20 @@ https://www.youtube.com/watch?v=I7fdWafTcPY&ab_channel=JohnSavill%27sTechnicalTr
 * mp3 to text - GetCompressedFormat(MP3) + speechRecognizer
 * inclusiveness = bot+direct line speech. app auth con speech in entra id ha bisogno di pvt endpoint e dominio custom
 * QnA - deploy QuognitiveService n Appservice to perform queries. QnA fornisce risp statiche su dati statici, sempre la stessa risp a una domanda
-* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general. useful when video stream with audio must be analyzed
+* recognize spoken lang: SpeechtoText with AutoDetectSourceLanguageConfig. recognize multiple langs = cogn.text analytics/recognition/general. useful when video stream with audio must be analyzed. metrics = WER errors (words)
+* custom or base speech to test? custom if... noisy environment (train noise) or specific questions (topic training)
 * troubleshooting speech to text. errori di inserimento: aggiungi voci in background, err in eliminaz aggiungi voci sovrapposte. err di riconoscimento, train modello con + parole di nomi persone o prodotti.
 * process 50K images OCR + text analytics -> cogserv s0
 * describeImageInStreamAsync x leggere x non vedenti
 * OAI via arm tpl: capacity = parametro che indica quanti k-tpm (1000 richieste al minuto servire). app-OAI: auth via api key e endpoint + deployment name in sdk
 * bot with emulator framework x local dev
 * az video indexer (one drive file -> download link). to adapt transcript, correct it directly or upload an adaptation text (some key words, some phrases). avoid special chars
-
+* sentiment analysis: almeno 1 fr pos => pos, alm 1 neg => neg, misto => mixed, totalmente neutro => neutr
+* custom CLU: standard or advanced training. metrics - precision/recall/F1. precision considers TP&FP recall considers TP & FN. F1 mixes both
+* custom CLU: multilang by deafult, add different utter. in diff lang.
+* translation features - Transliterate, Detect, Dictionary lookup, and Dictionary example. translation text or document (sync/async)
+* custom translator? define dict, useful for specific contexts or domains.
+* BLEU score for evaluating translation goodness 100 or badness 0. 40-60 is high quality.
 
 ## Snippets
 
