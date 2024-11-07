@@ -48,6 +48,58 @@
     +-+-+
     |K|C|
 
+## AIGPE course
+
+* process hygiene factor is the basic requirement for a 6s project. A disciplinary issue is an example (people doing what they want). Small lean projects, kaizen lean instead, basic business management practices.
+* business ,ust be started more than 6 months earlier -> stable process
+* employees must be disciplined and well versed
+
+### AIGPE Exam
+* 50 mult choice questions
+* open book and no time limit
+* 2 attempts then costs 50$
+* translate projects into real scenario
+* study all topics in detail
+* complete activities several times
+* complete practice questions
+* simulation exam
+
+### Kaizen vs Lean vs 6s
+
+* Kaizen = change for the better (any **small improvement** in BP)
+  * problems where the cause is known and solution is simple
+  * 0-5 days to complete. 1 / team
+* Lean = **Elimination of waste**
+  * problems where the cause is known and solution is complex
+  * tools like VSM poka-joke (fool-proof processes), heijunka (load leveling), jidoka (automation with human intervention), JIT (necessary material when needed)..
+  * always team proj 45d-90d
+  * not data-driven
+* 6s - data driven methodology focused on standardize and **reduce variation**
+  * a 6s project has 3.4 defects in one million opportunities
+  * cause unknown and complex solution
+  * 90d-180d team proj
+
+### Sigma
+
+* std dev = how spread from the mean are data
+* process capability = capability of process to produce defect free work
+* more sigma = less DPMO (defects per million opportunities) 2s = 300K defects :-D
+
+### lean 6s
+
+* combination of lean amd 6s techniques
+* average industries perform at 3s level, while best-in-class at 6s
+* human related industries perform at 2s level (like airlaines baggage service, doctors, lawyers...)
+
+
+
+
+
+
+
+
+
+
 
 
 
