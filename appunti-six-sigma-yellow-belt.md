@@ -91,11 +91,50 @@
 * average industries perform at 3s level, while best-in-class at 6s
 * human related industries perform at 2s level (like airlaines baggage service, doctors, lawyers...)
 
+### Metodologies
 
+- DMADV define measure analyze design verify
+   - fot new product, process, serivice / very used in manufact
+   - lesser freqient use
+   - focus on creating right product with constr
+- DMAIC idem                   improve control
+   - require historical data
+   - for ongoing businessm more frequent usage
+   - goal of maximizing profits (sales productivity costs)
+- 
+### Six Sigma DMAIC
+* 5 phases define analyze measure improve control
+   * define: what problem trying to solve?
+   * what is the entity?
+   * why is it happeninhg?
+   * what do tou propose to do?
+   * how to control proposal execution?
+* at end of each phase, toll gate review / meeting
+* 15 steps with tools
+* based on PDCA (plan = define, analyze = do, improve = check, control = act)
+* proj = 3-6 months
+* how long each phase? it depends... every proj is unique
+* the only documented step vby step meth in the markey to solve every business problem
 
+### YB role
 
+* part time role
+* help green belt
+* execute smaller proj
+* execute sipoc, proc map, brainstorm, rca, solution ident
+* smetimes subject matter expert
+* data collection actm basic data anal
+* implement and monitor pilot
+* update control charts and exec control plans
+* mentored by a green belt
 
+* soft skill will be developed
+   * good facilitation
+   * change management
+   * analyt skills
+   * leadership and communication
 
+-
 
 
 
