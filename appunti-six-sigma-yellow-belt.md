@@ -136,9 +136,27 @@
 
 -
 
+#### DEFINE
 
+> addresses the problem to solve
 
-
+* 3 steps:
+   *  understand customer and business requirement
+      *  VoC
+   *  complete proj charter
+      * proj chart how do you know there is a probl, which measures? what success look like? scope? team? proj plan? 
+   *  complete high level as is process map
+      * sipoc (40000ft above) where is the probl occurring
+    
+##### step 1
+* customer is king, everything starts with customers
+* capture stated unstated and anticipated customer requirements
+* methods:
+  * surverys (more generic than specific, email, fast feedback from many people. with time and money constraints it's useful)
+  * interviews /smaller segment of customer, specific feedback. phone or in person with trained facilitator
+  * focus groups (similar to interview but with group of cust at one time, meeting, if willing to participate with multiple customers, also via social
+  * suggestion complaints, compliments or observations
+* get specific customer verbatim comments /(feedbacks)
 
 
 
