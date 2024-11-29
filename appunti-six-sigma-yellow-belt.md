@@ -192,13 +192,31 @@
   * mbb expert stats, drive vision, coach, review gates
   * bb drive large proj, leads tollgates, expert stats, coach train gb
   * gb drive process proj, participate tollgates, coach train yb and wb parttime
-  * yb
+  * yb subj amatte exp basic data analysis, parttime
+  * wb subj amatte exp parttime
 * milestones
+  * high-level documented
+  * realistic but aggressive
+  * planned start and end dates for each phase
 * everyone must agree on scope benefit target and timeline
+* why projects fail?
+  * failure to define proj correctly
+  * scope creep
+  * communication
 
 
+##### step 3
 
-
+>SIPOC
+* high level process map (end to end)
+* one of the 7 quality tools
+* use it when -> need understanding in 1 page
+* it describe the "as-is" not the "as-should-be"
+  steps:
+* identify 5-7 H-L steps of proc
+* identify customer who receive the outputs and the outputs
+* identify all inputs (without them, the function doesn't work), and who are their suplliers
+* verify the flow and validate with stakeholders
 
 
 
