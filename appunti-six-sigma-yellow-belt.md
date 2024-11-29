@@ -158,5 +158,53 @@
   * suggestion complaints, compliments or observations
 * get specific customer verbatim comments /(feedbacks)
 
+* need = desire/expectation from product or service
+* requirement = attribute that fulfill a need (the must of a product), should be measurable
+* how to translate voices to requirements? ask, involve customer, deep ask, translate terms to yours, review, prioritize. Use this template:
+* VoC (verbatim, exact) - Critical customer criteria need - CTQ requirement (KPI, metric)
+* I hope to book my flight without error through the call center - need: ACCURACY (issue correct flight tickets as communicated) - CtQ 100% accuracy issuing tickets
+
+##### step 2
+
+* project charter: document with a framework for improving project
+* created at the beginning of dmaic proj
+* it's a living document (uodated on a regularly basis)
+* it includes
+* problem statement
+   * pain of customer
+   * full of numbers, what is probl, when where, magnitude, consequences of the problem
+   * be short, not wordy
+   * no blame, no cause, no solution
+* goal statement
+  * define the improvement objective (starts with a verb improve eliminate control)
+  * time bound
+  * SMART specific measurable attainable/achieavable relevant timebound
+  * no cause, blame or solutions
+* project scope
+  * start, end points
+  * proj constraints and dimension
+  * horizontal scope - end to end process
+  * vertical scope - going in depth of team or location
+  * define out of scope
+* project team
+  * selected by black and green belt
+  * champion
+  * mbb expert stats, drive vision, coach, review gates
+  * bb drive large proj, leads tollgates, expert stats, coach train gb
+  * gb drive process proj, participate tollgates, coach train yb and wb parttime
+  * yb
+* milestones
+* everyone must agree on scope benefit target and timeline
+
+
+
+
+
+
+
+
+
+
+
 
 
