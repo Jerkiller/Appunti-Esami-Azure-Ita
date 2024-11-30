@@ -134,7 +134,7 @@
    * analyt skills
    * leadership and communication
 
--
+---
 
 #### DEFINE
 
@@ -207,20 +207,49 @@
 
 ##### step 3
 
->SIPOC
+> SIPOC / COPIS
 * high level process map (end to end)
 * one of the 7 quality tools
 * use it when -> need understanding in 1 page
 * it describe the "as-is" not the "as-should-be"
-  steps:
+
+steps:
+
 * identify 5-7 H-L steps of proc
 * identify customer who receive the outputs and the outputs
 * identify all inputs (without them, the function doesn't work), and who are their suplliers
 * verify the flow and validate with stakeholders
 
+---
 
+#### MEASURE
 
+##### Step 4 identify what to measure
 
+> process map
+* describes steps of process in time, flow of info across depts
+* identifies roles and responsabiltiies
+* identifies dependendcies and bottlenecks
+* interaction betw proc and tech requirements
+* How to do it?
+  * do it with a team (people who do it), validate, ask a lot, find issues
+  * stay high level
+  * map it "as-is"
+  * map it across he organization
+  * start from the borders: define start and end first
+* swimlane diagram (lanes like a swimmingpool)
+* 
+
+common symbols
+* oval - terminal activity
+* rect - activity
+* diamon - decision/question - M-options or binary
+* arrow - connector - flow and direction of proc
+* D - delay - when the process tempor. halts and what has to happen to resume
+* rect paper - document - written docum is prepared name of doc
+* DB
+* triangle-down - storage - what's stored and for how long
+* window rect - predefined process
 
 
 
