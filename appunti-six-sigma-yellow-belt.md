@@ -251,7 +251,56 @@ common symbols
 * triangle-down - storage - what's stored and for how long
 * window rect - predefined process
 
+**WASTE / NVA**
+> anything other than the minimum amount of info, equipment, material, effort required to add value to product or services (definition of NVA non-value-added)
+* the customer is unwilling to pay it
+* it should be eliminated
+* where is waste? 8 major wastes help us identify them
 
+Every step of process can be:
+* value add
+* NVA
+* business value add
 
+**8 wastes**
 
+1. DEFECTS/REWORK
+   * rejects that req additional time, rss, $ to fix
+   * rejects/scrap in production
+   * not in good order transaction in services
+   * missing info or rework loops or breaks
+2. OVERPRODUCTION
+   * producing too much or too soon
+   * more info requested than required
+   * effort not aligned wth risk complexity or cst needs
+   * poorly applied automation
+3. WAITING
+   * a work has to stop for some reason
+   * next in line is overwhelmed
+   * something broke down
+   * waiting for approval
+   * run out o something
+4. NONUTilized skills
+   * fail to utilize time & talents of ppl
+   * experts doing simple tasks
+   * missing training or team work
+   * poorly defined jobs & expectations
+5. TRANSFER / TRANSPORTATION
+   * excessive back and forth
+   * movements across locations buildings
+6. INVENTORY
+   * work stuck in mail inboxes, fixed assets
+   * bottlenecks in styaging WIP
+   * idle or underutilized eqipment
+7. MOTION
+   * inefficient placement of rss creating motion
+   * office rss disposition
+   * distance betw workstations
+   * poor housekeeping
+8. EXCESS PROCESSING
+   *  similar info in several places
+   *  large variation in tim to do similar tasks
+   *  unnecessary approvals
 
+> DOWNTIME
+* acronym of 8 wastes
