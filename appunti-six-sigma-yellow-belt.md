@@ -302,5 +302,79 @@ Every step of process can be:
    *  large variation in tim to do similar tasks
    *  unnecessary approvals
 
-> DOWNTIME
-* acronym of 8 wastes
+> DOWNTIME - acronym of 8 wastes
+
+##### Step 05
+
+* there is underlying cause of every defect. Defect = Y cause = x.
+* for every Y, possibly many xs. Y = f(x)
+* e.g. Y = high cycle time, x = system latency, missing training employees, ..
+* SS -> focus on causes xs. Work on them and Y will reduce automatically
+* Data classification = discrete(attribute data, based on counts, integers only) vs continuous data (variable data, like time or length or percentages, anything that can be bifurcated into meaningful fractions)
+* data collection plan - how, who, when, what data to collect
+   * HOW - data collection can be tedious to be done (>15 min per day is bad), try to do it automatically, standardize it with checksheet (1 of 7 basic tools)
+   * WHO - Ppl can face dynamics like being afraid of data being known or be controlled or judged, ppl must know the benefits of measuring. PPl must be trained and exercise
+  * WHEN - at 5pm? every hour?
+* **SAMPLING** - when it's impractical, costly in money or time - collect only a portion of meaningful data
+   * simple random sampling - same probability to pick up a type or another one, like taking MnMs colour from bag
+   * stratified random sampling - divide population by character and then sample N for each group. Like divide MnMs by colour and take 3 for each
+   * systematic sampling - take every nth element, like odds, evens or 1 every 10...
+* minitab - 1972 called omnitab penssylvania university
+   * 1500$ single license (or free trial)
+   * SPSS IBM more priced and more complicated
+   * Sigma XL not complex cheaper than minitab
+* minitab - 2 main windows worksheet and menu with all functionalities
+* pvalue - output of all statistical analysis performed in minitab
+   * reference value is 0.05. >0.05 - data is stable <0.05 data unstable
+
+##### Step 06
+
+Identify data characteristics
+* measures of central tendency
+   * **mean**. Disadvantage: it's meaningless with extreme values (skewed data)
+   * **median**
+   * **mode** - most frquently data point. only with repeated values
+* measures of dispersion/variation (std dev)
+   * avg distance of all data poits from the mean
+   * mean = 65%. stddev = +/- 3% => data from 62-68%
+* minitab - Stat - Basic Statistics - select which stats, which variable
+
+Check for data stability
+
+* each business process have variation - data reflects it and output too
+* stable data has small fluctuations
+* use runcharts (1 of 7 basic tools)
+* Minitab - stat - quality tools - Run chart - select column and subgroup = 1
+   * if a single p-value of clusters mixtures trends or oscillations is < 0.05 data is unstable
+   * if data is unstable, investigate the reason. you could collect more data. Don't use unstable data for analysis!
+   * if data is stable go to step 7
+
+Identify defects, defectives, unit and opportunities for error (OFE)
+
+* OFE = # of elements that can cause a possible defect
+* defects = # of errors/problems. a defect is a failure to meet customer req or performance standard
+* unit = element being processed (or sampled) that can have multiple defects but can be defective or non difective (1 defect could be acceptable)
+* defectives = # of bad units
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
