@@ -364,6 +364,55 @@ Process Capability
   * lookup DPMO to nearest sigma table conversion
 
 
+#### ANALYZE
+
+> Why a probl occurs?
+> Perform and validate analysis, then review with a proc champion and go to improve
+
+##### Step 07
+
+**Identify performance gaps**
+
+Process map review
+
+* place meeting to review together map with clear agenda
+* document problms, disconnections, opportunities, measures
+* annotate thoughts
+* validate things together, not in solution mode, but can start thinking of it
+
+Brainstorming
+
+* Used when creativity must be boosted
+* both for individual or group usage (4-8)
+* tips
+  * 4-8 ppl
+  * rules well defined
+  * ppl already did something at home
+  * short breaks (5 every 15-30)
+  * warmup if group is new
+  * start/end with an "around the room"
+  * ideas visible and recorded
+  * keep topic open after the brainst.
+  * number items
+  * ppl speak 1 at a time
+  * awarness of criticism or phrase
+  * checklist of techniques to expand ideas: modify, magnify, minify, subst.
+  * establish need for brainst
+  * enforce everyone's participation
+  * stop early deviations from main topic
+  * never judge ideas, crazy are welcome
+  * appreciate and thx everyone
+* pros
+  * consensus, buy-in
+  * everything by everyone on the table
+  * promote unique ideas and validation
+* cons
+  * can b slow
+  * only 1 can be done with the team, with many ppl
+
+##### Step 08
+
+##### Step 09
 
 
 
