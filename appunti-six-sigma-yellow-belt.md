@@ -444,14 +444,23 @@ ASCERTAIN TYPICAL RC
 * classify RC based on impact high med low
 * create matrix 3x2. Then focus only on high (medium) in control causes.
 
-* 
-
-
-
 ##### Step 09
 
+> Validate RC
 
-
+* line - if X is time, useful to infer derive
+* bar - 1 or 2 categories clearly above / below the others the mean (e.g. Average Handle Time for teams D and E)
+* pie chart - 2-6 percentage proportional categfories
+* pareto chart - 20% causes contribute to 80% of the problem
+* histogram chart - showcase data in bins (one of 7 basic quality tools) - check spread, skewness of data
+* scatter chart - useful to relate 2 contin variable -> doesn't indicate causation
+  * see points cloud? positive correlation if y=+x negative if y=-x
+* correlation analysis
+  * used in conjunction with scatter plot
+  * objective data!
+  * r = pearson correlation cohefficient
+  * r in [-1;1]
+  * 1 => positive corr / -1 => negative / 0 => no correlation
 
 
 
