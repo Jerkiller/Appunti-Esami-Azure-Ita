@@ -410,7 +410,43 @@ Brainstorming
   * can b slow
   * only 1 can be done with the team, with many ppl
 
+FISHBONE
+
+* AKA Ishikawa
+* useful to relate together and sum up brainst ideas
+* one of the 7 quality tools
+* find root causes of a probl
+* identify causes from syntoms
+* option: use 5M cathegories Man Method Machine Material MotherNature
+* steps:
+  * brainstorm possible causes
+  * decide categories
+  * identify most important causes
+  * ask 5 why for ideas
+  * brainstorm for cat that contains fewer items
+
+5Ys
+* one of the 7 quality tools
+* useful because simple, no statistics required, good probing technique
+* everyone agrees on RC? keep asking. RC can be the 4th or 9th Y.
+* when RC, develop corrective action and responsible for it
+
+
 ##### Step 08
+
+ASCERTAIN TYPICAL RC
+
+* control impact matrix
+* useful to prioritize RCs
+* assemble focus group with subject matter expert
+* list all possible RC from step 7
+* divide RC out of control from in control
+* classify RC based on impact high med low
+* create matrix 3x2. Then focus only on high (medium) in control causes.
+
+* 
+
+
 
 ##### Step 09
 
