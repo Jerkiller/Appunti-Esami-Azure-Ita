@@ -356,7 +356,12 @@ Identify defects, defectives, unit and opportunities for error (OFE)
 * unit = element being processed (or sampled) that can have multiple defects but can be defective or non difective (1 defect could be acceptable)
 * defectives = # of bad units
 
+Process Capability
 
+* DPMO method to calculate sigma
+  * compute DPO = D / (OfE * U) # defects OfE units
+  * compute DPMO = D * 1M # defects per million opportun.
+  * lookup DPMO to nearest sigma table conversion
 
 
 
