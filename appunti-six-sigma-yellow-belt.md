@@ -519,9 +519,18 @@ Pilot = test of proposed solution on a small scale
 > validate impact of solution
 
 * Proc capability reanalysis (DPMO method)
-* 
 
+#### CONTROL
 
+> how to control that the solution stays stable
 
+##### Step 13
 
-
+> institutionalize the solution
+* control chart - SPC
+  * created by walter shewhart 1920s Bell labs
+  * identify and evaluate variation
+  * UCL mean LCL
+  * process between UCL-LCL => in-control (common cause variation). Otherwise out-of-control (special cause variation)
+  * special causes - not always present, bigger influence, come fromoutside  influecnce, we want to know about those effects
+* c chart - defects over constant sample size
