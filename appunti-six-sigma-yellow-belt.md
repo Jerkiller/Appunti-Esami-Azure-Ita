@@ -534,3 +534,24 @@ Pilot = test of proposed solution on a small scale
   * process between UCL-LCL => in-control (common cause variation). Otherwise out-of-control (special cause variation)
   * special causes - not always present, bigger influence, come fromoutside  influecnce, we want to know about those effects
 * c chart - defects over constant sample size
+
+> create a control plan
+* describe actions at each step that assure that all outputs stays in-control
+* governance mechanism
+* template: process (process step, waht's controlled) method (how it's measured size freq, resposible party, where is recorderd), actions (response plan, responsible party)
+
+##### Step 14 and 15
+
+> replicate & share best practices
+* are there similar process to port? translation!
+* short case study with goals, measures, actions, outcome etc
+> celebrate and recognize success
+* post-implementation review
+* no rank no fault review
+* pressure passed, feedback, lesson learned
+* 30-90 min
+* do it shortly after project end
+* celebrate success
+
+
+
