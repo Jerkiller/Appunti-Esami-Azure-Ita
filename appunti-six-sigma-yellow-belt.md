@@ -349,14 +349,14 @@ Check for data stability
    * if data is unstable, investigate the reason. you could collect more data. Don't use unstable data for analysis!
    * if data is stable go to step 7
 
-Identify defects, defectives, unit and opportunities for error (OFE)
+Identify DUDO: defects, defectives, unit and opportunities for error (OFE)
 
 * OFE = # of elements that can cause a possible defect
 * defects = # of errors/problems. a defect is a failure to meet customer req or performance standard
 * unit = element being processed (or sampled) that can have multiple defects but can be defective or non difective (1 defect could be acceptable)
 * defectives = # of bad units
 
-Process Capability
+Process Capability (aka yield %)
 
 * DPMO method to calculate sigma
   * compute DPO = D / (OfE * U) # defects OfE units
@@ -462,16 +462,55 @@ ASCERTAIN TYPICAL RC
   * r in [-1;1]
   * 1 => positive corr / -1 => negative / 0 => no correlation
 
+#### IMPROVE
 
+##### step 10
+> Generate, prioritize and select potential solution
+techniques:
+* brainstorming
+  * as in step 7 but not focus on RC but on solutions
+* brain writing 6-3-5
+  * tool to generate many ideas in short time
+  * 6 ppl (SMEs) write 6 ideas on postits in 5 min on a parameter
+  * do this for each RC
+* assumption busting
+  * review the problem and find the RC
+  * find the responsible for the RC and find the assumption in the process why a specific RC happens
+  * test if it's still valid
 
+* Now that I have solutions, I cannot implement all of them. Must prioritize based on cost, time, availability, feasability...
+* Categorize in "Musts-Wants"
 
+##### Step 11
+> Pilot solution / POC
+Pilot = test of proposed solution on a small scale
+* Used to evaluate solution and implementation
+* Then, pass on full scale
+* Gives data of expected results
+* Issues are raised
+* It increases buy-in and creates momentum
+* Safe path: quick improvements reducing failure risks
+* Why important? Because changes to process sometimes are irreversible
+* But, it should be done on every solution
+* Steps:
+  * create a pilot plan
+  * ensure strong leadership support
+  * communicate plan to key stakeholder
+  * train pilot group
+  * implement pilot
+  * collect analyze feedback
+  * diagnose gaps revise solution
+  * implement solutions
+* tips
+  * much much observation needed
+  * manage expecteations and perceptions
+  * celebrate success
+  * commun small victories
+  * be aware that some additional opprotunitties for improvement can rise
 
+> Risk analysis
 
-
-
-
-
-
+*
 
 
 
