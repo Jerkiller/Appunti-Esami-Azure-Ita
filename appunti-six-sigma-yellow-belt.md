@@ -510,7 +510,16 @@ Pilot = test of proposed solution on a small scale
 
 > Risk analysis
 
-*
+* template like: risk, rating, mitigation, contingency plan (what to do if risk happen) , assigned to
+* brainstorim all potential risks
+* fill the tpl above or similar
+
+##### Step 12
+
+> validate impact of solution
+
+* Proc capability reanalysis (DPMO method)
+* 
 
 
 
