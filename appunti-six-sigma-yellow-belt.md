@@ -31,6 +31,7 @@
 * SIPOC or COPIS - scheme to map the process / diagram Supplier Input Process Output Customer
   * to avoid "scope creep": uncontrolled expansion of requirements and growth in scope
 * Value Stream Map - 3 kinds: Current Ideal and Future states
+  * value stream = sequence of all items, events, people for a result
   * Swim lanes - VSM where material moves between departments
   * what to include? every subprocess has boxes with data, include times, waiting times, resources, quality metrics, arrows, inventory supplies
   * add stars for kanban bursts (initiatives)
@@ -71,13 +72,14 @@
   * 0-5 days to complete. 1 / team
 * Lean = **Elimination of waste**
   * problems where the cause is known and solution is complex
-  * tools like VSM poka-joke (fool-proof processes), heijunka (load leveling), jidoka (automation with human intervention), JIT (necessary material when needed)..
+  * tools like VSM poka-joke (fool-proof processes), heijunka (load leveling), jidoka (automation with human intervention, inline control of defects), JIT (necessary material when needed)..
   * always team proj 45d-90d
   * not data-driven
 * 6s - data driven methodology focused on standardize and **reduce variation**
   * a 6s project has 3.4 defects in one million opportunities
   * cause unknown and complex solution
   * 90d-180d team proj
+* others... TotalQuality TQM, CEM customer experience, scrum, Rummler-brache, business proc reingeneering (BPR), jumpstart
 
 ### Sigma
 
@@ -286,7 +288,7 @@ Every step of process can be:
    * missing training or team work
    * poorly defined jobs & expectations
 5. TRANSFER / TRANSPORTATION
-   * excessive back and forth
+   * excessive back and forth for materials and I/O
    * movements across locations buildings
 6. INVENTORY
    * work stuck in mail inboxes, fixed assets
@@ -296,6 +298,7 @@ Every step of process can be:
    * inefficient placement of rss creating motion
    * office rss disposition
    * distance betw workstations
+   * bad UX for software distant clicks
    * poor housekeeping
 8. EXCESS PROCESSING
    *  similar info in several places
@@ -303,6 +306,17 @@ Every step of process can be:
    *  unnecessary approvals
 
 > DOWNTIME - acronym of 8 wastes
+> AKA Muda in JP. Others: stacking cash $, wasted ideas
+> type 1 muda: necessary ones (indirect value, or constraints), type 2: removable
+
+> 5S - way to organize a workspace in a lean way (also digital)
+* Sort - order, remove useless things
+* Straighten - fix locations, label them visually, to make easy to everyone
+* Shine - clean and maintenance
+* Standardize
+* Sustain
+
+* JIT - produce as late as possible, when the next in chain needs it, try to anticipate the market, but not too much!
 
 ##### Step 05
 
@@ -356,13 +370,15 @@ Identify DUDO: defects, defectives, unit and opportunities for error (OFE)
 * unit = element being processed (or sampled) that can have multiple defects but can be defective or non difective (1 defect could be acceptable)
 * defectives = # of bad units
 
-Process Capability (aka yield %)
+Process Capability
 
 * DPMO method to calculate sigma
   * compute DPO = D / (OfE * U) # defects OfE units
   * compute DPMO = D * 1M # defects per million opportun.
   * lookup DPMO to nearest sigma table conversion
-
+* basic YIELD = 1 - DPO %
+* FTY = first time yield => # items good / items total entering proc
+* Rolled throughput yield => lower than FTY because takes items good - rework
 
 #### ANALYZE
 
