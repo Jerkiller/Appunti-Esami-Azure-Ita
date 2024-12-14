@@ -22,10 +22,12 @@
   * Skills
 * VoC - what the customer wants and needs (must know who are the customer and what they value)
 * CtQ - set of goals that are **Critical to Quality** that must be satisified
-  * CtQ-Flowdown/Tree - tree diagram from VoC to CtQ
+  * CtQ-Flowdown/Tree - tree diagram from VoC/requirement to driver to CtQ
   * QDF - Quality Function Deployment - house of quality map CtQ and VoC
   * CtQ like must be quick in answering calls, specified CtQ like must answer in less than 30 sec
   * Prioritize CtQ
+  * quality drivers = aspects where quality expresses. E.g. SERVICE - friendly techniciansm, timely service...
+  * different from CTC critical to customer. e.g. criptography and security standards is a CTQ not a CTC
 * See the process / start to finish or finish to start. Measure, speak, ask quetions. Gemba walk, process walk
   * To optimize movement, spaghetti diagram (map with curves of how people moves during process)
 * SIPOC or COPIS - scheme to map the process / diagram Supplier Input Process Output Customer
@@ -48,6 +50,13 @@
     |P|I|
     +-+-+
     |K|C|
+* CoPQ = cost of poor qual. (not respecting CTQ requirements) = external failures costs (rework, warranties, brand, missing sales) + internal failures costs (scrap rework delay inventory) BUT beware of hidden costs.... moral, turnover, fines, rescheduling... it's important to compute copq to estimate budget for improving, gain buy-in
+* CoQ = CoPQ + appraisal costs (e.g. salary of quality operator) + prevention costs (e.g. new machinery)
+* CoQ decrease with higher sigma (in terms of sales) because if defects -> 0 then CoPQ -> 0 and appraisal costs -> 0 
+* choose the 6s project?
+  * never choose too much projecys. better a few well managed, supported and executed
+  * describe company high level, brainstorm project, shortend list with basic criteria, create business requirements&criteria, prioritize and shorten list
+  * project viability model - calculate a weighted score of project to prioritize them according to attributes
 
 ## AIGPE course
 
@@ -214,13 +223,18 @@
 * one of the 7 quality tools
 * use it when -> need understanding in 1 page
 * it describe the "as-is" not the "as-should-be"
+* inputs = what's required + factors (e.g. oven temperature)
+* upstream - process - downstream
+* events/enablers - triggers that fire the process / sometimes annotated on sipoc
 
-steps:
+steps / POCIS:
 
 * identify 5-7 H-L steps of proc
 * identify customer who receive the outputs and the outputs
 * identify all inputs (without them, the function doesn't work), and who are their suplliers
 * verify the flow and validate with stakeholders
+
+Process owner / person in charge of process / monitor, ensure training, respect SOP (standard operating procedure)
 
 ---
 
