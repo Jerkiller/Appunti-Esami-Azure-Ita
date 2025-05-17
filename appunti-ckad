@@ -1,13 +1,43 @@
 # CKAD
 
 [corso introduttivo](https://trainingportal.linuxfoundation.org/learn/course/introduction-to-cloud-infrastructure-technologies)
-Cloud
+## Cloud
 * cloud privato - interno o esterno (es. con openstack)
 * cloud ibrido - tipico scenario quando dati sono su cloud privato, computing su pubblico, utile per i burst/picchi
 * multi or poly cloud x evitare vendor lock-in e sfruttare il meglio di ciascun cloud (es. finops)
 
-Virtualizz
+## Virtualizz
 * tipo 1 (bare-metal): hyperV, aws-Nitro, VMWare ESXi, RedHat...
 * tipo 2 (on top of OS): vbox, vmware player o vmware ws
 * ibrido (entrambi): kvm e bhive
 * emulatori in accoppiata con virtualizzatori x performance. es. QEMU tool di traduz dinamica dei programmi
+
+### KVM
+> Kernel-based virtual machine
+* open source e gratuita, virtualizza tutti i principali sistemi con grande scalabilità (virt tipo 1)
+* originariamente x arch x86 (intel) portato poi su ARM, PowerPC, FreeBSD ...
+* usa QEMU (x emulaz hw, o altri sistemi come Kubevirt) e linux kernel x accedere a risorse fisiche come CPU
+* crea al suo interno un kernel con i driver e uno stack applicativo -> OS virtualizzato
+* GUI come VMM (virtual machine manager)
+* disco almeno 10GB (meglio su FS differente)
+* network bridged o NAT
+
+### Virtual Box
+* oracle (GNU GPL v2)
+* open source e gratuita, virtualizza tutti i principali sistemi - virtual di tipo 2 (non nel core di linux), facile
+* x86 e AMD64
+* in installaz è suggerito di installare le vbox guest additions. All'avvio dell'OS aggiornale!
+
+## Vagrant
+* hashicorp
+* cross-platform CLI tool x gestire più vm e loro ciclo di vita, mentre chi poi le tira su è un provider (es. vbox o kvm, hyperv...)
+* utile x team, ambienti complessi, tutto sommato semplice da configurare
+* supporta vm e container - chiamate box. Si possono scaricare da vagrant box repository
+* estensibile con plugin
+* vagrant file = dichiarativo sintassi ruby x dire cosa voglio nel progetto. il comando legge il file
+* synced folder x mount di cartelle in fs
+* provisioner x installare sw ed eseguire comandi custom su macchina host
+
+
+## Altro
+> Dogfooding = usare quotidianamente gli strumenti k sviluppi
