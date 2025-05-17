@@ -1,0 +1,13 @@
+# CKAD
+
+[corso introduttivo](https://trainingportal.linuxfoundation.org/learn/course/introduction-to-cloud-infrastructure-technologies)
+Cloud
+* cloud privato - interno o esterno (es. con openstack)
+* cloud ibrido - tipico scenario quando dati sono su cloud privato, computing su pubblico, utile per i burst/picchi
+* multi or poly cloud x evitare vendor lock-in e sfruttare il meglio di ciascun cloud (es. finops)
+
+Virtualizz
+* tipo 1 (bare-metal): hyperV, aws-Nitro, VMWare ESXi, RedHat...
+* tipo 2 (on top of OS): vbox, vmware player o vmware ws
+* ibrido (entrambi): kvm e bhive
+* emulatori in accoppiata con virtualizzatori x performance. es. QEMU tool di traduz dinamica dei programmi
