@@ -37,16 +37,64 @@
 ###BPR
 * Business process reingeneering
 * il processeo viene ridisegnato radicalmente
-* caratterizzato da tecnologia
+* caratterizzato/guidato da tecnologia
 * Si usa quando il processo raggiunge saturazione: quando qualsiasi miglioramento non spinge il processo oltre il x %
 * Si usa x evitare di metttere le persone sotto pressione con le performance e causare malcontento e frustrazione x mancato miglioramento
 * Esempio: banche per prelievo soldi: da fisicamente andare allo sportello a ATM
 
 * 6s + conservativo di BPR
-* 6s orientato al cliente
+* 6s orientato al cliente, usato x processi stabili, che vanno da almeno 6mesi con metriche gialle/rosse
 * bpr non x proj lungo termine
-* bpr rischio alto ritorno bassino
+* bpr rischio alto ritorno bassino, metriche già verdi
+* in caso di problemi di igiene del lavoro, si usa lean, kaizen, kanban, best practices
 
+### 6s
+* metodologia definita e disciplinata x risolvere ogni problema di business passo dopo passo migliorando qualità, riducendo spreco, ordinando operazioni
+* 1979 motorola - Bill Smith la teorizza, Mikel Harry scrive un saggio su 6s per migliorare la qualità
+* nell 1988 vincono malcolm baldridge award
+
+### sigma definition
+* Std Dev = average distance of all data points from the mean
+* Process capability = metric of quality.
+* 6s best in class = automobile industry
+* 3s = most of insustries
+* 2s = conti e commesse ristoranti, bagagli aerei, prescriz dottori, trasporti verso le persone
+* 2s = 308k DPMO
+* 3s = 67K DPMO
+* 4s = 6K DPMO
+* 5s = 233 DPMO
+* 6s = 3.4 DPMO
+
+### come funziona?
+probl business -> prob statistico -> risoluz stat -> risoluz business
+* data-driven decision-making
+* per ogni effetto (Y) ci sono molte xause (X)
+* X è indipendente, Y dipendente e Y=f(X)
+* es. arrico in ritardo in ufficio = porto bambini a scuola, la sveglia non suona, c'è traffico
+* il focus di 6s è sulle cause (X)
+
+### Ruoli 6s
+* 1986 unisys volevano internalizzare un po' di 6s per risolversi da soli i problemi
+* mikel harry ha inquadrato i ruoli
+* proj champ PC - business leader o manager senior, interessato nel successo del team, obbiettivi alineati a quelli dell'organizzaz strategicamente, finanzia, rimuove blocchi e partecipa a 
+* MBB - FTE, determina vision con il PC, alloca i progetti x le BB, train mentor, review, concetti stat, strum, esperto di management e facilitaz, risolve i problemi delle BB,
+* BB - FTE, trasforma vision in realtà, riceve un target costo, ha un area di business, grandi progetti cross funz e cross collaborativi
+  * si confronta con MBB per ogni prob
+  * porta avanti la vision
+  * istruisce GB, YB, WB
+  * Chnage management, facilitaz
+  * conosce statistica
+* GB - part time, 25% tempo, progetti piccoli, basic knowledge stat
+  * partecipa nel team del BB
+  * riporta i problemi al BB
+  * ha autorità nel processo di business
+  * conosce change managem, facilitaz
+* YB
+  * basic knowledge, part time, partecipa a GB proj, esperto 7 basic tools of qual
+* WB
+  * basic knowledge, part time, partecipa a GB proj, 7 basic tools of qual
+
+### Lean
 
 ## Define
 ## Measure
