@@ -95,6 +95,26 @@ probl business -> prob statistico -> risoluz stat -> risoluz business
   * basic knowledge, part time, partecipa a GB proj, 7 basic tools of qual
 
 ### Lean
+* tecniche x identificare ed eliminare sistematicamente lo spreco
+* come hijunka (load balancing)
+* genchi gembutsu = go & see yourself
+* poka yoke = error proof solution
+* es. macchina k inscatola saponi a volte fa scatola vuota: metto due ventilatori a fine produz
+* nessuna fine ai benefici (costo, qualità tempi, sicurezza, morale)
+
+### Kai Zen
+* cambiare kai x migliorare zen
+* piccoli cambiamenti
+
+### matrice x uso dei tool
+
+* cause note, probl semplice - just do it o kaizen se proprio si vuole stabilizzare il miglioram
+* cause note, probl complesso - lean
+* cause sconosciute soluz semplice - chiama esperto
+* cause sconosciute, soluz complessa - 6S!!!
+
+CSAT = Customer Satisfaction
+
 
 ## Define
 ## Measure
