@@ -115,6 +115,24 @@ probl business -> prob statistico -> risoluz stat -> risoluz business
 
 CSAT = Customer Satisfaction
 
+### Statistics
+
+* ottenere informaz dai dati
+* dati sono numeri che rappresentano fatti.
+* si divide in 2 rami: stat inferenziale e descrittiva
+* inferenziale - studia cm campionare e testare ipotesi su 1 gruppo ridotto
+* descrittiva - organizzare, riassumere e presentare dati
+* che info vanno estratte?
+* tendenza centrale o dispersione/variaz?
+* tendenza centrale - media mediana moda (Excel fallisce se ho dati bimodali o multimodali) quartili (Q1 - mediana Q3. Q3-Q1 = IQR (interquartile range))
+* dispers - stddev varianza (quadr di stdev) range (max-min)
+
+### 6s e stat
+* ai clienti interessa la media e la stddev
+* 6s si concentra nel ridurre la stdev e POI spsotare la media
+* stddev è la stabilità del processo, qualità è la media
+* molte compagnie si concentrano troppo sulla media sola (semplice) per misurare le performance
+* ma se in media i voli sono in orario (ritardo <30 min), ma proprio il tuo è un outlier di ore di ritardo, è un problema.
 
 ## Define
 ## Measure
