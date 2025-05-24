@@ -134,7 +134,76 @@ CSAT = Customer Satisfaction
 * molte compagnie si concentrano troppo sulla media sola (semplice) per misurare le performance
 * ma se in media i voli sono in orario (ritardo <30 min), ma proprio il tuo è un outlier di ore di ritardo, è un problema.
 
+### Which problems?
+
+* accuracy or precision?
+* low accuracy high precision = colpisco un punto del bersaglio con molti tiri vicini ma non è il centro (+facile) (1 o + procedure sconoscite a tutti)
+* high accuracy low precision = colpisco dappertutto, ma intorno al bersaglio. (mancanza di conoscenza procedure, nuovi impiegati)
+
+### individuare progetto
+* legato al lavoro di ogni giorno
+* in un periodo temporale (no illimitato) 1.5-6mesi
+* allineato a obb di business (focus e buy-in)
+* 1 sola metrica o ctq
+* deve riguardare il valore del cliente
+
+### baseline processo
+media delle performance di processo nel lungo periodo quando tutti gli input sono "normali"
+
+* **entitlement** - quando processo è al massimo (nelle migliori condizioni) a breve termine, quando tutti gi input sono centrati e sotto controllo
+* **benchmark** - performance del proc rispetto all'ottimo. ci porta a investigare l'ottimo nello storico, nell'industria, ecc.
+
+### overview DMAIC
+
+* define - capire qual'è probl cliente? definire perimetro con il charter, chi ci lavora, quali metriche, SIPOC (dv capita)
+  * toll gate review con champion - dopo ogni fase
+* measure - extent of the problem, identifica i dati, plan the data collection, determina le baseline di processo, se stabile, se soddisfa req. di business
+* analyze - WHY? identificare cause e origine di sprechi e deviazioni, analisi dati e grafici, valida root causes
+* improve - genera, prioritizza, seleziona potenziali risoluzioni, fare una soluz pilota, valida impatto soluzione
+* control - industrializza soluzione, rende istituzionale, come viene messa in piedi, chi la fa, replica e condividi le buone prassi, celebra e riconosci successo
+
+* 80 strumenti - non tutti da usare, ma come le maze da golf. Ogni buca ha la sua mazza
+
 ## Define
+
+* chi è il cliente? chi riceve l'output di un proc (es. prod o serv)
+* clienti interni o esterni
+* clienti primari o secondari (es. i clienti primari dei pannolini sono i bebè, i secondari le mamme)
+
+* bisogno - aspettativa su output di proc
+* requisito - caratteristica che soddisfa un bisogno (spesso espressa numericamente)
+* es. condizionatori - ho bisogno di dormire bene d'estate - req.1 rumorosità < 30dB req.2 raffrescamento tra 19 e 25 °C
+
+### VOC
+* cliente riporta commenti vergini (verbatim comments) da cui si estraggono desideri cliente, e si arriva ai requisiti.
+* VOC di 5 tipi (AICPS) VoAssociate (impiegati) VoInvestor (management e shareholder) VoCustomer VoProcess (CTP o CTQ) VoSupplier (fornitori)
+* come intervista, questionario, focus group, suggerimenti, ecc. Molti modi a seconda di limiti o necessità
+
+### Affinity diagram
+
+* concetti legati da frecce in ovali piu o meno grandi
+* utile x analizzare dati non strutturati (es. linguaggio naturale)
+* scrivere tutti concetti random su muro postit o lavagana. raggrupparli se sono affini a 2 a 2. Eventualm duplicare postit. fare post-it "header". crea gruppi e supergruppi se necessario. infine frecce e titolo
+
+### tradurre VoC in need in req
+* tabella con commento in prima colonna, seconda CTC critical to customer e terza critical to quality (requirement)
+* facendo la domanda "cosa significa" si dovrebbe passare da col 1 a 2 a 3
+
+### Kano Analysis
+* serve a identificare quali i req più importanti a prescindere da tempo costo e risorse, ma dal valore al cliente finale
+* requisiti sono divisi in 3 categorie
+1. must-bes - o dissoddisfatori - se non ci sono, il prodotto o servizio perde senso (tipicamente non-detti)
+2. soddisfatori - il loro grado di presenza aumenta il livello di soddisfazione (es. prezzo, costo manutenz, potenza) - one-dimensional x la loro linearità
+3. eccitanti - caratteristiche inattese, che fanno piacere delighters (non-detti) es. design, extra-garanzie, 
+* classifica requisiti nelle 3 categorie, metti i req nel diagramma di Kano, prioritizza i req dal basso verso l'alto
+
+### CTQ Drilldown tree
+
+* need -> driver -> CTQ
+* si va dal generico di un bisogno, a declinarlo su vari driver + specifici, fino a definire dei CTQ, metriche misurabili.
+* andando verso lo specifico, si va verso il misurabile. un bisogno generico è difficile da misurare
+* es. buon sevrizio clienti si declina con agenti competenti, agenti cortesi, breve tempo d'attesa. per ciascun driver si determinano ctq
+
 ## Measure
 ## Analyze
 ## Improve
