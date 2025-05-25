@@ -204,6 +204,36 @@ media delle performance di processo nel lungo periodo quando tutti gli input son
 * andando verso lo specifico, si va verso il misurabile. un bisogno generico è difficile da misurare
 * es. buon sevrizio clienti si declina con agenti competenti, agenti cortesi, breve tempo d'attesa. per ciascun driver si determinano ctq
 
+### Proj Charter
+* documento vivente
+* descrive il prog dall'alto
+* business case
+  * perché il prog va fatto, xk va fatto ora? quali i rischi di non farlo? che impatto finanziario? che obbiettivi?
+  * spesso il proj non viene approvato xk non si punta ad aggredire obb di business (skei), ma l'obb in termini di metrica. Invece ha senso parlare proprio di quello. quanti soldi risparmio in 1 anno?
+* problem statement
+  * qual è il probl? che impatto ha? che dimens? dove impatta? quando? quali le conseg?
+  * se dimentico anche un solo di questi, è incompleta
+  * NON mettere colpa, causa, soluzioni!
+  * no gergo, usare parole semplici, chiare e comprensibili
+* project goal
+  * SMART specific measurable achiavable realistic timely
+* proj scope
+  * longitudinal scope: time - define start and end
+  * lateral scope: e.g. geography. define places
+  * define project constraints and dimensions, to avoid SCOPE CREEP
+* proj team
+  * scegli team competente, cross-funzionale. non scegliere "x conoscenza"
+  * avere approvaz dal management
+  * tieni il team acceso e ben nutrito di attività, incontrati regolarmente, incoraggiali e dai una visione superiore del proj
+  * ascolta il team, trova occasioni x congratlarti, includi il champion, monitora il progresso
+  * non essere autoritario, piuttosto scala nella piramide
+  * non essere micro-manager. Lascia fare il lavoro.
+* proj. milestone
+  * decidere date inizio e fine per ogni fase DMAIC riportare date attuali
+
+### Accettabilità del progetto
+
+
 ## Measure
 ## Analyze
 ## Improve
