@@ -232,6 +232,30 @@ media delle performance di processo nel lungo periodo quando tutti gli input son
   * decidere date inizio e fine per ogni fase DMAIC riportare date attuali
 
 ### Accettabilità del progetto
+vari CAP tools
+Efficacia = qualità*accettabilità
+*WIIFM cosa c'è per me? obbiettivo di ognuno sul proj
+stato attuale del processo, transizione, stato migliorato
+GB guida al cambiamento. Per accellerare si usano i CAP tool (change accelleration process):
+* ARMI - approvatore, risorsa, membro, informato
+  * es, MBB e champion è A in tutte le fasi di progetto
+  * BB e GB sono R. LO SME è R in tutte le fasi ed è M in Measure
+  * Il management è I in tutte le fasi
+* RACI matrice - responsabile accountbale consulted informed. strumenti equivalenti
+*  minacce opportunità
+  * se il progetto nn viene fatto? 2x2 matrice con minacce e opportunità a breve e lungo term
+* analisi degli stakeholder - elencali tutti in griglia, raggruppali, valuta impatto, influenza, attitud verso proj, punteggio e fai un piano o azioni. concentrati su quelli con + punti, magari coinvolgendoli di +
+* elevator speech - 30-60s <100 parole. va detto tutto il necessario del progetto, quale e xk il probl, quale il piano, cosa ci si può aspettare? come misuriamo?
+  * tutti i membri di proj devono saperlo. nn parlare velocemente o robotico. nn essere tecnico e nemmeno vago.
+* prohj falliscono anche x mala comunicazione. a volte è utile fare un piano di comunicazione:
+  * previene duplicaz, identifica problemi, evita sorpsese
+  * dall'analisi stakeholder, si passa a piano comunicazione
+  * include obbiettivi, target, contenuti, frequenza e canali di comunicaz
+
+### SIPOC
+* mappa del processp as-is ad aaaalto livello
+* descrive fornitori, input, proceso, output e clienti
+* titolo, inizio fine del proc, output, clienti input fornitori
 
 
 ## Measure
