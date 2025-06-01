@@ -259,6 +259,48 @@ GB guida al cambiamento. Per accellerare si usano i CAP tool (change accellerati
 
 
 ## Measure
+
+* misurare efficacia o efficienza? efficacia /qualiitativo - qunato bene proc soddisfa requisiti - efficienza/quantitativo - quanto bene sfrutta le risorse il processo
+* COPQ - costi associati a difetti/scarti. è un iceberg dove in superficie vedo solo il visibile (difetti, tempi morti, ritardi, rilavoraz, ispezione). sotto la superf (perdita fiducia clienti, pianificaz eccessiva, perdita vendite, costi capitali, costi k accellerano...)
+* WASTE - tutto ciò k è di più del minimo assoluto richiesto k aggiunge valore al prodotto o servizio
+* DOWNTIME - 8 sprechi
+  * defects - scarti k richiedono tempo, denaro, risorse extra, spesso rilavoraz e extra lavoro - cerca errori, rotture, buchi info, cicli, transaz non in ordine
+  * overproduction - prod troppo o troppo presto - + info richiesta k necessaria, sforzi non allineati a complessità, bisogni cliente, rischio
+  * waiting - ogni fermo lavoro - attesa input o approvaz, attesa poter scaricare output, rotture
+  * non-utilized skills - spreco di intelletto - esperti su cose semplici? no lavoro squadra, no formaz, ruoli e posiz nn chiari
+  * transfer/transportation - muovere le cose in giro, o spostare lavoro tra team e reparti
+  * inventory - lavoro fermo in caselle di posta, finanze immobilizzate, magazzino grande ecc. - equip non utilizzato, gradi aree staging o colli bottiglia
+  * motion - poizionamento errato k causa spostamenti - male disposizione, distanza, scarsa pulizia
+  * excess processing - troppe transaz - duplicaz, ridondanza info, grande variazione tempi x fare stesso lavoro, approvaz non necessaria
+* eliminare i difetti è un'attitudine, un processo lean. Un buon modo è stare sul pezzo tecnologico: miglioramenti continui vengono dalle nuove tecnologie o metodi
+* process map - strumento di mappatura step by step del processo: spazi, ruoli, tempi, ecc.
+  * cerch att terminali - rett attvitià - rombo decisione - D ritardo - freccia direz processo - rett spezzato documento - cilindro database - triang basso merce magazzino - rettangolo con bordi orizz processo predefinito
+  * si fa in team, si valida insieme, di fanno domande come: che tool vengono usati, ci sono eccezioni, ci sono processi manuali, ci sono molti errori o rilavoraz, ci sono livelli di approvaz, ci si basa su procedure scritte, ci sono lamentele, chi è il punto di contatto x probl
+  * 3 tipi: flowchart di processo (workflow semplice monoagente) alternate flow (lo stesso ma con possibili scelte, piu diramazioni tra nodi) - deployment flowchart (swimlane chart) con + attori
+  * non mappare da solo, o senza inzio fine, non inventare, mappa quello k c'è ora onestamente
+* VSM - value stream map - usata x identificare e ridurre sprechi nel proc
+  * attività classificate come VA valore aggiunto, NVA da eliminare, ENVA essenziale nva da tenere ma k non aggiunge valore
+  * sommo i tempi di VA e ottengo i VA time. Li divido per l'intero tempo ciclo del processo e ottengo la PCE efficienza del ciclo di processo
+  * varie icone cm kaizen burst
+  * identifico inizio e fine processo, tutte le attività, segno quanti le fanno, segno x ciascuna dei dati come:
+    * CT tempo ciclo (inizio-fine)
+    * CO tempo change over (x cambiare tipo prodotto)
+    * UT% uptime (tempo di funzionamento su totale)
+    * resa% yield (quantità di materiale k passa ispezione)
+* takt time - tempo x produrre un'unità della richiesta cliente, parola tedesca x colpo di tamburo, stabilisce il ritmo di produz
+  * Takt time T = tempo totale disponibile di lavoro Ta / Td numero richieste cliente.
+  * se il cliente richiede 2 pezzi al mese, il takt time è 15 giorni. se ne richiede 3 ma non lavoro sabato e domenica ho 7 giorni di takt.
+  * processore 4core in 1 secondo ha 10000 operaz da effettuare, il takt è 0.4 millesimi di secondo
+
+* dati classificati xk si usano metodi diversi o visualizz diverse
+  * dati continui: tempi, costi, lungh, temp... rate, velocità, percentuale
+  * dati discreti: persone, num pezzi: non possono ess divisi senza perdere senso
+* matrice XY
+  * serve a identificare var in input e output e ridurre complessità
+  * va concordato con tutti l'impatto delle X sulle Y
+  * elenca output e ordinali con 10-1 per importanza, elenca input (X) di solito in ordine ssequenziale del processo, classifica impatto 1-10, calcola score totale e %, ordina input x importanza
+
+
 ## Analyze
 ## Improve
 ## Cpmtrol
