@@ -300,6 +300,46 @@ GB guida al cambiamento. Per accellerare si usano i CAP tool (change accellerati
   * va concordato con tutti l'impatto delle X sulle Y
   * elenca output e ordinali con 10-1 per importanza, elenca input (X) di solito in ordine ssequenziale del processo, classifica impatto 1-10, calcola score totale e %, ordina input x importanza
 
+### Data Collection Plan
+* cosa c'è da sapere del processo e dove trovare i dati?
+  * che dati servono cm baseline? quali fattori influenzano? sono inclusi tutte le misure di input output e processo? cosa fare dopo la raccolta dati?
+* definizione operativa
+  * ognuno deve misurare allo stesso modo, consistenza, come?
+* fattori di stratificazione
+  * ordinare dati x caratteristiche (fare i dati a fette)
+  * inizia con SIPOC I/O e CTQ
+  * fornisce possibili cause x RC o le verifica
+  * scopre pattern sospetti o problemi severi che si presentano ogni tanto in un certo luogo e tempo
+  * what when where who di un dato
+* esistenza
+  * il dato esiste? è usabile? è rappresentativo? segue la definizione? ha abbastanza dati? com'è misurato?
+  * il dato non esiste? costo e tempo x raccogliere questo dato? dati simili?
+* modalità
+  * evitare manualismi, meglio report o automatizzati, cm garantire accuratezza, qnt tempo mi ci vuole? in che formato (es. check sheet)
+* agente?
+  * chi collez dati? se > 15 min non lo farà, gli è utile o rischioso raccogliere dati?
+  * chi li raccoglie deve ess formato. almeno su definiz operativa e cm verranno raccolti
+* quando? ogni quanto?
+
+### Campionamento
+
+ * raccolta di una parte dei dati disponibili e conclusioni sull'intera poplaz -> inferenza statistica
+ * viene fatto quando: sarebbe costoso misurare tutto, sarebbe distruttivo, c'è un grande volume -> salvare tempo e denaro
+ * simple random sempling - su un totale, estraggo N elementi in maniera equiprobabile
+ * stratified random sampl - divido popolaz in sotto.insiemi (classi) e per ciascuna classe ne prendo N
+ * systematic sampl - prendo elem ogni N (es. utile in linea di produz)
+ * cluster sampl - ogni N prendo M elementi (es. tutto il primo quarto d'ora di ogni ora)
+ * grandezza campione n = ((1.96 * std dev) / marg. errore )^2 -----> 95% confidenza per dati continui - marg errore = quanto errore massimo ammesso. di solito intorno 5%
+ * x dati discreti moltiplico per fattore p*(1-p) e non metto std dev -----> p è percentuale difetti (es. 0.2 se 20% difetti)
+
+### MSA
+* mesaurement system analysis - processo misurazione efficienza di raccolta dati/misura
+* variaz di processo -> legata al processo o no. Se legata al proc può essere x fattori controllati o no. Se legata al sistema di misuraz può essere dovuta a chi la fa o apparecchiatura
+* un apparecchio di misura deve garantire: ripetitibilità, riproducibilità, accuratezza
+* ripetibilità: stessa misura fatta nel tempo più volte con stesso strum deve ess consistente
+* riproducibilità: due persone diverse misurano la stessa unità con stesso strum, mi attendo risultati uguali, lo stesso se misuro su 2 strum diversi
+* accuratezza: se mmolti fanno misuraz, ogni valore deve stare vicino alla media, no dev std eccessiva
+* ank sw sbagliano, maglio fare MSA
 
 ## Analyze
 ## Improve
