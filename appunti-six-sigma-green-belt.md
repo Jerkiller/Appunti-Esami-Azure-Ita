@@ -341,6 +341,28 @@ GB guida al cambiamento. Per accellerare si usano i CAP tool (change accellerati
 * accuratezza: se mmolti fanno misuraz, ogni valore deve stare vicino alla media, no dev std eccessiva
 * ank sw sbagliano, maglio fare MSA
 
+### Stabilità
+I dati devono essere stabili x fare assunzioni (igiene processo).
+Si usa runchart sia x continui che discreti. Principali bias:
+* stesso valore: 7 punti con stesso valore
+* cluster: serie di punti sotto mediana, poi sopra, poi sotto, ecc. ciclicità cm se nel proc si sposta la media
+* mixture: 14 o + punti che si alternano sopra sotto la media (ciclo)
+* oscillazioni: i punti vanno rapidamente molto su e giù (anche rispetto mediana) non stabile
+* trend: 7 o piu punti in linea su o giu
+* shift: 8 oo piu punti sopra o sotto mediana
+* MT: stat > quality tool > runchart > selez colonna, subgroup size of data = 1
+* se p-value su una di queste categorie è < 0.05 allora instabilità dei dati
+* dati instabili? eliminali, non usarli e acquiscine di nuovi
+
+### Normalità
+* dati continui seguono distribuz e curva gaussiana/a campana
+* area 1, media=moda=mediana, simmetria, code asintotiche
+* meglio che i dati siano normali (ci si basa sulla media). Se non lo sono, non significa che siano senza senso, ma è piu difficile analizzarli. Va usata mediana invece.
+* x il teorema del limite centrale, aggiungendo altri dati, questi tendono a seguire distrib normale.
+* se dati nn normali, aggiungi altri dati! se dati sn normali, probabilmente non è un caso.
+* se dati nn normali, elimina outlier, ma ocio a nn eliminare troppi dati o significativi
+* MT: Basic stat > normality test. I dati risultano intorno alla best fit line? il p vlaue è > 0.05? (metodo anderson darling è ok)
+
 ## Analyze
 ## Improve
 ## Cpmtrol
