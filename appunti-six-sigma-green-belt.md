@@ -363,6 +363,33 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * se dati nn normali, elimina outlier, ma ocio a nn eliminare troppi dati o significativi
 * MT: Basic stat > normality test. I dati risultano intorno alla best fit line? il p vlaue è > 0.05? (metodo anderson darling è ok)
 
+### Resa
+
+* resa/yield: num o percent di pezzi buoni su pezzi prodotti
+* resa classica = pezzi buoni all'output del processo / pezzi iniziati a lavorare
+* resa first pass = pezzi senza rilavorazioni / pezzi iniziati a lavorare - ocio pezzi: totali - rework
+* resa rolled throughput = se ho 5 step moltiplico le 5 rese (0.9*0.9*0.9...)
+
+### Sigma Discreto
+* sigma shift = tra il breve termine e il lungo termine c'è spostamento sigma di circa 1.5: Zst = 1.5+Zlt. Se misuro a breve termine un 6, a lungo termine sono 4.5
+* DUDO - difetti, unità, difettivi, opportunità. es. form con 8 campi (ofe), 2 errori (difetti),  sopra il 3 viene considerato difettivo. 1 form = 1 unità
+* sigma a breve termine (Zst) con dati discreti:
+  * calcolo DPO, DPMO, cerco in tabella distribuzione Z
+  * DPO = Difetti / OFE * Unità
+  * DPMO = DPO * 1M
+  * x ricordare... DPO = quanti difetti globali su quante opportunità globali (tra tutte le unità)
+
+### Sigma continuo
+* LSL e USL = limiti di specifica dati dal cliente. A volte solo 1 dei 2, a volte entrambi
+* MT = stat>quality tools>capability analysis>normal
+* Cpk * 3 = Zst. Può essere anche negativo per valori continui
+* metrica PPM indica il DPMO
+
 ## Analyze
+
+* obbiettivo della fase è identificare 3-6 RC
+* brainstorming, ishikawa (diagr a lisca di pesce o causa effetto) magari con categorie man,method, machine, material, mothernature
+* analisi dei 5 perché
+
 ## Improve
 ## Cpmtrol
