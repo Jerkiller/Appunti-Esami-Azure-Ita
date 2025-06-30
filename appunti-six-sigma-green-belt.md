@@ -390,6 +390,32 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * obbiettivo della fase è identificare 3-6 RC
 * brainstorming, ishikawa (diagr a lisca di pesce o causa effetto) magari con categorie man,method, machine, material, mothernature
 * analisi dei 5 perché
+* pareto x identificare le cause principali
+* boxplot - prof. wisker from MIT, central tendency, symmetry, variability
+* scatter - used to dislpay relation (e.g. cause-effect where cause is X independnet and Y is effect)
+* multi voting - prese le RC da un brainstorming, fai una votazione da 1-10 per ciascuna e poi somma tutti i voit e ordina x identificare quali le principali
+* control impact matrix - ogni RC viene messa in un quadrante su sotto-controllo o fuori controllo e impatto alto medio basso
+
+### Validare le RC
+* missing accuracy - centering problem - same variances, diff means
+* missing precision - spread problem - same means, diff variances
+* cos'è la differenza?
+  * nei dati continui può ess media (test parametrici), mediana (test non param) e varianza diverse
+  * nei dati discreti, diff in proporz dei difettivi
+* determina test appropriato, dichiara ipotesi nulla e ipotesi alternativa, fai test e p-val, interpreta risultati e accetta o rigetta H0
+* identifica X e Y. Categorizza X e Y come discreto o continuo.
+* 2 continue - simple LR o correlazione
+* 2 discrete - Chi quadro o 1-proportion test o 2-proportion test
+* X discrete Y cont
+  * test parametrici (1-sample t-test, 2-sample, paired t-test, 1-way ANOVA)
+  * test sulla varianza (1-var, 2-var, test di uguali var)
+  * se dati non normali - test non param sulla mediana (1-sample sign test, mann whitney, moods median test
+* X continua, Y discreta - regressione logistica
+* scenari diversi:
+  * X discr Y cont - compara 1 camp con 1 valore 1-sample t test (media, dati normali) 1-sample sign test (median) 1 variance test (varianza)
+  * idem - compara 2 campioni di 2 popolazioni - 2-sample t-test (media) mann-whitney (mediana), 2-variance (varianza)
+  * idem - 2 campioni della stessa popolazione - paired 2 test (media)  mann-whitney (mediana), 2-variance (varianza)
+  * idem - più di 2 campioni - ANOVA (media), moods med test (mediana), test di uguali varianze (varianz)
 
 ## Improve
 ## Cpmtrol
