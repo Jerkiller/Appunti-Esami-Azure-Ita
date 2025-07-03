@@ -417,5 +417,24 @@ Si usa runchart sia x continui che discreti. Principali bias:
   * idem - 2 campioni della stessa popolazione - paired 2 test (media)  mann-whitney (mediana), 2-variance (varianza)
   * idem - più di 2 campioni - ANOVA (media), moods med test (mediana), test di uguali varianze (varianz)
 
+### ipotesi test
+* ipotesi nulla = H0, tutto è come ora (ha sempre segno =) come un avvocato che difende l'accusato
+* ipotesi alternativa = H1 o Ha, quello che voglio provare (<> oppure < oppure >) come un avvocato accusatore
+* in caso che H1 abbia segno >, H0 ha segno <=. Sempre con l'uguale.
+* si pensa prima H1 ma si scrive prima H0.
+
+### Confidenza
+* confidenza = percentuale di quanto sia indicativa la statistica.
+* significanza = 1-confidenza
+* es. conf = 95% // signif = 5%
+* aumento la confidenza? = aumento campione statistico
+
+### P-Value
+* P = probabilità
+* misura statistica tra 0 e 1
+* lo confronto con la significanza (es. 5% - p-val < 0.05)
+* when p is low, null must go (rigetto H0). when p is high, null must fly (fallisco nel rigettare H0)!
+* se p value è basso, vince H1, se è medio alto, vince H0...
+
 ## Improve
 ## Cpmtrol
