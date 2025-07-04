@@ -436,5 +436,56 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * when p is low, null must go (rigetto H0). when p is high, null must fly (fallisco nel rigettare H0)!
 * se p value è basso, vince H1, se è medio alto, vince H0...
 
+### 1-sample t-test
+* parametrico: compara media
+* con un vlore
+* Y continue, X discreta
+* MT: stat > basic stat > 1-sample t test
+
+### 2-sample t-test
+* parametrico
+* usato x confrontare 2 popolazioni diverse (es. 2 team, NON stesso team in momenti diversi)
+* sele due popolaz hanno la stessa varianza, imposta "assumi stessa varianza"! (in caso fai un 2-variance test)
+* MT: stat > basic stat > 2-sample t test. nelle opzioni, impostare il segno della ipotesi nulla >= oppure <= oppure = default
+
+### Paired t-test
+* parametrico
+* come 2-sample ma con stessa popolazione (es. stesso lotto di auto, stesso team in condiz o momenti diversi)
+* MT: stat > basic stat > paired t-test
+
+### 1-way ANOVA
+* il nome è analisi of variances ma in verità compara medie -> parametrico
+* usato per più di 2 campioni (3, 4, ...)
+* le ipotesi si scrivono come A=B=C=D ma si leggono con tutti i campioni sono uguali o c'è 1 campione diverso dagli altri
+* MT: stat > ANOVA > 1 way unstacked
+
+### 1-var test
+* devo provare k la dev standard è diversa o magg o min di un certo valore
+* MT: stat > basic stat > 1-variance, perform hyp test e segna k ti interessa la dev standard e inserisci ik valore
+
+### 2-var test
+* paragono varianza o dev stand di due campioni
+* MT: stat > basic stat > 2-variance
+* compaiono 2 risultati: con F-test o Bonnet's test (x dati normali) o Luvene-test (x dati non normali)
+
+### Test of eq variances
+* x vari campioni su cui voglio paragonare varianza
+* MT: stat > ANOVA > test of eq var. response = colonna valori, factor = colonna di raggruppamento discreto
+  * dati normali -> bartlett's test o multiple comparison, in caso contrario levene's test
+
+### 1-sample sign test
+* confronto tra mediana di un campione e valore
+* si usa mediana invece di media quando i dati sono spesso non normali
+* MT: stat > nonparametrics > 1-sample sign
+
+### Mann-Whitney test
+* confronto tra mediane di due campioni
+* si usa mediana invece di media quando i dati sono spesso non normali
+* MT: stat > nonparametrics > mann-whitney
+
+### Mood's median text
+* confronto di mediante tra + di 2 campioni
+* MT: stat > nonparametrics > mood's median test
+
 ## Improve
 ## Cpmtrol
