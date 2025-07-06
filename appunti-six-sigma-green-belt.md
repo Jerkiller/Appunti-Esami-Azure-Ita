@@ -487,5 +487,43 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * confronto di mediante tra + di 2 campioni
 * MT: stat > nonparametrics > mood's median test
 
+### analisi di Correlazione
+* correlazione è misura di forza e direzione su come 2 var (dipendente Y e indipend X) continue sono relazionate
+* NON DEFINISCE LA CAUSAZIONE!
+* il coeff di correlaz r è detto anche di Pearson
+* [-1;1]
+* soglie: > .8 forte correlaz, .2 < r < .8 possibile correlaz, -.2 < r < .2 no correlaz
+* MT: stat > basic stat > correlation analysis
+
+### analisi di regressione
+* predirre valore linearmente basandosi su dati precedenti
+* R quadro è livello di confidenza. > 95% è molto alto
+* MT: stat > regression > fitted line plot
+
+### chi quadro
+* quando ho matrici (es. num/fumatori, maschi/femm, alto/medio/basso)
+* quindi X e Y discrete
+* MT: stat > tables > chi sq test (2-way table in worksheet) - vedi p value
+
+### 1-proportion
+* 3 var discrete, voglio indagare se un certo numero di campioni (trial) su un totale di sampled (events) supera una certa soglia
+* MT > stat > basic stat > 1-proportion, summarized data
+
+### 2-proportion
+* 4 var discrete, voglio indagare se la proporzione tra trial ed eventi A e trial ed eventi B è mantenuta
+* MT > stat > basic stat > 2-proportion, summarized data
+
+### errori nel testing delle ipotesi
+
+|-|giudizio: colpevole| giudizio: NON colpevole|
+|-|--------|--------|
+|verità: colpevole|decisione corretta|errore I tipo alpha|
+|verità: NON colpevole|errore II tipo beta|decisione corretta|
+
+* errore I tipo: rischio del produttore (xk produttore fornisce materiale al consumatore che rigetta ingiustamente il materiale)
+* errore II tipo: rischio dell'acquirente
+
+
+
 ## Improve
 ## Cpmtrol
