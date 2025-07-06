@@ -523,7 +523,17 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * errore I tipo: rischio del produttore (xk produttore fornisce materiale al consumatore che rigetta ingiustamente il materiale)
 * errore II tipo: rischio dell'acquirente
 
-
-
 ## Improve
+
+### Benchmarking
+* si attinge da varie fonti: pubblicazioni, ricerca, meeting, questionari, visite siti web, analisi competitor
+* serve a capire limiti di ottimizzazione, quale può essere il desiderata
+* benchmarking interno - con altri dipartimenti (limitato cmq da cultura e norme aziendali)
+* benchmarking esterno - con altre aziende (forza all'esterno, a volte pone dei limiti bassi in certi settori)
+* benchmarking funzionale - con altre funzioni simili al processo, spesso all'esterno
+* benchmarking collaborativo - fatto in team o con + organizzazioni
+* molto ben visto dal management xk aiuta a settare obbiettivi, fare molte ricerche
+* non farlo su tt i processi, solo su core, serve investimento, servono dati e misure
+* non chidere cose che non condivideresti
+
 ## Cpmtrol
