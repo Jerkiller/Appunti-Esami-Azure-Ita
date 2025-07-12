@@ -523,6 +523,8 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * errore I tipo: rischio del produttore (xk produttore fornisce materiale al consumatore che rigetta ingiustamente il materiale)
 * errore II tipo: rischio dell'acquirente
 
+---
+
 ## Improve
 
 ### Benchmarking
@@ -535,5 +537,55 @@ Si usa runchart sia x continui che discreti. Principali bias:
 * molto ben visto dal management xk aiuta a settare obbiettivi, fare molte ricerche
 * non farlo su tt i processi, solo su core, serve investimento, servono dati e misure
 * non chidere cose che non condivideresti
+
+### brainwriting
+brainwrite 635 - 6 xsn 3 idee in 5 min
+oppure con vincoli
+
+### assumption busting
+* si va a caccia di assunzioni! parto dal problema, cerco la regola, trovo assunzione
+* si fanno domande a tutti quelli k possono saperne qualcosa
+* testo assunzione cercando di romperla
+
+### variazioni di brainstorming
+* analogia - si parte da una situaz analoga, si fa bs e si porta alla situaz reale
+* channeling - si fa bs di idee x categoria. quando le idee rallentano si cambia categoria (es. SQCC - servizio qualità costo cliente-soddisf)
+* anti-soluzione - si fa bs dell'opposto, non della soluz al problema, ma di come generare il probl
+
+### tecniche lean
+
+* 5S - migliora l'ambiente con la pulizia, ordine, ecc: sort straighten shine standardize sustain
+* heijunka - load leveling x tutti
+* pull system - tempi e quantità dettati dalla richiesta . elimina sovrapproduz e sprechi
+* jidoka - automazione con intervento umano (toyota). il sistema processa quasi tutto, ma i casi particolari vengono visti dagli umani
+* JIT - costo invantario. la sfida è fare quello k serve quando serva, al limite prevenendo un po' la domanda
+
+### matrice di selezione delle soluzioni
+* efficacia costo rischi
+* serve x accordarsi su priorità insieme e priorizzarle
+* ogni ctq ha un peso, x ogni puntaggio, mi da una classifica delle soluz da attuare
+
+### Pilota
+* vantaggi di un pilota: meno rischio e costi, posso migliorare soluz, buy-in, valida risultati con dati
+
+### Poka yoke
+* mondo pieno di sistemi a prova di errore, come le spine elettriche e prese, quando obbiettivo tappato, non posso scttare foto
+* il sistema può spegnersi/controllare errore eliminandolo/dare allarme-avviso
+
+### FMEA
+* failure mode and effect analysis
+* severità * probabilità * rintracciabilità = RPN = numero priorità del richio
+* categorizzo i richi. per ciascuno, descrivo l'impatto k hanno sul cliente, elenco come può succedere, spiego come attualmente il problema è rintracciabile
+* do puntaggi 1-10
+* descrivo azioni x mitigare uno dei 3 fattori, poi scrivo nuova severità, nuova probabilità, nuova rintracciabilità
+
+### Piano di implementaz
+* una sorta di backlog dove metto le attività, eventuali ostacoli, responsabile, data di scadenza e stato
+
+### Validare soluzione
+* verificare che costi benefici sia invariato (dal define può cambiare)
+* verificare sistema di misurazione (potrebbe esserci bias da define)
+* ri-verifico process capability (DPMO x dati discreti, x continui uso MT) - il sigma è migliorato?
+
 
 ## Cpmtrol
