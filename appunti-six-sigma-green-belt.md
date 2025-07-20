@@ -164,6 +164,8 @@ media delle performance di processo nel lungo periodo quando tutti gli input son
 
 * 80 strumenti - non tutti da usare, ma come le maze da golf. Ogni buca ha la sua mazza
 
+<img width="713" height="374" alt="image" src="https://github.com/user-attachments/assets/a60e99f6-880d-4e4e-9093-434b8b43a3cb" />
+
 ## Define
 
 * chi è il cliente? chi riceve l'output di un proc (es. prod o serv)
@@ -588,4 +590,94 @@ oppure con vincoli
 * ri-verifico process capability (DPMO x dati discreti, x continui uso MT) - il sigma è migliorato?
 
 
-## Cpmtrol
+## Control
+
+### Visual Management Board
+* lavagne per mostrare metriche, stato di iniziative o azioni
+* incoraggia e inorgoglisce xk dati di proc condivisi
+* utile x condividere news, obbiettivo, idee
+* deve ess aggiornato regolarm (giorno)
+
+### Team Huddle
+* breve meeting davanti al board visuale
+* chiarire aspettative e feedback
+* senso di unità e allineamento
+* condividi traguardi, att correnti, sfide, azioni
+* focus su metriche
+* in piedi, in faccia, in 15'
+* cose più lunghe o tecniche vanno parcheggiate
+
+### SOP procedure operative standard
+* procedure scritte con metriche, benchmark, I/O, step
+* centralizzate, standardizzate e accessibili
+* riducono rischio operaz, riducono variaz di processo
+* vanno aggionrate sempre qnd cambia qlcs, e usate giornalmente
+* usate x analizzare processo o x formazione
+
+### Go Gemba
+* ideale x analisi cross-funzionale
+* domande tipiche, dove l'obbiettivo del team, chi è responsabile di qst processo, quale lo scopo?
+* quali le performance? le misure? quanto rework? xk? xk funziona bene? cosa cambieresti?
+* hai le capapcità e strumenti necessari? dove le SOP? sono utili? qnd aggiornate?
+* non spaventare nessuno con le domande
+
+### SPC
+* walter shewhart - bell labs 1920s
+* carte di controllo x misurare processo e variaz
+* limiti di specifica vs limiti di controllo
+  * spec limit - dati dal cliente. control limit dati da media +- 3sigma
+  * se il proc è fuori limite da difetti. control - se proc fuori limite, è fuori controllo (potrebbe come no dare difetti)
+  * i primi cambiano in base al cliente, i secondi in base allo standard di processo
+* processo sotto controllo - dentro ctrl limits, senza pattern ordinati, solo cause comuni di variazione, proc predicibile e stabile
+* zona C la più interna, B un po' più fuori, A quella più estrema e distante dalla media
+* processo fuori controllo quando
+  * 1 punto fuori ctrl-limite
+  * 7 punti crescenti o decrescenti
+  * 8 punti sopra o sotto la media
+  * 14 punti oscillanti su e giù
+  * 2 punti ogni 3 sono in zona A (da una parte della media)
+  * 4 punti ogni 5 sono in zona B o A (da una parte della media)
+  * 15 punti sono in zona C (sopra o sotto media)
+* ci sono indicatori:
+  * leading indicator - 6 punti crescenti - il processo sta x andare fuori controllo
+  * lagging indicator - outlier - il processo è stato fuori controllo e ora lo sappiamo ex post
+
+### come selezionare la migliore carta di controllo
+* dati continui
+  * XR o XS
+* dati discreti / attributi
+  * difetti o difettivi?
+  * difettivi - campioni di uguale dimensione? stesse OFE?
+  * <img width="873" height="466" alt="image" src="https://github.com/user-attachments/assets/4e93bc0d-97af-4db9-9861-5b4380e226de" />
+* control chart tipi
+  * XR - media e range
+  * XS - media e std dev
+  * I-MR - individual moving range (o Universal Control Chart). MT: stat > control charts > var chart for individual > IMR
+  * X bar R chrat - media di medie - confronta la media di diff tra ogni punto e la media. stampa anche un R chart, guarda prima quello x capire se proc è ooc
+  * X bar S xhart - media di medie, con dev std
+  * attribute chart: NP P C U
+
+### piano di controllo
+* analisi di ogni step di processo - cosa può introdurre variazione?
+* quale processo?
+* quali i suoi output monitoriati?
+* quali gli input x mantenere target?
+* cm avviene il controllo di I/O? cosa succede se qualcs fuori controllo? response plan
+* documento vivente
+
+### process owner sign-off
+* documento riassuntivo di gestione del processo
+
+### replicare best-practice
+* individua processi simili e porta benefici su quelli xk tradurre da 1 proc all'altro l'ottimizzazione costa meno k re-implementarla
+* crea un case-study x evitare agli altri di leggere lunga documentaz di progetto, x condividere in modo semplice
+  * spesso un one-pager per mostrare riassumendo tutto
+  * obbiettivi di proge e processo
+  * strumenti e approcci, sfide affrontate
+  * benefici e contributi del team
+
+ ### review post-implementazione
+ * presenta risultati e discussione col team 30-90'
+ * da fare poco dopo fine (non troppo)
+ * cosa andato bene, cosa no
+ * utile celebrare successo e festeggiare
