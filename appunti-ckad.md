@@ -92,7 +92,7 @@
 * tutto ciò che è in un pod ha una sua sotto-rete dove può comunicare cm localhost. Condivide anche lo stesso spazio di storage. Condivide anche il "fate", cioè il ciclo di vita è comune: creati e distrutti
 * immaginare di fare a mano tutto con docker sarebbe un suicidio: crea 1 container, creane 1 altro, fai il link tra questi, crea un volume e attaccalo a entrambi, crea una rete e attaccala a entrambi, gestisci una mappa di risorse condivise, replica tutto N volte, gestisci il ciclo di vita di tutti gli N insiemi di container. Kube fa tutto con i pod
 * quindi: anche se mi serve 1 solo container, in kube deployo 1 pod
-* kubectl run --image nginx nginx -> scarica immagine nginx da dockerhub (repo pubblica) e rilascia pod
+* kubectl run --image nginx nginx -> scarica immagine nginx da dockerhub (repo pubblica) e rilascia pod -- UTILE!
 * kubectl get pods -> lista pod
 * kubectl describe pod <pod-name> -> x avere info in dettaglio
 
@@ -120,3 +120,126 @@
   ```
   * containers è una lista di oggetti. In questo caso sono i container dentro al pod
 * kubectl create -f deployment-pod.yml -> rilascia un pod a partire da un template yaml
+* x ottenere yaml di un pod kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+* x edit pod: kubectl edit pod <property> <value> ma solo alcune property sono editabili. Non il nome o le label x esempio
+
+### Replica
+* replication controller fa il lavoro sporco di tenere le istanza al numero desiderato
+  * se voglio più repliche, mi garantisce il deploy di nuovi pod
+  * se voglio repliche su più nodi, le fa
+  * se voglio anche 1 solo pod, e questo muore, prova a deployarlo
+* nelle spec si mette template e tutto il contenuto di un pod (metadata e spec)
+* kubectl get replicationcontroller
+```yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+spec:
+  template:
+    metadata:
+      name: my-app
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+  replicas: 3
+```
+* ora la nuova tecnologia è replica set
+* apiVersion: apps/v1 - altrimenti errore che dice unable to recognize... no matches for / kind=ReplicaSet
+* può usare il selector x puntare ad altri pod via label. Va scritto x forza
+* garantisce che ci siano x repliche, anche con pod esistenti. Se sono già x non fa nulla. Se sono x-n ne deploya n. Se sono x+n ne killa n (penso). Se uccido 1 nodo di un replica set ne deploya 1 nuovo: x questo il template è obbligatorio!
+* kubectl get replicaset
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-app-rs
+spec:
+  template:
+    metadata:
+      name: my-app
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+```
+* come scalare?
+  * aggiornare il manifest yaml e lanciare kubectl replace -f rs-definition.yml
+  * kubectl scale --replicas=6 rs-definition.yml
+  * kubectl scale --replicas=6 replicaset my-app-rs # type e name del RS
+  * con autoscaler ma + avanzato
+* kubectl delete replicaset <rs-name>
+* kubectl edit rs <nome-risorsa> mi apre vim sul manifest del file. Per orientarsi in vim:
+  * kubectl edit --help ha un esempio di come impostare nano come editor
+  * :wq salva il file ed esce, "i" serve a inserire inplace e esc serve a tornare alla command mode
+
+### Deployment
+* a che serve?
+  * gestire versioni dei pod, gestire aggiornamenti facilmente
+  * gestire rolling update (aggiorna a, poi b, poi c...)
+  * gestire rollback (a->v1 b->v1 ...)
+  * mettere in pausa o riavviare i cambiamenti
+* incapsula P replica set che incapsula Q repliche di 1 pod che incapsula R container! Quindi è High-order object e può gestire molte cose
+* e il manifest? Esattamente uguale al replicaset cambiando il kind: Deployment!!!! (sempre apps/v1, sempre spec.template.(metadata, spec), spec.replicas, spec.selector.matchLabels.(*:*))
+* kubectl get all - serve a vedere tutti gli oggetti creati
+* kubectl create deployment --name <name> --replicas 3 --image <image> - utile!
+* -o specifica l'output del comando. le opzioni utili sono: yaml|json|name (solo i nomi)|wide (info estese)
+
+### Namespace
+* analogia con casa e cognomi. Qui sono Luca. In casa di altri, sono Luca F. Fuori casa tutti hanno cognome
+* tutto di default creato nel default :-D
+* kube-system è x le risorse kube che non vanno cancellate o modificate accidentalmente
+* kube-public x le risorse accessibili x tutti gli utenti
+* ognuno può creare namespace x isolare le risorse: es. dev e prod
+* in 1 namespace si possono indicare rbac policies, quotas x risorse
+* in 1 namespace l'hostname è semplicemente il nome del service, es. "mysql"
+* ci si può collegare a un altro svc di un diverso namespace (dev) per esempio usando "mysql.dev.svc.cluster.local"
+* cluster.local è il domain name del cluster
+* si può aggiungere nei comandi --namespace (-n). di default il listing è solo su default e le risorse sono create/eliminate solo dal default
+* si può aggiungere nei metadati un diverso namespace x assicurarsi che ogni volta la risorsa viene creata in quel NS
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+```
+* oppure kubectl create namespace <ns-name>
+* contesto: il mio default in cui sono
+* kubectl config set-context $(kubectl config current-context) --namespace=dev
+* kubectl get pods --all-namespaces x vedere ogni cosa (oppure -A)
+* se voglio limitare le risorse posso farlo (num pod, cpu o ram max e min)
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: my-namespace-quotas
+  namespace: my-namespace
+spec:
+  hard:
+    pods: 10
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+```
+* x creare un template di pod in 1 comando posso usare --dry-run=client x simulare l'esecuzione di un comando e uscire lo yaml in un file
+  ```shell
+  #pod
+  kubectl run my-redis --image=redis --labels="tier=db" --dry-run=client -o yaml > my-redis.yaml
+  kubectl run my-redis --image=redis --labels="tier=db" --expose=true --port=80 # x un pod già esposto
+  #deployment
+  kubectl create deployment my-nginx --image=nginx --replicas=2 --dry-run=client -o yaml > my-nginx.yaml
+  #svc
+  kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml # assumendo app=redis cm selettore
+  kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml #
+  kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
+  kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+  ```
