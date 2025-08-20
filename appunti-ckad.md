@@ -192,6 +192,8 @@ spec:
 * kubectl get all - serve a vedere tutti gli oggetti creati
 * kubectl create deployment --name <name> --replicas 3 --image <image> - utile!
 * -o specifica l'output del comando. le opzioni utili sono: yaml|json|name (solo i nomi)|wide (info estese)
+* di un pod a runtime posso cambiare poche cose: immagine, immagine dell'initContainer, e qualche parametro. Se vado in edit, mi impedisce di salvare o mi fa salvare un file yaml localmente. Di un deployment posso cambiare tutto (kubectl edit deployment) xk il pod ne è figlio e quindi ho controllo.
+* Se cmq voglio forzare l'edit di un pod con cancellazione posso fare `kubectl replace --force -f deployment.yaml`
 
 ### Namespace
 * analogia con casa e cognomi. Qui sono Luca. In casa di altri, sono Luca F. Fuori casa tutti hanno cognome
@@ -243,3 +245,266 @@ spec:
   kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
   kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
   ```
+
+## Containerization
+```dockerfile
+FROM Ubuntu
+# start from an image (mandatory and first)
+# then install dependencies
+RUN apt-get update
+RUN apt-get install python
+# ...
+RUN pip install flask flask-mysql
+# copy local to remote system
+COPY . /opt/source-code
+# command when it runs in the container
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+  ```
+    
+```sh
+docker build Dockerfile -t <user>/<app>
+docker push <user>/<app>
+```
+
+ogni istruz docker crea un layer x:
+* riuso se ne faccio tanti
+* cache se sto facendo più volte cose simili
+* cache se sto fallendo e riprendo da un certo punto
+con docker history si vedono i vari layer e il peso di ciascuno in kB e MB
+
+```sh
+docker images
+docker run -p 8282:8080 webapp-color
+# s capire la release di un docker o si guarda la history oppure
+docker run python:3.6 cat /etc/*release*
+```
+
+Rispetto a un OS, un container mira a runnare un task/processo
+X cui se faccio docker run ubuntu, uscirà (exited)
+
+Se invece faccio
+```dockerfile
+FROM Ubuntu
+CMD sleep 5
+```
+Questa immag vive 5 secondi
+CMD accetta anche lista di parametri come CMD ["sleep","5"] ma non ["sleep 5"]
+```dockerfile
+FROM Ubuntu
+ENTRYPOINT ["sleep"]
+```
+Usando ENTRYPOINT invece di CMD posso rendere parametrico il mio dockerfile xk specifico un programma da eseguire
+docker run ubuntu-sleeper 10
+```dockerfile
+FROM Ubuntu
+ENTRYPOINT ["sleep"]
+CMD ["5"]
+```
+Questo da un default di 5 secondi ma con possibilità cm prima di parametrizzare
+Si può fare override anche a runtime docker run --entrypoint
+
+Come passare argomenti a un container in un pod:
+```yaml
+  spec:
+    containers:
+	- name: nginx-container
+	  image: nginx
+    args: ["5"]
+  ```
+  invece x specificare un entrypoint (il programma da eseguire a runtime) + argomenti
+  ```yaml
+  spec:
+    containers:
+	- name: nginx-container
+	  image: nginx
+    command: ["sleep2.0"]
+    args: ["5"]
+  ```
+  > falso amico! Non è command che fa l'override di CMD!
+  > cannot unmarshall number... errore quando sto tentando di parsare un intero come stringa. Tutti comandi e argomenti sono SOLO stringhe
+* se voglio vedere un pod esistente con il describe vedo anche il suo command con cui è inizializzato
+
+## Configurazione
+
+* configMap x gestire configurazione con + pod semplicemente, iniettata all'avvio del pod
+* kubectl create configmap <my-config-map> --from-literal=APP_COLOR=blue --from-literal=APP_MODE=test
+* oppure --from-file=<filepath> xk usare cento from-literal è scomodo anche se si può usare \ per spezzare com in + righe
+* approccio dichiarativo
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  APP_COLOR: blue
+  APP_MODE: test
+```
+* ocio, no spec ma data! no lista ma oggetto
+* kubectl get configmaps / kubectl describe configmaps
+
+* si può iniettare tutta la config map in un container con envFrom:
+```yaml
+  spec:
+    containers:
+	- name: nginx-container
+	  image: nginx
+    envFrom:
+      - configMapRef:
+        name: my-app-config
+```
+
+* si può iniettare singola chiave della config map usando env:
+```yaml
+  spec:
+    containers:
+	- name: nginx-container
+	  image: nginx
+    envs:
+      - name: ENVIRONM
+        value: production
+```
+corrisponde a docker run -e ENVIRONM=production
+* oppure prendi valore da config map o secret
+
+```yaml
+  spec:
+    containers:
+	- name: nginx-container
+	  image: nginx
+    envs:
+      - name: ENVIRONM
+        valueFrom:
+          configMapKeyRef: xxx
+      - name: ENVIRONM
+        valueFrom:
+          secretKeyRef: xxx
+```
+* si può montare un'intera config map come file su un volume
+```yaml
+  spec:
+    containers:
+    - name: nginx-container
+      image: nginx
+    volumes:
+      name: appConfigVolume
+      appConfig:
+        name: myAppConfig
+```
+* secret sono esattamente identici alle config map, sia i comandi che i manifest. Basterebbe fare un replace word-by-word. es. envFrom.secretRef, volumes[0].secret.secretName. NOTA: in create va specificato che vogliamo creare un secret generic (opaco)
+* nota: i value dei secret dentro il campo data del manifest sono in base64, altrimenti stringData
+* echo -n "ciao beo" | base64 # ->> encode a string into base64
+* echo -n "Y2lhbyBiZW8=" | base64 --decode
+* sicurezza dei secret:
+  * sono encoded non encrypted! -> non vanno committati con il codice
+  * non sono encrypted in ETCD -> configurare [encryption at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data) x certe risorse
+  * sono visibili da tutti in un namespace -> configurare access policy role based
+  * si possono usare provider cloud per iniettare secret AWS, GCP, Azure. Oppure Helm Secret o HashiCorp Vault
+  * si può usare [CSI driver](https://www.youtube.com/watch?v=MTnQW9MxnRI&ab_channel=KodeKloud) -- TODO guardare di che si tratta
+
+---
+### encryption at rest
+```sh
+apt-get install etcd-client
+etcdctl <...certificates> get my-super-secret | hexdump -C # it appears that secrets are not encrypted
+# check kubeapis se è gia attiva la encrypt
+ps -aux | grep kube-api | grep "encryption-provider-config"
+cat /etc/kubernetes/manifests/kube-apiserver.yaml 
+# crea file
+/etc/enc.yaml
+# incolla dalla doc una EncryptionConfiguration
+# specifica x k risorse (secret) e k provider (ordine conta!) cioè quali alg di cifratura
+# incolla
+--encryption-provider-config=/etc/enc.yaml # montata come volume nel pod (vedi docum)
+# fai tutte le mdoficihe necessarie al file /etc/kubernetes/manifests/kube-apiserver.yaml 
+# salvando, il server si riavvia x i cambiamenti e ci mette un po'. se fai "k get po" fallsice un po'
+# ora, i nuovi secret sono encrypti, i vecchi no, a meno k non fai
+k get secrets -A -o json | k replace -f -
+```
+
+## Docker security
+rispetto vm, i container nn sono isolati al 100% dall'host. condividono il kernel ma separano i processi usando i namespace
+dentro docker vedi 1 solo processo con pid 1 (namespace isolato)
+ma dall'host vedi i processi docker con pid diverso dall'altro namespace
+* di default docker usa utente root sia nell'host che dentro il container
+* se si vuole cambiare il default: `docker run --user=1000` (userid) o mettendo nel dockerfile `USER 1000`
+* root dell'host è potentissimo. root del docker di default ha dei permessi in meno (es. nn può terminare processi di sistema o modificare networking)
+* se si vuole fare override docker run --cap-drop KILL o docker run --cap-add <permission> o addirittura --privileged
+* nel pod si può aggiungere queesti parametri di sicurezza sia a livello di pod (globale x tutti i container) che nel signolo container
+```yaml
+kind: Pod
+spec:
+  securityContext:
+    runAsUser: 1001
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sleep", "3600"]
+```
+oppure sul container (ank capabilities):
+```yaml
+kind: Pod
+spec:
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sleep", "3600"]  
+      securityContext:
+        runAsUser: 1001
+        capabilities:
+          add: ["MAC_ADMIN"]
+```
+altro modo x vedere k utente esegue un pod è
+k exec -i <pod_name> -- whoami
+
+### Risorse
+* CPU e RAM usate dallo scheduler x bilanciare carico nei nodi. Se è tutto pieno, scheduling fallisce
+* CPU è definita in unità (0.1 - 1 - infinito) oppure milliunità (1m - 2000m - infinito) - 1vCPU/hyperthread/core nome dipende dal provider
+* RAM è definita in Mebibyte di solito (potenze di 2. 1Kibibyte = 1024 B, 1 KiloByte sono 1000 B. 1Mib = 1048576B)
+* Si può definire ram con unità Ki Mi Gi o K M G (kibi, mebi, gibi, kilo mega giga)
+* si definisce min max come richieste e limiti
+```yaml
+kind: Pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      resources:
+        requests:
+          cpu: 500m
+          memory: "500Mi"
+        limits:
+          cpu: 2
+          memory: "2Gi"
+```
+* quando pod eccede limiti? se è cpu throttla. se è memoria, viene lasciato fino all'OOM (errore out of memory)
+* non settare risorse è scorretto xk possono competere in risorse
+* CPU: settare il massimo è utile (es. evita picchi) ma a volte controproducente: se ho risorse xk altri pod sono scarichi, xk limitare un pod k ha bisogno? - l'approccio vincente è settare le risorse minime di cpu e non le max. un caso è quello di evitare azioni come mining crypto x cui limitarre cpu di pod
+* la memoria nn si può throttlare. l'unico modo x liberarla è killare il pod
+* cm settare limiti x tutto il cluster? default è limite massimo, default req è minimo
+```yaml
+apiVersion: v1
+kind: LimitRange
+spec:
+  limits:
+    - default:
+        cpu: 500m
+      defaultRequest:
+        cpu: 500m
+      max:
+        cpu: 2
+      min:
+        cpu: 100m
+      type: Container
+```
+* ocio k se creo un pod cicciotto, poi le limitrange, il pod nn è intaccato, ma solo i nuovi o quelli aggiornati
+* cm settare x tutto il clister? usando le resourcequotas
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+spec:
+  hard:
+    requests.cpu: 500m
+    limits.cpu: 2
+    requests.memory: "500Mi"
+    limits.memory: "2Gi"
+```
