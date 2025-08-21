@@ -513,6 +513,7 @@ spec:
 * account
    * user account - umano, dev, admin
    * service account - prometheus o jenkins
+trattiamo i service account
    * k create serviceaccount my-sa # crea account, token nei secret
    * k get sa, k describe sa, k get secret serviceaccount-token-xhsmc
    * tokrn usabile cm bearer nelle richieste rest --header Authorization: Bearer <token:base64>
@@ -525,3 +526,66 @@ spec:
      * k create ***token*** my-dashboard # con eventuale expiry allungato
      * si può cmq creare un secret con annotation e tipo specifico x renderlo illimitato, ma nn è il default. e' sconsigliato, a favore invece di TokenRequestAPI
      * kubectl set serviceaccount deploy/web-dashboard dashboard-sa oppure nelle spec del pod si mette serviceAccountName e il nome del SA
+
+### Taints and toleration
+* taint su un nodo e toleration su un pod servono x lo scheduler x definire cosa va e cosa no su un nodo
+* di default nessun nodo ama i taint. Solo con la toleration ci può andare (cm insetticida e insetti)
+* kubectl taint nodes <node-name> key=value:<taint-effect>
+* key value come app=blue
+* taint effect è cs succede se un po non tollera quel taint: NoSchedule|PreferNoSchedule|NoExecute (ultimo cn effetto retroattivo, fa eviction dei po esistenti)
+* toleration:
+```yaml
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+```
+* NB: per qualche motivo va tutto tra doppi apici
+* NB2: taint e toleration fanno si k in un nodo finiscano solo certe cose, ma non garantiscono nulla. Se dico k nodo X accetta solo pod ti tipo B, questo può andare su un altro nodo Y, senza problemi.
+* sto meccanismo è usato nei cluster di default x dire k nel master nodo non puoi deployare workload.
+* kubectl describe node kubemaster | grep Taint
+* x rimuovere taint si usa k taints node nodename a=b:NoSchedule-
+
+### nodeSelectors e affinity
+* servono a dire k certi pod vadano su certi nodi
+* k label node <node-name> key=value
+* dopo containers si aggiunge
+```
+  containers:
+  # ...
+  nodeSelector:
+    size: Large
+```
+utile ma limitato xk nn posso fare robe complesse cm dire k un pod va in medio o grande o negazione
+
+con l'affinity si possono usare operatori complessi e comporre regole ma pagando in semplicità
+operatori In, NotIn, Exist (matcha la chiave, conqualsiasivalore)
+ma senon matcha nulla? dipende dal node affinity type
+```
+  containers:
+  # ...
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: size
+              operator: NotIn
+              values:
+                - Large
+```
+requiredDuringSchedulingIgnoredDuringExecution -> required in scheduling. Se nn c'è la label non schedula
+prefered... -> Se nn c'è la label schedula cmq
+required...required... -> se nn c'è la label o la rimuovo a runtime, non schedula o fa eviction del pod!
+
+* quando usare taint e tolerations insieme? Nel caso in cui: voglio k i pod vadano su nodi specifici e k altri pod non vadano su quei nodi. es. pod R G B X Y e nodi r g b x y. voglio Rr Gg Bb e non mi interessa X e Y. Mi basta che non vadano Rg o Rx o Xg...
+
+alias kk=kubectl
+export KUBECTL_EDITOR="nano"
+
+## pod multicontainer
