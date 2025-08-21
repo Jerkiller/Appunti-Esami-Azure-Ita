@@ -193,7 +193,7 @@ spec:
 * kubectl create deployment --name <name> --replicas 3 --image <image> - utile!
 * -o specifica l'output del comando. le opzioni utili sono: yaml|json|name (solo i nomi)|wide (info estese)
 * di un pod a runtime posso cambiare poche cose: immagine, immagine dell'initContainer, e qualche parametro. Se vado in edit, mi impedisce di salvare o mi fa salvare un file yaml localmente. Di un deployment posso cambiare tutto (kubectl edit deployment) xk il pod ne è figlio e quindi ho controllo.
-* Se cmq voglio forzare l'edit di un pod con cancellazione posso fare `kubectl replace --force -f deployment.yaml`
+* Se cmq voglio forzare l'edit o delete di un pod con cancellazione posso fare `kubectl replace --force -f deployment.yaml`
 
 ### Namespace
 * analogia con casa e cognomi. Qui sono Luca. In casa di altri, sono Luca F. Fuori casa tutti hanno cognome
@@ -508,3 +508,20 @@ spec:
     requests.memory: "500Mi"
     limits.memory: "2Gi"
 ```
+
+### Utenti
+* account
+   * user account - umano, dev, admin
+   * service account - prometheus o jenkins
+   * k create serviceaccount my-sa # crea account, token nei secret
+   * k get sa, k describe sa, k get secret serviceaccount-token-xhsmc
+   * tokrn usabile cm bearer nelle richieste rest --header Authorization: Bearer <token:base64>
+   * il sa di default c'e in ogni ns (limitato): lo vedi col describe. viene montato di default su tti i pod (cosi possono accedere a kube api x es). x robe + potenti, es. modifica dei pod, va montato a manella
+   * k exec -it <pod> -- ls /var/run/secrets/kubernetes.io/serviceaccounts # dentro token c'è il secret
+   * x override: spec.automountServiceAccountToken: false
+   * 1.22: ora nn viene montato direttamente il token ma un ogg TokenRequestAPI k ha un token time-bound (prima era illimintato)
+   * 1.24: ora nn viene + creato di default il token del sevice account.
+     * k create serviceaccount my-dashboard
+     * k create ***token*** my-dashboard # con eventuale expiry allungato
+     * si può cmq creare un secret con annotation e tipo specifico x renderlo illimitato, ma nn è il default. e' sconsigliato, a favore invece di TokenRequestAPI
+     * kubectl set serviceaccount deploy/web-dashboard dashboard-sa oppure nelle spec del pod si mette serviceAccountName e il nome del SA
