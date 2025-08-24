@@ -589,3 +589,14 @@ alias kk=kubectl
 export KUBECTL_EDITOR="nano"
 
 ## pod multicontainer
+* pod con + container xk è utile a volte k certe applicazioni abbiano microservizi comuni con stesse esigenze di scalabilità
+* stesso spazio di networking (con localhost), stesso volume, stesso ciclo di vita/fate
+* pattern
+  * container co-locati - semplicemente 2 cont devono stare insieme, li creo insieme e muoiono insieme
+  * regular init container - parte all-inizio e poi muore es. inizializzazione DB
+    * viene impostato mettendo N container in initContainers (eseguiti insequenza). Spesso viene montato lo stesso volume dentro tutti questi pod, es busybox con sh -c until nslookup myservice do echo waiting for myservice; sleep 2; done;
+    * finché l'init sta andando il main container è in waiting/pendingg
+    * quando finisce, linit container va in completed e si avvia il passo successivo (altri init oppure main)
+  * sidecar container - decido ordine di avvio, poi continua x tutta la vita del cont principale. es. logger
+    * initContainers con un restartPolicy: Always. Spesso viene montato lo stesso volume dentro tutti questi pod
+    l'importante è la restartPolicy
