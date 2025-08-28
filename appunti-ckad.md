@@ -112,24 +112,30 @@
   * name: stringa, come voglio chiamare il pod
   * labels: dizionario stringa: any dove posso etichettare oggetti x identificarne a gruppi (es. se ho centinaia di oggetti)
 * spec: dizionario/oggetto x dire cosa voglio creare e come (unica definizione per ogni kind)
-    ```yaml
+
+```yaml
   spec:
     containers:
-	- name: nginx-container
-	  image: nginx
+    - name: nginx-container
+      image: nginx
   ```
+
   * containers è una lista di oggetti. In questo caso sono i container dentro al pod
 * kubectl create -f deployment-pod.yml -> rilascia un pod a partire da un template yaml
-* x ottenere yaml di un pod kubectl get pod <pod-name> -o yaml > pod-definition.yaml
-* x edit pod: kubectl edit pod <property> <value> ma solo alcune property sono editabili. Non il nome o le label x esempio
+* x ottenere yaml di un pod kubectl get pod \<pod-name> -o yaml > pod-definition.yaml
+* oppure x ottenere un manifest con tutti i pod basta kubectl get pod -o yaml > pod-definition.yaml
+* poi conviene fare k delete pod --all
+* x edit pod: kubectl edit pod \<property> \<value> ma solo alcune property sono editabili. Non il nome o le label x esempio
 
 ### Replica
+
 * replication controller fa il lavoro sporco di tenere le istanza al numero desiderato
   * se voglio più repliche, mi garantisce il deploy di nuovi pod
   * se voglio repliche su più nodi, le fa
   * se voglio anche 1 solo pod, e questo muore, prova a deployarlo
 * nelle spec si mette template e tutto il contenuto di un pod (metadata e spec)
 * kubectl get replicationcontroller
+
 ```yaml
 apiVersion: v1
 kind: ReplicationController
