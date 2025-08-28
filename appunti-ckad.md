@@ -671,3 +671,27 @@ export KUBECTL_EDITOR="nano"
   * sidecar container - decido ordine di avvio, poi continua x tutta la vita del cont principale. es. logger
     * initContainers con un restartPolicy: Always. Spesso viene montato lo stesso volume dentro tutti questi pod
     l'importante è la restartPolicy
+
+### Logging & Monitoring
+
+* docker logs -f \<nome_container>
+* k logs -f \<pod_name> ma, se ci sono più container fallisce
+* k logs -f \<pod_name> \<container_name>
+* soluz di monitoraggio
+  * open source
+    * elasticstack
+    * prometheus
+  * proprietarie
+    * datadog
+    * dynatrace
+    * groundcover
+  * agli albori c'era heapster ma è deprecato
+  * metrics server registra metriche in-memory e non su disco
+  * cm funziona? ogni nodo ha kubelet k è un agente che runna i pod. Dentro kubelet c'è cAdvisor che preleva le metriche
+  * su minikube: `minikube addons enable metrics-server`
+  * oppure git clone della repo e kubectl apply -f /deploy/\<version>
+  * kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+  * kubectl top node
+  * kubectl top pod
+
+###
