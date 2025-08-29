@@ -694,4 +694,45 @@ export KUBECTL_EDITOR="nano"
   * kubectl top node
   * kubectl top pod
 
-###
+### Raggruppamenti
+
+* label e selector servono a fare raggruppamenti multipli
+
+```yaml
+metadata:
+  labels:
+    app: app1
+    functionality: xyz
+    env: test
+```
+
+* ocio: Nei replica set ci sono le label del replica set e quelle deel template di pod.
+* nel replica set c'è in spec il selector x identificare N pod. DEVE matchare con il template
+
+```yaml
+spec:
+  selector:
+    matchLabels:
+      app: app1
+```
+
+* service ha i selector x identiificare gruppo di pod
+* annotations servono x altri scopi informativi o integrativi e sono dentro i metadati
+* k get po --selector=app=app1
+* k get po --selector=bu=finance,env=prod,tier=frontend
+* k get all --selector=app=app1
+
+### Strategie di Deploy
+
+* posso fare k rollout history deployment/myapp-deploy --revision=1 per vedere il dettaglio di una revisione (cosa cambia)
+* quando creo un deployment parte un rollout. Ogni aggiornamento immagine avvia un rollout: sequenzialmente vengono aggiornati tutti i pod
+* rolling update è la default deployment strategy, ma ce ne sono di alternative tipo la recreate dove tiro giù N pod e ne ricreo N (con downtime)
+* oltre ad aggiornare manifest, si può usare comando imperativo k set image deployment/myapp-deploy nignx-container=nginx:1.9.1
+* nel describe di un deployment si vedono tra gli eventi le strategie di deploy. Un recreate ha l'evento scale down to zero. Il rollout ha molti più eventi (tiro giù il pod, creo il pod x N volte)
+* Nel rollout, il deployment crea un replica set B dove, man mano che uccide il replica set A pod dopo pod, crea un pod nel RS B
+* k rollout undo deployment/myapp-deployment per fare rollback
+* k rollout status deployment/myapp-deploy
+* k rollout history deployment/myapp-deploy -> mi da l'elenco delle revisioni con un indice numerico di revisione
+* la history mi da anche la causa del cambiamento. Ma di default non viene registrata
+* per aggiungere la causa: quando si lancia k set image o k edit deploy va messo il flag --record
+* per tornare alla versione X si fa k rollout undo deployment/myapp-deploy --to-revision=X
