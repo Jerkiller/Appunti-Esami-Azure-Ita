@@ -862,7 +862,8 @@ ma senon matcha nulla? dipende dal node affinity type
 ## NetworkPolicies
 
 * di default i nodi, i pod, i servizi: si vedono tra loro. Sono in una rete privata dove si raggiungono e si può fare qualsiasi connessione di traffico entrante o uscente con regola AllowAll
-* NetworkPolicy: oggetto Kube che fa sì che solo certi routing siano consentiti (es. DB raggiungibile solo da API server)
+* NetworkPolicy: oggetto Kube (non core) che fa sì che solo certi routing siano consentiti (es. DB raggiungibile solo da API server)
+* `k get netpol`
 * Segue manifest
 
   ```yaml
@@ -890,3 +891,185 @@ ma senon matcha nulla? dipende dal node affinity type
 * non su tutti i cluster sono supportate le NetPolicy (ocio k nn mostra errore, ma proprio nn funziona)
   * NON su FLANNEL
   * SI' su KubeRouter Calico Romana WeaveNet
+* oltre a podSelector posso avere regole sul namespace (una regola composta è valutata in AND)
+  
+  ```yaml
+  - from:
+    - podSelector:
+        matchLabels:
+          app: api
+      namespaceSelector:
+        matchLabels:
+          name: prod
+  ```
+
+* in from posso avere + regole (valutate in OR) quando c'è un array. quando è un oggetto sono in AND
+* es. dal db voglio avere accesso da degli IP per fare il backup:
+
+  ```yaml
+  - from:
+    - podSelector:
+        matchLabels:
+          app: api
+      namespaceSelector:
+        matchLabels:
+          name: prod
+    - ipBlock:
+        cidr: 192.168.0.15/32
+  ```
+
+* es. per egress:
+
+  ```yaml
+  apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: db-policy-to-accept-only-incoming-api-traffic
+  spec:
+    podSelector:
+      matchLabels:
+        app: db
+    policyTypes:
+    - Ingress
+    - Egress
+    ingress:
+    - from:
+      - podSelector:
+        matchLabels:
+          app: api
+      ports:
+      - protocol: TCP
+        port: 3306
+    egress:
+    - to:
+      # the same... rules for egress
+    - to:
+      # the same... rules for egress IN OR
+  ```
+
+## Ingress
+
+* Il service di tipo nodeport al max mi da un url del genere: `http://11.24.33.105:33080` mentre ne vorrei uno come `https://my-site.com`.
+* In ambienti cloud posso usare load balancer (a pagamento) per esporre un servizio
+* Posso creare un ingress k è come un reverse proxy k fa:
+  * mapping di porte (es. 80->33080)
+  * SSL
+  * routing tra vari nodi, basato su path, virtual hosting, ecc
+* `k get ingress`
+* senza Ingress si userebbe nginx, HAProxy, Traefik, Contour, Istio, Envoy come reverse proxy, ma vanno configurati
+* con ingress, si usa un reverse proxy (IngressController) e si configurano delle regole (IngressResource)
+* manifest IngressController
+
+  ```yaml
+  apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    name: my-ingr-cont
+  spec:
+    containers:
+      - image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.21.0
+        name: ingress-controller
+    args:
+      - /nginx-ingress-controller
+      - -- configmap=$(POD_NAMESPACE)/nginx-configuration # passo la config map x nginx
+    env:
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+    ports:
+      - name: http
+        containerPort: 80
+      - name: https
+        containerPort: 443
+
+  ---
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: nginx-configuration
+  ---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: nginx-ingress
+  spec:
+    type: NodePort
+    ports:
+      - name: http
+        protocol: TCP
+        targetPort: 80
+        port: 80
+      - name: https
+        protocol: TCP
+        targetPort: 443
+        port: 443
+    selector:
+      name: nginx-ingress
+  ---
+  apiVersion: v1
+  kind: ServiceAccount # serve all'ingress controller x fare cose intelligenti
+  metadata:
+    name: nginx-ingress-serviceaccount
+  ```
+
+* routing semplice (pass through nessuna regola):
+
+  ```yaml
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: my-simple-routing
+  spec:
+    backend:
+      serviceName: wear-service
+      servicePort: 80
+  ```
+
+* routing basato su path
+
+  ```yaml
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: my-routing
+  spec:
+    rules:
+      - http:
+          paths:
+            - path: /wear
+              backend:
+                serviceName: wear-service
+                servicePort: 80
+            - path: /watch
+              backend:
+                serviceName: watch-service
+                servicePort: 80
+  ```
+
+* routing basato su host
+
+  ```yaml
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: my-routing
+  spec:
+    rules:
+      - host: wear.my-site.com
+        http:
+          paths:
+            - backend:
+                serviceName: wear-service
+                servicePort: 80
+      - host: watch.my-site.com
+        http:
+          paths:
+            - backend:
+                serviceName: watch-service
+                servicePort: 80
+  ```
