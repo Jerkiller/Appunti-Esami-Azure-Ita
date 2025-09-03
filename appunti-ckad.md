@@ -958,10 +958,12 @@ ma senon matcha nulla? dipende dal node affinity type
 * `k get ingress`
 * senza Ingress si userebbe nginx, HAProxy, Traefik, Contour, Istio, Envoy come reverse proxy, ma vanno configurati
 * con ingress, si usa un reverse proxy (IngressController) e si configurano delle regole (IngressResource)
+* `kubectl create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"`
+* se nn viene specificato un backend viene usato default-backend-service
 * manifest IngressController
 
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1
   kind: Deployment
   metadata:
     name: my-ingr-cont
@@ -1017,23 +1019,26 @@ ma senon matcha nulla? dipende dal node affinity type
     name: nginx-ingress-serviceaccount
   ```
 
+* di norma l'ingress controller viene deployato nel namespace `ingress-nginx`
 * routing semplice (pass through nessuna regola):
 
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
     name: my-simple-routing
   spec:
     backend:
-      serviceName: wear-service
-      servicePort: 80
+      service:
+        name: wear-service
+        port:
+          number: 80
   ```
 
 * routing basato su path
 
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
     name: my-routing
@@ -1043,18 +1048,22 @@ ma senon matcha nulla? dipende dal node affinity type
           paths:
             - path: /wear
               backend:
-                serviceName: wear-service
-                servicePort: 80
+                service:
+                  name: wear-service
+                  port:
+                    number: 80
             - path: /watch
               backend:
-                serviceName: watch-service
-                servicePort: 80
+                service:
+                  name: watch-service
+                  port:
+                    number: 80
   ```
 
 * routing basato su host
 
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
     name: my-routing
@@ -1064,12 +1073,19 @@ ma senon matcha nulla? dipende dal node affinity type
         http:
           paths:
             - backend:
-                serviceName: wear-service
-                servicePort: 80
+                service:
+                  name: wear-service
+                  port:
+                    number: 80
       - host: watch.my-site.com
         http:
           paths:
             - backend:
-                serviceName: watch-service
-                servicePort: 80
+                service:
+                  name: watch-service
+                  port:
+                    number: 80
   ```
+
+* `nginx.ingress.kubernetes.io/rewrite-target: /` serve a dire che se accedo a un ingress con `/path`, questo rimappa nel servizio con `/` invece che con `/path`
+* nel comando imperativo ricorda di mettere `--annotation a=b`
