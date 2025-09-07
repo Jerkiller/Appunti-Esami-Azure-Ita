@@ -51,7 +51,7 @@
 
 ## Corso num 2
 
-[Link a corso Udemy](TODO)
+[Link a corso Udemy](https://www.udemy.com/course/certified-kubernetes-application-developer/?couponCode=KEEPLEARNING)
 
 * Cluster è formato da nodi (macch. virtuali o fisiche) una volta detti minions
 * nodo multiplo x ridondanza, carico suddiviso
@@ -677,6 +677,7 @@ ma senon matcha nulla? dipende dal node affinity type
 * `docker logs -f <nome_container>`
 * `k logs -f <pod_name>` ma, se ci sono più container fallisce
 * `k logs -f <pod_name> \<container_name>`
++ `k exec <pod_name> -- cat /var/logs`, inoltra il comando x stampa log
 * soluz di monitoraggio
   * open source
     * elasticstack
@@ -1089,3 +1090,76 @@ ma senon matcha nulla? dipende dal node affinity type
 
 * `nginx.ingress.kubernetes.io/rewrite-target: /` serve a dire che se accedo a un ingress con `/path`, questo rimappa nel servizio con `/` invece che con `/path`
 * nel comando imperativo ricorda di mettere `--annotation a=b`
++ se devo mappare togliendo un pezzo di path es. /wear/shoes in /shoes uso i capturing group $2
+
+## Persistenza
+
+* docker crea una cartella in /var/lib/docker dentro ci sono images, containers, volumes (dove salva i dati interni)
+* docker usa una layered architecture per velocizzare build e risparmiare spazio
+  * i layer sono condivisi e sono read-only, on top dei layer viene appeso un container volume che è writable dove a runtime posso modificare quello che voglio, o la app scrive i log, ecc
+  * se modifico un file dell'immagine (es. app.py)? viene usato meccanismo copy-on-write e scritto il container volume
+  * ocio: il container volume è effimero, appena riavvio l'immagine, perdo tutto!
+  * se voglio volume persistente (k non perde modficihe)? `docker volume create data_mysql` -> aggiunge una cartella in `/var/lib/docker/volumes/data_mysql`. Poi faccio `docker run -v data_mysql:/var/lib/mysql mysql` x avviare il container montando il volume in un certo percorso (/var/lib/mysql).
+  * bind mounting: se voglio posso anche montare una cartella locale invece di un volume docker: `docker run -v /my-folder/mysql:/var/lib/mysql mysql`
+  * altro modo è usare opz --mount, più verbosa ed esplicita: docker run --mount type=bind,source=/my-folder/my-sql,target=/var/lib/mysql mysql
+  * chi fa lavoro sporco di gestione storage? storage driver - dipende dal SO, alcuni comuni sono AUFS, ZFS, BTRFS, Overlay, DeviceMapper
+  * volume plugin invece si occupa di montare un file system. Di solito il plugin è Local (storage sottostante), a volte altri providere come Azure File System, oppure, VMWare, S3 Flocker...
+* Mounting semplice du Pod da path su host
+
+  ```yaml
+  kind: Pod
+  spec:
+    containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+          - name: my-volume-data
+            mountPath: /opt/my-data # dove monto nel container
+    volumes:
+      - name: my-volume-data
+        hostPath:
+          path: /data # la mia directory locale
+          type: Directory
+  ```
+
+* ocio: il mounting di cartella funziona se sono su singolo nodo, singolo pod. Se monto lo stesso volume su più pod (es. replica set) devo usare alternativa
+* invece di host path: awsElasticBlockStore, [oppure](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes) dischi azure, flocker, NFS... local, emptyDir, ...
+* settare a mano il volume su tutti i pod è difficile da gestire, allora viene centralizzato in una risorsa Kube (PV) in cui, più pod accedono a una parte con un PVC:
+
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolume
+  spec:
+    accessModes: ReadWriteOnce # ReadOnlyMany or ReadWriteMany
+    capacity:
+      storage: 1Gi # quanto dedicare al PV
+    hostPath: # da non usare in prod!
+      path: /data # la mia directory locale
+      type: Directory
+    # esempio più veritiero con EBS:
+    awsElasticBlockStorage:
+      volumeID: <volumeId>
+      fsType: ext4
+  ```
+
+  * generalmente i PV li crea l'amministratore, l'utente kube crea i PVC, cioè richieste di storage da parte di un pod, queste vengono appropriatamente mappate su PV dal sistema
+  * i PVC possono selezionare un PV con label e selector, oppure dare dei constraint più flessibili (es. ho bisogno di 200MB, di uno storage RW, su Azure)
+  * un PVC viene attaccato a 1 e 1 solo volume. Se non c'è un volume? PVC rimane pending in attesa di nuovi PV. Se il volume è più grande? viene sotto-utilizzato.
+
+  ```yaml
+  apiVersion: v1
+  metadata:
+    name: my-pvc
+  kind: PersistentVolumeClaim
+  spec:
+    accessModes:
+      - ReadWriteOnce # ReadOnlyMany or ReadWriteMany
+    resources:
+      requests:
+        storage: 500Mi # quanto grande deve essere PV
+  ```
+
+* cosa succede quando elimino un PVC? posso deciderlo io:
+  * `persistentVolumeReclaimPolicy: Retain` - non cancellabile se non da admin - cosa succede? il PVC va in stato di terminating perenne. Solo quando elimino tutte le risorse che lo usano (pod), viene eliminato il claim. A quel punto, il PV va in stato released (reclaimed)
+  * `persistentVolumeReclaimPolicy: Delete` - viene cancellato il PVC senza toccare il PV
+  * `persistentVolumeReclaimPolicy: Recycle` - viene cancellato il PVC svuotando il PV
