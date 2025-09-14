@@ -1163,3 +1163,300 @@ ma senon matcha nulla? dipende dal node affinity type
   * `persistentVolumeReclaimPolicy: Retain` - non cancellabile se non da admin - cosa succede? il PVC va in stato di terminating perenne. Solo quando elimino tutte le risorse che lo usano (pod), viene eliminato il claim. A quel punto, il PV va in stato released (reclaimed)
   * `persistentVolumeReclaimPolicy: Delete` - viene cancellato il PVC senza toccare il PV
   * `persistentVolumeReclaimPolicy: Recycle` - viene cancellato il PVC svuotando il PV
+
+### argomenti extra esame
+
+* storage class
+  * provisioning statico: creo un PV dopo aver fatto un oggetto su cloud
+  * provisioning dinamico: con una storage class appena creo un PV viene creato un ogg cloud
+
+  ```yaml
+  apiVersion: storage.k8s.io/v1
+  metadata:
+    name: google-storage
+  kind: StorageClass
+  provisioner: kubernetes.io/gce-pd
+  ```
+
+  * si chiama storage class perché posso segmentare gli storage in base a caratteristiche, es. silver-gold-platinum (sd, ssd, ssd replicati)
+  * generalmente le storage class sono lazy: richiedono lo storage solo quando un PVC viene effettivamente usato dal pod
+  * stateful set sono simili ai deployment (scale up, down, deployment, rollback) e alla fine creano dei pod. Solo che servono quando ci sono persistenza e identità, es. un DB con replica ha 1 master e N slave. Nel deployment i pod nascono tutti insieme e non sono differenziabili. Qui sì.
+  * nomi deterministici es. mysql-0 mysql-1, negli Stateful set (anche a livello DNS, sono trovabili sempre), la replica avviene copiando l'ultimo container creato, vengono runnati in sequenza (ordered stable deployment) e solo se il primo va a buon fine parte il secondo, e anche in ordine ivnverso. Si può cmq fare override
+  * con il caso della replica DB va a braccetto l'headless service. E' un service che non fa load balancing, ma crea un record DNS x un pod. Lo use case è scrivere sul master del mysql. `mysql-0.<headless-service-name>.default.svc.cluster.local`
+  * se metto ClusterIP a None, creo un headless service, e nelle spec del pod metto subdomain: "mysql-h" e hostname: "mysql-pod" + serviceName in spec x collegare all'headless service
+  * negli stateful set? generalmente voglio 1 storage unico montato su ogni pod, ma non è sempre così. Posso usare le storage class per provisioning dei volumi, e i persistentvolumeclaimtemplate per definire un template di pvc (anche dentro al pod). il provsistema garantirà stabilità di storage alla creazione/eliminazione dei pod
+
+## Sicurezza
+
+* a livello di nodo: tutti con auth, basata su SSH key o password
+* kube-api possono fare di tutto -> vanno rese sicure
+### autenticazione
+> chi può accedere?
+* parti coinvolte
+  * ~~end user - auth gestita a livello applicativo~~
+  * umani - admins
+  * umani - sviluppatori
+  * bot x integrazioni con servizi
+* kube non ha db di utenti come altri servizi (non posso fare listing utenti). Solo per i serviceaccount
+* è la kube-apiserver che autentica gli utenti
+* tipologie auth
+  * static password file
+    * file csv con password, username e userid (opz gruppo)
+    * riavvio il kube-apiserver service con opzione `--basic-auth-file`
+    * chiamo le api con `-u "user1:password123"`
+  * static token file
+    * file csv analogo ma con token in prima colonna
+    * riavvio il kube-apiserver service con opzione `--token-auth-file`
+    * chiamo le api con `-/header "Authorization> Bearer <token>"`
+  * certificati
+    * chiamo le api con `--key ... --cert ... --cacert ...`
+  * ext provider: LDAP kerberos
+  * service account (x utenze non umane)
+* per brevità, le info di autenticazione si possono mettere in un file `kube.config`. si può invocare ogni comando passandolo: `k get pods --kubeconfig config`
+  * di default il comando kubectl cerca un file in $HOME chiamato .kube/config
+  * 3 sezioni: clusters, contexts, users
+  * contexts: quale utente per quale ambiente (es. admin@prod, user@prod, admin@test, user@test...)
+
+  ```yaml
+  apiVersion: v1
+  kind: Config
+  current-context: dev-user@google
+  clusters:
+  - name: my-kube-playground
+    cluster:
+      certificate-authority: ca.crt
+      # oppure certificate-authority-data: base64 del certificato
+      server: https://my-kube-playground:6443
+  contexts:
+  - name: my-kube-admin@my-kube-playground
+    context:
+      cluster: my-kube-playground
+      user: my-kube-admin
+      # namespace: finance
+  users:
+  - name: my-kube-admin
+    user:
+      client-certificate: admin.crt
+      client-key: admin.key
+  ```
+
+  * il current context decide quale contesto usare
+  * `kubectl config view` --> mostra la kube config 
+  * `kubectl config use-context <context_name>` --> cambia il `current-context`
+  * `export $KUBECONFIG="$HOME/custom-config"` e `source ~/.bashrc` per cambiare la config di default
+
+* autorizzazione - cosa può fare?
+  * RBAC
+  * ABAC
+  * Autorizzazione per nodo
+  * modalità webhook
+
+### API
+* diverse api /healtz /logs ... /api /apis
+* api/v1 ha il core (namespaces, pods, rc, events, endpoints, nodes, bindings, PV, PVC, configmaps, secrets, services)
+* /apis sono le named api e sono + organizzate: apps/v1/deployments replicasets statefulsets, networking.k8s.io/v1/networkpolicies...
+* ogni API ha un gruppo, una resource e N verbs (rss=deployment, verbs=create, watch, get..., il gruppo è networking.k8s.io o altro)
+* curl <api-server-endpoint> -k -> lista gruppi API core
+* curl <api-server-endpoint>/apis -k | grep "name" -> lista gruppi named  API
+* per accedere alle API servirebbe passare --key admin.key --cert admin.crt --cacert ca.crt
+* opppure lanciare `kube proxy` che apre un tunnel sulla 8001 in base alla config file di kube. Non è kubectl proxy!
+
+### Authz
+* Authz - node, ABAC RBAC WEBHOOK
+* Node
+  * c'è il node authorizer, un servizio dentro kubelet che valida l'authz utente
+* ABAC (attribute based access control)
+  * si crea un file JSON di policy per ciascun utente
+  * si passano i vari JSON all'API server
+  * difficili da mantenere, ma granularità massima
+* RBAC
+  * role - developer e security con N permessi
+  * associati utenti ai ruoli
+  * modalità più standard
+* WebHook
+  * per fare outsourcing dell'authz
+  * es. con Open Policy Agent, la kube API riceve una richiesta dell'utente e la passa all'agent. L'agent gli dice che è autenticato
+* AlwaysAllow, AlwaysDeny
+
+* nel KubeAPI server exec command si specifica --authorization-mode=AlwaysAllow (default) oppure multipli: Node,RBAC,Webhook
+* usando authz multiple, funziona che il primo modulo di authz che ritorna positivo interrompe la catena. Se Node rifiuta l'authz utente, allora si passa a RBAC, che rifiuta l'authz, si passa a Webhook e così via (se specificati N metodi)
+
+### RBAC
+
+* si crea un manifest per definire un ruolo e i suoi permessi
+
+  ```yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    name: developer
+  rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["list", "get", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["deployments"]
+    verbs: ["list", "get"]
+    resourceNames: ["my-deployment"]
+  ```
+
+* tutti i gruppi: lascia vuoto
+* gruppi, risorse e verbi sono i concetti base delle API
+* si possono creare N regole senza problemi
++ le regole sono in and, x cui se si aggiunge resourceNames, si sta restringendo la regola a solo quelle risorse specifiche
+* si crea un manifest per definire un'associazione ruolo-utente
+
+  ```yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: dev-user-developer
+  subjects:
+  - kind: User
+    name: dev-user
+    apiGRoup: rbac.authorization.k8s.io
+  roleRef:
+    kind: Role
+    name: developer
+    apiGRoup: rbac.authorization.k8s.io
+  ```
+
+* kubectl get roles / kubectl describe role <role_name>
+* kubectl get rolebindings / kubectl describe rolebinding <role_name>
+* kubectl auth can-i create deployments # yes/no
+* kubectl auth can-i create deployments --as dev-user # yes/no -> utile per testare x gli admin se settati giusti i permessi (impersonate)
+* x vedere quale auth: fare descirbe del pod api-server in namespace kube-system oppure cat /etc/kubernetes/manifests/api-server.yaml oppure ps -aus | grep authorization
+
+### Cluster roles
+
++ role e role binding sono risorse namespaced e trattano ruoli su risorse namespaced come pod, service, ecc (se non c'è è il default)
+* ma x i nodi, PV, CSR, namespace? e altre risorse cluster-scoped?
+* kubectl api-resources --namespaced=false -> lista risorse cluster-scoped
+  * utilissima, mi da anche i nomi abbreviati
+* ClusterRole e ClusterRoleBinding, manifest praticamente come sopra
+* con i clusterrole si possono dare permessi anche su risorse namespaced, ma cross-namespace
+
+### Policy
+
+* potrei volere delle policy, es. no immagini latest, no immagini da dockerhub, rivedere il securityContext (no root user, solo certe capabilities...), labels...
+* a valle dell'autorizzazione, sta l'admission controller (per verifica policy)
+* capace di rifiutare una richiesta, consentirla o fare side effect, quindi è un middleware
+  * validating admission controller - negano, approvano una chiamata
+  * mutating admission controller - modificano una chiamata
+  * prima vengono eseguiti i mutating e poi i validating nell'ordine
+* alcune policy già presenti di default in kube:
+  * AlwaysPullImages - appena creo un pod fa il pull dell'immagine
+  * DefaultStorageClass - appena creo un PVC gli mette la storage class
+  * EventRateLimit - x non impiantare l'API server
+  * NamespaceExists - rifiuta richieste con ns errati
+  * NamespaceAutoProvision - DISABILITATO by default, se richiedo NS che non esiste, lo crea
+* `kube-apiserver -h | grep enable-admission-plugin`
+* se sei in kube ADM, va lanciato nel controlplane `k exec kube-apiserver-controlplane -n kube-system -- <comando di prima>`
+* o + ez: `ps -ef | grep apiserver | grep admission-plugin`
+* alcuni sono già abilitati di default.
+  * per abilitarne altri va cambiato il command di esecuzione dell'apiserver abbiungendo o togliendo un certo plugin da  --enable-admission-plugin
+  * per disabilitarne aggiungerli in disable-admission-plugin
+* mofidificare APISERVER:
+  * in kube ADM: si cambia il manifest del pod (/etc/kubernetes/manifests/kube-apiserver.yaml) e si applica
+  * non kube ADM: va modificato ExecStart script modificando il solito campo --enable-admission-plugin
+* NamespaceLifecycle sostituisce NamespaceExists e NSAutoProvision, in + fa altre cose, cm rifiutare cancellazioni di NS come kube-system
+* custom policy
+  * di due tipi:
+    * mutating admission webhook
+    * validating admission webhook - true allowed
+  * il server che gestisce le richieste può essere esterno o interno a kube
+  * deployato il webserver (es. come deployment, esposto come service), creo un manifest:
+
+    ```yaml
+    apiVersion: admissionregistration.k8s.io/
+    kind: ValidatingWebhookConfiguration
+    metadata:
+      name: pod-policy.example.com
+    webhooks:
+    - name: pod-policy.example.com
+      clientConfig:
+        service:
+          namespace: webhook-namespace
+          name: webhook-service
+        caBundle: Ci0tLS0tqK....
+      rules:
+        - apiGroups: [""]
+          apiVersions: ["v1"]
+          operations: ["CREATE"]
+          resources: ["pods"]
+          scope: "Namespaced"
+    ```
+
+### Versioni API
+
+* v1alpha1 v1beta1 v1 v2 v2alpha1...
+* alpha - vanno abilitate intenzionalmente, codice appena mergiato. Non è garantito che vadano in beta o che siano mantenute o nn cambino
+* beta - abilitate di default, non stabili, tutti i maggiori bug risolti
+* stabili - beta da diversi mesi, supportate con test ecc.
+* quale versione viene usata con il comando `k get deployment`?
+  > la preferred version, quella indicata facendo `k explain deployment`
+  > la storage version è quella usata per salvare l'oggetto in ETCD
+* per vedere la storage version si deve usare comando ETCD
+* per cambiare la versione prefe di API devo cambiare kube-apiserver nel --runtime-config e mettere una lista di override di versioni es. batch/v2alpha1
+* le deprecazioni delle API avvengono con un insieme di regole fisse, con attenzioni alla retrocompatibilità:
+  * una GA può essere deprecata solo da una altra GA
+  * il supporto di una alfa non è garantito, di una beta almeno di 9 mesi o 3 release, di una GA almeno di 12 mesi o 5 release
+  * la preferred version può essere deprecata ma mantenuta tale x retrocompatibilità (intanto viene notificato)
+* kubectl convert serve a convertire la versione di uno o più manifest ed è un pligin separato k va [installato](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin) se serve
+* `k proxy 8001&` apro un port-forward verso kube-apiserver in background
+* `curl localhost:8001/apis/authorization.k8s.io` faccio una get x ricevere la response della GET di questa chiamata
+
+
+### Custom Resource Definition
+
+* quando faccio create, list, get sto interagendo con ETCD. Creo un deploy, scrivo un record su ETCD. Il controller monitora i cambiamenti e li effettua. C'è un controller x i deploy, uno per i namespace, ecc.
+* posso fare estensione con mie risorse e miei controller. Es. risorsa TicketBooking, e alla creazione vado a invocare una API che prenota un biglietto, all'eliminaz elimina la prenotaz e così via
+* creo un CRD
+  
+  ```yaml
+  apiVersion: apiextension.k8s.io/v1
+  kind: CustomResourceDEfinition
+  metadata:
+    name: flighttickets.flights.com
+  spec:
+    scope: Namespaced # a livelloo di NS o di nodo
+    group: flights.com
+    names:
+      kind: FLightTicket
+      singular: flighttickets
+      plural: flighttickets # usato dall'API
+      shortNames: ["ft"]
+    versions:
+      - name: v1
+        served: true
+        storage: true
+        schema:
+          openAPIV3Schema:
+            type: object
+            propeties:
+              spec:
+                type: object
+                properties:
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  number:
+                    type: integer
+                    minimum: 1
+                    maximum: 10
+  ```
+
+* a questo punto posso creare una risorsa come questa:
+
+  
+  ```yaml
+  apiVersion: flights.com/v1
+  kind: FlightTicket
+  metadata:
+    name: my-flightticket
+  spec:
+    from: Venice
+    to: London
+    number: 2
+  ```
