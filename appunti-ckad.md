@@ -1460,3 +1460,49 @@ ma senon matcha nulla? dipende dal node affinity type
     to: London
     number: 2
   ```
+
+* custom controller -> serve ad agire alla CRUD di queste risorse, si scrive in Go per comodità partendo dalle repo git del sample-controller
+* operator framework: impacchetta la CRD e il controller. Alcune risorse, come l'etcd vengono create con un op. framework. molti op sono su operator hub (grafana, istio...)
+
+## HELM
+
+* una specie di package manager, o installer, o release manager che fa molto di più
+* accetta dei parametri a install-time
+* helm install|rollback|upgrade|uninstall wordpress -> 1 deploy con 3 pod, 1 service, 1 secret, 1 PV, 1 PVC...
+* helm chart è un insieme di template e un values.yaml
+* nei template vengono referenziati parametri come {{ .Values.image }} -> rimpiazzati da helm (go templating)
+* si può creare o usare un chart da Artifact  hub (magari cercandolo con cli heml search hub wordpress)
+* o si possono usare altre repo (cm bitnami) aggiungendole con helm repo add bitnami https://charts.bitnami.com/bitnami
+  * puppet o hashicorp
+  * helm repo list
+  * helm repo search custom-chart
+* una volta trovato il chart si installa con helm install <release-name> <chart-name>
+  * la release è l'istanza dell'installazione
+  * posso installare più volte con helm install wp1 bitnami/wordpress, helm install wp2 bitnami/wordpress
+  * helm list
+  * helm uninstall my-release
+  * helm pull --untar bitnami/wordpress # di solito scaricati in tar, così sono scaricati nella cartella wordpress e poi si lancia il comando helm install my-release ./wordpress
+* di solito con tanti ambienti si strutturano cartelle x values e cartelle x risorse
+* altre feature come loop, condizionali, ecc
+
+## Kustomize
+
+* sistema di default di kube usato x gestire + ambienti in modo semplice: basato su struttura cartelle
+* cartella base con i manifest e cartelle x gli overlay (ridefinizione solo di quello che cambia)
+* file kustomizations.yaml
+
+  ```yaml
+  resources:
+    - file1.yaml
+    - fie2.yaml
+    
+  commonLabels:
+    company: xyz #posso mettere qui gli overlay x tutte le risorse  
+  ```
+
+* kustomize build <nome_cartella> # stampa in output la config che creerebbe
+* kustomize build <nome_cartella> | kubetl apply -f - # applica con la linux pipe la config
+* kustomize build <nome_cartella> | kubetl delete -f - # applica con la linux pipe la config
+* ooppure invece di usare la cli di kustomize, kubectl apply -k <nome_cartella>
+* ogni yaml in verità implicitamente è un oggetto Kube di tipo Kustomize
+* si può puntare alle sottocartelle innestando dei kustomization.yaml per ciascuna cartella
