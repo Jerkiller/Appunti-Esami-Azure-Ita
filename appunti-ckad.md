@@ -2,6 +2,19 @@
 
 [corso introduttivo](https://trainingportal.linuxfoundation.org/learn/course/introduction-to-cloud-infrastructure-technologies)
 
+Esame:
+* 19 domande in 2h
+* domande difficoltà mista, meglio skippare che bloccarsi su una
+  * quando è davvero difficile
+  * quando dopo un paio di tentativi veloci si vede che richiede tempo
+* [curriculum](https://github.com/cncf/curriculum/)
+* `alias kk=kubectl`
+* `export KUBECTL_EDITOR="nano"` oppure `KUBECTL_EDITOR=nano k edit deploy nginx`
+* `k config set-context my-context`
+* `k explain cronJobs.spec.jobTemplate --recursive`
+
+
+
 ## Cloud
 
 * cloud privato - interno o esterno (es. con openstack)
@@ -654,9 +667,6 @@ ma senon matcha nulla? dipende dal node affinity type
 * required...required... -> se nn c'è la label o la rimuovo a runtime, non schedula o fa eviction del pod!
 
 * quando usare taint e tolerations insieme? Nel caso in cui: voglio k i pod vadano su nodi specifici e k altri pod non vadano su quei nodi. es. pod R G B X Y e nodi r g b x y. voglio Rr Gg Bb e non mi interessa X e Y. Mi basta che non vadano Rg o Rx o Xg...
-
-`alias kk=kubectl`
-`export KUBECTL_EDITOR="nano"`
 
 ## pod multicontainer
 
@@ -1506,3 +1516,77 @@ ma senon matcha nulla? dipende dal node affinity type
 * ooppure invece di usare la cli di kustomize, kubectl apply -k <nome_cartella>
 * ogni yaml in verità implicitamente è un oggetto Kube di tipo Kustomize
 * si può puntare alle sottocartelle innestando dei kustomization.yaml per ciascuna cartella
+* si possono applicare delle trasformazioni comuni:
+  * commonLabels: {k:v}
+  * namePrefix: v
+  * nameSuffix: v
+  * namespace: v
+  * commonAnnotations: {k:v}
+* si possono sovrascrivere immagini specifiche
+
+  ```yaml
+  images:
+    - name: nginx # non ha a che vedere con il name del container, è un selettore per immagine
+      newName: haproxy
+    - name: redis
+      newTag: "2.4" # cambia solo il tag
+  ```
+
+* si possono patchare specifiche risorse con OperationType (add/remove/replace), un selettore Target e un valore Value (non x il remove)
+* JSON 6902 patch
+  
+  ```yaml
+  patches:
+    - target:
+        kind: Deployment
+        name: api-deployment
+      patch: |-
+        - op: replace
+          path: /metadata/name
+          value: web-deployment
+  # rimpiazza il nome di tutti i deployment chiamati api-deployment con web-deployment
+  ```
+
+* strategic merge patch
+
+  ```yaml
+  patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: api-deployment
+        spec:
+          replicas: 5
+  # cerca api-deployment e gli setta 5 repliche
+  ```
+
+* con `|-` posso definire la patch inline. Alternativa: specifico nome file creato nella folder
+* aggiunta nuova etichetta con JSON 6902
+
+  ```yaml
+  patches:
+    - target:
+        kind: Deployment
+        name: api-deployment
+      patch: |-
+        - op: add
+          path: spec/template/metadata/label/org
+          value: xyz
+  # rimpiazza il nome di tutti i deployment chiamati api-deployment con web-deployment
+  ```
+
+* per rimuovere un valore nello strategic merge si usa un valore null
+* nel caso di liste, si punta con indice, es. /containers/0/name
+* se voglio aggiungere un elemento in lista con JSON 6902 posso passare inidice della lista o `-` per dire alla fine della lista
+* il value nel 6902 chiaramente può essere un oggetto complesso. Es. voglio aggiungere un container al pod
+* se voglio eliminare dalla lista con strategic merge patch, devo specificare un valore tipo:
+
+  ```yaml
+  ...
+    containers:
+      - $patch: delete # direttiva che specifica di eliminare
+        name: database
+  ```
+
+* overlays per ciascun ambiente: cartella `base` con risorse base e kustomization. Poi nella cartella `overlays`, per ciascun ambiente patch con bases che è riferimento alla cartella principale
