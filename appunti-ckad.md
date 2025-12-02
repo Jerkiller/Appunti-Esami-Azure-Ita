@@ -441,6 +441,7 @@ Come passare argomenti a un container in un pod:
   ```
 
 * si può montare un'intera config map come file su un volume
+* si può perfino montare definendola allo stesso tempo
 
   ```yaml
     spec:
@@ -1590,3 +1591,19 @@ ma senon matcha nulla? dipende dal node affinity type
   ```
 
 * overlays per ciascun ambiente: cartella `base` con risorse base e kustomization. Poi nella cartella `overlays`, per ciascun ambiente patch con bases che è riferimento alla cartella principale
+* components, oer riutilizzo su più ambienti in modo centralizzato, cartella components.
+  
+  ```yaml
+  apiVersion: kustomize.config.k8s.io/v1alpha1
+  kind: Component
+  resources:
+    - ...
+  patches:
+    - ...
+  ```
+
+## esami
+
+* C'è connettività verso un pod?
+  * k exec -it <podname> -- sh
+  * nc -v -z -w 2 <servicename> 80 # netcat -v verbose -w 2 timeout in 2 sec (wait) -z non mandare dati ma fai scan (zero) -> NC VerZaWait
