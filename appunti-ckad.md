@@ -9,7 +9,8 @@ Esame:
   * quando dopo un paio di tentativi veloci si vede che richiede tempo
 * [curriculum](https://github.com/cncf/curriculum/)
 * `alias kk=kubectl`
-* `export KUBECTL_EDITOR="nano"` oppure `KUBECTL_EDITOR=nano k edit deploy nginx`
+* `export KUBE_EDITOR="nano"` oppure `KUBE_EDITOR=nano k edit deploy nginx`
+* `export KUBE_EDITOR="codium --wait"`
 * `k config set-context my-context`
 * `k explain cronJobs.spec.jobTemplate --recursive`
 
