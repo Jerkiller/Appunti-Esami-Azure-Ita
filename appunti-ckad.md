@@ -1608,3 +1608,46 @@ ma senon matcha nulla? dipende dal node affinity type
 * C'è connettività verso un pod?
   * k exec -it <podname> -- sh
   * nc -v -z -w 2 <servicename> 80 # netcat -v verbose -w 2 timeout in 2 sec (wait) -z non mandare dati ma fai scan (zero) -> NC VerZaWait
+## lifecycle e readiness
+* pending - lo scheduler sta tentando di capire dove metterlo - describe x capire xk qualcosa è incastrato
+* containercreating - vengono scaricate le immagini e avviate finché TUTTE non sono avviate
+* running - tutto avviato finché non è terminato o finisce correttamente
+oltre agli stati ci sono delle condizioni k possono essere vere>
+* PodScheduled - true se il pod è schedulato su un nodo
+* Initialized - true se inizializzato il pod
+* ContainersReady - true se tutti i container sono pronti
+* Ready - true se il pod è pronto
+si può vedere l'array di condizioni nel k describe po
+pronto significa disposto ad accettare richieste - db ci mettono alcuni secondi ad avviarsi, jenkins server anche 10 min, non è un problema di kube xk dipende dal pod. Si fanno chiamate HTTP o richieste TCP, o comandi - readiness probe
+* utile nei replica set x evitare k venga mandato traffico dei service a specifici pod non pronti
+```yaml
+containers:
+  - image: nginx
+    name: webserver
+    ports:
+      - containerPort: 8080
+    readinessProbe:
+      httpGet:
+        path: /api/ready
+        port: 8080
+    # alternative
+    readinessProbe:
+      tcpSocket:
+        port: 3306
+    # alternative
+    readinessProbe:
+      exec:
+        command:
+          - cat
+          - /app/is_ready
+    # se sappiamo k ci mette almeno 10 secondi
+    readinessProbe:
+      initialDelaySeconds: 10
+      # se non vogliamo k venga stressata troppo la app
+      periodSeconds: 5
+      # se dopo 3 tentativi non risponde demorde, altrimenti si mette la threshold
+      failureThreshold: 8
+```
+* livenessProbe invece si scrive uguale nel template yaml, ma serve a uno scopo diverso:
+  * viene verificata periodicamente a pod avviato x accertarsi del corretto funzionamento di un pod a regime
+  * serve a intercettare quei problemi tipici come i restart loop
