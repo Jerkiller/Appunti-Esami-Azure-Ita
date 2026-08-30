@@ -258,7 +258,7 @@ spec:
 * contesto: il mio default in cui sono
 * `kubectl config set-context $(kubectl config current-context) --namespace=dev`
 * `kubectl get pods --all-namespaces` x vedere ogni cosa (oppure `-A`)
-* se voglio limitare le risorse posso farlo (num pod, cpu o ram max e min)
+* se voglio limitare le risorse posso farlo (num pod, cpu o ram max e min) su singolo namespace
 
   ```yaml
   apiVersion: v1
@@ -275,6 +275,7 @@ spec:
       limits.memory: 16Gi
   ```
 
+* oppure posso usare le `LimitRange` per settare il max per namespace di un pod/deploy, ecc.
 * x creare un template di pod in 1 comando posso usare --dry-run=client x simulare l'esecuzione di un comando e uscire lo yaml in un file
 
   ```shell
@@ -678,7 +679,7 @@ ma senon matcha nulla? dipende dal node affinity type
   * container co-locati - semplicemente 2 cont devono stare insieme, li creo insieme e muoiono insieme
   * regular init container - parte all-inizio e poi muore es. inizializzazione DB
     * viene impostato mettendo N container in initContainers (eseguiti insequenza). Spesso viene montato lo stesso volume dentro tutti questi pod, es busybox con `sh -c until nslookup myservice do echo waiting for myservice; sleep 2; done;`
-    * finché l'init sta andando il main container è in waiting/pendingg
+    * finché l'init sta andando il main container è in waiting/pending
     * quando finisce, linit container va in completed e si avvia il passo successivo (altri init oppure main)
   * sidecar container - decido ordine di avvio, poi continua x tutta la vita del cont principale. es. logger
     * initContainers con un restartPolicy: Always. Spesso viene montato lo stesso volume dentro tutti questi pod
@@ -688,7 +689,7 @@ ma senon matcha nulla? dipende dal node affinity type
 
 * `docker logs -f <nome_container>`
 * `k logs -f <pod_name>` ma, se ci sono più container fallisce
-* `k logs -f <pod_name> \<container_name>`
+* `k logs -f <pod_name> -c <container_name>`
 + `k exec <pod_name> -- cat /var/logs`, inoltra il comando x stampa log
 * soluz di monitoraggio
   * open source
@@ -719,7 +720,7 @@ ma senon matcha nulla? dipende dal node affinity type
       env: test
   ```
 
-* ocio: Nei replica set ci sono le label del replica set e quelle deel template di pod.
+* ocio: Nei replica set ci sono le label del replica set e quelle del template di pod.
 * nel replica set c'è in spec il selector x identificare N pod. DEVE matchare con il template
 
   ```yaml
@@ -729,7 +730,7 @@ ma senon matcha nulla? dipende dal node affinity type
         app: app1
   ```
 
-* service ha i selector x identiificare gruppo di pod
+* service ha i selector x identificare gruppo di pod
 * annotations servono x altri scopi informativi o integrativi e sono dentro i metadati
 * `k get po --selector=app=app1`
 * `k get po --selector=bu=finance,env=prod,tier=frontend`
@@ -759,7 +760,7 @@ ma senon matcha nulla? dipende dal node affinity type
 
 * quando servono: batch processing, analytics, reporting, manutenz periodica, ecc
 * In docker `docker run ubuntu expr 1+2` - container si avvia, stampa e termina (con codice 0 - nessun errore)
-* un modo per farlo in docker è con un pod, ma va messo RestartPolicy: Never altrimenti viene continuamente riavviato!
+* un modo per farlo in kube è con un pod, ma va messo RestartPolicy: Never altrimenti viene continuamente riavviato!
 * Ma di norma si usa il job (analogo al replica set x parallelismo) che si avvia e arriva a completamento
 * `k get job`, `k get pod`, `k delete job` -> elimina anche pod annessi
   
