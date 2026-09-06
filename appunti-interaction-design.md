@@ -132,4 +132,10 @@ Metafora/analogia
 - Esplorare (implica una visualizz 3D (o 2D) - muoversi in uno spazio, anche un dataset numerico può diventare un luogo fisico)
 - Rispondere (notifiche, domande, info da foto/QR - il sistema manda degli interrupt all'utente)
 
-Tipi di interaz diverse: Costi diversi, diversi modi di interagire (es. dare comandi sia via menu e click, sia via CLI...), da adattare agli utenti e ai contesti
+Tipi di interaz diverse: Costi diversi, diversi modi di interagire (es. dare comandi sia via menu e click, sia via CLI...), da adattare agli utenti e ai contesti: sono un modo x pensare a come sostenere al meglio le attività dell'utente.
+
+Avere il controllo - ci piace, ci serve
+Nuovi sistemi hanno il controllo (es. AI) o retroazioni automatizzate. Bisogna chiedersi quale il limite.
+Es. Fidarsi del GPS anche se assurdo? Sistema segnalazione malore che monitora costantemente - troppo controllo
+
+Una visione può guidare l'interaction design. Come si immagina il futuro? es. superpoteri grazie a tech, percezione e cognizione aumentata. Es2. Siri
