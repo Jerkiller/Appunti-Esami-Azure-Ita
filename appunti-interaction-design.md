@@ -119,11 +119,13 @@ I team discutono i modelli concettuali. Quelli più semplici e ovvi funzionano m
 Metafora/analogia
 - usata da sempre nella didattica (es. metafora del gioco x evoluz)
 - spiega in modo semplice/familiare qualcosa di difficile e concettuale
+- spesso si basa sull'intuizione e non serve spiegarla
 - è qualcosa di familiare per riconoscibilità - apprezzata dagli utenti (easy to learn)
 - a volte si rompe per forza di cose (es. cestino sopra la scrivania)
 - esperienza desktop, esperienza ecommerce, posta, social
 - metafora di UI - mazzo di carte (card navigabili dei luoghi o swipe di tinder)
 - la metafora diventa linguaggio comune (metaforico) nel tempo se funziona e non ci si accorge più come un paio di occhiali
+- quelle buone rimangono nel tempo (es. macchina da scrivere - anche se pochi ora l'hanno usata)
 
 5 tipi di interazioni fondamentali
 - Dare istruzioni (menu, CLI, GUI - rapido efficiente, molte opzioni da valutare, utile per ripetizione, o operaz massive)
@@ -137,5 +139,42 @@ Tipi di interaz diverse: Costi diversi, diversi modi di interagire (es. dare com
 Avere il controllo - ci piace, ci serve
 Nuovi sistemi hanno il controllo (es. AI) o retroazioni automatizzate. Bisogna chiedersi quale il limite.
 Es. Fidarsi del GPS anche se assurdo? Sistema segnalazione malore che monitora costantemente - troppo controllo
+> Interfacce utente a intervento. Sistemi autonomi in cui però è facile inserirsi. Potenza dell'AI va imbrigliata
 
-Una visione può guidare l'interaction design. Come si immagina il futuro? es. superpoteri grazie a tech, percezione e cognizione aumentata. Es2. Siri
+Una visione può guidare l'interaction design. Come si immagina il futuro? es. superpoteri grazie a tech, percezione e cognizione aumentata. Es2. Siri nel 1987
+
+## 4. Cognizione
+
+Tipi di cognizione:
+* Esperienziale - reagire ad eventi/stimoli/oggetti esterni - affine al pensiero veloce
+* Riflessiva - dentro di noi - vicina al pensiero lento
+Processi cognitivi (spesso interdipendenti, non scindibili):
+* attenzione
+   * ci permette di non essere investiti dalle auto
+   * è anche selezione di cosa concentrarsi
+   * dipende dagli obb delle persone e dalle info circostanti
+   * A volte si è attenti e si cerca specificità, a volte si vaga nel menu cercando qualcosa che stuzzichi
+   * Ci sono heavy e light multitasker. gli heavy tendono ad avere soglia più bassa dell'attenzione, si distraggono ma fanno buon uso di questa dote. Distrarsi non è sempre negativo: alcuni compiti richiedono distrazione su tanti fronti
+   * multitasking generalmente piu dispendioso xk effort x riprendere dal context switching: app di messaggistica rallentano la lettura di un testo fino al 50%, a volte MT porta a fare errori
+   * sale operatorie con sempre piu schermi - tecniche come allarmi colorati o suoni per cose critiche
+   * telefono alla guida scatena processi cognitivi che distraggono facilmente (es. immaginare faccia di chi parla) - modalità aereo x auto?
+   * luoghi di lavoro - vanno studiate interfacce ad hoc pensando al MT
+   > UI: no bloating, diversificare importanza con ordine, spaziature, stili, modalità
+* percezione
+   * con 5 sensi, vista predominante su udito e su altri
+   > UI: distinguibilità e percepibilità icone, testo, separatori evidenti o spazi, distinguibilità suoni, feedback tattili usati parsimoniosamente
+* memoria
+  * funziona come non vorremmo a volte, ricordiamo cose poco utili
+  * l'info viene filtrata, codificata e memorizzata
+  * più attenzione -> più ricordo, più rielaboraz (appunti, discussione, esercizi) -> più ricordo
+  * contesto di codifica: ci ricordiamo del medico quando è in divisa, quando è in abiti civili stentiamo a riconoscerlo
+  * smartphone è protesi mnemonica: scatto foto e presto meno attenzione, internet a portata di mano. Ricordo dove/come reperire qualcosa e non la cosa stessa.
+  * PIM - gestione file (imm/video/audio) personali. Le persone preferiscono colocare in cartelle che usare categorie, metadati
+  * REgola di miller: ricordiamo circa 7 piu o meno 2 elementi. Generalm non si applica a design xk l'iutente non ha necess di ricordare gli elementi della GUI, ma riconsocerli
+  * Password - poco memorabili. MFA a domande complessi da ricordare, alto carico mnemonico - PWD manager vincono, approccio passwordless
+  * come progetttare un social in modo che aiuti a dimenticare una relaz finita?
+  * sense cam per malati di alzheimer - foto della giornata ogni 30s x ricordare cosa successo. Memoria triplica
+  > UI: ridurre burden evitando procedure lunghe, UI x riconoscimento anziché ricordo, modi di classificare info con cartelle
+* apprendimento
+* leggere, parlare, ascoltare
+* risolvere probl, pianificare, decidere, ragionare
