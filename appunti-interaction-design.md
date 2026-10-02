@@ -2,14 +2,16 @@
 
 ## 1. Cos'è l'interaction design
 
-Interaction design con ogni cosa HCI solo con pc e dispositivi. Ma ora il confine si sta assottigliando
+Interaction design con ogni cosa / HCI solo con pc e dispositivi. Ma ora il confine si sta assottigliando
 Multidisciplinare, team da 15 persone, psicologi, informatici, ecc a volte costoso
 
 obbiettivo dell'Int. des.: aiutare le persone a comunicare e interagire
 Comprendere utenti-non esiste una taglia unica es. Vecchi col brondi nn x forza
 Accessibilita e inclusivita
-Deficit sensorialincognitivi fisici
-Deficit permanenti temporanei situazionalip
+
+Deficit
+- sensoriali cognitivi fisici
+- permanenti temporanei situazionali
 
 Usabilita in relaz con ux. Usabile piacevole efficace utile
 > 6 dim Usabilità:
@@ -36,7 +38,7 @@ Alcuni **principi euristici** globalmente sensati (ma localmente discutibili).
 I principi a volte si contraddicono, va trovato compromesso. Es. Rompere coerenza a volte aiuta. Oppure semplicita si ma anche estetica
 
 
-Ricerca e design sono attivita caotiche, prevedono spreco, vicoli ciechi, false ipotesi prima di capire un problema e risplverlo
+Ricerca e design sono attivita caotiche, prevedono spreco, vicoli ciechi, false ipotesi prima di capire un problema e rispolverarlo
 
 ---
 
@@ -53,7 +55,7 @@ Altri modi di coinvolgere è chiedere feedback afrermarket es recensioni o E.R.S
 
 Focalizzarsi su utenti e non sulla tecnologia.
 3 pilastri
-- Focalizzarsi su utenti, sul loro obiettivi, sui comportamenti, contesto, caratteristiche, decidere xon utenti in testa.
+- Focalizzarsi su utenti, sui loro obiettivi, sui comportamenti, contesto, caratteristiche, decidere con utenti in testa.
 - Misurare e definire obiettivi
 - Iterare. Mai al primo colpo. Il design va di trial and error
 
@@ -72,7 +74,7 @@ Domanda non banale.
 Es. Cellulari ci sono utenti come i giovani genitori o i controllaschermo. E quali sono gli stakeholder? Utile analisi e molto ampio cerchio 
 
 Quali bisogni e requisiti?
-Nessuno lo sa, a volte abbiamo bisogno di cose che nemmeno sogniamo. Quindi si esplora spazio dei problemi. I designer e i dev a volte si rispecchiano in quello che fanno, ma non è x forza quello di cui ha bisogno un utente.
+Nessuno lo sa, a volte abbiamo bisogno di cose che nemmeno sognamo. Quindi si esplora spazio dei problemi. I designer e i dev a volte si rispecchiano in quello che fanno, ma non è x forza quello di cui ha bisogno un utente.
 
 Da dove viene creativita?
 Non è misticismo. È spesso rielaboraz di design ed esperienze passate. È fecondazione incrociata tra vari campi. Non ci si deve limitare all'idea che funzionicchia.
@@ -148,6 +150,7 @@ Una visione può guidare l'interaction design. Come si immagina il futuro? es. s
 Tipi di cognizione:
 * Esperienziale - reagire ad eventi/stimoli/oggetti esterni - affine al pensiero veloce
 * Riflessiva - dentro di noi - vicina al pensiero lento
+
 Processi cognitivi (spesso interdipendenti, non scindibili):
 * attenzione
    * ci permette di non essere investiti dalle auto
@@ -170,7 +173,7 @@ Processi cognitivi (spesso interdipendenti, non scindibili):
   * contesto di codifica: ci ricordiamo del medico quando è in divisa, quando è in abiti civili stentiamo a riconoscerlo
   * smartphone è protesi mnemonica: scatto foto e presto meno attenzione, internet a portata di mano. Ricordo dove/come reperire qualcosa e non la cosa stessa.
   * PIM - gestione file (imm/video/audio) personali. Le persone preferiscono colocare in cartelle che usare categorie, metadati
-  * REgola di miller: ricordiamo circa 7 piu o meno 2 elementi. Generalm non si applica a design xk l'iutente non ha necess di ricordare gli elementi della GUI, ma riconsocerli
+  * Regola di miller: ricordiamo circa 7 piu o meno 2 elementi. Generalm non si applica a design xk l'iutente non ha necess di ricordare gli elementi della GUI, ma riconsocerli
   * Password - poco memorabili. MFA a domande complessi da ricordare, alto carico mnemonico - PWD manager vincono, approccio passwordless
   * come progetttare un social in modo che aiuti a dimenticare una relaz finita?
   * sense cam per malati di alzheimer - foto della giornata ogni 30s x ricordare cosa successo. Memoria triplica
