@@ -178,6 +178,34 @@ Processi cognitivi (spesso interdipendenti, non scindibili):
   * come progetttare un social in modo che aiuti a dimenticare una relaz finita?
   * sense cam per malati di alzheimer - foto della giornata ogni 30s x ricordare cosa successo. Memoria triplica
   > UI: ridurre burden evitando procedure lunghe, UI x riconoscimento anziché ricordo, modi di classificare info con cartelle
-* apprendimento
-* leggere, parlare, ascoltare
+* apprendimento (interdipend con memoria)
+  * intenzionale - mi metto, leggo manuale, studio, pratico, mi esercito. Sforzo e noia
+  * incidentale - esco, imparo la strada, facendo imparo, provo. Più gradevole
+  * UI: meglio interfacce che incoraggiano l'esplorazione, in apprendimento GUI, spingere verso scelte obbligate il discente
+* leggere, parlare, ascoltare (elaborare il linguaggio)
+  * soggettivo preferire leggere o ascoltare
+    * ascolto amato - bambini e storie, adulti audiolibri, ma meno permanente
+    * leggere è più veloce, si può tornare indietro, più rigoroso (non bene x dislessici)
+    * il parlato è più sgrammaticato
+    * UI: curare dimens testuale, attenzione agli speech based, interfacce tattili
 * risolvere probl, pianificare, decidere, ragionare
+  * azioni riflessive quando si ha tempo e info adeguata (es. analisi costi-benefici, quante proteine, allergeni) 
+  * azioni istintive con poco tempo, sovraccarico di informazioni - spesso euristiche semplici di scelta (confezione bella, costo basso, marca conosciuta)
+  * evoluzione ci ha portati a essere dei pessimi decisori veloci
+  * si ama sempre meno il rischio - si delega a app di recensioni, open day, ecc paralysis by analysis
+  * UI: fornire più info e corrette x chi deve scegliere, salvare preferenze utente
+ 
+Framework congnitivi
+
+* Modelli mentali - costruzione interna (soggettiva) usato per semplificare una situazione un aspetto del mondo, una tecnologia (es. cos'è la rete wifi, cos'è l'AI)
+  * il tecnico di rete ha un modello mentale avanzato del wifi, l'utente medio ne ha uno semplice, gli consente di fare previsioni e il funzionamento di base
+  * comune è usare modelli mentali errati (es. premere due volte ai semafori - di più è prima), a volte modelli basati su analogie inappropriate o superstizione
+  * es. termostato o forno imposti dei setpoint. Non è che se metti il forno a 300 °C si riscalda piu in fretta
+  * UI: istruzioni chiare e facili - supporto, tutorial - affordance che rendono naturale l'interazione (es. swipe, click o sleezione)
+  * UI: trasparenza della UI - voglio una cosa xyz, chiedo all'interfaccia xyz e non devo impostare cento cose, mettere 8 password, perdere tempo dove non voglio (es. conferenza con il pubblico e il power point non si apre)
+* Golfo della valutazione / Golfo dell'esecuzione.
+  * due componenti: utente e sistema (mondo) tra di loro due golfi da attraversare (sforzo cognitivo)
+  * golfo dell'esecuzione - come uso il sistema? come interagisco?
+  * golfo della valutazione - com'è lo stato del sistema? come interpreto?
+  * progetto un sistema in modo da facilitare l'attraversamento dei golfi, l'utente impara anche lui.
+* 
