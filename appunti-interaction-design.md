@@ -245,6 +245,42 @@ Tipi di cognizione:
 
 ## 5. Interazione sociale
 
+* **Umano** - è animale **sociale** da sempre, scambio continuo di informazioni in gruppi (famiglia, lavoro, amici)
+* Dai primi cellulari e social network si è passati a tecnologie sociali - si sono evolute x interagire insieme, ora è sempre connesso
+* Social computing - lavorare collaborare globalmente anche da remoto e con spazi condivisi (lavagne calendari...)
+* farsi domande orienta le nuove tecnologie. Es. che etichetta comportamentale? le persone parlano sempre a turno?
+* I piu giovani preferiscono decidere all'ultimo minuto cosa fare - frustrante se prenoto con 1 sett di anticipo un biglietto
+* troppo utilizzo dello smartphone a scapito di socializzazione, attenzione, ecc.
+* alcune tch incoragggiano l'uso sociale (open the magic door di assistenti vocali tipo libro game a voce. Esempio deboluccio IMO)
+* vedersi e parlare o mandarsi un messaggio? vedersi incoraggia la sincerità, la gestualità è insostituibile, i tempi, l'improvvisazione, i cambi argomento. Via messaggio è tutto diverso
+
+### Conversazione e dialogo
+* ci sono regole non scritte: apertura / svolgimento / chiusura
+* messaggi e mail sono molto diverse dal parlato (spesso più dirette e frammentate, si saltano i saluti)
+* studio interessante - aperture e chiusure più informali (hey, hello) nelle mail ottengono piu probabilità di risposta
+* regole della conversazione - il parlante sceglie il successivo, un altro può decidere di iniziare, oppure il parlante continua / a cascata. se non avviene la 1 si passa alla 2 e così via
+* spesso si dichiara quanto si vuole parlare - all'inizio (dirò 3 cose, se mi date 1 min,) - alla fine (concludendo... per riassumere, tutto chiaro?)
+* back-channelling usato x dire quando si vuole lasciare o prendere parola (mmmm uh-uh) orientamento corpo (allontanarsi, avvicinarsi), sguardo, gesti
+* frasi in coppie di adiacenza (aspettativa e risposta)
+* meccanismi di riparazione - chiedo, rispondo, chiedo conferma ripentendo, correggo spiegandomi meglio
+* a volte regole rotte anche intenzionalmente (chi continua a parlare) o in interrogazione lo studente non risponde (imbarazzo)
+* fratture nella conversazione si riparano ascoltando e intervenendo es. che cosa? non ho capito
+* nelle mail le fratture si riparano piu soft (intendevi x? la mail forse è andata in spam, promemoria rispondimi)
+* ambigue anche le mail. Es. "..." la sospensione scaricano sul destinatario l'onere di interpretare invece della respons del mittente di chiarire
+* imitazione - nella conversazione spesso si imita, sorride - sorrido, sbadiglia, sbadiglio, gratta testa, anch'io. Questo porta a empatia
+
+### conversare da remoto
+
+* primi esperimenti video window (agevolava chiacchiera naturale)
+* diffusione app di video conf (zoom, meeting owl, skype, teams...), migliorata qualità video
+* robot di telepresenza
+  * vedono, si spostano, interagiscono, ascoltano e parlano
+  * es. bambino in ospedale segue lezioni o invalido visita un museo
+  * Beam+ modello commerciale
+* facebook spaces - idea di usare un avatar in ambiente 3D per facilitare conversazione - attualmente limitato (un po' cartoonesco), molte persona hanno motion sickness, ma l'idea è che a tendere se migliora potrebbe diventare una dipendenza
+
+### Copresenza (148)
+
 ## 6. Interazione emotiva
 
 ## 7. Interfacce
