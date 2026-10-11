@@ -279,7 +279,38 @@ Tipi di cognizione:
   * Beam+ modello commerciale
 * facebook spaces - idea di usare un avatar in ambiente 3D per facilitare conversazione - attualmente limitato (un po' cartoonesco), molte persona hanno motion sickness, ma l'idea è che a tendere se migliora potrebbe diventare una dipendenza
 
-### Copresenza (148)
+### Copresenza
+
+Stare insieme nello stesso luogo: agevolato da tecnologie cm multitouch o kinetic
+* le persone comunicano (aggiornano o comandano) tramite gesti e strumenti, si coordinano.
+  * linguaggi sintatt e semantici specifici: direttore d'orchestra, personale terra aeroporto
+  * linguaggi universali (ciao, sventolare un oggetto)
+* le persone hanno consapevolezza dello spazio
+  * consap. periferica: concentrati su qualcosa, ci si accorge anche di altro (si origlia, coda dell'occhio)
+  * consap. situazionale: consap. di quanto succede per comprendere come info eventi e azioni influiranno.
+  * si lavora in team e se è coeso, si creano strategie di comunicazione e coordinamento (es. due responsabili di ambiti diversi che si coordinano quasi involontariamente)
+* I bambini giocano insieme (es. sabbia AR o lego) coordinandosi e comunicando spesso
+* interfacce che si condividono funzionano:
+  * lavagne, schermi, tavoli multitouch - schemi preesistenti adattati al digitale xk funzionano bene, risultano naturali
+* A volte, alcuni sono più partecipi di altri (timidezza, incertezza lingua, autismo...) 
+  * un dispositivo fisico (es. lavagna digitale) invoglia un confronto paritario dove anche i timidi si esprimono
+  * Reflect Table: tavolo con led in base a quanto si parla - alcuni hanno feedback retroattivo di limitarsi
+* Strumenti utili ad evitare l'isolamento
+  * Babble sistema IBM con biglie di chi è in conversazione. CHi no pian piano esce dal cerchio 
+  * Sococo - ufficio virtuale per remote working o sedi distanti con piantina virtuale
+  * breaktime barometer - indicatore di chi era in pausa caffe comune e disposto a parlare. Alcuni socializzavano di più, altri evitavano i momenti di affollamento e si isolavano di piu 
+  * opinionizer - x rompere il ghiaccio alle conferenze, honeypot di uno schermo dove ognuno poteva scrivere commenti e mettere avatar cartoon. Intorno a sto schermo si creava un capannello di gente e spesso si parlava
+
+### Coinvolgimento sociale
+* i social hanno dato vita a molte iniziative di collaborazione sociale o escalation virali
+  * dalle sfide di retweet di selfie pubblicitarie
+  * risposta all'emergenza e iniziative sociali (es. volontariato)
+  * community specifiche ampliate a dismisura
+  * giornalismo diffuso (ognuno twitta la notizia del maltempo), i TG si rifanno ai post
+  * miglioramento servizi comuni
+  * citizen science (es. plant net o air quality)
+  * fortnite - gioco comunitario
+  * griefbot - ma eticamente?
 
 ## 6. Interazione emotiva
 
