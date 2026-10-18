@@ -314,6 +314,33 @@ Stare insieme nello stesso luogo: agevolato da tecnologie cm multitouch o kineti
 
 ## 6. Interazione emotiva
 
+* Affective computing - tecnologie che si adattano allo stato emotivo (a volte secondi fini come vendita), lo riconoscono, lo cambiano (es. Claude che decifra sentiment testuale e si adatta empaticamente)
+  * mirroring - utente triste, anche il modello è dimesso. Entusiasmo, risponde con faccine e incoraggiamenti
+  * de-scalation - utente arrabbiato, modello evita di mettere faccine felici o commenti
+  * ma questi meccanicismi dei modelli mancano di intelligenza emotiva (es. over-apologizing, irony deficiency, forced empaty)
+* Emotional design - design studiato per generare certi stati emotivi (es. virtual pet fa sentire meno soli)
+* Più in generale... interazione emotiva
+
+* UX di un acquisto online può essere una montagna russa di emozioni
+* Aeroporto - com'è stata la tua esperienza :-) :-( :-/ ... -> tracking tra settimana e sett, nelle ore del giorno, A/B testing
+* Ma quindi? Un sentimento negativo va "corretto"? Vanno adattate le info presentate? Siamo manipolati di continuo
+  * ecommerce ci vuole allegri x acquistare
+  * raccolte fondi ci voglioni tristi e stupiti per donare (es. musica triste, bimbo africano con occhioni, malato, frasi a effetto)
+  * esporsi porta ansia e tensione - da palcoscenico
+  * guidare arrabbiati fa peggio. La musica influenza la guida, distrazione x testo e musica
+  * paura - fuga, rabbia - lotta (psico. evolutiva lo spiega come risposta fisiologica a stimoli) - adrenalina, sudoraz, batticuore, nausea
+  * emozioni influenzano il comportamento? Es. felicità -> rischio, rabbia -> concentrazione. Dibattuto. Il modello emotivo va oltre il rapporto causa-effetto, + complicato
+* Emozioni durano tempi variabili (prendo paura x un rumore, oppure un rumore ci disturba da ore), complesse o semplici, coscienti (più lente, derivanti da scelte) o automatiche (affetti)
+* Le emozioni si rivelano inconsapevolmente da parlato, gesti, postura, ecc
+* Le persone sanno riconoscere le emozioni, spesso rispondono copiandole (sorriso contagioso)
+* Nel design? Don Norman dice che emozioni negative (ansia stress paura) portano meno tolleranza verso UI, benessere porta creatività, focus, rapidità decisionale.
+  * Modello a livelli del cervello (Ortony) - liv. viscerale, comportamentale, riflessivo.
+  * Viscerale x risposte immediate e semplici (buono/cattivo, ragno=paura, cacca=brutto)
+  * comportamentale x quasi tutto nel quotidiano, att. di routine come nuotare, bere...
+  * riflessivo - ho preso paura guardando un horror - ma che eff. speciali ha usato il regista?
+  * nel design si cerca di appagare i 3 livelli - es. orologi swatch - riflessivo x riferimenti culturali, comport. x funzionalità base, viscerale x colori e tatto
+
+
 ## 7. Interfacce
 
 ## 8. Raccolta dei dati
