@@ -368,6 +368,11 @@ All the feels - i gamers su twich registrano le live con telemetria biometrica i
   * Fitbit e altri tracker che danno dashboard dati
 * Senso civico - cestino con suoni o scala pianoforte, app che fanno vedere i consumi energetici e sostenibilità
 
+### Antropomorfismo
+* attribuz di qualità umane a oggetti o animali
+* robot umanoidi - sushi robot, assistenza sanitaria ecc. ci piacciono
+* robot animali aptici - resi pelosetti per poterli toccare e aumentare esperienza emotiva
+
   
 ## 7. Interfacce
 
