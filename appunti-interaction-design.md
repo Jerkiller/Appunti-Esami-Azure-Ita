@@ -333,14 +333,42 @@ Stare insieme nello stesso luogo: agevolato da tecnologie cm multitouch o kineti
 * Emozioni durano tempi variabili (prendo paura x un rumore, oppure un rumore ci disturba da ore), complesse o semplici, coscienti (più lente, derivanti da scelte) o automatiche (affetti)
 * Le emozioni si rivelano inconsapevolmente da parlato, gesti, postura, ecc
 * Le persone sanno riconoscere le emozioni, spesso rispondono copiandole (sorriso contagioso)
-* Nel design? Don Norman dice che emozioni negative (ansia stress paura) portano meno tolleranza verso UI, benessere porta creatività, focus, rapidità decisionale.
+* Nel design? Don Norman dice che emozioni negative (ansia stress paura) portano meno tolleranza verso UI, benessere porta creatività, focus, rapidità decisionale. Un bel design rende più tolleranti es. ai tempi d'attesa
   * Modello a livelli del cervello (Ortony) - liv. viscerale, comportamentale, riflessivo.
   * Viscerale x risposte immediate e semplici (buono/cattivo, ragno=paura, cacca=brutto)
   * comportamentale x quasi tutto nel quotidiano, att. di routine come nuotare, bere...
   * riflessivo - ho preso paura guardando un horror - ma che eff. speciali ha usato il regista?
   * nel design si cerca di appagare i 3 livelli - es. orologi swatch - riflessivo x riferimenti culturali, comport. x funzionalità base, viscerale x colori e tatto
+  * emoji, emoticon sono state usate da mac x stato PC, si sorride ai sorrisi. Pallone da spiaggia, fruscio cestino. Tutti elementi piacevoli. Una ruota che gira in android per aspettare.
+* questione etica: è giusto che le tecnologie adattino (es. mostrino certe pubblicità) in base a come ci sentiamo? Alla fine, non è come fanno gli umani stessi? Es. sei giù, ti va di andare al parco con me?
+  
+### Interfacce irritanti
 
+Alcune interfacce nascono irritanti, complicate, piene di bottoni, non fanno quello che devono, disattendono aspettative, si rompono, sono troppo vaghe, confusionarie, affollate, sgargianti, animate, astruse, ingannevoli, mal-disposte, quando richiedono troppi passaggi e fanno ricominciaere da capo
+Ci sono due vie:
+    * semplificare il design ove possibile (es. termostato nest)
+    * compensare con aiuti (es. tutorial) cose rassicuranti (come il salotto con caminetto di Win95 o Clippy - forse troppo infantili xk nati tutti)
+      * pag 404 - errore tecnico e un po' incolpante verso l'utente: meglio una landing che si prende la colpa
 
+### Rilevare emozioni
+* biosensori umani (sudoraz battito), oculometria, saturimetro
+* telecamere - marcatori per riconoscere volto, classificaz espressioni in base a posiz marcatori (puntini)
+* espress linguaggio, testo
+* movim corporeo
+Rilevare sonnolenza da sbadigli, freq chiusura palpebre, occhi chiusi - adattare assistente guida
+All the feels - i gamers su twich registrano le live con telemetria biometrica in sovraimpress
+
+### Design persuasivo
+* spingere a modificare il comportamento con il design
+* Commerciale - es. amazon - acquista con 1 click
+* Salute
+  * Pikachu tamagochi o pokémon Go - fare passi per giocare: rinforzo positivo
+  * Scala pianoforte
+  * Hapi fork - fork che vibra se mangi velocemente
+  * Fitbit e altri tracker che danno dashboard dati
+* Senso civico - cestino con suoni o scala pianoforte, app che fanno vedere i consumi energetici e sostenibilità
+
+  
 ## 7. Interfacce
 
 ## 8. Raccolta dei dati
