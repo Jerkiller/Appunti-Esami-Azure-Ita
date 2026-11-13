@@ -376,6 +376,60 @@ All the feels - i gamers su twich registrano le live con telemetria biometrica i
   
 ## 7. Interfacce
 
+Contesto:
+* input eterogenei (mouse, touch, rfid, joystick, comandi vocali)
+* output eterogenei (TV, smartwatch, mobile)
+  * AR, MR, linguaggio
+Risolvere i problemi utente in questo contesto -> piccolo catalogo, 20 presentate
+
+### Tipi di interfacce
+Classificaz sulla base di funzionalità, dispositivo, stile interazione, piattaforma
+Molti aggettivi come grafica, a comandi, vocale, multimodale, touchless, naturale, smart...
+tipi:
+* a comandi
+  * comandi a shortcut (es. CTRL-ALT)
+  * riga di comando - preferita in molti contesti (es. sistemisti) - abbreviazioni per scrivere meno
+  * in generale problemi di memorabilità, sintassi, apprendibilità
+* grafiche
+  * da xerox star metà 90 nasce WIMP
+  * basato su widget disponibile (rappresentazione grafica di un controllo es. barra di scorrimento)
+  * WIMP evoluta verso touch e mobile, confluita in senso di alcuni elementi - s'è mischiato tutto
+  * come superare limiti di uno schrmo? finestre, schede/tab in-app, barre scorrimento, sfoglia pagina
+    * controproblema: come trovare la finestra che cerco? varie soluz come highlight con anteprima delle schede, come passare efficacemente da una all'altra. Mediamente si sta 20 secondi su una finestra
+  * menu - di solito sx o alto, sono spesso a comparsa, voci raggruppate per importanza/frequenza e similartià (es. office)
+    * tendina, liste, popup, contestuali, a scomparsa, giganti, a espansione (limiti e vantaggi vari, contesti diversi - mobile meglio lista, ecommerce utile megamenu, ecc)
+    * cosa scrivo? tanto o poco? compromesso tra spazio usato e memorabilità
+  * icone
+    * metaforiche, estetiche... es. taglia incolla, icone di una app, funzione, stato condizione (wifi mod. aereo)
+    * vari stili - monocromatico, bitonali, colorate, realistico, 3D render, ombregg, 2D flat
+    * antialiasing - aggiungere pixel per smussare linee curve o oblique
+    * soluz apple: icone leggermente ruotate e + divertenti per icone utente e dritte x quelle di sistema
+    * icone mobile più semplici
+    * contenuto: isomorfico, similitudine (taglia forbici), metaforico, arbitrario (X x chiudere)
+    * accompagnate da testo (anche in hover) per rendere meno ambigue
+* multimediali
+  * combinare media diversi per fruire meglio delle informazioni
+  * es. enciclopedia omnia con immagini cliccabili con testi o suoni e video (cuore, colosseo, pompei)
+  * a volte tendono a essere frammentarie, studenti guardano o ascoltano il contenuto ma non leggono
+  * si risolve il problema precedente con soluzioni complementari come quiz, scelte obbligate, appunti. ecc
+* VR
+* web
+* mobile
+* x elettrodomestici
+* vocale
+* a penna
+* touch
+* a gesti
+* aptiche
+* multimodali
+* condivisibili
+* tangibili
+* AR
+* indossabili
+* robot/droni
+* interaz cervello/computer
+* smart
+
 ## 8. Raccolta dei dati
 
 ## 9. Analisi, interpretazione e presentazione dei dati
